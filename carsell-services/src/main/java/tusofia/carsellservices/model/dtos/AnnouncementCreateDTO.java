@@ -1,13 +1,12 @@
-package tusofia.carsellservices.model;
+package tusofia.carsellservices.model.dtos;
 
 import java.math.BigDecimal;
+import java.util.Currency;
 import java.util.Date;
 
-import tusofia.carsellservices.model.enums.Currency;
 import tusofia.carsellservices.model.enums.PeriodType;
 
-public class Announcement {
-	private Long id;
+public class AnnouncementCreateDTO {
 	private Long mainCategoryId;
 	private String brand;
 	private String model;
@@ -27,19 +26,10 @@ public class Announcement {
 	private String region;
 	private String city;
 	private Long validDays;
-	private PeriodType periodType;
 	private Date adValidFrom;
 	private Date adValidTo;
 	private String description;
-	private MetaProps metaProps;
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
+	private PeriodType periodType;
 
 	public Long getMainCategoryId() {
 		return mainCategoryId;
@@ -215,14 +205,6 @@ public class Announcement {
 
 	public void setDescription(String description) {
 		this.description = description;
-	}
-
-	public MetaProps getMetaProps() {
-		return metaProps;
-	}
-
-	public void setMetaProps(MetaProps metaProps) {
-		this.metaProps = metaProps;
 	}
 
 	public PeriodType getPeriodType() {

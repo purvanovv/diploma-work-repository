@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import tusofia.carsellservices.model.Announcement;
 import tusofia.carsellservices.model.MainCategory;
+import tusofia.carsellservices.model.dtos.AnnouncementCreateDTO;
 import tusofia.carsellservices.service.AnnouncementService;
+import tusofia.carsellservices.util.AnnouncementModelMapper;
 
 @RestController
 @RequestMapping(path = "announcements")
@@ -20,9 +22,13 @@ public class AnnouncementsController {
 
 	private AnnouncementService announcementService;
 
+	private AnnouncementModelMapper announcementModelMapper;
+
 	@Autowired
-	public AnnouncementsController(AnnouncementService announcementService) {
+	public AnnouncementsController(AnnouncementService announcementService,
+			AnnouncementModelMapper announcementModelMapper) {
 		this.announcementService = announcementService;
+		this.announcementModelMapper = announcementModelMapper;
 	}
 
 	@RequestMapping(value = "/categories", method = RequestMethod.GET)
@@ -32,7 +38,8 @@ public class AnnouncementsController {
 	}
 
 	@RequestMapping(value = "/announcement", method = RequestMethod.POST)
-	public ResponseEntity<Long> createAnnouncement(@RequestBody Announcement announcement) {
+	public ResponseEntity<Long> createAnnouncement(@RequestBody AnnouncementCreateDTO announcementCreateDTO) {
+		Announcement announcement = announcementModelMapper.convertToEntity(announcementCreateDTO);
 		Long announcementId = this.announcementService.createAnnouncement(announcement);
 		return new ResponseEntity<Long>(announcementId, HttpStatus.OK);
 	}
