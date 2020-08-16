@@ -1,0 +1,7 @@
+prompt executing script crtb_SUB_CATEGORIES.sql in schema &&sapp
+
+CREATE TABLE &&sapp..SUB_CATEGORIES(
+ID NUMBER (15) NOT NULL,
+NAME VARCHAR2(60 CHAR) NOT NULL,
+MAIN_CATEGORY_ID NUMBER(15) NOT NULL
+);

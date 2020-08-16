@@ -1,0 +1,11 @@
+@@CREATE_ROLE &&role_resource;
+GRANT CREATE MATERIALIZED VIEW to &&role_resource;
+GRANT CREATE VIEW to &&role_resource;
+GRANT CREATE TRIGGER to &&role_resource;
+GRANT CREATE TABLE to &&role_resource;
+GRANT CREATE OPERATOR to &&role_resource;
+GRANT CREATE PROCEDURE to &&role_resource;
+GRANT CREATE INDEXTYPE to &&role_resource;
+GRANT CREATE CLUSTER to &&role_resource;
+GRANT CREATE TYPE to &&role_resource;
+GRANT CREATE SEQUENCE to &&role_resource;

@@ -1,0 +1,8 @@
+SET ECHO ON
+SET VERIFY ON
+
+CONNECT &csusr
+
+@@dml/del_VERSION.sql
+
+DISCONNECT
