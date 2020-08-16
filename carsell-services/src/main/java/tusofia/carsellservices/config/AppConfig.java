@@ -2,11 +2,14 @@ package tusofia.carsellservices.config;
 
 import javax.sql.DataSource;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
+
+import tusofia.carsellservices.util.AnnouncementModelMapper;
 
 @Configuration
 public class AppConfig {
@@ -36,6 +39,18 @@ public class AppConfig {
 	@Bean
 	public NamedParameterJdbcTemplate namedParameterJdbcTemplate(DataSource dataSource) {
 		return new NamedParameterJdbcTemplate(dataSource);
+	}
+
+	@Bean
+	public ModelMapper modelMapper() {
+		ModelMapper modelMapper = new ModelMapper();
+		modelMapper.getConfiguration().setAmbiguityIgnored(true);
+		return modelMapper;
+	}
+
+	@Bean
+	public AnnouncementModelMapper AnnouncementModelMapper(ModelMapper modelMapper) {
+		return new AnnouncementModelMapper(modelMapper);
 	}
 
 }
