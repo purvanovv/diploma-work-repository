@@ -29,7 +29,7 @@ public class SqlUtils {
 		return new String(baos.toByteArray(), StandardCharsets.UTF_8);
 	}
 
-	public static String getBoolean(Boolean bool) {
+	public static String getSubmissionBoolean(Boolean bool) {
 		if (bool != null) {
 			return bool ? "Y" : "N";
 		} else {
@@ -37,7 +37,7 @@ public class SqlUtils {
 		}
 	}
 
-	public static Boolean getBoolean(String boolString) {
+	public static Boolean getSubmissionBooleanConverted(String boolString) {
 		if (boolString != null) {
 			return boolString.toLowerCase().equals("y") ? true : false;
 		} else {
