@@ -18,11 +18,13 @@ INSERT INTO announcements
              color, 
              region, 
              city, 
-             period_id, 
+             valid_days, 
              ad_valid_from, 
              ad_valid_to, 
              description, 
-             created_by) 
+             created_by,
+             created_on,
+             delete_flag) 
 VALUES     (announcements_seq.nextval, 
             :mainCategoryId, 
             :brand, 
@@ -42,8 +44,10 @@ VALUES     (announcements_seq.nextval,
             :color, 
             :region, 
             :city, 
-            :periodId, 
+            :validDays, 
             :adValidFrom, 
             :adValidTo, 
             :description, 
-            :createdBy) 
+            :createdBy,
+            :createdOn,
+            :deleteFlag) 
