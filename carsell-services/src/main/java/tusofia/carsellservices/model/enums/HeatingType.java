@@ -1,17 +1,15 @@
 package tusofia.carsellservices.model.enums;
 
-public enum Currency {
-
-	LEV("лв."), USD("USD"), EUR("EUR");
+public enum HeatingType {
+	NO("Няма"), ELECTRICAL("Електриеско"), GAS("Газово");
 
 	private final String value;
 
-	private Currency(String value) {
+	private HeatingType(String value) {
 		this.value = value;
 	}
 
 	public String getValue() {
 		return value;
 	}
-
 }
