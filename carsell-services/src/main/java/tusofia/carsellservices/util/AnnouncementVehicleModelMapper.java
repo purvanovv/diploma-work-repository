@@ -2,21 +2,22 @@ package tusofia.carsellservices.util;
 
 import org.modelmapper.ModelMapper;
 
-import tusofia.carsellservices.model.Announcement;
+import tusofia.carsellservices.model.AnnouncementVehicle;
 import tusofia.carsellservices.model.MetaProps;
-import tusofia.carsellservices.model.dtos.AnnouncementCreateDTO;
+import tusofia.carsellservices.model.dtos.AnnouncementVehicleCreateDTO;
 
-public class AnnouncementModelMapper {
+public class AnnouncementVehicleModelMapper {
 
 	private ModelMapper modelMapper;
 
-	public AnnouncementModelMapper(ModelMapper modelMapper) {
+	public AnnouncementVehicleModelMapper(ModelMapper modelMapper) {
 		this.modelMapper = modelMapper;
 	}
 
-	public Announcement convertToEntity(AnnouncementCreateDTO announcementCreateDTO) {
-		Announcement announcement = modelMapper.map(announcementCreateDTO, Announcement.class);
-		announcement.setMetaProps(new MetaProps());
-		return announcement;
+	public AnnouncementVehicle convertToEntity(AnnouncementVehicleCreateDTO announcementVehicleCreateDTO) {
+		AnnouncementVehicle announcementVehicle = modelMapper.map(announcementVehicleCreateDTO,
+				AnnouncementVehicle.class);
+		announcementVehicle.setMetaProps(new MetaProps());
+		return announcementVehicle;
 	}
 }

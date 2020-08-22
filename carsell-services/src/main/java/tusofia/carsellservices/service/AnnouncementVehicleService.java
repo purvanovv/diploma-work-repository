@@ -2,11 +2,11 @@ package tusofia.carsellservices.service;
 
 import java.util.List;
 
-import tusofia.carsellservices.model.Announcement;
+import tusofia.carsellservices.model.AnnouncementVehicle;
 import tusofia.carsellservices.model.MainCategory;
 
-public interface AnnouncementService {
+public interface AnnouncementVehicleService {
 	public List<MainCategory> getCategories();
 
-	public Long createAnnouncement(Announcement announcement);
+	public Long createAnnouncementVehicle(AnnouncementVehicle announcementVehicle);
 }

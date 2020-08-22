@@ -3,22 +3,33 @@ package tusofia.carsellservices.model;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import tusofia.carsellservices.model.enums.AirConditionType;
+import tusofia.carsellservices.model.enums.ConditionType;
+import tusofia.carsellservices.model.enums.CoolingType;
 import tusofia.carsellservices.model.enums.Currency;
-import tusofia.carsellservices.model.enums.PeriodType;
+import tusofia.carsellservices.model.enums.EmissionStandartType;
+import tusofia.carsellservices.model.enums.EngineCategoryType;
+import tusofia.carsellservices.model.enums.EngineType;
+import tusofia.carsellservices.model.enums.GearboxType;
+import tusofia.carsellservices.model.enums.HeatingType;
+import tusofia.carsellservices.model.enums.MaterialType;
+import tusofia.carsellservices.model.enums.ToiletType;
 
-public class Announcement {
+public class AnnouncementVehicle {
 	private Long id;
 	private Long mainCategoryId;
 	private String brand;
 	private String model;
-	private String engineType;
-	private String condition;
+	private EngineType engineType;
+	private ConditionType conditionType;
 	private Integer horsePower;
-	private String gearboxType;
+	private EmissionStandartType emissionStandartType;
+	private GearboxType gearboxType;
 	private Long subCategoryId;
-	private Integer cubature;
-	private String coolingType;
-	private Short engineCategory;
+	private CoolingType coolingType;
+	private Short numberOfAxels;
+	private Short numberOfSeats;
+	private Integer weightCapacity;
 	private BigDecimal price;
 	private Currency currency;
 	private Date dateOfManufacture;
@@ -27,9 +38,22 @@ public class Announcement {
 	private String region;
 	private String city;
 	private Long validDays;
-	private PeriodType periodType;
-	private Date adValidFrom;
-	private Date adValidTo;
+	private Integer cubature;
+	private EngineCategoryType engineCategoryType;
+	private Date validFrom;
+	private Date validTo;
+	private Integer totalWeight;
+	private Integer workingVolume;
+	private Integer hoursOfOperation;
+	private Short numberOfBeds;
+	private ToiletType toiletType;
+	private HeatingType heatingType;
+	private AirConditionType airConditionType;
+	private Integer lengthSize;
+	private MaterialType materialType;
+	private Integer width;
+	private Short bicycleSize;
+	private Short numberOfGears;
 	private String description;
 	private MetaProps metaProps;
 
@@ -65,20 +89,20 @@ public class Announcement {
 		this.model = model;
 	}
 
-	public String getEngineType() {
+	public EngineType getEngineType() {
 		return engineType;
 	}
 
-	public void setEngineType(String engineType) {
+	public void setEngineType(EngineType engineType) {
 		this.engineType = engineType;
 	}
 
-	public String getCondition() {
-		return condition;
+	public ConditionType getConditionType() {
+		return conditionType;
 	}
 
-	public void setCondition(String condition) {
-		this.condition = condition;
+	public void setConditionType(ConditionType conditionType) {
+		this.conditionType = conditionType;
 	}
 
 	public Integer getHorsePower() {
@@ -89,11 +113,19 @@ public class Announcement {
 		this.horsePower = horsePower;
 	}
 
-	public String getGearboxType() {
+	public EmissionStandartType getEmissionStandartType() {
+		return emissionStandartType;
+	}
+
+	public void setEmissionStandartType(EmissionStandartType emissionStandartType) {
+		this.emissionStandartType = emissionStandartType;
+	}
+
+	public GearboxType getGearboxType() {
 		return gearboxType;
 	}
 
-	public void setGearboxType(String gearboxType) {
+	public void setGearboxType(GearboxType gearboxType) {
 		this.gearboxType = gearboxType;
 	}
 
@@ -105,28 +137,36 @@ public class Announcement {
 		this.subCategoryId = subCategoryId;
 	}
 
-	public Integer getCubature() {
-		return cubature;
-	}
-
-	public void setCubature(Integer cubature) {
-		this.cubature = cubature;
-	}
-
-	public String getCoolingType() {
+	public CoolingType getCoolingType() {
 		return coolingType;
 	}
 
-	public void setCoolingType(String coolingType) {
+	public void setCoolingType(CoolingType coolingType) {
 		this.coolingType = coolingType;
 	}
 
-	public Short getEngineCategory() {
-		return engineCategory;
+	public Short getNumberOfAxels() {
+		return numberOfAxels;
 	}
 
-	public void setEngineCategory(Short engineCategory) {
-		this.engineCategory = engineCategory;
+	public void setNumberOfAxels(Short numberOfAxels) {
+		this.numberOfAxels = numberOfAxels;
+	}
+
+	public Short getNumberOfSeats() {
+		return numberOfSeats;
+	}
+
+	public void setNumberOfSeats(Short numberOfSeats) {
+		this.numberOfSeats = numberOfSeats;
+	}
+
+	public Integer getWeightCapacity() {
+		return weightCapacity;
+	}
+
+	public void setWeightCapacity(Integer weightCapacity) {
+		this.weightCapacity = weightCapacity;
 	}
 
 	public BigDecimal getPrice() {
@@ -193,24 +233,136 @@ public class Announcement {
 		this.validDays = validDays;
 	}
 
-	public Date getAdValidFrom() {
-		return adValidFrom;
+	public Integer getCubature() {
+		return cubature;
 	}
 
-	public void setAdValidFrom(Date adValidFrom) {
-		this.adValidFrom = adValidFrom;
+	public void setCubature(Integer cubature) {
+		this.cubature = cubature;
 	}
 
-	public Date getAdValidTo() {
-		return adValidTo;
+	public EngineCategoryType getEngineCategoryType() {
+		return engineCategoryType;
 	}
 
-	public void setAdValidTo(Date adValidTo) {
-		this.adValidTo = adValidTo;
+	public void setEngineCategoryType(EngineCategoryType engineCategoryType) {
+		this.engineCategoryType = engineCategoryType;
+	}
+
+	public Date getValidFrom() {
+		return validFrom;
+	}
+
+	public void setValidFrom(Date validFrom) {
+		this.validFrom = validFrom;
+	}
+
+	public Date getValidTo() {
+		return validTo;
+	}
+
+	public void setValidTo(Date validTo) {
+		this.validTo = validTo;
+	}
+
+	public Integer getTotalWeight() {
+		return totalWeight;
+	}
+
+	public void setTotalWeight(Integer totalWeight) {
+		this.totalWeight = totalWeight;
+	}
+
+	public Integer getWorkingVolume() {
+		return workingVolume;
+	}
+
+	public void setWorkingVolume(Integer workingVolume) {
+		this.workingVolume = workingVolume;
+	}
+
+	public Integer getHoursOfOperation() {
+		return hoursOfOperation;
+	}
+
+	public void setHoursOfOperation(Integer hoursOfOperation) {
+		this.hoursOfOperation = hoursOfOperation;
+	}
+
+	public Short getNumberOfBeds() {
+		return numberOfBeds;
+	}
+
+	public void setNumberOfBeds(Short numberOfBeds) {
+		this.numberOfBeds = numberOfBeds;
+	}
+
+	public ToiletType getToiletType() {
+		return toiletType;
+	}
+
+	public void setToiletType(ToiletType toiletType) {
+		this.toiletType = toiletType;
+	}
+
+	public HeatingType getHeatingType() {
+		return heatingType;
+	}
+
+	public void setHeatingType(HeatingType heatingType) {
+		this.heatingType = heatingType;
+	}
+
+	public AirConditionType getAirConditionType() {
+		return airConditionType;
+	}
+
+	public void setAirConditionType(AirConditionType airConditionType) {
+		this.airConditionType = airConditionType;
+	}
+
+	public Integer getLengthSize() {
+		return lengthSize;
+	}
+
+	public void setLengthSize(Integer lengthSize) {
+		this.lengthSize = lengthSize;
+	}
+
+	public Integer getWidth() {
+		return width;
+	}
+
+	public void setWidth(Integer width) {
+		this.width = width;
+	}
+
+	public Short getBicycleSize() {
+		return bicycleSize;
+	}
+
+	public void setBicycleSize(Short bicycleSize) {
+		this.bicycleSize = bicycleSize;
+	}
+
+	public Short getNumberOfGears() {
+		return numberOfGears;
+	}
+
+	public void setNumberOfGears(Short numberOfGears) {
+		this.numberOfGears = numberOfGears;
 	}
 
 	public String getDescription() {
 		return description;
+	}
+
+	public MaterialType getMaterialType() {
+		return materialType;
+	}
+
+	public void setMaterialType(MaterialType materialType) {
+		this.materialType = materialType;
 	}
 
 	public void setDescription(String description) {
@@ -224,13 +376,4 @@ public class Announcement {
 	public void setMetaProps(MetaProps metaProps) {
 		this.metaProps = metaProps;
 	}
-
-	public PeriodType getPeriodType() {
-		return periodType;
-	}
-
-	public void setPeriodType(PeriodType periodType) {
-		this.periodType = periodType;
-	}
-
 }

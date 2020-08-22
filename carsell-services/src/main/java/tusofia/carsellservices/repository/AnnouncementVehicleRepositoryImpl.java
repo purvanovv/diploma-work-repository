@@ -1,5 +1,6 @@
 package tusofia.carsellservices.repository;
 
+import java.sql.SQLType;
 import java.util.Date;
 import java.util.List;
 
@@ -10,19 +11,19 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
-import tusofia.carsellservices.model.Announcement;
+import tusofia.carsellservices.model.AnnouncementVehicle;
 import tusofia.carsellservices.model.MainCategory;
 import tusofia.carsellservices.util.DateUtils;
 import tusofia.carsellservices.util.SqlContainer;
 import tusofia.carsellservices.util.SqlUtils;
 
 @Repository
-public class AnnouncementRepositoryImpl implements AnnouncementRepository {
+public class AnnouncementVehicleRepositoryImpl implements AnnouncementVehicleRepository {
 
 	NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
 	@Autowired
-	public AnnouncementRepositoryImpl(NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
+	public AnnouncementVehicleRepositoryImpl(NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
 		this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
 	}
 
@@ -40,38 +41,58 @@ public class AnnouncementRepositoryImpl implements AnnouncementRepository {
 	}
 
 	@Override
-	public Long createAnnouncement(Announcement announcement) {
+	public Long createAnnouncementVehicle(AnnouncementVehicle announcementVehicle) {
 		try {
 			MapSqlParameterSource params = new MapSqlParameterSource();
-			params.addValue("mainCategoryId", announcement.getMainCategoryId());
-			params.addValue("brand", announcement.getBrand());
-			params.addValue("model", announcement.getModel());
-			params.addValue("engineType", announcement.getEngineType());
-			params.addValue("condition", announcement.getCondition());
-			params.addValue("horsePower", announcement.getHorsePower());
-			params.addValue("gearboxType", announcement.getGearboxType());
-			params.addValue("subCategoryId", announcement.getSubCategoryId());
-			params.addValue("cubature", announcement.getCubature());
-			params.addValue("coolingType", announcement.getCoolingType());
-			params.addValue("engineCategory", announcement.getEngineCategory());
-			params.addValue("price", announcement.getPrice());
-			params.addValue("currency", announcement.getCurrency().getValue());
-			params.addValue("dateOfManufacture", DateUtils.getSubmissionDate(announcement.getDateOfManufacture()));
-			params.addValue("mileage", announcement.getMileage());
-			params.addValue("color", announcement.getColor());
-			params.addValue("region", announcement.getRegion());
-			params.addValue("city", announcement.getCity());
-			params.addValue("validDays", announcement.getValidDays());
-			params.addValue("adValidFrom", DateUtils.getSubmissionDate(announcement.getAdValidFrom()));
-			Date validTo = DateUtils.addDays(announcement.getAdValidFrom(), announcement.getValidDays());
-			params.addValue("adValidTo", DateUtils.getSubmissionDate(validTo));
-			params.addValue("description", announcement.getDescription());
-			params.addValue("createdBy", announcement.getMetaProps().getCreatedBy());
-			params.addValue("createdOn", DateUtils.getSubmissionDate(announcement.getMetaProps().getCreatedOn()));
-			params.addValue("deleteFlag", SqlUtils.getSubmissionBoolean(announcement.getMetaProps().getDeleteFlag()));
+			params.addValue("mainCategoryId", announcementVehicle.getMainCategoryId());
+			params.addValue("brand", announcementVehicle.getBrand());
+			params.addValue("model", announcementVehicle.getModel());
+			params.addValue("engineType", announcementVehicle.getEngineType().getValue());
+			params.addValue("conditionType", announcementVehicle.getConditionType().getValue());
+			params.addValue("horsePower", announcementVehicle.getHorsePower());
+			params.addValue("emissionStandartType", announcementVehicle.getEmissionStandartType().getValue());
+			params.addValue("gearboxType", announcementVehicle.getGearboxType().getValue());
+			params.addValue("subCategoryId", announcementVehicle.getSubCategoryId());
+			params.addValue("coolingType", announcementVehicle.getCoolingType().getValue());
+			params.addValue("cubature", announcementVehicle.getCubature());
+			params.addValue("engineCategoryType", announcementVehicle.getEngineCategoryType().getValue());
+			params.addValue("price", announcementVehicle.getPrice());
+			params.addValue("currency", announcementVehicle.getCurrency().getValue());
+			params.addValue("dateOfManufacture",
+					DateUtils.getSubmissionDate(announcementVehicle.getDateOfManufacture()));
+			params.addValue("mileage", announcementVehicle.getMileage());
+			params.addValue("color", announcementVehicle.getColor());
+			params.addValue("region", announcementVehicle.getRegion());
+			params.addValue("city", announcementVehicle.getCity());
+			params.addValue("validDays", announcementVehicle.getValidDays());
+			params.addValue("validFrom", DateUtils.getSubmissionDate(announcementVehicle.getValidFrom()));
+			Date validTo = DateUtils.addDays(announcementVehicle.getValidFrom(), announcementVehicle.getValidDays());
+			params.addValue("validTo", DateUtils.getSubmissionDate(validTo));
+			params.addValue("numberOfAxels", announcementVehicle.getNumberOfAxels());
+			params.addValue("numberOfSeats", announcementVehicle.getNumberOfSeats());
+			params.addValue("weightCapacity", announcementVehicle.getWeightCapacity());
+			params.addValue("engineCategoryType", announcementVehicle.getEngineCategoryType().getValue());
+			params.addValue("totalWeight", announcementVehicle.getTotalWeight());
+			params.addValue("workingVolume", announcementVehicle.getWorkingVolume());
+			params.addValue("hoursOfOperation", announcementVehicle.getHoursOfOperation());
+			params.addValue("numberOfBeds", announcementVehicle.getNumberOfBeds());
+			params.addValue("toiletType", announcementVehicle.getToiletType().getValue());
+			params.addValue("heatingType", announcementVehicle.getHeatingType().getValue());
+			params.addValue("airConditionType", announcementVehicle.getAirConditionType().getValue());
+			params.addValue("lengthSize", announcementVehicle.getLengthSize());
+			params.addValue("materialType", announcementVehicle.getMaterialType().getValue());
+			params.addValue("width", announcementVehicle.getWidth());
+			params.addValue("bicycleSize", announcementVehicle.getBicycleSize());
+			params.addValue("numberOfGears", announcementVehicle.getNumberOfGears());
+			params.addValue("description", announcementVehicle.getDescription());
+			params.addValue("createdBy", announcementVehicle.getMetaProps().getCreatedBy());
+			params.addValue("createdOn",
+					DateUtils.getSubmissionDate(announcementVehicle.getMetaProps().getCreatedOn()));
+			params.addValue("deleteFlag",
+					SqlUtils.getSubmissionBoolean(announcementVehicle.getMetaProps().getDeleteFlag()));
 
 			KeyHolder keyHolder = new GeneratedKeyHolder();
-			String sql = SqlContainer.CREATE_ANNOUNCEMENT;
+			String sql = SqlContainer.CREATE_ANNOUNCEMENT_VEHICLE;
 			namedParameterJdbcTemplate.update(sql, params, keyHolder, new String[] { "ID" });
 
 			return keyHolder.getKey().longValue();

@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
-import tusofia.carsellservices.util.AnnouncementModelMapper;
+import tusofia.carsellservices.util.AnnouncementVehicleModelMapper;
 
 @Configuration
 public class AppConfig {
@@ -49,8 +49,8 @@ public class AppConfig {
 	}
 
 	@Bean
-	public AnnouncementModelMapper AnnouncementModelMapper(ModelMapper modelMapper) {
-		return new AnnouncementModelMapper(modelMapper);
+	public AnnouncementVehicleModelMapper AnnouncementModelMapper(ModelMapper modelMapper) {
+		return new AnnouncementVehicleModelMapper(modelMapper);
 	}
 
 }

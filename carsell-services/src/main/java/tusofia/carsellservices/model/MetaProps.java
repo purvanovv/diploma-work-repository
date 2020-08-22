@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class MetaProps {
 	private Date createdOn;
-	private String createdBy;
+	private String createdBy="CarSellUserMock";
 	private Boolean deleteFlag;
 	private String modifiedBy;
 	private Date modifiedOn;

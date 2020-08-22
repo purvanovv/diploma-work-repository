@@ -5,28 +5,28 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import tusofia.carsellservices.model.Announcement;
+import tusofia.carsellservices.model.AnnouncementVehicle;
 import tusofia.carsellservices.model.MainCategory;
-import tusofia.carsellservices.repository.AnnouncementRepository;
+import tusofia.carsellservices.repository.AnnouncementVehicleRepository;
 
 @Service
-public class AnnouncementServiceImpl implements AnnouncementService {
+public class AnnouncementVehicleServiceImpl implements AnnouncementVehicleService {
 
-	private AnnouncementRepository announcementRepository;
+	private AnnouncementVehicleRepository announcementVehicleRepository;
 
 	@Autowired
-	public AnnouncementServiceImpl(AnnouncementRepository announcementRepository) {
-		this.announcementRepository = announcementRepository;
+	public AnnouncementVehicleServiceImpl(AnnouncementVehicleRepository announcementRepository) {
+		this.announcementVehicleRepository = announcementRepository;
 	}
 
 	@Override
 	public List<MainCategory> getCategories() {
-		return this.announcementRepository.getCategories();
+		return this.announcementVehicleRepository.getCategories();
 	}
 
 	@Override
-	public Long createAnnouncement(Announcement announcement) {
-		return announcementRepository.createAnnouncement(announcement);
+	public Long createAnnouncementVehicle(AnnouncementVehicle announcementVehicle) {
+		return announcementVehicleRepository.createAnnouncementVehicle(announcementVehicle);
 	}
 
 }
