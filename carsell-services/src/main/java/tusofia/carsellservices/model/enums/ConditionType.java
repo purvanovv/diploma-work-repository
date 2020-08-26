@@ -12,4 +12,13 @@ public enum ConditionType {
 	public String getValue() {
 		return value;
 	}
+	
+	public static ConditionType fromString(String inputValue) {
+		for (ConditionType e : ConditionType.values()) {
+			if (e.getValue().equals(inputValue)) {
+				return e;
+			}
+		}
+		return null;
+	}
 }

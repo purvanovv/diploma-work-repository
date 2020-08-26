@@ -12,4 +12,13 @@ public enum CoolingType {
 	public String getValue() {
 		return value;
 	}
+	
+	public static CoolingType fromString(String inputValue) {
+		for (CoolingType e : CoolingType.values()) {
+			if (e.getValue().equals(inputValue)) {
+				return e;
+			}
+		}
+		return null;
+	}
 }

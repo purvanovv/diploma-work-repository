@@ -13,5 +13,14 @@ public enum Currency {
 	public String getValue() {
 		return value;
 	}
+	
+	public static Currency fromString(String inputValue) {
+		for (Currency e : Currency.values()) {
+			if (e.getValue().equals(inputValue)) {
+				return e;
+			}
+		}
+		return null;
+	}
 
 }

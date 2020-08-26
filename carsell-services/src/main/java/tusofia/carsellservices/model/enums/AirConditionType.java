@@ -12,4 +12,14 @@ public enum AirConditionType {
 	public String getValue() {
 		return value;
 	}
+
+	public static AirConditionType fromString(String inputValue) {
+		for (AirConditionType e : AirConditionType.values()) {
+			if (e.getValue().equals(inputValue)) {
+				return e;
+			}
+		}
+		return null;
+	}
+
 }

@@ -13,4 +13,13 @@ public enum MaterialType {
 	public String getValue() {
 		return value;
 	}
+
+	public static MaterialType fromString(String inputValue) {
+		for (MaterialType e : MaterialType.values()) {
+			if (e.getValue().equals(inputValue)) {
+				return e;
+			}
+		}
+		return null;
+	}
 }

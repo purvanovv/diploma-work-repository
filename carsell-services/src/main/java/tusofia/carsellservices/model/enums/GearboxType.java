@@ -12,4 +12,13 @@ public enum GearboxType {
 	public String getValue() {
 		return value;
 	}
+
+	public static GearboxType fromString(String inputValue) {
+		for (GearboxType e : GearboxType.values()) {
+			if (e.getValue().equals(inputValue)) {
+				return e;
+			}
+		}
+		return null;
+	}
 }

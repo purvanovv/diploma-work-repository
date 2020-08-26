@@ -12,4 +12,13 @@ public enum HeatingType {
 	public String getValue() {
 		return value;
 	}
+	
+	public static HeatingType fromString(String inputValue) {
+		for (HeatingType e : HeatingType.values()) {
+			if (e.getValue().equals(inputValue)) {
+				return e;
+			}
+		}
+		return null;
+	}
 }

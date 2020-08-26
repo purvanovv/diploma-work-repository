@@ -12,4 +12,13 @@ public enum EmissionStandartType {
 	public String getValue() {
 		return value;
 	}
+	
+	public static EmissionStandartType fromString(String inputValue) {
+		for (EmissionStandartType e : EmissionStandartType.values()) {
+			if (e.getValue().equals(inputValue)) {
+				return e;
+			}
+		}
+		return null;
+	}
 }

@@ -12,4 +12,13 @@ public enum ToiletType {
 	public String getValue() {
 		return value;
 	}
+
+	public static ToiletType fromString(String inputValue) {
+		for (ToiletType e : ToiletType.values()) {
+			if (e.getValue().equals(inputValue)) {
+				return e;
+			}
+		}
+		return null;
+	}
 }

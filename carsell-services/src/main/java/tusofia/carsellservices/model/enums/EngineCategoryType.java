@@ -12,4 +12,16 @@ public enum EngineCategoryType {
 	public Integer getValue() {
 		return value;
 	}
+
+	public static EngineCategoryType fromString(String inputValue) {
+		if (null == inputValue) {
+			return null;
+		}
+		for (EngineCategoryType e : EngineCategoryType.values()) {
+			if (e.getValue().equals(Integer.parseInt(inputValue))) {
+				return e;
+			}
+		}
+		return null;
+	}
 }
