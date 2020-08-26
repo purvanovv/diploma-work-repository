@@ -9,4 +9,8 @@ public interface AnnouncementVehicleService {
 	public List<MainCategory> getCategories();
 
 	public Long createAnnouncementVehicle(AnnouncementVehicle announcementVehicle);
+
+	public AnnouncementVehicle getAnnouncementVehicle(Long announcementVehicleId);
+
+	public List<AnnouncementVehicle> getAnnouncementVehicles();
 }

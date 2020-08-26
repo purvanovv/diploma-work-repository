@@ -1,6 +1,5 @@
 package tusofia.carsellservices.repository;
 
-import java.sql.SQLType;
 import java.util.Date;
 import java.util.List;
 
@@ -99,6 +98,37 @@ public class AnnouncementVehicleRepositoryImpl implements AnnouncementVehicleRep
 
 		} catch (Exception e) {
 			// TODO
+			return null;
+		}
+	}
+
+	@Override
+	public AnnouncementVehicle getAnnouncementVehicle(Long announcementVehicleId) {
+		try {
+			String sql = SqlContainer.GET_ANNOUNCEMENT_VEHICLE;
+			MapSqlParameterSource params = new MapSqlParameterSource();
+			params.addValue("announcementVehicleId", announcementVehicleId);
+			List<AnnouncementVehicle> announcementVehicles = namedParameterJdbcTemplate.query(sql, params,
+					new AnnouncementVehicleRowMapper());
+			if (null != announcementVehicles && !announcementVehicles.isEmpty()) {
+				return announcementVehicles.get(0);
+			}
+			return null;
+
+		} catch (Exception e) {
+			// TODO: handle exception
+			return null;
+		}
+	}
+
+	@Override
+	public List<AnnouncementVehicle> getAnnouncementVehicles() {
+		try {
+			String sql = SqlContainer.GET_ANNOUNCEMENT_VEHICLES;
+			return namedParameterJdbcTemplate.query(sql, new AnnouncementVehiclesResultSetExtractor());
+
+		} catch (Exception e) {
+			// TODO: handle exception
 			return null;
 		}
 	}

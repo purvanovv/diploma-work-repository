@@ -29,4 +29,14 @@ public class AnnouncementVehicleServiceImpl implements AnnouncementVehicleServic
 		return announcementVehicleRepository.createAnnouncementVehicle(announcementVehicle);
 	}
 
+	@Override
+	public AnnouncementVehicle getAnnouncementVehicle(Long announcementVehicleId) {
+		return announcementVehicleRepository.getAnnouncementVehicle(announcementVehicleId);
+	}
+
+	@Override
+	public List<AnnouncementVehicle> getAnnouncementVehicles() {
+		return announcementVehicleRepository.getAnnouncementVehicles();
+	}
+
 }

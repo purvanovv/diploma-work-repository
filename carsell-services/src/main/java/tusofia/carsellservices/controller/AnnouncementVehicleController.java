@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import tusofia.carsellservices.model.AnnouncementVehicle;
@@ -44,6 +45,24 @@ public class AnnouncementVehicleController {
 				.convertToEntity(announcementVehicleCreateDTO);
 		Long announcementVehicleId = this.announcementVehicleService.createAnnouncementVehicle(announcementVehicle);
 		return new ResponseEntity<Long>(announcementVehicleId, HttpStatus.OK);
+	}
+
+	@RequestMapping(value = "/announcement", method = RequestMethod.GET)
+	public ResponseEntity<AnnouncementVehicleCreateDTO> getAnnouncementVehicle(
+			@RequestParam Long announcementVehicleId) {
+		AnnouncementVehicle announcementVehicle = announcementVehicleService
+				.getAnnouncementVehicle(announcementVehicleId);
+		AnnouncementVehicleCreateDTO announcementVehicleCreateDTO = announcementVehicleModelMapper
+				.convertToDTO(announcementVehicle);
+		return new ResponseEntity<AnnouncementVehicleCreateDTO>(announcementVehicleCreateDTO, HttpStatus.OK);
+	}
+
+	@RequestMapping(value = "/announcements", method = RequestMethod.GET)
+	public ResponseEntity<List<AnnouncementVehicleCreateDTO>> getAnnouncementVehicles() {
+		List<AnnouncementVehicle> announcementVehicles = this.announcementVehicleService.getAnnouncementVehicles();
+		List<AnnouncementVehicleCreateDTO> announcementVehicleCreateDTOs = announcementVehicleModelMapper
+				.convertToDTOs(announcementVehicles);
+		return new ResponseEntity<List<AnnouncementVehicleCreateDTO>>(announcementVehicleCreateDTOs, HttpStatus.OK);
 	}
 
 }

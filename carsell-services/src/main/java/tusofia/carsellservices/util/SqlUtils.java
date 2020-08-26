@@ -4,11 +4,12 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
+import java.sql.SQLException;
 
 import org.springframework.core.io.DefaultResourceLoader;
 
 public class SqlUtils {
-	
+
 	public static String getClasspathResource(String sqlPath, String sqlFileName) {
 		try (InputStream is = new DefaultResourceLoader()
 				.getResource(sqlPath + System.getProperty("file.separator") + sqlFileName).getInputStream()) {
