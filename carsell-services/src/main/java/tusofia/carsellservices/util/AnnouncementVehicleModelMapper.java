@@ -1,5 +1,8 @@
 package tusofia.carsellservices.util;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.modelmapper.ModelMapper;
 
 import tusofia.carsellservices.model.AnnouncementVehicle;
@@ -19,5 +22,16 @@ public class AnnouncementVehicleModelMapper {
 				AnnouncementVehicle.class);
 		announcementVehicle.setMetaProps(new MetaProps());
 		return announcementVehicle;
+	}
+
+	public AnnouncementVehicleCreateDTO convertToDTO(AnnouncementVehicle announcementVehicle) {
+		return modelMapper.map(announcementVehicle, AnnouncementVehicleCreateDTO.class);
+	}
+
+	public List<AnnouncementVehicleCreateDTO> convertToDTOs(List<AnnouncementVehicle> announcementVehicles) {
+		if (null != announcementVehicles) {
+			return announcementVehicles.stream().map(a -> convertToDTO(a)).collect(Collectors.toList());
+		}
+		return null;
 	}
 }
