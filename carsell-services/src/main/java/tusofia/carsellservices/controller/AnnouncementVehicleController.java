@@ -11,11 +11,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import tusofia.carsellservices.exceptions.ValidationException;
 import tusofia.carsellservices.model.AnnouncementVehicle;
 import tusofia.carsellservices.model.MainCategory;
 import tusofia.carsellservices.model.dtos.AnnouncementVehicleCreateDTO;
 import tusofia.carsellservices.service.AnnouncementVehicleService;
 import tusofia.carsellservices.util.AnnouncementVehicleModelMapper;
+import tusofia.carsellservices.validation.AnnouncementVehicleValidationContext;
+import tusofia.carsellservices.validation.AnnouncementVehicleValidationContextBuilder;
+import tusofia.carsellservices.validation.ValidationResult;
 
 @RestController
 @RequestMapping(path = "announcements")
@@ -40,7 +44,18 @@ public class AnnouncementVehicleController {
 
 	@RequestMapping(value = "/announcement", method = RequestMethod.POST)
 	public ResponseEntity<Long> createAnnouncement(
-			@RequestBody AnnouncementVehicleCreateDTO announcementVehicleCreateDTO) {
+			@RequestBody AnnouncementVehicleCreateDTO announcementVehicleCreateDTO) throws ValidationException {
+
+		tusofia.carsellservices.model.enums.MainCategoryType mainCategoryType = announcementVehicleService
+				.getMainCategoryType(announcementVehicleCreateDTO.getMainCategoryId());
+
+		AnnouncementVehicleValidationContext validationContext = AnnouncementVehicleValidationContextBuilder
+				.build(mainCategoryType);
+		List<ValidationResult> validationErrors = validationContext.executeAndGetList(announcementVehicleCreateDTO);
+		if (!validationErrors.isEmpty()) {
+			throw new ValidationException(validationErrors);
+		}
+
 		AnnouncementVehicle announcementVehicle = announcementVehicleModelMapper
 				.convertToEntity(announcementVehicleCreateDTO);
 		Long announcementVehicleId = this.announcementVehicleService.createAnnouncementVehicle(announcementVehicle);
