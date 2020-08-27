@@ -121,7 +121,6 @@ Development, build and quality processes are based on [angular-cli](https://gith
 - [Angular Flex Layout](https://github.com/angular/flex-layout)
 - [Material Icons](https://material.io/icons/)
 - [RxJS](http://reactivex.io/rxjs)
-- [ngx-translate](https://github.com/ngx-translate/core)
 
 #### Coding guides
 
@@ -134,7 +133,6 @@ Development, build and quality processes are based on [angular-cli](https://gith
 
 #### Other documentation
 
-- [I18n guide](docs/i18n.md)
 - [Working behind a corporate proxy](docs/corporate-proxy.md)
 - [Updating dependencies and tools](docs/updating.md)
 - [Using a backend proxy for development](docs/backend-proxy.md)
