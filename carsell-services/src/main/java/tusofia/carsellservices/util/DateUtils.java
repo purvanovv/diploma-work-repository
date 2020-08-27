@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.Calendar;
 import java.util.Date;
 
 public class DateUtils {
@@ -29,6 +30,21 @@ public class DateUtils {
 			return Date.from(locaDate.plusDays(days).atStartOfDay(ZoneId.systemDefault()).toInstant());
 		}
 		return null;
+	}
+
+	public static Date getZeroTimeDate(Date inputDate) {
+		Date res = inputDate;
+		Calendar calendar = Calendar.getInstance();
+
+		calendar.setTime(inputDate);
+		calendar.set(Calendar.HOUR_OF_DAY, 0);
+		calendar.set(Calendar.MINUTE, 0);
+		calendar.set(Calendar.SECOND, 0);
+		calendar.set(Calendar.MILLISECOND, 0);
+
+		res = calendar.getTime();
+
+		return res;
 	}
 
 }

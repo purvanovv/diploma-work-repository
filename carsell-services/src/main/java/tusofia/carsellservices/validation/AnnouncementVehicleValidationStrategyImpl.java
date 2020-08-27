@@ -260,7 +260,8 @@ public enum AnnouncementVehicleValidationStrategyImpl implements AnnouncementVeh
 				return new ValidationResult(ValidationType.VALID_FROM, ValidationConstants.ERROR_MESSAGE_FIELD_IS_EMPTY,
 						false);
 
-			} else if (DateUtils.compareDateIgnoreTime(input.getValidFrom(), new Date()) == -1) {
+			} else if (DateUtils.getZeroTimeDate(input.getValidFrom())
+					.compareTo(DateUtils.getZeroTimeDate(new Date())) == -1) {
 				return new ValidationResult(ValidationType.VALID_FROM,
 						String.format(ValidationConstants.ERROR_MESSAGE_INPUT_DATE_IS_BEFORE,
 								DateUtils.getSubmissionDate(new Date())),
