@@ -13,4 +13,6 @@ public interface AnnouncementVehicleService {
 	public AnnouncementVehicle getAnnouncementVehicle(Long announcementVehicleId);
 
 	public List<AnnouncementVehicle> getAnnouncementVehicles();
+
+	public tusofia.carsellservices.model.enums.MainCategoryType getMainCategoryType(Long mainCategoryId);
 }

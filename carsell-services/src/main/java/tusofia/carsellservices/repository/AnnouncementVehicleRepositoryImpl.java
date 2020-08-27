@@ -64,8 +64,9 @@ public class AnnouncementVehicleRepositoryImpl implements AnnouncementVehicleRep
 			params.addValue("region", announcementVehicle.getRegion());
 			params.addValue("city", announcementVehicle.getCity());
 			params.addValue("validDays", announcementVehicle.getValidDays());
-			params.addValue("validFrom", DateUtils.getSubmissionDate(announcementVehicle.getValidFrom()));
-			Date validTo = DateUtils.addDays(announcementVehicle.getValidFrom(), announcementVehicle.getValidDays());
+			Date validFrom = new Date();
+			params.addValue("validFrom", DateUtils.getSubmissionDate(validFrom));
+			Date validTo = DateUtils.addDays(validFrom, announcementVehicle.getValidDays());
 			params.addValue("validTo", DateUtils.getSubmissionDate(validTo));
 			params.addValue("numberOfAxels", announcementVehicle.getNumberOfAxels());
 			params.addValue("numberOfSeats", announcementVehicle.getNumberOfSeats());
@@ -126,6 +127,21 @@ public class AnnouncementVehicleRepositoryImpl implements AnnouncementVehicleRep
 		try {
 			String sql = SqlContainer.GET_ANNOUNCEMENT_VEHICLES;
 			return namedParameterJdbcTemplate.query(sql, new AnnouncementVehiclesResultSetExtractor());
+
+		} catch (Exception e) {
+			// TODO: handle exception
+			return null;
+		}
+	}
+
+	@Override
+	public tusofia.carsellservices.model.enums.MainCategoryType getMainCategoryType(Long mainCategoryId) {
+		try {
+			String sql = SqlContainer.GET_MAIN_CATEGORY;
+			MapSqlParameterSource params = new MapSqlParameterSource();
+			params.addValue("mainCategoryId", mainCategoryId);
+			String mainCategory = namedParameterJdbcTemplate.queryForObject(sql, params, String.class);
+			return tusofia.carsellservices.model.enums.MainCategoryType.fromString(mainCategory);
 
 		} catch (Exception e) {
 			// TODO: handle exception
