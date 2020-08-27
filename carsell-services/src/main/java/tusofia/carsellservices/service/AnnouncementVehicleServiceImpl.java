@@ -39,4 +39,9 @@ public class AnnouncementVehicleServiceImpl implements AnnouncementVehicleServic
 		return announcementVehicleRepository.getAnnouncementVehicles();
 	}
 
+	@Override
+	public tusofia.carsellservices.model.enums.MainCategoryType getMainCategoryType(Long mainCategoryId) {
+		return announcementVehicleRepository.getMainCategoryType(mainCategoryId);
+	}
+
 }
