@@ -54,7 +54,6 @@ export class CreateAnnouncementComponent implements OnInit {
       validDays: '',
       cubature: '',
       engineCategoryType: '',
-      validFrom: '',
       totalWeight: '',
       workingVolume: '',
       hoursOfOperation: '',
