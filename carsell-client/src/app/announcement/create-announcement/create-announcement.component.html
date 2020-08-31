@@ -5,25 +5,22 @@
         </h1>
         <mat-card-content>
             <form [formGroup]="createForm">
-                <div class="form-container" fxLayout="row wrap" fxLayout.xs="column"
-                    fxLayoutAlign="left">
+                <div class="form-container" fxLayout="row wrap" fxLayout.xs="column" fxLayoutAlign="left">
                     <div fxFlex="22%" class="form-element">
                         <mat-form-field appearance="legacy">
                             <mat-select placeholder="Основна категория" formControlName="mainCategoryId">
-                                <mat-option value="CAR_AND_JEEPS">Автомобили и Джипове</mat-option>
-                                <mat-option value="MOTORBIKES">Мотоциклети</mat-option>
+                                <mat-option [value]="mainCategory.id"
+                                    *ngFor="let mainCategory of mainCategories$ | async">
+                                    {{mainCategory.name}}</mat-option>
                             </mat-select>
                         </mat-form-field>
                     </div>
 
                     <div fxFlex="22%" class="form-element">
                         <mat-form-field appearance="legacy">
-                            <mat-select placeholder="Марка" formControlName="brand">
-                                <mat-optgroup *ngFor="let group of brandGroups" [label]="group.name">
-                                    <mat-option *ngFor="let brand of group.brands" [value]="brand">
-                                        {{brand}}
-                                    </mat-option>
-                                </mat-optgroup>
+                            <mat-select placeholder="Категория" formControlName="subCategoryId">
+                                <mat-option [value]="subCategory.id" *ngFor="let subCategory of subCategories">
+                                    {{subCategory.name}}</mat-option>
                             </mat-select>
                         </mat-form-field>
                     </div>
@@ -37,6 +34,18 @@
                                 <mat-radio-button class="example-margin" value="ON_PARTS">За части</mat-radio-button>
                             </mat-radio-group>
                         </section>
+                    </div>
+
+                    <div fxFlex="22%" class="form-element">
+                        <mat-form-field appearance="legacy">
+                            <mat-select placeholder="Марка" formControlName="brand">
+                                <mat-optgroup *ngFor="let group of brandGroups" [label]="group.name">
+                                    <mat-option *ngFor="let brand of group.brands" [value]="brand">
+                                        {{brand}}
+                                    </mat-option>
+                                </mat-optgroup>
+                            </mat-select>
+                        </mat-form-field>
                     </div>
 
                     <div fxFlex="22%" class="form-element">
@@ -55,11 +64,12 @@
                                 <mat-option value="DIESEL">Дизелов</mat-option>
                             </mat-select>
                         </mat-form-field>
-                    </div>     
+                    </div>
 
                     <div fxFlex="22%" class="form-element">
                         <mat-form-field appearance="legacy">
-                            <input matInput placeholder="Мощност(к.с.)" formControlName="horsePower">
+                            <input matInput type="number" placeholder="Мощност" formControlName="horsePower">
+                            <mat-hint>в конски сили</mat-hint>
                         </mat-form-field>
                     </div>
 
@@ -78,15 +88,6 @@
                             <mat-select placeholder="Скоростна кутия" formControlName="gearboxType">
                                 <mat-option value="MANUAL">Ръчна</mat-option>
                                 <mat-option value="AUTOMATIC">Автоматична</mat-option>
-                            </mat-select>
-                        </mat-form-field>
-                    </div>
-
-                    <div fxFlex="22%" class="form-element">
-                        <mat-form-field appearance="legacy">
-                            <mat-select placeholder="Категория" formControlName="subCategoryId">
-                                <mat-option value="VAN">Ван</mat-option>
-                                <mat-option value="JEEP">Джип</mat-option>
                             </mat-select>
                         </mat-form-field>
                     </div>
@@ -116,18 +117,9 @@
                         </mat-form-field>
                     </div>
 
-
-
                     <div fxFlex="22%" class="form-element">
                         <mat-form-field appearance="legacy">
-                            <input matInput placeholder="Пробег" formControlName="mileage">
-                            <mat-hint>в километри</mat-hint>
-                        </mat-form-field>
-                    </div>
-
-                    <div fxFlex="22%" class="form-element">
-                        <mat-form-field appearance="legacy">
-                            <input matInput placeholder="Пробег" formControlName="color">
+                            <input matInput type="number" placeholder="Пробег" formControlName="mileage">
                             <mat-hint>в километри</mat-hint>
                         </mat-form-field>
                     </div>
@@ -192,6 +184,7 @@
                     <div fxFlex="22%" class="form-element">
                         <mat-form-field appearance="legacy">
                             <input matInput type="number" placeholder="Товароносимост" formControlName="weightCapacity">
+                            <mat-hint>в килограми</mat-hint>
                         </mat-form-field>
                     </div>
 
@@ -203,13 +196,7 @@
 
                     <div fxFlex="22%" class="form-element">
                         <mat-form-field appearance="legacy">
-                            <input matInput type="number" placeholder="Кубатура" formControlName="engineCategoryType">
-                        </mat-form-field>
-                    </div>
-
-                    <div fxFlex="22%" class="form-element">
-                        <mat-form-field appearance="legacy">
-                            <mat-select placeholder="Вид охлаждане" formControlName="engineCategoryType">
+                            <mat-select placeholder="Вид двигател" formControlName="engineCategoryType">
                                 <mat-option value="TYPE_2">Двутактов</mat-option>
                                 <mat-option value="TYPE_4">Четиритактов</mat-option>
                             </mat-select>
@@ -232,7 +219,8 @@
 
                     <div fxFlex="22%" class="form-element">
                         <mat-form-field appearance="legacy">
-                            <input matInput type="number" placeholder="Часове работа" formControlName="hoursOfOperation">
+                            <input matInput type="number" placeholder="Часове работа"
+                                formControlName="hoursOfOperation">
                         </mat-form-field>
                     </div>
 
@@ -282,7 +270,7 @@
                             <mat-hint>в метри</mat-hint>
                         </mat-form-field>
                     </div>
-                    
+
                     <div fxFlex="22%" class="form-element">
                         <mat-form-field appearance="legacy">
                             <mat-select placeholder="Размер" formControlName="bicycleSize">
@@ -306,7 +294,7 @@
             </form>
 
             <button (click)="submitForm()" type="submit" mat-raised-button color="primary">
-                <span>Запази</span>
+                <span>Публикувай</span>
             </button>
         </mat-card-content>
     </mat-card>
