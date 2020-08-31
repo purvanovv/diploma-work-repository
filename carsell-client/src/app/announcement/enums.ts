@@ -1,61 +1,61 @@
 export enum AirConditionType {
-    NO,
-    ELECTRICAL,
-    TO_THE_ENGINE
+    NO = 'Няма',
+    ELECTRICAL = 'Електрически',
+    TO_THE_ENGINE = 'Към двигателя'
 }
 export enum ConditionType {
-    NEW,
-    USED,
-    ON_PARTS
+    NEW = 'Нов',
+    USED = 'Употребяван',
+    ON_PARTS = 'За части'
 }
 export enum CoolingType {
-    WATER,
-    AIR
+    WATER = 'Водно',
+    AIR = 'Въздушно'
 }
 export enum Currency {
-    LEV,
-    USD,
-    EUR
+    LEV = 'лв.',
+    USD = 'USD',
+    EUR = 'EUR'
 }
 export enum EmissionStandartType {
-    EURO_1,
-    EURO_2,
-    EURO_3,
-    EURO_4,
-    EURO_5,
-    EURO_6
+    EURO_1 = 'Евро 1',
+    EURO_2 = 'Евро 2',
+    EURO_3 = 'Евро 3',
+    EURO_4 = 'Евро 4',
+    EURO_5 = 'Евро 5',
+    EURO_6 = 'Евро 6'
 }
 export enum EngineCategoryType {
-    TACT_2,
-    TACT_4
+    TACT_2 = 'Двутактов',
+    TACT_4 = 'Четиритактов'
 }
 export enum EngineType {
-    DIESEL,
-    GASOLINE,
-    HYBRID,
-    ELECTRIC
+    DIESEL = 'Дизелов',
+    GASOLINE = 'Бензинов',
+    HYBRID = 'Хибриден',
+    ELECTRIC = 'Електрически'
 }
 export enum GearboxType {
-    MANUAL,
-    AUTOMATIC,
-    SEMI_AUTOMATIC
+    MANUAL = 'Ръчна',
+    AUTOMATIC = 'Автоматична',
+    SEMI_AUTOMATIC = 'Полуавтоматична'
 }
 export enum HeatingType {
-    NO,
-    ELECTRICAL,
-    GAS
+    NO = 'Няма',
+    ELECTRICAL = 'Електрическо',
+    GAS = 'Газово'
 }
 export enum MaterialType {
-    ALUMINUM,
-    IRON,
-    WOOD,
-    CEMENT,
-    KEVLAR,
-    PVC,
-    PLASTIC
+    ALUMINUM = 'Алуминии',
+    IRON = 'Желязо',
+    WOOD = 'Дърво',
+    CEMENT = 'Бетон',
+    KEVLAR = 'Кевлар',
+    PVC = 'PVC',
+    PLASTIC = 'Пластмаса'
 }
 export enum ToiletType {
-    NO,
-    CHEMICAL,
-    ORDINARY
+    NO = 'Няма',
+    CHEMICAL = 'Химическа',
+    ORDINARY = 'Обикновена'
 }

@@ -4,6 +4,7 @@ import { BrandGroup, MainCategory, SubCategory } from '../models';
 import { AnnouncementService } from '../announcement.service';
 import { Observable, Subject, pipe } from 'rxjs';
 import { tap, startWith } from 'rxjs/operators';
+import { EngineType, AirConditionType, ConditionType, CoolingType, Currency, EmissionStandartType, EngineCategoryType, GearboxType, HeatingType, MaterialType, ToiletType } from '../enums';
 
 @Component({
   selector: 'app-create-announcement',
@@ -23,6 +24,17 @@ export class CreateAnnouncementComponent implements OnInit {
   public mainCategories: MainCategory[];
   public subCategories: SubCategory[] = [];
 
+  public engineType = EngineType;
+  public airConditionType = AirConditionType;
+  public conditionType = ConditionType;
+  public coolingType = CoolingType;
+  public currency = Currency
+  public emissionStandartType = EmissionStandartType;
+  public engineCategoryType = EngineCategoryType;
+  public gearboxType = GearboxType;
+  public heatingType = HeatingType;
+  public materialType = MaterialType;
+  public toiletType = ToiletType;
 
   constructor(private formBuilder: FormBuilder, private announcementService: AnnouncementService) { }
 
@@ -32,7 +44,10 @@ export class CreateAnnouncementComponent implements OnInit {
       this.mainCategories = mainCategories
       this.initEvents();
     }));
+  }
 
+  getEnumValue(name: string, enumeration: object) {
+    return enumeration[name];
   }
 
   public onSelectMainCategory(mainCategoryId: number) {
