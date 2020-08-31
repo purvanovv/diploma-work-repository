@@ -5,12 +5,13 @@ import { AnnouncementRoutingModule } from './announcement-routing.module';
 import { MaterialModule } from '@app/material.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ReactiveFormsModule } from '@angular/forms';
+import { SharedModule } from '@app/@shared';
 
 
 
 @NgModule({
   imports: [
-    CommonModule, AnnouncementRoutingModule, FlexLayoutModule, MaterialModule,ReactiveFormsModule
+    CommonModule, AnnouncementRoutingModule, FlexLayoutModule, MaterialModule,ReactiveFormsModule,SharedModule
   ], declarations: [CreateAnnouncementComponent]
 })
 export class AnnouncementModule { }
