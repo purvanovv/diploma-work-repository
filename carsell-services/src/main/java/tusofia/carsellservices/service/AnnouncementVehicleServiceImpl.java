@@ -51,4 +51,9 @@ public class AnnouncementVehicleServiceImpl implements AnnouncementVehicleServic
 		return announcementVehicleRepository.getMakesByMainCategory(mainCategoryId);
 	}
 
+	@Override
+	public Map<String, List<String>> getRegions() {
+		return announcementVehicleRepository.getRegions();
+	}
+
 }

@@ -88,4 +88,10 @@ public class AnnouncementVehicleController {
 		return new ResponseEntity<Map<String, List<Make>>>(groupMakes, HttpStatus.OK);
 	}
 
+	@RequestMapping(value = "/regions", method = RequestMethod.GET)
+	public ResponseEntity<Map<String, List<String>>> getRegions() {
+		Map<String, List<String>> regions = announcementVehicleService.getRegions();
+		return new ResponseEntity<Map<String, List<String>>>(regions, HttpStatus.OK);
+	}
+
 }

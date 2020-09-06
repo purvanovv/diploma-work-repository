@@ -164,4 +164,15 @@ public class AnnouncementVehicleRepositoryImpl implements AnnouncementVehicleRep
 		}
 	}
 
+	@Override
+	public Map<String, List<String>> getRegions() {
+		try {
+			String sql = SqlContainer.GET_REGIONS;
+			return namedParameterJdbcTemplate.getJdbcTemplate().queryForObject(sql, null, new RegionsRowMapper());
+		} catch (Exception e) {
+			// TODO: handle exception
+			return null;
+		}
+	}
+
 }

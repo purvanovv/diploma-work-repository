@@ -19,4 +19,6 @@ public interface AnnouncementVehicleService {
 	public tusofia.carsellservices.model.enums.MainCategoryType getMainCategoryType(Long mainCategoryId);
 	
 	public Map<String, List<Make>> getMakesByMainCategory(Long mainCategoryId);
+	
+	public Map<String, List<String>> getRegions();
 }
