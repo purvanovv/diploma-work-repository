@@ -44,7 +44,7 @@ public class AnnouncementVehicleRepositoryImpl implements AnnouncementVehicleRep
 		try {
 			MapSqlParameterSource params = new MapSqlParameterSource();
 			params.addValue("mainCategoryId", announcementVehicle.getMainCategoryId());
-			params.addValue("brand", announcementVehicle.getBrand());
+			params.addValue("make", announcementVehicle.getMake());
 			params.addValue("model", announcementVehicle.getModel());
 			params.addValue("engineType", announcementVehicle.getEngineType().getValue());
 			params.addValue("conditionType", announcementVehicle.getConditionType().getValue());

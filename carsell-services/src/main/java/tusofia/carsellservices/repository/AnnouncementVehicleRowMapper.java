@@ -31,7 +31,7 @@ public class AnnouncementVehicleRowMapper implements RowMapper<AnnouncementVehic
 		AnnouncementVehicle announcementVehicle = new AnnouncementVehicle();
 		announcementVehicle.setId(rs.getLong("ID"));
 		announcementVehicle.setMainCategoryId(rs.getLong("MAIN_CATEGORY_ID"));
-		announcementVehicle.setBrand(rs.getString("BRAND"));
+		announcementVehicle.setMake(rs.getString("MAKE"));
 		announcementVehicle.setModel(rs.getString("MODEL"));
 		announcementVehicle.setEngineType(EngineType.fromString(rs.getString("ENGINE_TYPE")));
 		announcementVehicle.setConditionType(ConditionType.fromString(rs.getString("CONDITION_TYPE")));

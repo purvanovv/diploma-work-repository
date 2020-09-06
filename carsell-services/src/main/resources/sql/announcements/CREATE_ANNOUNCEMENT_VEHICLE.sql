@@ -1,6 +1,6 @@
 SELECT av.id, 
        av.main_category_id, 
-       av.brand, 
+       av.make, 
        av.model, 
        av.engine_type, 
        av.condition_type, 
