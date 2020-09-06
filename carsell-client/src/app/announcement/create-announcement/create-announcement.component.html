@@ -37,10 +37,10 @@
 
                     <div fxFlex="22%" class="form-element">
                         <mat-form-field appearance="legacy">
-                            <mat-select placeholder="Марка" formControlName="brand">
-                                <mat-optgroup *ngFor="let group of brandGroups" [label]="group.name">
-                                    <mat-option *ngFor="let brand of group.brands" [value]="brand">
-                                        {{brand}}
+                            <mat-select placeholder="Марка" formControlName="make">
+                                <mat-optgroup *ngFor="let group of makeGroups" [label]="group.name">
+                                    <mat-option *ngFor="let make of group.makes" [value]="make">
+                                        {{make}}
                                     </mat-option>
                                 </mat-optgroup>
                             </mat-select>

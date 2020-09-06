@@ -10,7 +10,7 @@ export interface SubCategory {
     mainCategoryId: number;
 }
 
-export interface BrandGroup{
+export interface MakeGroup{
     name: string;
-    brands: string[];
+    makes: string[];
 }

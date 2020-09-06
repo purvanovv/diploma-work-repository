@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { BrandGroup, MainCategory, SubCategory } from '../models';
+import { MakeGroup, MainCategory, SubCategory } from '../models';
 import { AnnouncementService } from '../announcement.service';
 import { Observable, Subject, pipe } from 'rxjs';
 import { tap, startWith } from 'rxjs/operators';
@@ -13,9 +13,9 @@ import { EngineType, AirConditionType, ConditionType, CoolingType, Currency, Emi
 })
 
 export class CreateAnnouncementComponent implements OnInit {
-  brandGroups: BrandGroup[] = [
-    { name: 'A', brands: ['Audi', 'Abarth'] },
-    { name: 'B', brands: ['Bentley', 'BMW'] }
+  makeGroups: MakeGroup[] = [
+    { name: 'A', makes: ['Audi', 'Abarth'] },
+    { name: 'B', makes: ['Bentley', 'BMW'] }
   ]
 
 
@@ -64,7 +64,7 @@ export class CreateAnnouncementComponent implements OnInit {
   private initForm() {
     this.createForm = this.formBuilder.group({
       mainCategoryId: 1,
-      brand: '',
+      make: '',
       model: '',
       engineType: '',
       conditionType: '',

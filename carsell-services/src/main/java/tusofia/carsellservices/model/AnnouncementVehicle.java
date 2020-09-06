@@ -18,7 +18,7 @@ import tusofia.carsellservices.model.enums.ToiletType;
 public class AnnouncementVehicle {
 	private Long id;
 	private Long mainCategoryId;
-	private String brand;
+	private String make;
 	private String model;
 	private EngineType engineType;
 	private ConditionType conditionType;
@@ -73,12 +73,12 @@ public class AnnouncementVehicle {
 		this.mainCategoryId = mainCategoryId;
 	}
 
-	public String getBrand() {
-		return brand;
+	public String getMake() {
+		return make;
 	}
 
-	public void setBrand(String brand) {
-		this.brand = brand;
+	public void setMake(String make) {
+		this.make = make;
 	}
 
 	public String getModel() {

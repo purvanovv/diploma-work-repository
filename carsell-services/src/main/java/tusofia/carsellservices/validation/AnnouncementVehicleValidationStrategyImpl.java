@@ -19,10 +19,10 @@ public enum AnnouncementVehicleValidationStrategyImpl implements AnnouncementVeh
 	},
 	BRAND(ValidationType.BRAND) {
 		public ValidationResult validate(AnnouncementVehicleCreateDTO input) {
-			if (null == input.getBrand()) {
+			if (null == input.getMake()) {
 				return new ValidationResult(ValidationType.BRAND, ValidationConstants.ERROR_MESSAGE_FIELD_IS_EMPTY,
 						false);
-			} else if (input.getBrand().length() > 1000) {
+			} else if (input.getMake().length() > 1000) {
 				return new ValidationResult(ValidationType.BRAND,
 						String.format(ValidationConstants.ERROR_MESSAGE_FIELD_MAXIMUM_LENGTH, 1000), false);
 			}
