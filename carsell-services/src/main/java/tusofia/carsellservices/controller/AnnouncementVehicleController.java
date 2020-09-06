@@ -1,6 +1,7 @@
 package tusofia.carsellservices.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import tusofia.carsellservices.exceptions.ValidationException;
 import tusofia.carsellservices.model.AnnouncementVehicle;
 import tusofia.carsellservices.model.MainCategory;
+import tusofia.carsellservices.model.Make;
 import tusofia.carsellservices.model.dtos.AnnouncementVehicleCreateDTO;
 import tusofia.carsellservices.service.AnnouncementVehicleService;
 import tusofia.carsellservices.util.AnnouncementVehicleModelMapper;
@@ -78,6 +80,12 @@ public class AnnouncementVehicleController {
 		List<AnnouncementVehicleCreateDTO> announcementVehicleCreateDTOs = announcementVehicleModelMapper
 				.convertToDTOs(announcementVehicles);
 		return new ResponseEntity<List<AnnouncementVehicleCreateDTO>>(announcementVehicleCreateDTOs, HttpStatus.OK);
+	}
+
+	@RequestMapping(value = "/groupmakes", method = RequestMethod.GET)
+	public ResponseEntity<Map<String, List<Make>>> getMakesByMainCategory(@RequestParam Long mainCategoryId) {
+		Map<String, List<Make>> groupMakes = announcementVehicleService.getMakesByMainCategory(mainCategoryId);
+		return new ResponseEntity<Map<String, List<Make>>>(groupMakes, HttpStatus.OK);
 	}
 
 }

@@ -1,12 +1,14 @@
 package tusofia.carsellservices.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import tusofia.carsellservices.model.AnnouncementVehicle;
 import tusofia.carsellservices.model.MainCategory;
+import tusofia.carsellservices.model.Make;
 import tusofia.carsellservices.repository.AnnouncementVehicleRepository;
 
 @Service
@@ -42,6 +44,11 @@ public class AnnouncementVehicleServiceImpl implements AnnouncementVehicleServic
 	@Override
 	public tusofia.carsellservices.model.enums.MainCategoryType getMainCategoryType(Long mainCategoryId) {
 		return announcementVehicleRepository.getMainCategoryType(mainCategoryId);
+	}
+
+	@Override
+	public Map<String, List<Make>> getMakesByMainCategory(Long mainCategoryId) {
+		return announcementVehicleRepository.getMakesByMainCategory(mainCategoryId);
 	}
 
 }

@@ -13,6 +13,7 @@ public class SqlContainer {
 	public static String CREATE_ANNOUNCEMENT_VEHICLE;
 	public static String GET_CATEGORIES;
 	public static String GET_MAIN_CATEGORY;
+	public static String GET_MAKES_BY_CATEGORY;
 
 	@Autowired
 	public SqlContainer(@Value("${sql.container}") String sqlPath) {
@@ -26,6 +27,7 @@ public class SqlContainer {
 				"announcements/CREATE_ANNOUNCEMENT_VEHICLE.sql");
 		GET_CATEGORIES = SqlUtils.getClasspathResource(sqlPath, "announcements/GET_CATEGORIES.sql");
 		GET_MAIN_CATEGORY = SqlUtils.getClasspathResource(sqlPath, "announcements/GET_MAIN_CATEGORY.sql");
+		GET_MAKES_BY_CATEGORY = SqlUtils.getClasspathResource(sqlPath, "announcements/GET_MAKES_BY_CATEGORY.sql");
 
 	}
 }

@@ -2,6 +2,7 @@ package tusofia.carsellservices.repository;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Repository;
 
 import tusofia.carsellservices.model.AnnouncementVehicle;
 import tusofia.carsellservices.model.MainCategory;
+import tusofia.carsellservices.model.Make;
 import tusofia.carsellservices.util.DateUtils;
 import tusofia.carsellservices.util.SqlContainer;
 import tusofia.carsellservices.util.SqlUtils;
@@ -143,6 +145,19 @@ public class AnnouncementVehicleRepositoryImpl implements AnnouncementVehicleRep
 			String mainCategory = namedParameterJdbcTemplate.queryForObject(sql, params, String.class);
 			return tusofia.carsellservices.model.enums.MainCategoryType.fromString(mainCategory);
 
+		} catch (Exception e) {
+			// TODO: handle exception
+			return null;
+		}
+	}
+
+	@Override
+	public Map<String, List<Make>> getMakesByMainCategory(Long mainCategoryId) {
+		try {
+			String sql = SqlContainer.GET_MAKES_BY_CATEGORY;
+			MapSqlParameterSource params = new MapSqlParameterSource();
+			params.addValue("mainCategoryId", mainCategoryId);
+			return namedParameterJdbcTemplate.queryForObject(sql, params, new MakesRowMapper());
 		} catch (Exception e) {
 			// TODO: handle exception
 			return null;
