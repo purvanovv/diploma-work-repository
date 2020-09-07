@@ -1,0 +1,308 @@
+<mat-card>
+    <!-- <h1>
+        <mat-card-title>Публикуване на обява</mat-card-title>
+    </h1> -->
+    <mat-card-content>
+        <form [formGroup]="createForm">
+            <div class="form-container" fxLayout="row wrap" fxLayout.xs="column" fxLayoutAlign="left">
+                <div fxFlex="22%" class="form-element">
+                    <mat-form-field appearance="legacy">
+                        <mat-select placeholder="Основна категория" formControlName="mainCategoryId">
+                            <mat-option [value]="mainCategory.id" *ngFor="let mainCategory of mainCategories">
+                                {{mainCategory.name}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+                <div fxFlex="22%" class="form-element">
+                    <mat-form-field appearance="legacy">
+                        <mat-select placeholder="Категория" formControlName="subCategoryId">
+                            <mat-option [value]="subCategory.id" *ngFor="let subCategory of subCategories">
+                                {{subCategory.name}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+                <div fxFlex="47%" class="form-element condition">
+                    <section>
+                        <label>Състояние:</label>
+                        <mat-radio-group formControlName="conditionType">
+                            <mat-radio-button [value]="name" *ngFor="let name of conditionType | enumToArray">
+                                {{getEnumValue(name,conditionType)}}</mat-radio-button>
+                        </mat-radio-group>
+                    </section>
+                </div>
+
+                <div fxFlex="22%" class="form-element">
+                    <mat-form-field appearance="legacy">
+                        <mat-select placeholder="Марка" formControlName="make">
+                            <mat-optgroup *ngFor="let group of makeGroups | keyvalue" [label]="group.key">
+                                <mat-option *ngFor="let make of group.value" [value]="make.make">
+                                    {{make.make}}
+                                </mat-option>
+                            </mat-optgroup>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+                <div fxFlex="22%" class="form-element">
+                    <mat-form-field appearance="legacy">
+                        <mat-select placeholder="Модел" formControlName="model">
+                            <mat-option [value]="model" *ngFor="let model of models">{{model}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+                <div fxFlex="22%" class="form-element">
+                    <mat-form-field appearance="legacy">
+                        <mat-select placeholder="Тип двигател" formControlName="engineType">
+                            <mat-option [value]="name" *ngFor="let name of engineType | enumToArray">
+                                {{getEnumValue(name,engineType)}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+                <div fxFlex="22%" class="form-element">
+                    <mat-form-field appearance="legacy">
+                        <input matInput type="number" placeholder="Мощност" formControlName="horsePower">
+                        <mat-hint>в конски сили</mat-hint>
+                    </mat-form-field>
+                </div>
+
+                <div fxFlex="22%" class="form-element">
+                    <mat-form-field appearance="legacy">
+                        <mat-select placeholder="Евростандарт" formControlName="emissionStandartType">
+                            <mat-option [value]="name" *ngFor="let name of emissionStandartType | enumToArray">
+                                {{getEnumValue(name,emissionStandartType)}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+                <div fxFlex="22%" class="form-element">
+                    <mat-form-field appearance="legacy">
+                        <mat-select placeholder="Скоростна кутия" formControlName="gearboxType">
+                            <mat-option [value]="name" *ngFor="let name of gearboxType | enumToArray">
+                                {{getEnumValue(name,gearboxType)}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+                <div fxFlex="22%" class="form-element">
+                    <mat-form-field appearance="legacy">
+                        <input matInput type="number" placeholder="Цена" formControlName="price">
+                    </mat-form-field>
+                </div>
+
+                <div fxFlex="22%" class="form-element">
+                    <mat-form-field appearance="legacy">
+                        <mat-select placeholder="Валута" formControlName="currency">
+                            <mat-option [value]="name" *ngFor="let name of currency | enumToArray">
+                                {{getEnumValue(name,currency)}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+                <div fxFlex="22%" class="form-element">
+                    <mat-form-field color="primary" appearance="legacy">
+                        <input placeholder="Дата на производство" formControlName="dateOfManufacture" matInput
+                            [matDatepicker]="dateOfManufacturePicker">
+                        <mat-datepicker-toggle matSuffix [for]="dateOfManufacturePicker"></mat-datepicker-toggle>
+                        <mat-datepicker #dateOfManufacturePicker></mat-datepicker>
+                    </mat-form-field>
+                </div>
+
+                <div fxFlex="22%" class="form-element">
+                    <mat-form-field appearance="legacy">
+                        <input matInput type="number" placeholder="Пробег" formControlName="mileage">
+                        <mat-hint>в километри</mat-hint>
+                    </mat-form-field>
+                </div>
+
+                <div fxFlex="22%" class="form-element">
+                    <mat-form-field appearance="legacy">
+                        <mat-select placeholder="Цвят" formControlName="color">
+                            <mat-option [value]="color" *ngFor="let color of colors">
+                                {{color}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+                <div fxFlex="22%" class="form-element">
+                    <mat-form-field appearance="legacy">
+                        <mat-select placeholder="Регион" formControlName="region">
+                            <mat-option [value]="region.key" *ngFor="let region of regions | keyvalue">
+                                {{region.key}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+                <div fxFlex="22%" class="form-element">
+                    <mat-form-field appearance="legacy">
+                        <mat-select placeholder="Населено място" formControlName="city">
+                            <mat-option [value]="city" *ngFor="let city of cities">{{city}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+                <div fxFlex="22%" class="form-element">
+                    <mat-form-field appearance="legacy">
+                        <mat-select placeholder="Валидност на обявата" formControlName="validDays">
+                            <mat-option [value]="days" *ngFor="let days of validDays">{{days}} дни</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+                <div fxFlex="22%" class="form-element">
+                    <mat-form-field appearance="legacy">
+                        <mat-select placeholder="Вид охлаждане" formControlName="coolingType">
+                            <mat-option [value]="name" *ngFor="let name of coolingType | enumToArray">
+                                {{getEnumValue(name,coolingType)}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+                <div fxFlex="22%" class="form-element">
+                    <mat-form-field appearance="legacy">
+                        <input matInput type="number" placeholder="Брой оси" formControlName="numberOfAxels">
+                    </mat-form-field>
+                </div>
+
+                <div fxFlex="22%" class="form-element">
+                    <mat-form-field appearance="legacy">
+                        <input matInput type="number" placeholder="Брой места" formControlName="numberOfSeats">
+                    </mat-form-field>
+                </div>
+
+                <div fxFlex="22%" class="form-element">
+                    <mat-form-field appearance="legacy">
+                        <input matInput type="number" placeholder="Товароносимост" formControlName="weightCapacity">
+                        <mat-hint>в килограми</mat-hint>
+                    </mat-form-field>
+                </div>
+
+                <div fxFlex="22%" class="form-element">
+                    <mat-form-field appearance="legacy">
+                        <input matInput type="number" placeholder="Кубатура" formControlName="cubature">
+                    </mat-form-field>
+                </div>
+
+                <div fxFlex="22%" class="form-element">
+                    <mat-form-field appearance="legacy">
+                        <mat-select placeholder="Вид двигател" formControlName="engineCategoryType">
+                            <mat-option [value]="name" *ngFor="let name of engineCategoryType | enumToArray">
+                                {{getEnumValue(name,engineCategoryType)}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+                <div fxFlex="22%" class="form-element">
+                    <mat-form-field appearance="legacy">
+                        <input matInput type="number" placeholder="Обща маса" formControlName="totalWeight">
+                        <mat-hint>в килограми</mat-hint>
+                    </mat-form-field>
+                </div>
+
+                <div fxFlex="22%" class="form-element">
+                    <mat-form-field appearance="legacy">
+                        <input matInput type="number" placeholder="Работен обем" formControlName="workingVolume">
+                        <mat-hint>в килограми</mat-hint>
+                    </mat-form-field>
+                </div>
+
+                <div fxFlex="22%" class="form-element">
+                    <mat-form-field appearance="legacy">
+                        <input matInput type="number" placeholder="Часове работа"
+                            formControlName="hoursOfOperation">
+                    </mat-form-field>
+                </div>
+
+                <div fxFlex="22%" class="form-element">
+                    <mat-form-field appearance="legacy">
+                        <input matInput type="number" placeholder="Брой легла" formControlName="numberOfBeds">
+                    </mat-form-field>
+                </div>
+
+                <div fxFlex="22%" class="form-element">
+                    <mat-form-field appearance="legacy">
+                        <mat-select placeholder="Тоалетна" formControlName="toiletType">
+                            <mat-option [value]="name" *ngFor="let name of toiletType | enumToArray">
+                                {{getEnumValue(name,toiletType)}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+                <div fxFlex="22%" class="form-element">
+                    <mat-form-field appearance="legacy">
+                        <mat-select placeholder="Климатик" formControlName="airConditionType">
+                            <mat-option [value]="name" *ngFor="let name of airConditionType | enumToArray">
+                                {{getEnumValue(name,airConditionType)}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+                <div fxFlex="22%" class="form-element">
+                    <mat-form-field appearance="legacy">
+                        <mat-select placeholder="Отопление" formControlName="heatingType">
+                            <mat-option [value]="name" *ngFor="let name of heatingType | enumToArray">
+                                {{getEnumValue(name,heatingType)}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+                <div fxFlex="22%" class="form-element">
+                    <mat-form-field appearance="legacy">
+                        <mat-select placeholder="Материал" formControlName="materialType">
+                            <mat-option [value]="name" *ngFor="let name of materialType | enumToArray">
+                                {{getEnumValue(name,materialType)}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+                <div fxFlex="22%" class="form-element">
+                    <mat-form-field appearance="legacy">
+                        <input matInput type="number" placeholder="Дължина" formControlName="lengthSize">
+                        <mat-hint>в метри</mat-hint>
+                    </mat-form-field>
+                </div>
+
+                <div fxFlex="22%" class="form-element">
+                    <mat-form-field appearance="legacy">
+                        <input matInput type="number" placeholder="Широчина" formControlName="width">
+                        <mat-hint>в метри</mat-hint>
+                    </mat-form-field>
+                </div>
+
+                <div fxFlex="22%" class="form-element">
+                    <mat-form-field appearance="legacy">
+                        <mat-select placeholder="Размер" formControlName="bicycleSize">
+                            <mat-option [value]="size" *ngFor="let size of bicycleSizes">{{size}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+                <div fxFlex="22%" class="form-element">
+                    <mat-form-field appearance="legacy">
+                        <mat-select placeholder="Скорости" formControlName="numberOfGears">
+                            <mat-option [value]="gears" *ngFor="let gears of numberOfGears">{{gears}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+        </form>
+
+        <button (click)="submitForm()" type="submit" mat-raised-button color="primary">
+            <span>Публикувай</span>
+        </button>
+    </mat-card-content>
+</mat-card>
