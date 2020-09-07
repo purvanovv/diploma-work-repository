@@ -1,7 +1,7 @@
 package tusofia.carsellservices.model.enums;
 
 public enum EngineCategoryType {
-	TYPE_2(2), TYPE_4(4);
+	TACT_2(2), TACT_4(4);
 
 	private final Integer value;
 

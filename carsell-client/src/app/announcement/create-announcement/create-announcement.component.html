@@ -262,6 +262,16 @@
 
                     <div fxFlex="22%" class="form-element">
                         <mat-form-field appearance="legacy">
+                            <mat-select placeholder="Материал" formControlName="materialType">
+                                <mat-option [value]="name" *ngFor="let name of materialType | enumToArray">
+                                    {{getEnumValue(name,materialType)}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+
+                    <div fxFlex="22%" class="form-element">
+                        <mat-form-field appearance="legacy">
                             <input matInput type="number" placeholder="Дължина" formControlName="lengthSize">
                             <mat-hint>в метри</mat-hint>
                         </mat-form-field>

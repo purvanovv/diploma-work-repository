@@ -50,7 +50,8 @@ export class CreateAnnouncementComponent implements OnInit {
   }
 
   public submitForm() {
-    console.log(this.createForm);
+    console.log(this.createForm.value);
+    this.announcementService.createAnnouncement(this.createForm.value).subscribe();
   }
 
   private $initData(): Observable<any> {
@@ -71,7 +72,7 @@ export class CreateAnnouncementComponent implements OnInit {
       make: '',
       model: '',
       engineType: '',
-      conditionType: '',
+      conditionType: 'USED',
       horsePower: '',
       emissionStandartType: '',
       gearboxType: '',
