@@ -10,7 +10,9 @@ export interface SubCategory {
     mainCategoryId: number;
 }
 
-export interface MakeGroup{
-    name: string;
-    makes: string[];
+export interface Make{
+    id: number;
+    make: string;
+    models: string[];
+    mainCategoryId: number;
 }

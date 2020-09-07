@@ -20,7 +20,7 @@ public class MakesRowMapper implements RowMapper<Map<String, List<Make>>> {
 			String groupName = rs.getString("GROUP_NAME");
 			Make currMake = extractMakeFromResultSet(rs);
 			if (groupMakes.containsKey(groupName)) {
-				Make make = findMake(currMake.getId(), groupMakes.get(groupName));
+				Make make = findMake(currMake.getMake(), groupMakes.get(groupName));
 				if (null == make) {
 					groupMakes.get(groupName).add(currMake);
 				} else {
@@ -44,8 +44,8 @@ public class MakesRowMapper implements RowMapper<Map<String, List<Make>>> {
 		return make;
 	}
 
-	private Make findMake(Long makeId, List<Make> makes) {
-		return makes.stream().filter(m -> m.getId().equals(makeId)).findAny().orElse(null);
+	private Make findMake(String make, List<Make> makes) {
+		return makes.stream().filter(m -> m.getMake().equalsIgnoreCase(make)).findAny().orElse(null);
 	}
 
 }

@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { MakeGroup, MainCategory, SubCategory } from '../models';
+import { MainCategory, SubCategory, Make } from '../models';
 import { AnnouncementService } from '../announcement.service';
-import { Observable, Subject, pipe } from 'rxjs';
-import { tap, startWith } from 'rxjs/operators';
+import { Observable, Subject, pipe, concat } from 'rxjs';
+import { tap, startWith, mergeMap } from 'rxjs/operators';
 import { EngineType, AirConditionType, ConditionType, CoolingType, Currency, EmissionStandartType, EngineCategoryType, GearboxType, HeatingType, MaterialType, ToiletType } from '../enums';
 
 @Component({
@@ -13,17 +13,15 @@ import { EngineType, AirConditionType, ConditionType, CoolingType, Currency, Emi
 })
 
 export class CreateAnnouncementComponent implements OnInit {
-  makeGroups: MakeGroup[] = [
-    { name: 'A', makes: ['Audi', 'Abarth'] },
-    { name: 'B', makes: ['Bentley', 'BMW'] }
-  ]
 
-
-  public createForm: FormGroup;
-  public mainCategories$: Observable<MainCategory[]>;
+  public makeGroups: Map<string, Make[]>;
+  public models: string[] = [];
   public mainCategories: MainCategory[];
   public subCategories: SubCategory[] = [];
+  public regions: Map<string, string[]>;
+  public cities: string[] = [];
 
+  public createForm: FormGroup;
   public engineType = EngineType;
   public airConditionType = AirConditionType;
   public conditionType = ConditionType;
@@ -35,30 +33,36 @@ export class CreateAnnouncementComponent implements OnInit {
   public heatingType = HeatingType;
   public materialType = MaterialType;
   public toiletType = ToiletType;
+  public colors = ['Зелен', 'Червен', 'Черен', 'Син', 'Бял'];
+  public validDays = [35, 49];
+  public bicycleSizes = [10, 12, 14, 16, 18, 20, 22, 24, 26, 27, 28, 29];
+  public numberOfGears = [3, 4, 5, 6, 7, 8, 9, 10, 12, 14, 16, 18, 20, 21, 24];
 
   constructor(private formBuilder: FormBuilder, private announcementService: AnnouncementService) { }
 
   ngOnInit(): void {
     this.initForm();
-    this.mainCategories$ = this.announcementService.getCategories().pipe(tap((mainCategories: MainCategory[]) => {
-      this.mainCategories = mainCategories
-      this.initEvents();
-    }));
+    this.$initData().pipe(tap(() => this.initEvents())).subscribe();
   }
 
-  getEnumValue(name: string, enumeration: object) {
+  public getEnumValue(name: string, enumeration: object) {
     return enumeration[name];
-  }
-
-  public onSelectMainCategory(mainCategoryId: number) {
-    let mainCategory = this.mainCategories.find(c => c.id = mainCategoryId);
-    if (mainCategory != undefined) {
-      this.subCategories = mainCategory.subCategories;
-    }
   }
 
   public submitForm() {
     console.log(this.createForm);
+  }
+
+  private $initData(): Observable<any> {
+    const $initCategories = this.announcementService.getCategories().pipe(tap((mainCategories: MainCategory[]) => {
+      this.mainCategories = mainCategories
+    }));
+
+    const $initRegions = this.announcementService.getRegions().pipe(tap((regions: Map<string, string[]>) => {
+      this.regions = regions;
+    }));
+
+    return concat($initCategories, $initRegions);
   }
 
   private initForm() {
@@ -106,12 +110,35 @@ export class CreateAnnouncementComponent implements OnInit {
     this.createForm.get('mainCategoryId').valueChanges
       .pipe(
         startWith(this.createForm.get('mainCategoryId').value),
-        tap((mainCategoryId: number) => {
-          const mainCategory = this.mainCategories.find(c => c.id == mainCategoryId);
-          if (mainCategory != undefined) {
+        mergeMap((mainCategoryId: number) => {
+          if (this.mainCategories != undefined) {
+            const mainCategory = this.mainCategories.find(c => c.id == mainCategoryId);
             this.subCategories = mainCategory.subCategories;
+            return this.announcementService.getMakes(mainCategoryId).pipe(tap(
+              (makeGroups: Map<string, Make[]>) => {
+                this.makeGroups = makeGroups;
+              }
+            ))
           }
-        })).subscribe();
+        }),
+      ).subscribe();
+
+    this.createForm.get('make').valueChanges
+      .pipe(
+        tap((make: string) => {
+          const groupName = make.substr(0, 1).toUpperCase();
+          const makes: Make[] = this.makeGroups[groupName];
+          this.models = makes.find(m => m.make == make)?.models;
+        })
+      ).subscribe();
+
+    this.createForm.get('region').valueChanges
+      .pipe(
+        tap((region: string) => {
+          this.cities = this.regions[region];
+        })
+      ).subscribe();
+
   }
 
 }

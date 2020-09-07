@@ -9,8 +9,7 @@
                     <div fxFlex="22%" class="form-element">
                         <mat-form-field appearance="legacy">
                             <mat-select placeholder="Основна категория" formControlName="mainCategoryId">
-                                <mat-option [value]="mainCategory.id"
-                                    *ngFor="let mainCategory of mainCategories$ | async">
+                                <mat-option [value]="mainCategory.id" *ngFor="let mainCategory of mainCategories">
                                     {{mainCategory.name}}</mat-option>
                             </mat-select>
                         </mat-form-field>
@@ -38,9 +37,9 @@
                     <div fxFlex="22%" class="form-element">
                         <mat-form-field appearance="legacy">
                             <mat-select placeholder="Марка" formControlName="make">
-                                <mat-optgroup *ngFor="let group of makeGroups" [label]="group.name">
-                                    <mat-option *ngFor="let make of group.makes" [value]="make">
-                                        {{make}}
+                                <mat-optgroup *ngFor="let group of makeGroups | keyvalue" [label]="group.key">
+                                    <mat-option *ngFor="let make of group.value" [value]="make.make">
+                                        {{make.make}}
                                     </mat-option>
                                 </mat-optgroup>
                             </mat-select>
@@ -50,8 +49,7 @@
                     <div fxFlex="22%" class="form-element">
                         <mat-form-field appearance="legacy">
                             <mat-select placeholder="Модел" formControlName="model">
-                                <mat-option value="322">322</mat-option>
-                                <mat-option value="100">100</mat-option>
+                                <mat-option [value]="model" *ngFor="let model of models">{{model}}</mat-option>
                             </mat-select>
                         </mat-form-field>
                     </div>
@@ -128,8 +126,9 @@
                     <div fxFlex="22%" class="form-element">
                         <mat-form-field appearance="legacy">
                             <mat-select placeholder="Цвят" formControlName="color">
-                                <mat-option value="RED">Зелен</mat-option>
-                                <mat-option value="GREEN">Червен</mat-option>
+                                <mat-option [value]="color" *ngFor="let color of colors">
+                                    {{color}}
+                                </mat-option>
                             </mat-select>
                         </mat-form-field>
                     </div>
@@ -137,8 +136,8 @@
                     <div fxFlex="22%" class="form-element">
                         <mat-form-field appearance="legacy">
                             <mat-select placeholder="Регион" formControlName="region">
-                                <mat-option value="Vratsa">Враца</mat-option>
-                                <mat-option value="Sofia">София</mat-option>
+                                <mat-option [value]="region.key" *ngFor="let region of regions | keyvalue">
+                                    {{region.key}}</mat-option>
                             </mat-select>
                         </mat-form-field>
                     </div>
@@ -146,8 +145,7 @@
                     <div fxFlex="22%" class="form-element">
                         <mat-form-field appearance="legacy">
                             <mat-select placeholder="Населено място" formControlName="city">
-                                <mat-option value="Vratsa">Враца</mat-option>
-                                <mat-option value="Sofia">София</mat-option>
+                                <mat-option [value]="city" *ngFor="let city of cities">{{city}}</mat-option>
                             </mat-select>
                         </mat-form-field>
                     </div>
@@ -155,8 +153,7 @@
                     <div fxFlex="22%" class="form-element">
                         <mat-form-field appearance="legacy">
                             <mat-select placeholder="Валидност на обявата" formControlName="validDays">
-                                <mat-option value="35">35 дни</mat-option>
-                                <mat-option value="49">49 дни</mat-option>
+                                <mat-option [value]="days" *ngFor="let days of validDays">{{days}} дни</mat-option>
                             </mat-select>
                         </mat-form-field>
                     </div>
@@ -280,8 +277,7 @@
                     <div fxFlex="22%" class="form-element">
                         <mat-form-field appearance="legacy">
                             <mat-select placeholder="Размер" formControlName="bicycleSize">
-                                <mat-option value="TYPE_2">10</mat-option>
-                                <mat-option value="TYPE_4">24</mat-option>
+                                <mat-option [value]="size" *ngFor="let size of bicycleSizes">{{size}}</mat-option>
                             </mat-select>
                         </mat-form-field>
                     </div>
@@ -289,8 +285,7 @@
                     <div fxFlex="22%" class="form-element">
                         <mat-form-field appearance="legacy">
                             <mat-select placeholder="Скорости" formControlName="numberOfGears">
-                                <mat-option value="TYPE_2">3</mat-option>
-                                <mat-option value="TYPE_4">4</mat-option>
+                                <mat-option [value]="gears" *ngFor="let gears of numberOfGears">{{gears}}</mat-option>
                             </mat-select>
                         </mat-form-field>
                     </div>
