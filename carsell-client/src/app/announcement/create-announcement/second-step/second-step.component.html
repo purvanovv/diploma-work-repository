@@ -2,17 +2,18 @@
     <mat-card-content>
 
         <mat-list>
-            <mat-list-item *ngFor="let file of files.data; let i = index">
+            <mat-list-item *ngFor="let file of files; let i = index">
                 <mat-icon mat-list-icon>image</mat-icon>
                 <span id="file-label">
-                    {{file.name}}
+                    {{file.data.name}}
                 </span>
                 <button [disabled]="disableRemove" mat-icon-button color="warn" (click)="remove(i)">
                     <mat-icon>delete</mat-icon>
                 </button>
+                <mat-progress-bar  [value]="file.progress"></mat-progress-bar>
             </mat-list-item>
         </mat-list>
-        <mat-progress-bar *ngIf="files.inProgress" [value]="files.progress"></mat-progress-bar>
+
     </mat-card-content>
     <mat-card-actions>
         <button mat-button color="warn" [disabled]="disableUpload" (click)="upload()">

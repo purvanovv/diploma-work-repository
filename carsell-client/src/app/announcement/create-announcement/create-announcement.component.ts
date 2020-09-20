@@ -14,9 +14,10 @@ import { MatStepper } from '@angular/material/stepper';
 })
 
 export class CreateAnnouncementComponent implements OnInit {
-  public isEditable = true; //false
-  public isLinear = true; //false
-  public completed = true;  //false
+  public isEditable = false; //false
+  public isLinear = false; //false
+  public completed = false;  //false
+  public announcementId: number;
 
   @ViewChild('stepper') stepper: MatStepper;
 
@@ -24,12 +25,18 @@ export class CreateAnnouncementComponent implements OnInit {
 
   }
 
-  public changeStep(isSuccessStep: boolean) {
-    if (isSuccessStep) {
-      this.stepper.selected.completed = true;
-      this.stepper.next();
-    }
+  private changeStep() {
+    this.stepper.selected.completed = true;
+    this.stepper.next();
+  }
 
+  public prepareSecondStep(announcementId: number) {
+    this.announcementId = announcementId;
+    this.changeStep();
+  }
+
+  public prepareThirdStep(announcementId: number){
+    this.changeStep();
   }
 
 

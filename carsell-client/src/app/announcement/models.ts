@@ -57,3 +57,9 @@ export interface Announcement{
     numberOfGears: number;
     description: string;
 }
+
+export interface FileUpload {
+    progress: number;
+    inProgress: boolean
+    data: File;
+  }

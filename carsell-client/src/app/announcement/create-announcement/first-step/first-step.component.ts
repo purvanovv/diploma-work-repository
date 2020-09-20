@@ -38,7 +38,7 @@ export class FirstStepComponent implements OnInit {
   public bicycleSizes = [10, 12, 14, 16, 18, 20, 22, 24, 26, 27, 28, 29];
   public numberOfGears = [3, 4, 5, 6, 7, 8, 9, 10, 12, 14, 16, 18, 20, 21, 24];
 
-  @Output() onSubmitAnnouncement: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() onSubmitAnnouncement: EventEmitter<number> = new EventEmitter<number>();
 
   constructor(private formBuilder: FormBuilder, private announcementService: AnnouncementService) { }
 
@@ -55,8 +55,8 @@ export class FirstStepComponent implements OnInit {
     console.log(this.createForm.value);
     this.announcementService.createAnnouncement(this.createForm.value)
       .pipe(
-        tap(() => {
-          this.onSubmitAnnouncement.emit(true);
+        tap((announcementId: number) => {
+          this.onSubmitAnnouncement.emit(announcementId);
         }
         )).subscribe();
   }

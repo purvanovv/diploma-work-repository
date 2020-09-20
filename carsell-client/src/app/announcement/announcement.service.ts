@@ -7,7 +7,8 @@ const routes = {
   categories: () => `announcements/categories`,
   groupmakes: (mainCategoryId: number) => `announcements/groupmakes?mainCategoryId=${mainCategoryId}`,
   regions: () => `announcements/regions`,
-  announcement: () => `announcements/announcement`
+  announcement: () => `announcements/announcement`,
+  upload: () => `announcements/upload`
 
 };
 
@@ -34,4 +35,16 @@ export class AnnouncementService {
   public createAnnouncement(announcement: Announcement): Observable<number> {
     return this.httpClient.post<number>(routes.announcement(), announcement);
   }
+
+  public upload(file: File, announcementId: number): Observable<any> {
+    const uploadData = new FormData();
+    uploadData.append('imageFile', file, file.name)
+    uploadData.append('announcementId', announcementId.toString());
+    return this.httpClient.post(routes.upload(), uploadData, {
+      observe: 'events',
+      reportProgress: true,
+      responseType: 'json'
+    });
+  }
+
 }
