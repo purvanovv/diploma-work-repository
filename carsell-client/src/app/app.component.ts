@@ -13,11 +13,7 @@ const log = new Logger('App');
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-  constructor(
-    private router: Router,
-    private activatedRoute: ActivatedRoute,
-    private titleService: Title,
-  ) { }
+  constructor(private router: Router, private activatedRoute: ActivatedRoute, private titleService: Title) {}
 
   ngOnInit() {
     // Setup logger

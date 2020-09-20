@@ -1,19 +1,29 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Make, MainCategory, SubCategory } from '@app/announcement/models';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { EngineType, AirConditionType, ConditionType, CoolingType, Currency, EmissionStandartType, EngineCategoryType, GearboxType, HeatingType, MaterialType, ToiletType } from '@app/announcement/enums';
+import {
+  EngineType,
+  AirConditionType,
+  ConditionType,
+  CoolingType,
+  Currency,
+  EmissionStandartType,
+  EngineCategoryType,
+  GearboxType,
+  HeatingType,
+  MaterialType,
+  ToiletType,
+} from '@app/announcement/enums';
 import { AnnouncementService } from '@app/announcement/announcement.service';
 import { tap, startWith, mergeMap } from 'rxjs/operators';
 import { Observable, concat } from 'rxjs';
 
-
 @Component({
   selector: 'app-first-step',
   templateUrl: './first-step.component.html',
-  styleUrls: ['./first-step.component.scss']
+  styleUrls: ['./first-step.component.scss'],
 })
 export class FirstStepComponent implements OnInit {
-
   public makeGroups: Map<string, Make[]>;
   public models: string[] = [];
   public mainCategories: MainCategory[];
@@ -26,7 +36,7 @@ export class FirstStepComponent implements OnInit {
   public airConditionType = AirConditionType;
   public conditionType = ConditionType;
   public coolingType = CoolingType;
-  public currency = Currency
+  public currency = Currency;
   public emissionStandartType = EmissionStandartType;
   public engineCategoryType = EngineCategoryType;
   public gearboxType = GearboxType;
@@ -40,11 +50,13 @@ export class FirstStepComponent implements OnInit {
 
   @Output() onSubmitAnnouncement: EventEmitter<number> = new EventEmitter<number>();
 
-  constructor(private formBuilder: FormBuilder, private announcementService: AnnouncementService) { }
+  constructor(private formBuilder: FormBuilder, private announcementService: AnnouncementService) {}
 
   ngOnInit(): void {
     this.initForm();
-    this.$initData().pipe(tap(() => this.initEvents())).subscribe();
+    this.$initData()
+      .pipe(tap(() => this.initEvents()))
+      .subscribe();
   }
 
   public getEnumValue(name: string, enumeration: object) {
@@ -53,22 +65,28 @@ export class FirstStepComponent implements OnInit {
 
   public submitForm() {
     console.log(this.createForm.value);
-    this.announcementService.createAnnouncement(this.createForm.value)
+    this.announcementService
+      .createAnnouncement(this.createForm.value)
       .pipe(
         tap((announcementId: number) => {
           this.onSubmitAnnouncement.emit(announcementId);
-        }
-        )).subscribe();
+        })
+      )
+      .subscribe();
   }
 
   private $initData(): Observable<any> {
-    const $initCategories = this.announcementService.getCategories().pipe(tap((mainCategories: MainCategory[]) => {
-      this.mainCategories = mainCategories
-    }));
+    const $initCategories = this.announcementService.getCategories().pipe(
+      tap((mainCategories: MainCategory[]) => {
+        this.mainCategories = mainCategories;
+      })
+    );
 
-    const $initRegions = this.announcementService.getRegions().pipe(tap((regions: Map<string, string[]>) => {
-      this.regions = regions;
-    }));
+    const $initRegions = this.announcementService.getRegions().pipe(
+      tap((regions: Map<string, string[]>) => {
+        this.regions = regions;
+      })
+    );
 
     return concat($initCategories, $initRegions);
   }
@@ -110,44 +128,47 @@ export class FirstStepComponent implements OnInit {
       width: '',
       bicycleSize: '',
       numberOfGears: '',
-      description: ''
+      description: '',
     });
   }
 
   private initEvents() {
-    this.createForm.get('mainCategoryId').valueChanges
-      .pipe(
+    this.createForm
+      .get('mainCategoryId')
+      .valueChanges.pipe(
         startWith(this.createForm.get('mainCategoryId').value),
         mergeMap((mainCategoryId: number) => {
           if (this.mainCategories != undefined) {
-            const mainCategory = this.mainCategories.find(c => c.id == mainCategoryId);
+            const mainCategory = this.mainCategories.find((c) => c.id == mainCategoryId);
             this.subCategories = mainCategory.subCategories;
-            return this.announcementService.getMakes(mainCategoryId).pipe(tap(
-              (makeGroups: Map<string, Make[]>) => {
+            return this.announcementService.getMakes(mainCategoryId).pipe(
+              tap((makeGroups: Map<string, Make[]>) => {
                 this.makeGroups = makeGroups;
-              }
-            ))
+              })
+            );
           }
-        }),
-      ).subscribe();
+        })
+      )
+      .subscribe();
 
-    this.createForm.get('make').valueChanges
-      .pipe(
+    this.createForm
+      .get('make')
+      .valueChanges.pipe(
         tap((make: string) => {
           const groupName = make.substr(0, 1).toUpperCase();
           const makes: Make[] = this.makeGroups[groupName];
-          this.models = makes.find(m => m.make == make)?.models;
+          this.models = makes.find((m) => m.make == make)?.models;
         })
-      ).subscribe();
+      )
+      .subscribe();
 
-    this.createForm.get('region').valueChanges
-      .pipe(
+    this.createForm
+      .get('region')
+      .valueChanges.pipe(
         tap((region: string) => {
           this.cities = this.regions[region];
         })
-      ).subscribe();
-
+      )
+      .subscribe();
   }
-
-
 }

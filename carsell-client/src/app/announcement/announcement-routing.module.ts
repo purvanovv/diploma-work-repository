@@ -4,11 +4,13 @@ import { CreateAnnouncementComponent } from './create-announcement/create-announ
 import { Shell } from '@app/shell/shell.service';
 
 const routes: Routes = [
-  Shell.childRoutes([{ path: 'announcement/create', component: CreateAnnouncementComponent, data: { title: 'CreateAnnouncement' } }]),
+  Shell.childRoutes([
+    { path: 'announcement/create', component: CreateAnnouncementComponent, data: { title: 'CreateAnnouncement' } },
+  ]),
 ];
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
   providers: [],
 })
-export class AnnouncementRoutingModule { }
+export class AnnouncementRoutingModule {}

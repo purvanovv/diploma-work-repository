@@ -9,11 +9,15 @@ import { SharedModule } from '@app/@shared';
 import { FirstStepComponent } from './create-announcement/first-step/first-step.component';
 import { SecondStepComponent } from './create-announcement/second-step/second-step.component';
 
-
-
 @NgModule({
   imports: [
-    CommonModule, AnnouncementRoutingModule, FlexLayoutModule, MaterialModule,ReactiveFormsModule,SharedModule
-  ], declarations: [CreateAnnouncementComponent, FirstStepComponent, SecondStepComponent]
+    CommonModule,
+    AnnouncementRoutingModule,
+    FlexLayoutModule,
+    MaterialModule,
+    ReactiveFormsModule,
+    SharedModule,
+  ],
+  declarations: [CreateAnnouncementComponent, FirstStepComponent, SecondStepComponent],
 })
-export class AnnouncementModule { }
+export class AnnouncementModule {}

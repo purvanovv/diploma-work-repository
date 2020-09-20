@@ -18,13 +18,7 @@ describe('ShellComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [
-        RouterTestingModule,
-        BrowserAnimationsModule,
-        FlexLayoutModule,
-        MaterialModule,
-        CoreModule,
-      ],
+      imports: [RouterTestingModule, BrowserAnimationsModule, FlexLayoutModule, MaterialModule, CoreModule],
       providers: [
         { provide: AuthenticationService, useClass: MockAuthenticationService },
         { provide: CredentialsService, useClass: MockCredentialsService },

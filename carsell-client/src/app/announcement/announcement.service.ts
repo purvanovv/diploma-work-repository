@@ -8,17 +8,14 @@ const routes = {
   groupmakes: (mainCategoryId: number) => `announcements/groupmakes?mainCategoryId=${mainCategoryId}`,
   regions: () => `announcements/regions`,
   announcement: () => `announcements/announcement`,
-  upload: () => `announcements/upload`
-
+  upload: () => `announcements/upload`,
 };
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-
 export class AnnouncementService {
-
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient) {}
 
   public getCategories(): Observable<MainCategory[]> {
     return this.httpClient.get<MainCategory[]>(routes.categories());
@@ -38,13 +35,12 @@ export class AnnouncementService {
 
   public upload(file: File, announcementId: number): Observable<any> {
     const uploadData = new FormData();
-    uploadData.append('imageFile', file, file.name)
+    uploadData.append('imageFile', file, file.name);
     uploadData.append('announcementId', announcementId.toString());
     return this.httpClient.post(routes.upload(), uploadData, {
       observe: 'events',
       reportProgress: true,
-      responseType: 'json'
+      responseType: 'json',
     });
   }
-
 }

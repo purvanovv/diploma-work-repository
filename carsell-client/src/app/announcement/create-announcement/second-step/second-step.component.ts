@@ -8,13 +8,12 @@ import { FileUpload } from '@app/announcement/models';
 @Component({
   selector: 'app-second-step',
   templateUrl: './second-step.component.html',
-  styleUrls: ['./second-step.component.scss']
+  styleUrls: ['./second-step.component.scss'],
 })
 
 //create subject of files
-
 export class SecondStepComponent implements OnInit {
-  @ViewChild("fileInput", { static: false }) fileInput: ElementRef;
+  @ViewChild('fileInput', { static: false }) fileInput: ElementRef;
 
   public files: FileUpload[] = [];
   public disableSubmit = true;
@@ -22,14 +21,12 @@ export class SecondStepComponent implements OnInit {
   public disableRemove = false;
   private maxNumberOfFiles = 3;
 
-
-  constructor(private announcementService: AnnouncementService) { }
+  constructor(private announcementService: AnnouncementService) {}
 
   @Input() announcementId: number;
   @Output() onUploadFiles: EventEmitter<number> = new EventEmitter<number>();
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   public upload() {
     const fileInput = this.fileInput.nativeElement;
@@ -46,13 +43,12 @@ export class SecondStepComponent implements OnInit {
       }
     };
     fileInput.click();
-
   }
 
   public remove(index: number) {
     this.files.splice(index, 1);
     const fileInput = this.fileInput.nativeElement;
-    fileInput.value = "";
+    fileInput.value = '';
     this.disableUpload = false;
     if (this.files.length <= 0) {
       this.disableSubmit = true;
@@ -68,33 +64,36 @@ export class SecondStepComponent implements OnInit {
 
   private uploadFiles() {
     this.fileInput.nativeElement.value = '';
-    this.files.forEach(file => {
+    this.files.forEach((file) => {
       file.inProgress = true;
-      this.announcementService.upload(file.data, this.announcementId).pipe(
-        map(event => {
+      this.announcementService
+        .upload(file.data, this.announcementId)
+        .pipe(
+          map((event) => {
+            console.log(event);
+            console.log(event.type);
+            switch (event.type) {
+              case HttpEventType.UploadProgress:
+                file.progress = Math.round((event.loaded * 100) / event.total);
+                break;
+              case HttpEventType.Response:
+                return event;
+            }
+          }),
+          catchError((error: HttpErrorResponse) => {
+            file.inProgress = false;
+            return of(`${file.data.name} upload failed.`);
+          })
+        )
+        .subscribe((event: any) => {
           console.log(event);
-          console.log(event.type);
-          switch (event.type) {
-            case HttpEventType.UploadProgress:
-              file.progress = Math.round(event.loaded * 100 / event.total);
-              break;
-            case HttpEventType.Response:
-              return event;
+          if (typeof event === 'object') {
+            this.removeFileFromArray(file);
+            if (this.files.length <= 0) {
+              this.onUploadFiles.emit(this.announcementId);
+            }
           }
-        }),
-        catchError((error: HttpErrorResponse) => {
-          file.inProgress = false;
-          return of(`${file.data.name} upload failed.`);
-        })
-      ).subscribe((event: any) => {
-        console.log(event);
-        if (typeof (event) === 'object') {
-          this.removeFileFromArray(file);
-          if (this.files.length <= 0) {
-            this.onUploadFiles.emit(this.announcementId);
-          }
-        }
-      });
+        });
     });
   }
 
@@ -104,5 +103,4 @@ export class SecondStepComponent implements OnInit {
     this.files.splice(fileIndex, 1);
     console.log(this.files);
   }
-
 }

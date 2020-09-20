@@ -9,6 +9,6 @@ import { EnumToArrayPipe } from './enum-to-array.pipe';
 @NgModule({
   imports: [FlexLayoutModule, MaterialModule, CommonModule],
   declarations: [LoaderComponent, EnumToArrayPipe],
-  exports: [LoaderComponent,EnumToArrayPipe],
+  exports: [LoaderComponent, EnumToArrayPipe],
 })
 export class SharedModule {}

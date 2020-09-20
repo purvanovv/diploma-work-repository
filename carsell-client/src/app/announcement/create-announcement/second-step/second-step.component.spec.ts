@@ -8,9 +8,8 @@ describe('SecondStepComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SecondStepComponent ]
-    })
-    .compileComponents();
+      declarations: [SecondStepComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
