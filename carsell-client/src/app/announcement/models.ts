@@ -1,3 +1,4 @@
+import { AbstractControl } from '@angular/forms';
 import {
   EngineType,
   ConditionType,
@@ -15,6 +16,7 @@ import {
 export interface MainCategory {
   id: number;
   name: string;
+  value: string;
   subCategories: SubCategory[];
 }
 
@@ -74,4 +76,9 @@ export interface FileUpload {
   progress: number;
   inProgress: boolean;
   data: File;
+}
+
+export interface AnnouncementControl {
+  name: string;
+  control: AbstractControl;
 }

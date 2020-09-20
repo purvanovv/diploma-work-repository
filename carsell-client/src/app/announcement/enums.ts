@@ -59,3 +59,57 @@ export enum ToiletType {
   CHEMICAL = 'Химическа',
   ORDINARY = 'Обикновена',
 }
+
+export enum MainCategoryType {
+  CARS_AND_JEEPS = 'Автомобили и Джипове',
+  BUSES = 'Бусове',
+  TRUCKS = 'Камиони',
+  MOTORBIKES = 'Мотоциклети',
+  AGRICULTURAL = 'Селскостопански',
+  INDUSTRIAL = 'Индустриални',
+  CURRY = 'Кари',
+  CARAVANS = 'Каравани',
+  YACHT_AND_BOATS = 'Яахти и лодки',
+  TRAILERS = 'Ремаркета',
+  BICYCLES = 'Велосипеди'
+}
+
+export enum Control {
+  MAIN_CATEGORY_ID,
+  MAKE,
+  MODEL,
+  ENGINE_TYPE,
+  CONDITION_TYPE,
+  HORSE_POWER,
+  EMISSION_STANDART_TYPE,
+  GEARBOX_TYPE,
+  SUB_CATEGORY_ID,
+  COOLING_TYPE,
+  NUMBER_OF_AXELS,
+  NUMBER_OF_SEATS,
+  WEIGHT_CAPACITY,
+  PRICE,
+  CURRENCY,
+  DATE_OF_MANUACTURE,
+  MILEAGE,
+  COLOR,
+  REGION,
+  CITY,
+  VALID_DAYS,
+  CUBATURE,
+  ENGINE_CATEGORY_TYPE,
+  TOTAL_WEIGHT,
+  WORKING_VOLUME,
+  HOURS_OF_OPERATION,
+  NUMBER_OF_BEDS,
+  TOILET_TYPE,
+  HEATING_TYPE,
+  AIR_CONDITION_TYPE,
+  LENGTH_SIZE,
+  MATERIAL_TYPE,
+  WIDTH,
+  BICYCLE_SIZE,
+  NUMBER_OF_GEARS,
+  DESCRIPTION
+}
+

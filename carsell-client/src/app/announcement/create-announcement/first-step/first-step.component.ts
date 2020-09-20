@@ -13,10 +13,12 @@ import {
   HeatingType,
   MaterialType,
   ToiletType,
+  MainCategoryType
 } from '@app/announcement/enums';
 import { AnnouncementService } from '@app/announcement/announcement.service';
 import { tap, startWith, mergeMap } from 'rxjs/operators';
 import { Observable, concat } from 'rxjs';
+import { AnnouncementFormBuilder } from '@app/announcement/announcement.form.builder';
 
 @Component({
   selector: 'app-first-step',
@@ -48,15 +50,41 @@ export class FirstStepComponent implements OnInit {
   public bicycleSizes = [10, 12, 14, 16, 18, 20, 22, 24, 26, 27, 28, 29];
   public numberOfGears = [3, 4, 5, 6, 7, 8, 9, 10, 12, 14, 16, 18, 20, 21, 24];
 
+  private initFormCategory = { categoryId: 1, category: MainCategoryType.CARS_AND_JEEPS };
+
   @Output() onSubmitAnnouncement: EventEmitter<number> = new EventEmitter<number>();
 
-  constructor(private formBuilder: FormBuilder, private announcementService: AnnouncementService) {}
+  constructor(private formBuilder: FormBuilder, private announcementService: AnnouncementService) {
+  }
 
   ngOnInit(): void {
     this.initForm();
     this.$initData()
-      .pipe(tap(() => this.initEvents()))
+      .pipe(mergeMap(() => {
+        const mainCategory = this.mainCategories.find((c) => c.id == this.initFormCategory.categoryId);
+        this.subCategories = mainCategory.subCategories;
+        this.initEvents()
+        return this.announcementService.getMakes(this.initFormCategory.categoryId).pipe(
+          tap((makeGroups: Map<string, Make[]>) => {
+            this.makeGroups = makeGroups;
+          }));
+      }))
       .subscribe();
+  }
+
+
+  private $onChangeMainCategory(mainCategoryId: number): Observable<Map<String, Make[]>> {
+    const mainCategory = this.mainCategories.find((c) => c.id == mainCategoryId);
+    this.subCategories = mainCategory.subCategories;
+
+    this.initFormCategory = { categoryId: mainCategoryId, category: MainCategoryType[mainCategory.value] };
+    this.initForm();
+    this.initEvents();
+
+    return this.announcementService.getMakes(mainCategoryId).pipe(
+      tap((makeGroups: Map<string, Make[]>) => {
+        this.makeGroups = makeGroups;
+      }));
   }
 
   public getEnumValue(name: string, enumeration: object) {
@@ -64,7 +92,6 @@ export class FirstStepComponent implements OnInit {
   }
 
   public submitForm() {
-    console.log(this.createForm.value);
     this.announcementService
       .createAnnouncement(this.createForm.value)
       .pipe(
@@ -92,60 +119,27 @@ export class FirstStepComponent implements OnInit {
   }
 
   private initForm() {
-    this.createForm = this.formBuilder.group({
-      mainCategoryId: 1,
-      make: '',
-      model: '',
-      engineType: '',
-      conditionType: 'USED',
-      horsePower: '',
-      emissionStandartType: '',
-      gearboxType: '',
-      subCategoryId: '',
-      coolingType: '',
-      numberOfAxels: '',
-      numberOfSeats: '',
-      weightCapacity: '',
-      price: '',
-      currency: '',
-      dateOfManufacture: '',
-      mileage: '',
-      color: '',
-      region: '',
-      city: '',
-      validDays: '',
-      cubature: '',
-      engineCategoryType: '',
-      totalWeight: '',
-      workingVolume: '',
-      hoursOfOperation: '',
-      numberOfBeds: '',
-      toiletType: '',
-      heatingType: '',
-      airConditionType: '',
-      lengthSize: '',
-      materialType: '',
-      width: '',
-      bicycleSize: '',
-      numberOfGears: '',
-      description: '',
-    });
+    this.createForm = new AnnouncementFormBuilder(this.formBuilder, this.initFormCategory.category).construct();
+    this.createForm.get('mainCategoryId').setValue(this.initFormCategory.categoryId);
+    this.createForm.get('conditionType').setValue('USED');
+
+  }
+
+  public containsControl(controlName: string): boolean {
+    if (this.createForm.get(controlName)) {
+      return true;
+    }
+    return false;
   }
 
   private initEvents() {
     this.createForm
       .get('mainCategoryId')
       .valueChanges.pipe(
-        startWith(this.createForm.get('mainCategoryId').value),
+        //startWith(this.createForm.get('mainCategoryId').value),
         mergeMap((mainCategoryId: number) => {
           if (this.mainCategories != undefined) {
-            const mainCategory = this.mainCategories.find((c) => c.id == mainCategoryId);
-            this.subCategories = mainCategory.subCategories;
-            return this.announcementService.getMakes(mainCategoryId).pipe(
-              tap((makeGroups: Map<string, Make[]>) => {
-                this.makeGroups = makeGroups;
-              })
-            );
+            return this.$onChangeMainCategory(mainCategoryId);
           }
         })
       )

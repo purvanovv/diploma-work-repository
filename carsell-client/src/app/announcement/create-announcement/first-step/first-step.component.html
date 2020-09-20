@@ -5,38 +5,35 @@
   <mat-card-content>
     <form [formGroup]="createForm">
       <div class="form-container" fxLayout="row wrap" fxLayout.xs="column" fxLayoutAlign="left">
-        <div fxFlex="22%" class="form-element">
+        <div *ngIf="containsControl('mainCategoryId')" fxFlex="22%" class="form-element">
           <mat-form-field appearance="legacy">
             <mat-select placeholder="Основна категория" formControlName="mainCategoryId">
               <mat-option [value]="mainCategory.id" *ngFor="let mainCategory of mainCategories">
-                {{ mainCategory.name }}</mat-option
-              >
+                {{ mainCategory.name }}</mat-option>
             </mat-select>
           </mat-form-field>
         </div>
 
-        <div fxFlex="22%" class="form-element">
+        <div *ngIf="containsControl('subCategoryId')" fxFlex="22%" class="form-element">
           <mat-form-field appearance="legacy">
             <mat-select placeholder="Категория" formControlName="subCategoryId">
               <mat-option [value]="subCategory.id" *ngFor="let subCategory of subCategories">
-                {{ subCategory.name }}</mat-option
-              >
+                {{ subCategory.name }}</mat-option>
             </mat-select>
           </mat-form-field>
         </div>
 
-        <div fxFlex="47%" class="form-element condition">
+        <div *ngIf="containsControl('conditionType')" fxFlex="47%" class="form-element condition">
           <section>
             <label>Състояние:</label>
             <mat-radio-group formControlName="conditionType">
               <mat-radio-button [value]="name" *ngFor="let name of conditionType | enumToArray">
-                {{ getEnumValue(name, conditionType) }}</mat-radio-button
-              >
+                {{ getEnumValue(name, conditionType) }}</mat-radio-button>
             </mat-radio-group>
           </section>
         </div>
 
-        <div fxFlex="22%" class="form-element">
+        <div *ngIf="containsControl('make')" fxFlex="22%" class="form-element">
           <mat-form-field appearance="legacy">
             <mat-select placeholder="Марка" formControlName="make">
               <mat-optgroup *ngFor="let group of makeGroups | keyvalue" [label]="group.key">
@@ -48,7 +45,7 @@
           </mat-form-field>
         </div>
 
-        <div fxFlex="22%" class="form-element">
+        <div *ngIf="containsControl('model')" fxFlex="22%" class="form-element">
           <mat-form-field appearance="legacy">
             <mat-select placeholder="Модел" formControlName="model">
               <mat-option [value]="model" *ngFor="let model of models">{{ model }}</mat-option>
@@ -56,7 +53,7 @@
           </mat-form-field>
         </div>
 
-        <div fxFlex="22%" class="form-element">
+        <div *ngIf="containsControl('engineType')" fxFlex="22%" class="form-element">
           <mat-form-field appearance="legacy">
             <mat-select placeholder="Тип двигател" formControlName="engineType">
               <mat-option [value]="name" *ngFor="let name of engineType | enumToArray">
@@ -66,14 +63,14 @@
           </mat-form-field>
         </div>
 
-        <div fxFlex="22%" class="form-element">
+        <div *ngIf="containsControl('horsePower')" fxFlex="22%" class="form-element">
           <mat-form-field appearance="legacy">
             <input matInput type="number" placeholder="Мощност" formControlName="horsePower" />
             <mat-hint>в конски сили</mat-hint>
           </mat-form-field>
         </div>
 
-        <div fxFlex="22%" class="form-element">
+        <div *ngIf="containsControl('emissionStandartType')" fxFlex="22%" class="form-element">
           <mat-form-field appearance="legacy">
             <mat-select placeholder="Евростандарт" formControlName="emissionStandartType">
               <mat-option [value]="name" *ngFor="let name of emissionStandartType | enumToArray">
@@ -83,7 +80,7 @@
           </mat-form-field>
         </div>
 
-        <div fxFlex="22%" class="form-element">
+        <div *ngIf="containsControl('gearboxType')" fxFlex="22%" class="form-element">
           <mat-form-field appearance="legacy">
             <mat-select placeholder="Скоростна кутия" formControlName="gearboxType">
               <mat-option [value]="name" *ngFor="let name of gearboxType | enumToArray">
@@ -93,13 +90,13 @@
           </mat-form-field>
         </div>
 
-        <div fxFlex="22%" class="form-element">
+        <div *ngIf="containsControl('price')" fxFlex="22%" class="form-element">
           <mat-form-field appearance="legacy">
             <input matInput type="number" placeholder="Цена" formControlName="price" />
           </mat-form-field>
         </div>
 
-        <div fxFlex="22%" class="form-element">
+        <div *ngIf="containsControl('currency')" fxFlex="22%" class="form-element">
           <mat-form-field appearance="legacy">
             <mat-select placeholder="Валута" formControlName="currency">
               <mat-option [value]="name" *ngFor="let name of currency | enumToArray">
@@ -109,27 +106,23 @@
           </mat-form-field>
         </div>
 
-        <div fxFlex="22%" class="form-element">
+        <div *ngIf="containsControl('dateOfManufacture')" fxFlex="22%" class="form-element">
           <mat-form-field color="primary" appearance="legacy">
-            <input
-              placeholder="Дата на производство"
-              formControlName="dateOfManufacture"
-              matInput
-              [matDatepicker]="dateOfManufacturePicker"
-            />
+            <input placeholder="Дата на производство" formControlName="dateOfManufacture" matInput
+              [matDatepicker]="dateOfManufacturePicker" />
             <mat-datepicker-toggle matSuffix [for]="dateOfManufacturePicker"></mat-datepicker-toggle>
             <mat-datepicker #dateOfManufacturePicker></mat-datepicker>
           </mat-form-field>
         </div>
 
-        <div fxFlex="22%" class="form-element">
+        <div *ngIf="containsControl('mileage')" fxFlex="22%" class="form-element">
           <mat-form-field appearance="legacy">
             <input matInput type="number" placeholder="Пробег" formControlName="mileage" />
             <mat-hint>в километри</mat-hint>
           </mat-form-field>
         </div>
 
-        <div fxFlex="22%" class="form-element">
+        <div *ngIf="containsControl('color')" fxFlex="22%" class="form-element">
           <mat-form-field appearance="legacy">
             <mat-select placeholder="Цвят" formControlName="color">
               <mat-option [value]="color" *ngFor="let color of colors">
@@ -139,7 +132,7 @@
           </mat-form-field>
         </div>
 
-        <div fxFlex="22%" class="form-element">
+        <div *ngIf="containsControl('region')" fxFlex="22%" class="form-element">
           <mat-form-field appearance="legacy">
             <mat-select placeholder="Регион" formControlName="region">
               <mat-option [value]="region.key" *ngFor="let region of regions | keyvalue"> {{ region.key }}</mat-option>
@@ -147,7 +140,7 @@
           </mat-form-field>
         </div>
 
-        <div fxFlex="22%" class="form-element">
+        <div *ngIf="containsControl('city')" fxFlex="22%" class="form-element">
           <mat-form-field appearance="legacy">
             <mat-select placeholder="Населено място" formControlName="city">
               <mat-option [value]="city" *ngFor="let city of cities">{{ city }}</mat-option>
@@ -155,7 +148,7 @@
           </mat-form-field>
         </div>
 
-        <div fxFlex="22%" class="form-element">
+        <div *ngIf="containsControl('validDays')" fxFlex="22%" class="form-element">
           <mat-form-field appearance="legacy">
             <mat-select placeholder="Валидност на обявата" formControlName="validDays">
               <mat-option [value]="days" *ngFor="let days of validDays">{{ days }} дни</mat-option>
@@ -163,7 +156,7 @@
           </mat-form-field>
         </div>
 
-        <div fxFlex="22%" class="form-element">
+        <div *ngIf="containsControl('coolingType')" fxFlex="22%" class="form-element">
           <mat-form-field appearance="legacy">
             <mat-select placeholder="Вид охлаждане" formControlName="coolingType">
               <mat-option [value]="name" *ngFor="let name of coolingType | enumToArray">
@@ -173,32 +166,32 @@
           </mat-form-field>
         </div>
 
-        <div fxFlex="22%" class="form-element">
+        <div *ngIf="containsControl('numberOfAxels')" fxFlex="22%" class="form-element">
           <mat-form-field appearance="legacy">
             <input matInput type="number" placeholder="Брой оси" formControlName="numberOfAxels" />
           </mat-form-field>
         </div>
 
-        <div fxFlex="22%" class="form-element">
+        <div *ngIf="containsControl('numberOfSeats')" fxFlex="22%" class="form-element">
           <mat-form-field appearance="legacy">
             <input matInput type="number" placeholder="Брой места" formControlName="numberOfSeats" />
           </mat-form-field>
         </div>
 
-        <div fxFlex="22%" class="form-element">
+        <div *ngIf="containsControl('weightCapacity')" fxFlex="22%" class="form-element">
           <mat-form-field appearance="legacy">
             <input matInput type="number" placeholder="Товароносимост" formControlName="weightCapacity" />
             <mat-hint>в килограми</mat-hint>
           </mat-form-field>
         </div>
 
-        <div fxFlex="22%" class="form-element">
+        <div *ngIf="containsControl('cubature')" fxFlex="22%" class="form-element">
           <mat-form-field appearance="legacy">
             <input matInput type="number" placeholder="Кубатура" formControlName="cubature" />
           </mat-form-field>
         </div>
 
-        <div fxFlex="22%" class="form-element">
+        <div *ngIf="containsControl('engineCategoryType')" fxFlex="22%" class="form-element">
           <mat-form-field appearance="legacy">
             <mat-select placeholder="Вид двигател" formControlName="engineCategoryType">
               <mat-option [value]="name" *ngFor="let name of engineCategoryType | enumToArray">
@@ -208,33 +201,33 @@
           </mat-form-field>
         </div>
 
-        <div fxFlex="22%" class="form-element">
+        <div *ngIf="containsControl('totalWeight')" fxFlex="22%" class="form-element">
           <mat-form-field appearance="legacy">
             <input matInput type="number" placeholder="Обща маса" formControlName="totalWeight" />
             <mat-hint>в килограми</mat-hint>
           </mat-form-field>
         </div>
 
-        <div fxFlex="22%" class="form-element">
+        <div *ngIf="containsControl('workingVolume')" fxFlex="22%" class="form-element">
           <mat-form-field appearance="legacy">
             <input matInput type="number" placeholder="Работен обем" formControlName="workingVolume" />
             <mat-hint>в килограми</mat-hint>
           </mat-form-field>
         </div>
 
-        <div fxFlex="22%" class="form-element">
+        <div *ngIf="containsControl('hoursOfOperation')" fxFlex="22%" class="form-element">
           <mat-form-field appearance="legacy">
             <input matInput type="number" placeholder="Часове работа" formControlName="hoursOfOperation" />
           </mat-form-field>
         </div>
 
-        <div fxFlex="22%" class="form-element">
+        <div *ngIf="containsControl('numberOfBeds')" fxFlex="22%" class="form-element">
           <mat-form-field appearance="legacy">
             <input matInput type="number" placeholder="Брой легла" formControlName="numberOfBeds" />
           </mat-form-field>
         </div>
 
-        <div fxFlex="22%" class="form-element">
+        <div *ngIf="containsControl('toiletType')" fxFlex="22%" class="form-element">
           <mat-form-field appearance="legacy">
             <mat-select placeholder="Тоалетна" formControlName="toiletType">
               <mat-option [value]="name" *ngFor="let name of toiletType | enumToArray">
@@ -244,7 +237,7 @@
           </mat-form-field>
         </div>
 
-        <div fxFlex="22%" class="form-element">
+        <div *ngIf="containsControl('airConditionType')" fxFlex="22%" class="form-element">
           <mat-form-field appearance="legacy">
             <mat-select placeholder="Климатик" formControlName="airConditionType">
               <mat-option [value]="name" *ngFor="let name of airConditionType | enumToArray">
@@ -254,7 +247,7 @@
           </mat-form-field>
         </div>
 
-        <div fxFlex="22%" class="form-element">
+        <div *ngIf="containsControl('heatingType')" fxFlex="22%" class="form-element">
           <mat-form-field appearance="legacy">
             <mat-select placeholder="Отопление" formControlName="heatingType">
               <mat-option [value]="name" *ngFor="let name of heatingType | enumToArray">
@@ -264,7 +257,7 @@
           </mat-form-field>
         </div>
 
-        <div fxFlex="22%" class="form-element">
+        <div *ngIf="containsControl('materialType')" fxFlex="22%" class="form-element">
           <mat-form-field appearance="legacy">
             <mat-select placeholder="Материал" formControlName="materialType">
               <mat-option [value]="name" *ngFor="let name of materialType | enumToArray">
@@ -274,21 +267,21 @@
           </mat-form-field>
         </div>
 
-        <div fxFlex="22%" class="form-element">
+        <div *ngIf="containsControl('lengthSize')" fxFlex="22%" class="form-element">
           <mat-form-field appearance="legacy">
             <input matInput type="number" placeholder="Дължина" formControlName="lengthSize" />
             <mat-hint>в метри</mat-hint>
           </mat-form-field>
         </div>
 
-        <div fxFlex="22%" class="form-element">
+        <div *ngIf="containsControl('width')" fxFlex="22%" class="form-element">
           <mat-form-field appearance="legacy">
             <input matInput type="number" placeholder="Широчина" formControlName="width" />
             <mat-hint>в метри</mat-hint>
           </mat-form-field>
         </div>
 
-        <div fxFlex="22%" class="form-element">
+        <div *ngIf="containsControl('bicycleSize')" fxFlex="22%" class="form-element">
           <mat-form-field appearance="legacy">
             <mat-select placeholder="Размер" formControlName="bicycleSize">
               <mat-option [value]="size" *ngFor="let size of bicycleSizes">{{ size }}</mat-option>
@@ -296,7 +289,7 @@
           </mat-form-field>
         </div>
 
-        <div fxFlex="22%" class="form-element">
+        <div *ngIf="containsControl('numberOfGears')" fxFlex="22%" class="form-element">
           <mat-form-field appearance="legacy">
             <mat-select placeholder="Скорости" formControlName="numberOfGears">
               <mat-option [value]="gears" *ngFor="let gears of numberOfGears">{{ gears }}</mat-option>
