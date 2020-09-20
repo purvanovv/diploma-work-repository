@@ -37,6 +37,7 @@ public class CategoriesRowMapper implements RowMapper<List<MainCategory>> {
 		MainCategory mainCategory = new MainCategory();
 		mainCategory.setId(rs.getLong("MAIN_CATEGORY_ID"));
 		mainCategory.setName(rs.getString("MAIN_CATEGORY_NAME"));
+		mainCategory.setValue(rs.getString("MAIN_CATEGORY_VALUE"));
 		return mainCategory;
 	}
 
