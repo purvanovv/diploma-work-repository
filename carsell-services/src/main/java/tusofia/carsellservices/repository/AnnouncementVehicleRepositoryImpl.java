@@ -14,6 +14,11 @@ import org.springframework.stereotype.Repository;
 import tusofia.carsellservices.model.AnnouncementVehicle;
 import tusofia.carsellservices.model.MainCategory;
 import tusofia.carsellservices.model.Make;
+import tusofia.carsellservices.repository.rowmappers.AnnouncementVehicleRowMapper;
+import tusofia.carsellservices.repository.rowmappers.CategoriesRowMapper;
+import tusofia.carsellservices.repository.rowmappers.MakesRowMapper;
+import tusofia.carsellservices.repository.rowmappers.RegionsRowMapper;
+import tusofia.carsellservices.repository.rsextractors.AnnouncementVehiclesResultSetExtractor;
 import tusofia.carsellservices.util.DateUtils;
 import tusofia.carsellservices.util.SqlContainer;
 import tusofia.carsellservices.util.SqlUtils;
@@ -21,7 +26,7 @@ import tusofia.carsellservices.util.SqlUtils;
 @Repository
 public class AnnouncementVehicleRepositoryImpl implements AnnouncementVehicleRepository {
 
-	NamedParameterJdbcTemplate namedParameterJdbcTemplate;
+	private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
 	@Autowired
 	public AnnouncementVehicleRepositoryImpl(NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
