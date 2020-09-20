@@ -1,4 +1,4 @@
-package tusofia.carsellservices.repository;
+package tusofia.carsellservices.repository.rsextractors;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -9,6 +9,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.ResultSetExtractor;
 
 import tusofia.carsellservices.model.AnnouncementVehicle;
+import tusofia.carsellservices.repository.rowmappers.AnnouncementVehicleRowMapper;
 
 public class AnnouncementVehiclesResultSetExtractor implements ResultSetExtractor<List<AnnouncementVehicle>> {
 

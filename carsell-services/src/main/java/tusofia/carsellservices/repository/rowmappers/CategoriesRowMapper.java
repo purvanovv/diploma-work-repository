@@ -1,4 +1,4 @@
-package tusofia.carsellservices.repository;
+package tusofia.carsellservices.repository.rowmappers;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
