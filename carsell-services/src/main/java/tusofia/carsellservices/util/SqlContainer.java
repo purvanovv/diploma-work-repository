@@ -15,6 +15,7 @@ public class SqlContainer {
 	public static String GET_MAIN_CATEGORY;
 	public static String GET_MAKES_BY_CATEGORY;
 	public static String GET_REGIONS;
+	public static String CREATE_IMAGE_FILE;
 
 	@Autowired
 	public SqlContainer(@Value("${sql.container}") String sqlPath) {
@@ -30,6 +31,7 @@ public class SqlContainer {
 		GET_MAIN_CATEGORY = SqlUtils.getClasspathResource(sqlPath, "announcements/GET_MAIN_CATEGORY.sql");
 		GET_MAKES_BY_CATEGORY = SqlUtils.getClasspathResource(sqlPath, "announcements/GET_MAKES_BY_CATEGORY.sql");
 		GET_REGIONS = SqlUtils.getClasspathResource(sqlPath, "announcements/GET_REGIONS.sql");
+		CREATE_IMAGE_FILE = SqlUtils.getClasspathResource(sqlPath, "announcements/CREATE_IMAGE_FILE.sql");
 
 	}
 }
