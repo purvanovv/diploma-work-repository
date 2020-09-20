@@ -20,6 +20,7 @@ prompt create tables staging area
 @ddl/crtb/crtb_MAKE_MODEL.sql
 @ddl/crtb/crtb_REGIONS.sql
 @ddl/crtb/crtb_REGION_CITIES.sql
+@ddl/crtb/crtb_IMAGE_FILES.sql
 
 -- -----------------------------------------------
 prompt create primary keys for tables staging area
@@ -31,6 +32,7 @@ prompt create primary keys for tables staging area
 @ddl/crpk/crpk_MAKE_MODEL_PK.sql
 @ddl/crpk/crpk_REGIONS_PK.sql
 @ddl/crpk/crpk_REGION_CITIES_PK.sql
+@ddl/crpk/crpk_IMAGE_FILES_PK.sql
 
 -- -----------------------------------------------
 prompt create foreign keys for tables staging area
@@ -40,12 +42,14 @@ prompt create foreign keys for tables staging area
 @ddl/crfk/crfk_SUB_CATEGORIES_FK.sql
 @ddl/crfk/crfk_MAKE_MODEL_FK.sql
 @ddl/crfk/crfk_REGION_CITIES_FK.sql
+@ddl/crfk/crfk_IMAGE_FILES_FK.sql
 
 -- -----------------------------------------------
 prompt create sequences
 -- -----------------------------------------------
 
 @ddl/crsq/crsq_ANNOUNCEMENT_VEHICLE.sql
+@ddl/crsq/crsq_IMAGE_FILES.sql
 
 -- Rolf Krissel, 23.01.2017
 -- -----------------------------------------------
