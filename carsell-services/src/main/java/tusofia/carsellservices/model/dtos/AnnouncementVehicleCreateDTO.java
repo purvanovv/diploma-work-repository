@@ -1,7 +1,6 @@
 package tusofia.carsellservices.model.dtos;
 
 import java.math.BigDecimal;
-import java.util.Currency;
 import java.util.Date;
 
 import tusofia.carsellservices.model.enums.AirConditionType;
@@ -20,18 +19,18 @@ public class AnnouncementVehicleCreateDTO {
 	private Long mainCategoryId;
 	private String make;
 	private String model;
-	private EngineType engineType;
-	private ConditionType conditionType;
+	private String engineType;
+	private String conditionType;
 	private Integer horsePower;
-	private EmissionStandartType emissionStandartType;
-	private GearboxType gearboxType;
+	private String emissionStandartType;
+	private String gearboxType;
 	private Long subCategoryId;
-	private CoolingType coolingType;
+	private String coolingType;
 	private Short numberOfAxels;
 	private Short numberOfSeats;
 	private Integer weightCapacity;
 	private BigDecimal price;
-	private Currency currency;
+	private String currency;
 	private Date dateOfManufacture;
 	private Integer mileage;
 	private String color;
@@ -39,17 +38,17 @@ public class AnnouncementVehicleCreateDTO {
 	private String city;
 	private Long validDays;
 	private Integer cubature;
-	private EngineCategoryType engineCategoryType;
+	private String engineCategoryType;
 	private Date validFrom;
 	private Integer totalWeight;
 	private Integer workingVolume;
 	private Integer hoursOfOperation;
 	private Short numberOfBeds;
-	private ToiletType toiletType;
-	private HeatingType heatingType;
-	private AirConditionType airConditionType;
+	private String toiletType;
+	private String heatingType;
+	private String airConditionType;
 	private Integer lengthSize;
-	private MaterialType materialType;
+	private String materialType;
 	private Integer width;
 	private Short bicycleSize;
 	private Short numberOfGears;
@@ -87,19 +86,19 @@ public class AnnouncementVehicleCreateDTO {
 		this.model = model;
 	}
 
-	public EngineType getEngineType() {
+	public String getEngineType() {
 		return engineType;
 	}
 
-	public void setEngineType(EngineType engineType) {
+	public void setEngineType(String engineType) {
 		this.engineType = engineType;
 	}
 
-	public ConditionType getConditionType() {
+	public String getConditionType() {
 		return conditionType;
 	}
 
-	public void setConditionType(ConditionType conditionType) {
+	public void setConditionType(String conditionType) {
 		this.conditionType = conditionType;
 	}
 
@@ -111,19 +110,19 @@ public class AnnouncementVehicleCreateDTO {
 		this.horsePower = horsePower;
 	}
 
-	public EmissionStandartType getEmissionStandartType() {
+	public String getEmissionStandartType() {
 		return emissionStandartType;
 	}
 
-	public void setEmissionStandartType(EmissionStandartType emissionStandartType) {
+	public void setEmissionStandartType(String emissionStandartType) {
 		this.emissionStandartType = emissionStandartType;
 	}
 
-	public GearboxType getGearboxType() {
+	public String getGearboxType() {
 		return gearboxType;
 	}
 
-	public void setGearboxType(GearboxType gearboxType) {
+	public void setGearboxType(String gearboxType) {
 		this.gearboxType = gearboxType;
 	}
 
@@ -135,11 +134,11 @@ public class AnnouncementVehicleCreateDTO {
 		this.subCategoryId = subCategoryId;
 	}
 
-	public CoolingType getCoolingType() {
+	public String getCoolingType() {
 		return coolingType;
 	}
 
-	public void setCoolingType(CoolingType coolingType) {
+	public void setCoolingType(String coolingType) {
 		this.coolingType = coolingType;
 	}
 
@@ -175,11 +174,11 @@ public class AnnouncementVehicleCreateDTO {
 		this.price = price;
 	}
 
-	public Currency getCurrency() {
+	public String getCurrency() {
 		return currency;
 	}
 
-	public void setCurrency(Currency currency) {
+	public void setCurrency(String currency) {
 		this.currency = currency;
 	}
 
@@ -239,11 +238,11 @@ public class AnnouncementVehicleCreateDTO {
 		this.cubature = cubature;
 	}
 
-	public EngineCategoryType getEngineCategoryType() {
+	public String getEngineCategoryType() {
 		return engineCategoryType;
 	}
 
-	public void setEngineCategoryType(EngineCategoryType engineCategoryType) {
+	public void setEngineCategoryType(String engineCategoryType) {
 		this.engineCategoryType = engineCategoryType;
 	}
 
@@ -287,40 +286,44 @@ public class AnnouncementVehicleCreateDTO {
 		this.numberOfBeds = numberOfBeds;
 	}
 
-	public ToiletType getToiletType() {
+	public String getToiletType() {
 		return toiletType;
 	}
 
-	public void setToiletType(ToiletType toiletType) {
+	public void setToiletType(String toiletType) {
 		this.toiletType = toiletType;
 	}
 
-	public HeatingType getHeatingType() {
+	public String getHeatingType() {
 		return heatingType;
 	}
 
-	public void setHeatingType(HeatingType heatingType) {
+	public void setHeatingType(String heatingType) {
 		this.heatingType = heatingType;
 	}
 
-	public AirConditionType getAirConditionType() {
+	public String getAirConditionType() {
 		return airConditionType;
 	}
 
-	public void setAirConditionType(AirConditionType airConditionType) {
+	public void setAirConditionType(String airConditionType) {
 		this.airConditionType = airConditionType;
-	}
-
-	public MaterialType getMaterialType() {
-		return materialType;
-	}
-
-	public void setMaterialType(MaterialType materialType) {
-		this.materialType = materialType;
 	}
 
 	public Integer getLengthSize() {
 		return lengthSize;
+	}
+
+	public void setLengthSize(Integer lengthSize) {
+		this.lengthSize = lengthSize;
+	}
+
+	public String getMaterialType() {
+		return materialType;
+	}
+
+	public void setMaterialType(String materialType) {
+		this.materialType = materialType;
 	}
 
 	public Integer getWidth() {
@@ -329,10 +332,6 @@ public class AnnouncementVehicleCreateDTO {
 
 	public void setWidth(Integer width) {
 		this.width = width;
-	}
-
-	public void setLengthSize(Integer lengthSize) {
-		this.lengthSize = lengthSize;
 	}
 
 	public Short getBicycleSize() {

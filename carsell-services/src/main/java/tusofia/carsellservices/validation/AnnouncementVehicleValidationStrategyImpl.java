@@ -1,9 +1,21 @@
 package tusofia.carsellservices.validation;
 
 import java.math.BigDecimal;
+import java.util.Arrays;
 import java.util.Date;
 
 import tusofia.carsellservices.model.dtos.AnnouncementVehicleCreateDTO;
+import tusofia.carsellservices.model.enums.AirConditionType;
+import tusofia.carsellservices.model.enums.ConditionType;
+import tusofia.carsellservices.model.enums.CoolingType;
+import tusofia.carsellservices.model.enums.Currency;
+import tusofia.carsellservices.model.enums.EmissionStandartType;
+import tusofia.carsellservices.model.enums.EngineCategoryType;
+import tusofia.carsellservices.model.enums.EngineType;
+import tusofia.carsellservices.model.enums.GearboxType;
+import tusofia.carsellservices.model.enums.HeatingType;
+import tusofia.carsellservices.model.enums.MaterialType;
+import tusofia.carsellservices.model.enums.ToiletType;
 import tusofia.carsellservices.util.DateUtils;
 
 public enum AnnouncementVehicleValidationStrategyImpl implements AnnouncementVehicleValidationStrategy {
@@ -46,6 +58,11 @@ public enum AnnouncementVehicleValidationStrategyImpl implements AnnouncementVeh
 			if (null == input.getEngineType()) {
 				return new ValidationResult(ValidationType.ENGINE_TYPE,
 						ValidationConstants.ERROR_MESSAGE_FIELD_IS_EMPTY, false);
+			} else if (null == EngineType.lookupByDisplayName(input.getEngineType())) {
+				return new ValidationResult(ValidationType.ENGINE_TYPE,
+						String.format(ValidationConstants.ERROR_MESSAGE_INPUT_IS_NOT_PARSABLE_ENUM, input,
+								Arrays.toString(ValidationType.values())),
+						false);
 			}
 			return new ValidationResult(true);
 		}
@@ -55,6 +72,11 @@ public enum AnnouncementVehicleValidationStrategyImpl implements AnnouncementVeh
 			if (null == input.getConditionType()) {
 				return new ValidationResult(ValidationType.CONDITION_TYPE,
 						ValidationConstants.ERROR_MESSAGE_FIELD_IS_EMPTY, false);
+			} else if (null == ConditionType.lookupByDisplayName(input.getConditionType())) {
+				return new ValidationResult(ValidationType.CONDITION_TYPE,
+						String.format(ValidationConstants.ERROR_MESSAGE_INPUT_IS_NOT_PARSABLE_ENUM, input,
+								Arrays.toString(ConditionType.values())),
+						false);
 			}
 			return new ValidationResult(true);
 		}
@@ -73,6 +95,11 @@ public enum AnnouncementVehicleValidationStrategyImpl implements AnnouncementVeh
 			if (null == input.getEmissionStandartType()) {
 				return new ValidationResult(ValidationType.EMISSION_STANDART_TYPE,
 						ValidationConstants.ERROR_MESSAGE_FIELD_IS_EMPTY, false);
+			} else if (null == EmissionStandartType.lookupByDisplayName(input.getEmissionStandartType())) {
+				return new ValidationResult(ValidationType.EMISSION_STANDART_TYPE,
+						String.format(ValidationConstants.ERROR_MESSAGE_INPUT_IS_NOT_PARSABLE_ENUM, input,
+								Arrays.toString(EmissionStandartType.values())),
+						false);
 			}
 			return new ValidationResult(true);
 		}
@@ -82,6 +109,11 @@ public enum AnnouncementVehicleValidationStrategyImpl implements AnnouncementVeh
 			if (null == input.getGearboxType()) {
 				return new ValidationResult(ValidationType.GEARBOX_TYPE,
 						ValidationConstants.ERROR_MESSAGE_FIELD_IS_EMPTY, false);
+			} else if (null == GearboxType.lookupByDisplayName(input.getGearboxType())) {
+				return new ValidationResult(ValidationType.GEARBOX_TYPE,
+						String.format(ValidationConstants.ERROR_MESSAGE_INPUT_IS_NOT_PARSABLE_ENUM, input,
+								Arrays.toString(GearboxType.values())),
+						false);
 			}
 			return new ValidationResult(true);
 		}
@@ -100,6 +132,11 @@ public enum AnnouncementVehicleValidationStrategyImpl implements AnnouncementVeh
 			if (null == input.getCoolingType()) {
 				return new ValidationResult(ValidationType.COOLING_TYPE,
 						ValidationConstants.ERROR_MESSAGE_FIELD_IS_EMPTY, false);
+			} else if (null == CoolingType.lookupByDisplayName(input.getCoolingType())) {
+				return new ValidationResult(ValidationType.COOLING_TYPE,
+						String.format(ValidationConstants.ERROR_MESSAGE_INPUT_IS_NOT_PARSABLE_ENUM, input,
+								Arrays.toString(CoolingType.values())),
+						false);
 			}
 			return new ValidationResult(true);
 		}
@@ -156,6 +193,11 @@ public enum AnnouncementVehicleValidationStrategyImpl implements AnnouncementVeh
 		public ValidationResult validate(AnnouncementVehicleCreateDTO input) {
 			if (null == input.getCurrency()) {
 				return new ValidationResult(ValidationType.CURRENCY, ValidationConstants.ERROR_MESSAGE_FIELD_IS_EMPTY,
+						false);
+			} else if (null == Currency.lookupByDisplayName(input.getCurrency())) {
+				return new ValidationResult(ValidationType.CURRENCY,
+						String.format(ValidationConstants.ERROR_MESSAGE_INPUT_IS_NOT_PARSABLE_ENUM, input,
+								Arrays.toString(Currency.values())),
 						false);
 			}
 			return new ValidationResult(true);
@@ -250,6 +292,11 @@ public enum AnnouncementVehicleValidationStrategyImpl implements AnnouncementVeh
 			if (null == input.getEngineCategoryType()) {
 				return new ValidationResult(ValidationType.ENGINE_CATEGORY_TYPE,
 						ValidationConstants.ERROR_MESSAGE_FIELD_IS_EMPTY, false);
+			} else if (null == EngineCategoryType.lookupByDisplayName(input.getEngineCategoryType())) {
+				return new ValidationResult(ValidationType.ENGINE_CATEGORY_TYPE,
+						String.format(ValidationConstants.ERROR_MESSAGE_INPUT_IS_NOT_PARSABLE_ENUM, input,
+								Arrays.toString(EngineCategoryType.values())),
+						false);
 			}
 			return new ValidationResult(true);
 		}
@@ -323,6 +370,11 @@ public enum AnnouncementVehicleValidationStrategyImpl implements AnnouncementVeh
 			if (null == input.getToiletType()) {
 				return new ValidationResult(ValidationType.TOILET_TYPE,
 						ValidationConstants.ERROR_MESSAGE_FIELD_IS_EMPTY, false);
+			} else if (null == ToiletType.lookupByDisplayName(input.getToiletType())) {
+				return new ValidationResult(ValidationType.TOILET_TYPE,
+						String.format(ValidationConstants.ERROR_MESSAGE_INPUT_IS_NOT_PARSABLE_ENUM, input,
+								Arrays.toString(ToiletType.values())),
+						false);
 			}
 			return new ValidationResult(true);
 		}
@@ -332,6 +384,11 @@ public enum AnnouncementVehicleValidationStrategyImpl implements AnnouncementVeh
 			if (null == input.getHeatingType()) {
 				return new ValidationResult(ValidationType.HEATING_TYPE,
 						ValidationConstants.ERROR_MESSAGE_FIELD_IS_EMPTY, false);
+			} else if (null == HeatingType.lookupByDisplayName(input.getHeatingType())) {
+				return new ValidationResult(ValidationType.HEATING_TYPE,
+						String.format(ValidationConstants.ERROR_MESSAGE_INPUT_IS_NOT_PARSABLE_ENUM, input,
+								Arrays.toString(HeatingType.values())),
+						false);
 			}
 			return new ValidationResult(true);
 		}
@@ -342,6 +399,11 @@ public enum AnnouncementVehicleValidationStrategyImpl implements AnnouncementVeh
 				return new ValidationResult(ValidationType.AIR_CONDITION_TYPE,
 						ValidationConstants.ERROR_MESSAGE_FIELD_IS_EMPTY, false);
 
+			} else if (null == AirConditionType.lookupByDisplayName(input.getAirConditionType())) {
+				return new ValidationResult(ValidationType.AIR_CONDITION_TYPE,
+						String.format(ValidationConstants.ERROR_MESSAGE_INPUT_IS_NOT_PARSABLE_ENUM, input,
+								Arrays.toString(AirConditionType.values())),
+						false);
 			}
 			return new ValidationResult(true);
 		}
@@ -363,6 +425,11 @@ public enum AnnouncementVehicleValidationStrategyImpl implements AnnouncementVeh
 			if (null == input.getMaterialType()) {
 				return new ValidationResult(ValidationType.MATERIAL_TYPE,
 						ValidationConstants.ERROR_MESSAGE_FIELD_IS_EMPTY, false);
+			} else if (null == MaterialType.lookupByDisplayName(input.getMaterialType())) {
+				return new ValidationResult(ValidationType.MATERIAL_TYPE,
+						String.format(ValidationConstants.ERROR_MESSAGE_INPUT_IS_NOT_PARSABLE_ENUM, input,
+								Arrays.toString(MaterialType.values())),
+						false);
 			}
 			return new ValidationResult(true);
 		}

@@ -33,19 +33,19 @@ public class AnnouncementVehicleRowMapper implements RowMapper<AnnouncementVehic
 		announcementVehicle.setMainCategoryId(rs.getLong("MAIN_CATEGORY_ID"));
 		announcementVehicle.setMake(rs.getString("MAKE"));
 		announcementVehicle.setModel(rs.getString("MODEL"));
-		announcementVehicle.setEngineType(EngineType.fromString(rs.getString("ENGINE_TYPE")));
-		announcementVehicle.setConditionType(ConditionType.fromString(rs.getString("CONDITION_TYPE")));
+		announcementVehicle.setEngineType(EngineType.lookupByStringValue(rs.getString("ENGINE_TYPE")));
+		announcementVehicle.setConditionType(ConditionType.lookupByStringValue(rs.getString("CONDITION_TYPE")));
 		announcementVehicle.setHorsePower(rs.getInt("HORSE_POWER"));
-		announcementVehicle
-				.setEmissionStandartType(EmissionStandartType.fromString(rs.getString("EMISSION_STANDART_TYPE")));
-		announcementVehicle.setGearboxType(GearboxType.fromString(rs.getString("GEARBOX_TYPE")));
+		announcementVehicle.setEmissionStandartType(
+				EmissionStandartType.lookupByStringValue(rs.getString("EMISSION_STANDART_TYPE")));
+		announcementVehicle.setGearboxType(GearboxType.lookupByStringValue(rs.getString("GEARBOX_TYPE")));
 		announcementVehicle.setSubCategoryId(rs.getLong("SUB_CATEGORY_ID"));
-		announcementVehicle.setCoolingType(CoolingType.fromString(rs.getString("COOLING_TYPE")));
+		announcementVehicle.setCoolingType(CoolingType.lookupByStringValue(rs.getString("COOLING_TYPE")));
 		announcementVehicle.setNumberOfAxels(rs.getShort("NUMBER_OF_AXELS"));
 		announcementVehicle.setNumberOfSeats(rs.getShort("NUMBER_OF_SEATS"));
 		announcementVehicle.setWeightCapacity(rs.getInt("WEIGHT_CAPACITY"));
 		announcementVehicle.setPrice(rs.getBigDecimal("PRICE"));
-		announcementVehicle.setCurrency(Currency.fromString(rs.getString("CURRENCY")));
+		announcementVehicle.setCurrency(Currency.lookupByStringValue(rs.getString("CURRENCY")));
 		announcementVehicle.setDateOfManufacture(rs.getDate("DATE_OF_MANUFACTURE"));
 		announcementVehicle.setMileage(rs.getInt("MILEAGE"));
 		announcementVehicle.setColor(rs.getString("COLOR"));
@@ -53,18 +53,20 @@ public class AnnouncementVehicleRowMapper implements RowMapper<AnnouncementVehic
 		announcementVehicle.setCity(rs.getString("CITY"));
 		announcementVehicle.setValidDays(rs.getLong("VALID_DAYS"));
 		announcementVehicle.setCubature(rs.getInt("CUBATURE"));
-		announcementVehicle.setEngineCategoryType(EngineCategoryType.fromString(rs.getString("ENGINE_CATEGORY_TYPE")));
+		announcementVehicle
+				.setEngineCategoryType(EngineCategoryType.lookupByIntegerValue(rs.getInt("ENGINE_CATEGORY_TYPE")));
 		announcementVehicle.setValidFrom(rs.getDate("VALID_FROM"));
 		announcementVehicle.setValidTo(rs.getDate("VALID_TO"));
 		announcementVehicle.setTotalWeight(rs.getInt("TOTAL_WEIGHT"));
 		announcementVehicle.setWorkingVolume(rs.getInt("WORKING_VOLUME"));
 		announcementVehicle.setHoursOfOperation(rs.getInt("HOURS_OF_OPERATION"));
 		announcementVehicle.setNumberOfBeds(rs.getShort("NUMBER_OF_BEDS"));
-		announcementVehicle.setToiletType(ToiletType.fromString(rs.getString("TOILET_TYPE")));
-		announcementVehicle.setHeatingType(HeatingType.fromString(rs.getString("HEATING_TYPE")));
-		announcementVehicle.setAirConditionType(AirConditionType.fromString(rs.getString("AIR_CONDITION_TYPE")));
+		announcementVehicle.setToiletType(ToiletType.lookupByStringValue(rs.getString("TOILET_TYPE")));
+		announcementVehicle.setHeatingType(HeatingType.lookupByStringValue(rs.getString("HEATING_TYPE")));
+		announcementVehicle
+				.setAirConditionType(AirConditionType.lookupByStringValue(rs.getString("AIR_CONDITION_TYPE")));
 		announcementVehicle.setLengthSize(rs.getInt("LENGTH_SIZE"));
-		announcementVehicle.setMaterialType(MaterialType.fromString(rs.getString("MATERIAL_TYPE")));
+		announcementVehicle.setMaterialType(MaterialType.lookupByStringValue(rs.getString("MATERIAL_TYPE")));
 		announcementVehicle.setWidth(rs.getInt("WIDTH"));
 		announcementVehicle.setBicycleSize(rs.getShort("BICYCLE_SIZE"));
 		announcementVehicle.setNumberOfGears(rs.getShort("NUMBER_OF_GEARS"));

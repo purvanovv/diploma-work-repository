@@ -148,7 +148,7 @@ public class AnnouncementVehicleRepositoryImpl implements AnnouncementVehicleRep
 			MapSqlParameterSource params = new MapSqlParameterSource();
 			params.addValue("mainCategoryId", mainCategoryId);
 			String mainCategory = namedParameterJdbcTemplate.queryForObject(sql, params, String.class);
-			return tusofia.carsellservices.model.enums.MainCategoryType.fromString(mainCategory);
+			return tusofia.carsellservices.model.enums.MainCategoryType.lookupByStringValue(mainCategory);
 
 		} catch (Exception e) {
 			// TODO: handle exception
