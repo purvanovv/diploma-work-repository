@@ -8,6 +8,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import tusofia.carsellservices.model.ResponseMessage;
+
 @RestControllerAdvice
 public class ExceptionControllerAdvice {
 	@ExceptionHandler(value = ValidationException.class)
@@ -19,5 +21,17 @@ public class ExceptionControllerAdvice {
 			errors.put(validationType, message);
 		});
 		return new ResponseEntity<Map<String, String>>(errors, HttpStatus.BAD_REQUEST);
+	}
+
+	@ExceptionHandler(value = TechnicalException.class)
+	public ResponseEntity<ResponseMessage> handleTechnicalException(TechnicalException e) {
+		return new ResponseEntity<ResponseMessage>(new ResponseMessage(e.getMessage()),
+				HttpStatus.INTERNAL_SERVER_ERROR);
+	}
+
+	@ExceptionHandler(value = BusinessException.class)
+	public ResponseEntity<ResponseMessage> handleBusinessException(BusinessException e) {
+		return new ResponseEntity<ResponseMessage>(new ResponseMessage(e.getMessage()),
+				HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 }
