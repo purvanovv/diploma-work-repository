@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { Make, MainCategory, SubCategory } from '@app/announcement/models';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import {
@@ -16,23 +16,23 @@ import {
   MainCategoryType
 } from '@app/announcement/enums';
 import { AnnouncementService } from '@app/announcement/announcement.service';
-import { tap, startWith, mergeMap } from 'rxjs/operators';
-import { Observable, concat } from 'rxjs';
+import { tap, startWith, mergeMap, take } from 'rxjs/operators';
+import { Observable, concat, Subscription } from 'rxjs';
 import { AnnouncementFormBuilder } from '@app/announcement/announcement.form.builder';
+import { untilDestroyed } from '@app/@core';
 
 @Component({
   selector: 'app-first-step',
   templateUrl: './first-step.component.html',
   styleUrls: ['./first-step.component.scss'],
 })
-export class FirstStepComponent implements OnInit {
+export class FirstStepComponent implements OnInit, OnDestroy {
   public makeGroups: Map<string, Make[]>;
   public models: string[] = [];
   public mainCategories: MainCategory[];
   public subCategories: SubCategory[] = [];
   public regions: Map<string, string[]>;
   public cities: string[] = [];
-
   public createForm: FormGroup;
   public engineType = EngineType;
   public airConditionType = AirConditionType;
@@ -52,9 +52,14 @@ export class FirstStepComponent implements OnInit {
 
   private initFormCategory = { categoryId: 1, category: MainCategoryType.CARS_AND_JEEPS };
 
+  private eventSubscriptions: Subscription[] = [];
+
   @Output() onSubmitAnnouncement: EventEmitter<number> = new EventEmitter<number>();
 
   constructor(private formBuilder: FormBuilder, private announcementService: AnnouncementService) {
+  }
+  ngOnDestroy(): void {
+    this.clearEventSubsriptions();
   }
 
   ngOnInit(): void {
@@ -65,8 +70,15 @@ export class FirstStepComponent implements OnInit {
         this.subCategories = mainCategory.subCategories;
         this.initEvents();
         return this.$initMakes(this.initFormCategory.categoryId);
-      }))
+      }), take(1))
       .subscribe();
+  }
+
+  private clearEventSubsriptions(): void {
+    this.eventSubscriptions.forEach((s) => {
+      s.unsubscribe();
+    })
+    this.eventSubscriptions = [];
   }
 
 
@@ -98,7 +110,7 @@ export class FirstStepComponent implements OnInit {
       .pipe(
         tap((announcementId: number) => {
           this.onSubmitAnnouncement.emit(announcementId);
-        })
+        }), take(1)
       )
       .subscribe();
   }
@@ -134,18 +146,20 @@ export class FirstStepComponent implements OnInit {
   }
 
   private initEvents() {
-    this.createForm
+    this.clearEventSubsriptions();
+    var mainCategoryIdSubsrc$ = this.createForm
       .get('mainCategoryId')
       .valueChanges.pipe(
         mergeMap((mainCategoryId: number) => {
           if (this.mainCategories != undefined) {
             return this.$onChangeMainCategory(mainCategoryId);
           }
-        })
+        }), untilDestroyed(this)
       )
       .subscribe();
+    this.eventSubscriptions.push(mainCategoryIdSubsrc$);
 
-    this.createForm
+    var makeSubscr$ = this.createForm
       .get('make')
       .valueChanges.pipe(
         tap((make: string) => {
@@ -155,8 +169,9 @@ export class FirstStepComponent implements OnInit {
         })
       )
       .subscribe();
+    this.eventSubscriptions.push(makeSubscr$);
 
-    this.createForm
+    var regionSubscr$ = this.createForm
       .get('region')
       .valueChanges.pipe(
         tap((region: string) => {
@@ -164,5 +179,7 @@ export class FirstStepComponent implements OnInit {
         })
       )
       .subscribe();
+    this.eventSubscriptions.push(regionSubscr$);
+
   }
 }
