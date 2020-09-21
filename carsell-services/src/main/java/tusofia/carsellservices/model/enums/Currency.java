@@ -27,6 +27,13 @@ public enum Currency {
 		return value;
 	}
 
+	public static String getValue(Currency input) {
+		if (null == input) {
+			return null;
+		}
+		return input.getValue();
+	}
+	
 	public static Currency lookupByDisplayName(String name) {
 		return displayNameIndex.get(name);
 	}

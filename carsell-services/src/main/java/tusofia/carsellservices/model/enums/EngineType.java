@@ -25,6 +25,13 @@ public enum EngineType {
 	public String getValue() {
 		return value;
 	}
+	
+	public static String getValue(EngineType input) {
+		if (null == input) {
+			return null;
+		}
+		return input.getValue();
+	}
 
 	public static EngineType lookupByDisplayName(String name) {
 		return displayNameIndex.get(name);

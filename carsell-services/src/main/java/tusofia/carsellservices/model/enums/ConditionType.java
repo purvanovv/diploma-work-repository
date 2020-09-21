@@ -25,6 +25,13 @@ public enum ConditionType {
 	public String getValue() {
 		return value;
 	}
+	
+	public static String getValue(ConditionType input) {
+		if (null == input) {
+			return null;
+		}
+		return input.getValue();
+	}
 
 	public static ConditionType lookupByDisplayName(String name) {
 		return displayNameIndex.get(name);

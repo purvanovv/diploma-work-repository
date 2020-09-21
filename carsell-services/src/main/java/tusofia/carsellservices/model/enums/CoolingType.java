@@ -25,6 +25,13 @@ public enum CoolingType {
 	public String getValue() {
 		return value;
 	}
+	
+	public static String getValue(CoolingType input) {
+		if (null == input) {
+			return null;
+		}
+		return input.getValue();
+	}
 
 	public static CoolingType lookupByDisplayName(String name) {
 		return displayNameIndex.get(name);

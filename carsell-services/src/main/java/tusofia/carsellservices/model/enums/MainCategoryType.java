@@ -27,6 +27,13 @@ public enum MainCategoryType {
 	public String getValue() {
 		return value;
 	}
+	
+	public static String getValue(MainCategoryType input) {
+		if (null == input) {
+			return null;
+		}
+		return input.getValue();
+	}
 
 	public static MainCategoryType lookupByDisplayName(String name) {
 		return displayNameIndex.get(name);

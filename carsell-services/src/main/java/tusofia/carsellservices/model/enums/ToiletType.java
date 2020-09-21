@@ -26,6 +26,13 @@ public enum ToiletType {
 		return value;
 	}
 
+	public static String getValue(ToiletType input) {
+		if (null == input) {
+			return null;
+		}
+		return input.getValue();
+	}
+
 	public static ToiletType lookupByDisplayName(String name) {
 		return displayNameIndex.get(name);
 	}

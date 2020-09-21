@@ -26,6 +26,13 @@ public enum GearboxType {
 		return value;
 	}
 
+	public static String getValue(GearboxType input) {
+		if (null == input) {
+			return null;
+		}
+		return input.getValue();
+	}
+
 	public static GearboxType lookupByDisplayName(String name) {
 		return displayNameIndex.get(name);
 	}

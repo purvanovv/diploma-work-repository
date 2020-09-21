@@ -14,6 +14,17 @@ import org.springframework.stereotype.Repository;
 import tusofia.carsellservices.model.AnnouncementVehicle;
 import tusofia.carsellservices.model.MainCategory;
 import tusofia.carsellservices.model.Make;
+import tusofia.carsellservices.model.enums.AirConditionType;
+import tusofia.carsellservices.model.enums.ConditionType;
+import tusofia.carsellservices.model.enums.CoolingType;
+import tusofia.carsellservices.model.enums.Currency;
+import tusofia.carsellservices.model.enums.EmissionStandartType;
+import tusofia.carsellservices.model.enums.EngineCategoryType;
+import tusofia.carsellservices.model.enums.EngineType;
+import tusofia.carsellservices.model.enums.GearboxType;
+import tusofia.carsellservices.model.enums.HeatingType;
+import tusofia.carsellservices.model.enums.MaterialType;
+import tusofia.carsellservices.model.enums.ToiletType;
 import tusofia.carsellservices.repository.rowmappers.AnnouncementVehicleRowMapper;
 import tusofia.carsellservices.repository.rowmappers.CategoriesRowMapper;
 import tusofia.carsellservices.repository.rowmappers.MakesRowMapper;
@@ -53,17 +64,19 @@ public class AnnouncementVehicleRepositoryImpl implements AnnouncementVehicleRep
 			params.addValue("mainCategoryId", announcementVehicle.getMainCategoryId());
 			params.addValue("make", announcementVehicle.getMake());
 			params.addValue("model", announcementVehicle.getModel());
-			params.addValue("engineType", announcementVehicle.getEngineType().getValue());
-			params.addValue("conditionType", announcementVehicle.getConditionType().getValue());
+			params.addValue("engineType", EngineType.getValue(announcementVehicle.getEngineType()));
+			params.addValue("conditionType", ConditionType.getValue(announcementVehicle.getConditionType()));
 			params.addValue("horsePower", announcementVehicle.getHorsePower());
-			params.addValue("emissionStandartType", announcementVehicle.getEmissionStandartType().getValue());
-			params.addValue("gearboxType", announcementVehicle.getGearboxType().getValue());
+			params.addValue("emissionStandartType",
+					EmissionStandartType.getValue(announcementVehicle.getEmissionStandartType()));
+			params.addValue("gearboxType", GearboxType.getValue(announcementVehicle.getGearboxType()));
 			params.addValue("subCategoryId", announcementVehicle.getSubCategoryId());
-			params.addValue("coolingType", announcementVehicle.getCoolingType().getValue());
+			params.addValue("coolingType", CoolingType.getValue(announcementVehicle.getCoolingType()));
 			params.addValue("cubature", announcementVehicle.getCubature());
-			params.addValue("engineCategoryType", announcementVehicle.getEngineCategoryType().getValue());
+			params.addValue("engineCategoryType",
+					EngineCategoryType.getValue(announcementVehicle.getEngineCategoryType()));
 			params.addValue("price", announcementVehicle.getPrice());
-			params.addValue("currency", announcementVehicle.getCurrency().getValue());
+			params.addValue("currency", Currency.getValue(announcementVehicle.getCurrency()));
 			params.addValue("dateOfManufacture",
 					DateUtils.getSubmissionDate(announcementVehicle.getDateOfManufacture()));
 			params.addValue("mileage", announcementVehicle.getMileage());
@@ -78,16 +91,17 @@ public class AnnouncementVehicleRepositoryImpl implements AnnouncementVehicleRep
 			params.addValue("numberOfAxels", announcementVehicle.getNumberOfAxels());
 			params.addValue("numberOfSeats", announcementVehicle.getNumberOfSeats());
 			params.addValue("weightCapacity", announcementVehicle.getWeightCapacity());
-			params.addValue("engineCategoryType", announcementVehicle.getEngineCategoryType().getValue());
+			params.addValue("engineCategoryType",
+					EngineCategoryType.getValue(announcementVehicle.getEngineCategoryType()));
 			params.addValue("totalWeight", announcementVehicle.getTotalWeight());
 			params.addValue("workingVolume", announcementVehicle.getWorkingVolume());
 			params.addValue("hoursOfOperation", announcementVehicle.getHoursOfOperation());
 			params.addValue("numberOfBeds", announcementVehicle.getNumberOfBeds());
-			params.addValue("toiletType", announcementVehicle.getToiletType().getValue());
-			params.addValue("heatingType", announcementVehicle.getHeatingType().getValue());
-			params.addValue("airConditionType", announcementVehicle.getAirConditionType().getValue());
+			params.addValue("toiletType", ToiletType.getValue(announcementVehicle.getToiletType()));
+			params.addValue("heatingType", HeatingType.getValue(announcementVehicle.getHeatingType()));
+			params.addValue("airConditionType", AirConditionType.getValue(announcementVehicle.getAirConditionType()));
 			params.addValue("lengthSize", announcementVehicle.getLengthSize());
-			params.addValue("materialType", announcementVehicle.getMaterialType().getValue());
+			params.addValue("materialType", MaterialType.getValue(announcementVehicle.getMaterialType()));
 			params.addValue("width", announcementVehicle.getWidth());
 			params.addValue("bicycleSize", announcementVehicle.getBicycleSize());
 			params.addValue("numberOfGears", announcementVehicle.getNumberOfGears());

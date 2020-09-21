@@ -26,6 +26,13 @@ public enum MaterialType {
 	public String getValue() {
 		return value;
 	}
+	
+	public static String getValue(MaterialType input) {
+		if (null == input) {
+			return null;
+		}
+		return input.getValue();
+	}
 
 	public static MaterialType lookupByDisplayName(String name) {
 		return displayNameIndex.get(name);

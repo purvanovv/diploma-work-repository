@@ -26,6 +26,13 @@ public enum EngineCategoryType {
 		return value;
 	}
 
+	public static Integer getValue(EngineCategoryType input) {
+		if (null == input) {
+			return null;
+		}
+		return input.getValue();
+	}
+
 	public static EngineCategoryType lookupByDisplayName(String name) {
 		return displayNameIndex.get(name);
 	}

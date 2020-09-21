@@ -25,6 +25,13 @@ public enum EmissionStandartType {
 		return value;
 	}
 
+	public static String getValue(EmissionStandartType input) {
+		if (null == input) {
+			return null;
+		}
+		return input.getValue();
+	}
+
 	public static EmissionStandartType lookupByDisplayName(String name) {
 		return displayNameIndex.get(name);
 	}
