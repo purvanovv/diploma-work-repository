@@ -30,6 +30,7 @@ export class AnnouncementFormBuilder {
                 this.addControl(AnnouncementControlsImpl.getControl(Control.COLOR));
                 this.addControl(AnnouncementControlsImpl.getControl(Control.REGION));
                 this.addControl(AnnouncementControlsImpl.getControl(Control.CITY));
+                this.addControl(AnnouncementControlsImpl.getControl(Control.VALID_DAYS));
                 break;
             }
             case MainCategoryType.MOTORBIKES: {
@@ -49,6 +50,7 @@ export class AnnouncementFormBuilder {
                 this.addControl(AnnouncementControlsImpl.getControl(Control.REGION));
                 this.addControl(AnnouncementControlsImpl.getControl(Control.CITY));
                 this.addControl(AnnouncementControlsImpl.getControl(Control.ENGINE_CATEGORY_TYPE));
+                this.addControl(AnnouncementControlsImpl.getControl(Control.VALID_DAYS));
                 break;
             }
             case MainCategoryType.BUSES: {
@@ -69,6 +71,7 @@ export class AnnouncementFormBuilder {
                 this.addControl(AnnouncementControlsImpl.getControl(Control.COLOR));
                 this.addControl(AnnouncementControlsImpl.getControl(Control.REGION));
                 this.addControl(AnnouncementControlsImpl.getControl(Control.CITY));
+                this.addControl(AnnouncementControlsImpl.getControl(Control.VALID_DAYS));
                 break;
             }
 
