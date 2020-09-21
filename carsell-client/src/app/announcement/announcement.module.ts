@@ -8,6 +8,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '@app/@shared';
 import { FirstStepComponent } from './create-announcement/first-step/first-step.component';
 import { SecondStepComponent } from './create-announcement/second-step/second-step.component';
+import { ThirdStepComponent } from './create-announcement/third-step/third-step.component';
 
 @NgModule({
   imports: [
@@ -18,6 +19,6 @@ import { SecondStepComponent } from './create-announcement/second-step/second-st
     ReactiveFormsModule,
     SharedModule,
   ],
-  declarations: [CreateAnnouncementComponent, FirstStepComponent, SecondStepComponent],
+  declarations: [CreateAnnouncementComponent, FirstStepComponent, SecondStepComponent, ThirdStepComponent],
 })
 export class AnnouncementModule {}

@@ -7,9 +7,9 @@ import { MatStepper } from '@angular/material/stepper';
   styleUrls: ['./create-announcement.component.scss'],
 })
 export class CreateAnnouncementComponent implements OnInit {
-  public isEditable = false; //false
-  public isLinear = false; //false
-  public completed = false; //false
+  public isEditable = true; //false
+  public isLinear = true; //false
+  public completed = true; //false
   public announcementId: number;
 
   @ViewChild('stepper') stepper: MatStepper;
