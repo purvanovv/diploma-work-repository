@@ -63,11 +63,8 @@ export class FirstStepComponent implements OnInit {
       .pipe(mergeMap(() => {
         const mainCategory = this.mainCategories.find((c) => c.id == this.initFormCategory.categoryId);
         this.subCategories = mainCategory.subCategories;
-        this.initEvents()
-        return this.announcementService.getMakes(this.initFormCategory.categoryId).pipe(
-          tap((makeGroups: Map<string, Make[]>) => {
-            this.makeGroups = makeGroups;
-          }));
+        this.initEvents();
+        return this.$initMakes(this.initFormCategory.categoryId);
       }))
       .subscribe();
   }
@@ -81,6 +78,10 @@ export class FirstStepComponent implements OnInit {
     this.initForm();
     this.initEvents();
 
+    return this.$initMakes(mainCategoryId);
+  }
+
+  private $initMakes(mainCategoryId: number): Observable<Map<string, Make[]>> {
     return this.announcementService.getMakes(mainCategoryId).pipe(
       tap((makeGroups: Map<string, Make[]>) => {
         this.makeGroups = makeGroups;
@@ -136,7 +137,6 @@ export class FirstStepComponent implements OnInit {
     this.createForm
       .get('mainCategoryId')
       .valueChanges.pipe(
-        //startWith(this.createForm.get('mainCategoryId').value),
         mergeMap((mainCategoryId: number) => {
           if (this.mainCategories != undefined) {
             return this.$onChangeMainCategory(mainCategoryId);

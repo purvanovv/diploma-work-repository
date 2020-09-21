@@ -177,7 +177,7 @@
             <input matInput type="number" placeholder="Брой места" formControlName="numberOfSeats" />
           </mat-form-field>
         </div>
-
+        
         <div *ngIf="containsControl('weightCapacity')" fxFlex="22%" class="form-element">
           <mat-form-field appearance="legacy">
             <input matInput type="number" placeholder="Товароносимост" formControlName="weightCapacity" />
@@ -299,7 +299,7 @@
       </div>
     </form>
 
-    <button (click)="submitForm()" type="submit" mat-raised-button color="primary">
+    <button [disabled]="createForm.invalid" (click)="submitForm()" type="submit" mat-raised-button color="primary">
       <span>Публикувай</span>
     </button>
   </mat-card-content>
