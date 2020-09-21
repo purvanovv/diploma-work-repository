@@ -16,7 +16,7 @@ import {
   MainCategoryType
 } from '@app/announcement/enums';
 import { AnnouncementService } from '@app/announcement/announcement.service';
-import { tap, startWith, mergeMap, take } from 'rxjs/operators';
+import { tap, mergeMap } from 'rxjs/operators';
 import { Observable, concat, Subscription } from 'rxjs';
 import { AnnouncementFormBuilder } from '@app/announcement/announcement.form.builder';
 import { untilDestroyed } from '@app/@core';
@@ -70,7 +70,7 @@ export class FirstStepComponent implements OnInit, OnDestroy {
         this.subCategories = mainCategory.subCategories;
         this.initEvents();
         return this.$initMakes(this.initFormCategory.categoryId);
-      }), take(1))
+      }), untilDestroyed(this))
       .subscribe();
   }
 
@@ -107,12 +107,10 @@ export class FirstStepComponent implements OnInit, OnDestroy {
   public submitForm() {
     this.announcementService
       .createAnnouncement(this.createForm.value)
-      .pipe(
-        tap((announcementId: number) => {
-          this.onSubmitAnnouncement.emit(announcementId);
-        }), take(1)
-      )
-      .subscribe();
+      .pipe(untilDestroyed(this))
+      .subscribe((announcementId: number) => {
+        this.onSubmitAnnouncement.emit(announcementId);
+      }, err => console.log(err));
   }
 
   private $initData(): Observable<any> {
