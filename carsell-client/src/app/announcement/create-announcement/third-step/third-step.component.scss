@@ -1,0 +1,25 @@
+.info-holder {
+    position: relative;
+    top: 0;
+}
+
+.info-item-left {
+    text-align: left;
+}
+.info-item-right {
+    font-weight: bold;
+    text-align: left;
+}
+
+.big-image {
+    width: 490px;
+    height: 341px;
+    object-fit: contain;
+}
+
+.small-image {
+    width: 96px;
+    height: 66px;
+    object-fit: contain;
+
+}
