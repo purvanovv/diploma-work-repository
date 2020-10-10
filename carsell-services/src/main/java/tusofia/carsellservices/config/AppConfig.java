@@ -10,6 +10,7 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 import tusofia.carsellservices.util.AnnouncementVehicleModelMapper;
+import tusofia.carsellservices.util.AnnouncementVehicleModelMapperConverter;
 
 @Configuration
 public class AppConfig {
@@ -37,14 +38,20 @@ public class AppConfig {
 	}
 
 	@Bean
+	public AnnouncementVehicleModelMapperConverter announcementVehicleModelMapperConverter() {
+		return new AnnouncementVehicleModelMapperConverter();
+	}
+
+	@Bean
 	public NamedParameterJdbcTemplate namedParameterJdbcTemplate(DataSource dataSource) {
 		return new NamedParameterJdbcTemplate(dataSource);
 	}
 
 	@Bean
-	public ModelMapper modelMapper() {
+	public ModelMapper modelMapper(AnnouncementVehicleModelMapperConverter announcementVehicleModelMapperConverter) {
 		ModelMapper modelMapper = new ModelMapper();
 		modelMapper.getConfiguration().setAmbiguityIgnored(true);
+		modelMapper.addConverter(announcementVehicleModelMapperConverter.getPreviewConverter());
 		return modelMapper;
 	}
 

@@ -16,7 +16,9 @@ import tusofia.carsellservices.exceptions.ValidationException;
 import tusofia.carsellservices.model.AnnouncementVehicle;
 import tusofia.carsellservices.model.MainCategory;
 import tusofia.carsellservices.model.Make;
+import tusofia.carsellservices.model.SubCategory;
 import tusofia.carsellservices.model.dtos.AnnouncementVehicleCreateDTO;
+import tusofia.carsellservices.model.dtos.AnnouncementVehiclePreviewDTO;
 import tusofia.carsellservices.service.AnnouncementVehicleService;
 import tusofia.carsellservices.util.AnnouncementVehicleModelMapper;
 import tusofia.carsellservices.validation.AnnouncementVehicleValidationContext;
@@ -39,9 +41,9 @@ public class AnnouncementVehicleController {
 	}
 
 	@RequestMapping(value = "/categories", method = RequestMethod.GET)
-	public ResponseEntity<List<MainCategory>> getCategories() {
-		List<MainCategory> categories = this.announcementVehicleService.getCategories();
-		return new ResponseEntity<List<MainCategory>>(categories, HttpStatus.OK);
+	public ResponseEntity<Map<MainCategory, List<SubCategory>>> getCategories() {
+		Map<MainCategory, List<SubCategory>> categories = this.announcementVehicleService.getCategories();
+		return new ResponseEntity<Map<MainCategory, List<SubCategory>>>(categories, HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/announcement", method = RequestMethod.POST)
@@ -70,15 +72,25 @@ public class AnnouncementVehicleController {
 		AnnouncementVehicle announcementVehicle = announcementVehicleService
 				.getAnnouncementVehicle(announcementVehicleId);
 		AnnouncementVehicleCreateDTO announcementVehicleCreateDTO = announcementVehicleModelMapper
-				.convertToDTO(announcementVehicle);
+				.convertToCreateDTO(announcementVehicle);
 		return new ResponseEntity<AnnouncementVehicleCreateDTO>(announcementVehicleCreateDTO, HttpStatus.OK);
+	}
+
+	@RequestMapping(value = "/announcementPreview", method = RequestMethod.GET)
+	public ResponseEntity<AnnouncementVehiclePreviewDTO> getAnnouncementVehiclePreview(
+			@RequestParam Long announcementVehicleId) {
+		AnnouncementVehicle announcementVehicle = announcementVehicleService
+				.getAnnouncementVehicle(announcementVehicleId);
+		AnnouncementVehiclePreviewDTO announcementVehiclePreviewDTO = announcementVehicleModelMapper
+				.convertToPreviewDTO(announcementVehicle);
+		return new ResponseEntity<AnnouncementVehiclePreviewDTO>(announcementVehiclePreviewDTO, HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/announcements", method = RequestMethod.GET)
 	public ResponseEntity<List<AnnouncementVehicleCreateDTO>> getAnnouncementVehicles() {
 		List<AnnouncementVehicle> announcementVehicles = this.announcementVehicleService.getAnnouncementVehicles();
 		List<AnnouncementVehicleCreateDTO> announcementVehicleCreateDTOs = announcementVehicleModelMapper
-				.convertToDTOs(announcementVehicles);
+				.convertToCreateDTOs(announcementVehicles);
 		return new ResponseEntity<List<AnnouncementVehicleCreateDTO>>(announcementVehicleCreateDTOs, HttpStatus.OK);
 	}
 
