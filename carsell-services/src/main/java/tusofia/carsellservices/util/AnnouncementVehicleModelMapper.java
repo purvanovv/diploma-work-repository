@@ -8,6 +8,7 @@ import org.modelmapper.ModelMapper;
 import tusofia.carsellservices.model.AnnouncementVehicle;
 import tusofia.carsellservices.model.MetaProps;
 import tusofia.carsellservices.model.dtos.AnnouncementVehicleCreateDTO;
+import tusofia.carsellservices.model.dtos.AnnouncementVehiclePreviewDTO;
 
 public class AnnouncementVehicleModelMapper {
 
@@ -24,13 +25,17 @@ public class AnnouncementVehicleModelMapper {
 		return announcementVehicle;
 	}
 
-	public AnnouncementVehicleCreateDTO convertToDTO(AnnouncementVehicle announcementVehicle) {
+	public AnnouncementVehicleCreateDTO convertToCreateDTO(AnnouncementVehicle announcementVehicle) {
 		return modelMapper.map(announcementVehicle, AnnouncementVehicleCreateDTO.class);
 	}
 
-	public List<AnnouncementVehicleCreateDTO> convertToDTOs(List<AnnouncementVehicle> announcementVehicles) {
+	public AnnouncementVehiclePreviewDTO convertToPreviewDTO(AnnouncementVehicle announcementVehicle) {
+		return modelMapper.map(announcementVehicle, AnnouncementVehiclePreviewDTO.class);
+	}
+
+	public List<AnnouncementVehicleCreateDTO> convertToCreateDTOs(List<AnnouncementVehicle> announcementVehicles) {
 		if (null != announcementVehicles) {
-			return announcementVehicles.stream().map(a -> convertToDTO(a)).collect(Collectors.toList());
+			return announcementVehicles.stream().map(a -> convertToCreateDTO(a)).collect(Collectors.toList());
 		}
 		return null;
 	}
