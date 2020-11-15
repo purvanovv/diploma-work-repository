@@ -29,7 +29,7 @@ public class AnnouncementVehicleModelMapperConverter {
 				AnnouncementVehiclePreviewDTO dest = new AnnouncementVehiclePreviewDTO();
 				AnnouncementVehicle source = context.getSource();
 				dest.setId(source.getId());
-				// private String mainCategory;
+				dest.setMainCategory(source.getMainCategory());
 				dest.setMake(source.getMake());
 				dest.setModel(source.getModel());
 				dest.setEngineType(EngineType.getValue(source.getEngineType()));
@@ -37,7 +37,7 @@ public class AnnouncementVehicleModelMapperConverter {
 				dest.setHorsePower(source.getHorsePower());
 				dest.setEmissionStandartType(EmissionStandartType.getValue(source.getEmissionStandartType()));
 				dest.setGearboxType(GearboxType.getValue(source.getGearboxType()));
-				// dest.setSubCategory(subCategory);
+				dest.setSubCategory(source.getSubCategory());
 				dest.setCoolingType(CoolingType.getValue(source.getCoolingType()));
 				dest.setNumberOfAxels(source.getNumberOfAxels());
 				dest.setNumberOfSeats(source.getNumberOfSeats());

@@ -1,5 +1,7 @@
 SELECT av.id, 
        av.main_category_id, 
+       mc.name, 
+       mc.value, 
        av.make, 
        av.model, 
        av.engine_type, 
@@ -44,4 +46,6 @@ SELECT av.id,
        av.modified_on, 
        av.delete_by 
 FROM   announcement_vehicle av 
+       JOIN main_categories mc 
+         ON mc.id = av.main_category_id 
 WHERE  av.delete_flag = 'N'

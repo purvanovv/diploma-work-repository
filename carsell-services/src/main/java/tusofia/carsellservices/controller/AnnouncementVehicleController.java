@@ -14,11 +14,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import tusofia.carsellservices.exceptions.ValidationException;
 import tusofia.carsellservices.model.AnnouncementVehicle;
-import tusofia.carsellservices.model.MainCategory;
+import tusofia.carsellservices.model.CategoryPair;
 import tusofia.carsellservices.model.Make;
-import tusofia.carsellservices.model.SubCategory;
 import tusofia.carsellservices.model.dtos.AnnouncementVehicleCreateDTO;
 import tusofia.carsellservices.model.dtos.AnnouncementVehiclePreviewDTO;
+import tusofia.carsellservices.model.enums.MainCategoryType;
 import tusofia.carsellservices.service.AnnouncementVehicleService;
 import tusofia.carsellservices.util.AnnouncementVehicleModelMapper;
 import tusofia.carsellservices.validation.AnnouncementVehicleValidationContext;
@@ -41,18 +41,17 @@ public class AnnouncementVehicleController {
 	}
 
 	@RequestMapping(value = "/categories", method = RequestMethod.GET)
-	public ResponseEntity<Map<MainCategory, List<SubCategory>>> getCategories() {
-		Map<MainCategory, List<SubCategory>> categories = this.announcementVehicleService.getCategories();
-		return new ResponseEntity<Map<MainCategory, List<SubCategory>>>(categories, HttpStatus.OK);
+	public ResponseEntity<List<CategoryPair>> getCategories() {
+		List<CategoryPair> categories = this.announcementVehicleService.getCategories();
+		return new ResponseEntity<List<CategoryPair>>(categories, HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/announcement", method = RequestMethod.POST)
 	public ResponseEntity<Long> createAnnouncement(
 			@RequestBody AnnouncementVehicleCreateDTO announcementVehicleCreateDTO) throws ValidationException {
 
-		tusofia.carsellservices.model.enums.MainCategoryType mainCategoryType = announcementVehicleService
+		MainCategoryType mainCategoryType = announcementVehicleService
 				.getMainCategoryType(announcementVehicleCreateDTO.getMainCategoryId());
-
 		AnnouncementVehicleValidationContext validationContext = AnnouncementVehicleValidationContextBuilder
 				.build(mainCategoryType);
 		List<ValidationResult> validationErrors = validationContext.executeAndGetList(announcementVehicleCreateDTO);

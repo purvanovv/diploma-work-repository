@@ -1,15 +1,13 @@
 <mat-card>
-  <!-- <h1>
-        <mat-card-title>Публикуване на обява</mat-card-title>
-    </h1> -->
-  <mat-card-content>
+  <mat-card-content *ngIf="isFormInit">
     <form [formGroup]="createForm">
       <div class="form-container" fxLayout="row wrap" fxLayout.xs="column" fxLayoutAlign="left">
         <div *ngIf="containsControl('mainCategoryId')" fxFlex="22%" class="form-element">
           <mat-form-field appearance="legacy">
             <mat-select placeholder="Основна категория" formControlName="mainCategoryId">
-              <mat-option [value]="mainCategory.id" *ngFor="let mainCategory of mainCategories">
-                {{ mainCategory.name }}</mat-option>
+              <mat-option [value]="categoryPair.mainCategory.id" *ngFor="let categoryPair of categories">
+                {{ categoryPair.mainCategory.name }}</mat-option
+              >
             </mat-select>
           </mat-form-field>
         </div>
@@ -18,7 +16,8 @@
           <mat-form-field appearance="legacy">
             <mat-select placeholder="Категория" formControlName="subCategoryId">
               <mat-option [value]="subCategory.id" *ngFor="let subCategory of subCategories">
-                {{ subCategory.name }}</mat-option>
+                {{ subCategory.name }}</mat-option
+              >
             </mat-select>
           </mat-form-field>
         </div>
@@ -28,7 +27,8 @@
             <label>Състояние:</label>
             <mat-radio-group formControlName="conditionType">
               <mat-radio-button [value]="name" *ngFor="let name of conditionType | enumToArray">
-                {{ getEnumValue(name, conditionType) }}</mat-radio-button>
+                {{ getEnumValue(name, conditionType) }}</mat-radio-button
+              >
             </mat-radio-group>
           </section>
         </div>
@@ -108,8 +108,12 @@
 
         <div *ngIf="containsControl('dateOfManufacture')" fxFlex="22%" class="form-element">
           <mat-form-field color="primary" appearance="legacy">
-            <input placeholder="Дата на производство" formControlName="dateOfManufacture" matInput
-              [matDatepicker]="dateOfManufacturePicker" />
+            <input
+              placeholder="Дата на производство"
+              formControlName="dateOfManufacture"
+              matInput
+              [matDatepicker]="dateOfManufacturePicker"
+            />
             <mat-datepicker-toggle matSuffix [for]="dateOfManufacturePicker"></mat-datepicker-toggle>
             <mat-datepicker #dateOfManufacturePicker></mat-datepicker>
           </mat-form-field>
@@ -177,7 +181,7 @@
             <input matInput type="number" placeholder="Брой места" formControlName="numberOfSeats" />
           </mat-form-field>
         </div>
-        
+
         <div *ngIf="containsControl('weightCapacity')" fxFlex="22%" class="form-element">
           <mat-form-field appearance="legacy">
             <input matInput type="number" placeholder="Товароносимост" formControlName="weightCapacity" />

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { MainCategory, Make, Announcement } from './models';
+import { MainCategory, Make, AnnouncementPreview, CategoryPair, AnnouncementCreate, ImageFile } from './models';
 import { HttpClient } from '@angular/common/http';
 
 const routes = {
@@ -9,6 +9,9 @@ const routes = {
   regions: () => `announcements/regions`,
   announcement: () => `announcements/announcement`,
   upload: () => `announcements/upload`,
+  announcementPreview: (announcementVehicleId: number) =>
+    `announcements/announcementPreview?announcementVehicleId=${announcementVehicleId}`,
+  images: (announcementId: number) => `announcements/images?announcementId=${announcementId}`,
 };
 
 @Injectable({
@@ -17,20 +20,24 @@ const routes = {
 export class AnnouncementService {
   constructor(private httpClient: HttpClient) {}
 
-  public getCategories(): Observable<MainCategory[]> {
-    return this.httpClient.get<MainCategory[]>(routes.categories());
+  public getCategories(): Observable<CategoryPair[]> {
+    return this.httpClient.get<CategoryPair[]>(routes.categories());
   }
 
-  public getMakes(mainCategoryId: number): Observable<Map<String, Make[]>> {
-    return this.httpClient.get<Map<String, Make[]>>(routes.groupmakes(mainCategoryId));
+  public getMakes(mainCategoryId: number): Observable<Map<string, Make[]>> {
+    return this.httpClient.get<Map<string, Make[]>>(routes.groupmakes(mainCategoryId));
   }
 
-  public getRegions(): Observable<Map<String, String[]>> {
-    return this.httpClient.get<Map<String, String[]>>(routes.regions());
+  public getRegions(): Observable<Map<string, string[]>> {
+    return this.httpClient.get<Map<string, string[]>>(routes.regions());
   }
 
-  public createAnnouncement(announcement: Announcement): Observable<number> {
+  public createAnnouncement(announcement: AnnouncementCreate): Observable<number> {
     return this.httpClient.post<number>(routes.announcement(), announcement);
+  }
+
+  public getAnnouncementPreview(announcementId: number): Observable<AnnouncementPreview> {
+    return this.httpClient.get<AnnouncementPreview>(routes.announcementPreview(announcementId));
   }
 
   public upload(file: File, announcementId: number): Observable<any> {
@@ -42,5 +49,9 @@ export class AnnouncementService {
       reportProgress: true,
       responseType: 'json',
     });
+  }
+
+  public getImages(announcementId: number): Observable<ImageFile[]> {
+    return this.httpClient.get<ImageFile[]>(routes.images(announcementId));
   }
 }

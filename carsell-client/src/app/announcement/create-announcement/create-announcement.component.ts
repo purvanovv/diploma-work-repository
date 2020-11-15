@@ -14,11 +14,8 @@ export class CreateAnnouncementComponent implements OnInit {
 
   @ViewChild('stepper') stepper: MatStepper;
 
-  ngOnInit() {}
-
-  private changeStep() {
-    this.stepper.selected.completed = true;
-    this.stepper.next();
+  ngOnInit() {
+    this.announcementId = 2;
   }
 
   public prepareSecondStep(announcementId: number) {
@@ -28,5 +25,10 @@ export class CreateAnnouncementComponent implements OnInit {
 
   public prepareThirdStep(announcementId: number) {
     this.changeStep();
+  }
+
+  private changeStep() {
+    this.stepper.selected.completed = true;
+    this.stepper.next();
   }
 }

@@ -1,5 +1,7 @@
 package tusofia.carsellservices.repository;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -8,6 +10,8 @@ import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import tusofia.carsellservices.model.ImageFile;
+import tusofia.carsellservices.repository.rowmappers.ImageRowMapper;
+import tusofia.carsellservices.repository.rsextractors.ImagesResultSetExtractor;
 import tusofia.carsellservices.util.SqlContainer;
 
 @Repository
@@ -38,5 +42,22 @@ public class ImageFileRepositoryImpl implements ImageFileRepository {
 			return null;
 		}
 	}
+
+	@Override
+	public List<ImageFile> getImagesByAnnouncementId(Long announcementId) {
+		try {
+			String sql = SqlContainer.GET_IMAGE_FILES_BY_ANNOUNCEMENT_ID;
+			MapSqlParameterSource params = new MapSqlParameterSource();
+			params.addValue("announcementId", announcementId);
+			List<ImageFile> images = namedParameterJdbcTemplate.query(sql, params,
+					new ImagesResultSetExtractor());
+			return images;
+		} catch (Exception e) {
+			// TODO
+			return null;
+		}
+	}
+	
+	
 
 }

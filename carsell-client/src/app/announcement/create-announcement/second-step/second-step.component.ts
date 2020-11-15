@@ -14,7 +14,8 @@ import { FileUpload } from '@app/announcement/models';
 //create subject of files
 export class SecondStepComponent implements OnInit {
   @ViewChild('fileInput', { static: false }) fileInput: ElementRef;
-
+  @Input() announcementId: number;
+  @Output() onUploadFiles: EventEmitter<number> = new EventEmitter<number>();
   public files: FileUpload[] = [];
   public disableSubmit = true;
   public disableUpload = false;
@@ -22,9 +23,6 @@ export class SecondStepComponent implements OnInit {
   private maxNumberOfFiles = 3;
 
   constructor(private announcementService: AnnouncementService) {}
-
-  @Input() announcementId: number;
-  @Output() onUploadFiles: EventEmitter<number> = new EventEmitter<number>();
 
   ngOnInit(): void {}
 

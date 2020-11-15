@@ -7,33 +7,36 @@ import java.util.List;
 
 import org.springframework.jdbc.core.RowMapper;
 
+import tusofia.carsellservices.model.CategoryPair;
 import tusofia.carsellservices.model.MainCategory;
 import tusofia.carsellservices.model.SubCategory;
 
-public class CategoriesRowMapper implements RowMapper<List<MainCategory>> {
+public class CategoriesRowMapper implements RowMapper<List<CategoryPair>> {
 
 	@Override
-	public List<MainCategory> mapRow(ResultSet rs, int rowNum) throws SQLException {
-		List<MainCategory> categories = new ArrayList<MainCategory>();
+	public List<CategoryPair> mapRow(ResultSet rs, int rowNum) throws SQLException {
+
+		List<CategoryPair> categories = new ArrayList<>();
 		while (rs.next()) {
 			SubCategory subCategory = extractSubCategoryFromResultSet(rs);
-			MainCategory mainCategory = findMainCategory(categories, subCategory.getMainCategoryId());
-			if (mainCategory == null) {
-				mainCategory = extractMainCategoryFromResultSet(rs);
-				categories.add(mainCategory);
+			CategoryPair category = findCategory(categories, subCategory.getMainCategoryId());
+			if (category == null) {
+				category = new CategoryPair();
+				category.setMainCategory(extractMainCategoryFromResultSet(rs));
+				categories.add(category);
 			}
-			mainCategory.addSubCategory(subCategory);
+			category.addSubCategory(subCategory);
 
 		}
 
 		return categories;
 	}
 
-	private MainCategory findMainCategory(List<MainCategory> categories, Long categoryId) {
-		return categories.stream().filter(c -> c.getId().equals(categoryId)).findAny().orElse(null);
+	private CategoryPair findCategory(List<CategoryPair> categories, Long categoryId) {
+		return categories.stream().filter(c -> c.getMainCategory().getId() == categoryId).findAny().orElse(null);
 	}
 
-	private MainCategory extractMainCategoryFromResultSet(ResultSet rs) throws SQLException {
+	public MainCategory extractMainCategoryFromResultSet(ResultSet rs) throws SQLException {
 		MainCategory mainCategory = new MainCategory();
 		mainCategory.setId(rs.getLong("MAIN_CATEGORY_ID"));
 		mainCategory.setName(rs.getString("MAIN_CATEGORY_NAME"));
@@ -41,7 +44,7 @@ public class CategoriesRowMapper implements RowMapper<List<MainCategory>> {
 		return mainCategory;
 	}
 
-	private SubCategory extractSubCategoryFromResultSet(ResultSet rs) throws SQLException {
+	public SubCategory extractSubCategoryFromResultSet(ResultSet rs) throws SQLException {
 		SubCategory subCategory = new SubCategory();
 		subCategory.setId(rs.getLong("SUB_CATEGORY_ID"));
 		subCategory.setName(rs.getString("SUB_CATEGORY_NAME"));

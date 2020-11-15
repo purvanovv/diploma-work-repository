@@ -3,11 +3,13 @@ package tusofia.carsellservices.model.dtos;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import tusofia.carsellservices.model.MainCategory;
 import tusofia.carsellservices.model.MetaProps;
+import tusofia.carsellservices.model.SubCategory;
 
 public class AnnouncementVehiclePreviewDTO {
 	private Long id;
-	private String mainCategory;
+	private MainCategory mainCategory;
 	private String make;
 	private String model;
 	private String engineType;
@@ -15,7 +17,7 @@ public class AnnouncementVehiclePreviewDTO {
 	private Integer horsePower;
 	private String emissionStandartType;
 	private String gearboxType;
-	private String subCategory;
+	private SubCategory subCategory;
 	private String coolingType;
 	private Short numberOfAxels;
 	private Short numberOfSeats;
@@ -54,12 +56,20 @@ public class AnnouncementVehiclePreviewDTO {
 		this.id = id;
 	}
 
-	public String getMainCategory() {
+	public MainCategory getMainCategory() {
 		return mainCategory;
 	}
 
-	public void setMainCategory(String mainCategory) {
+	public void setMainCategory(MainCategory mainCategory) {
 		this.mainCategory = mainCategory;
+	}
+
+	public void setSubCategory(SubCategory subCategory) {
+		this.subCategory = subCategory;
+	}
+
+	public SubCategory getSubCategory() {
+		return subCategory;
 	}
 
 	public String getMake() {
@@ -116,14 +126,6 @@ public class AnnouncementVehiclePreviewDTO {
 
 	public void setGearboxType(String gearboxType) {
 		this.gearboxType = gearboxType;
-	}
-
-	public String getSubCategory() {
-		return subCategory;
-	}
-
-	public void setSubCategory(String subCategory) {
-		this.subCategory = subCategory;
 	}
 
 	public String getCoolingType() {

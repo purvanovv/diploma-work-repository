@@ -1,5 +1,7 @@
 package tusofia.carsellservices.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import tusofia.carsellservices.exceptions.FileTypeNotValidException;
+import tusofia.carsellservices.model.ImageFile;
 import tusofia.carsellservices.model.ResponseMessage;
 import tusofia.carsellservices.service.ImageFileService;
 
@@ -31,6 +34,14 @@ public class ImageFileController {
 		imageFileService.storeImage(file, announcementId);
 		String message = "Uploaded the file successfully: " + file.getOriginalFilename();
 		return new ResponseEntity<ResponseMessage>(new ResponseMessage(message), HttpStatus.OK);
+	}
+
+	@RequestMapping(value = "/images", method = RequestMethod.GET)
+	public ResponseEntity<List<ImageFile>> getImages(@RequestParam Long announcementId)
+			throws FileTypeNotValidException {
+
+		List<ImageFile> images = imageFileService.getImagesByAnnouncementId(announcementId);
+		return new ResponseEntity<List<ImageFile>>(images, HttpStatus.OK);
 	}
 
 }

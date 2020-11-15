@@ -71,7 +71,7 @@ export enum MainCategoryType {
   CARAVANS = 'Каравани',
   YACHT_AND_BOATS = 'Яахти и лодки',
   TRAILERS = 'Ремаркета',
-  BICYCLES = 'Велосипеди'
+  BICYCLES = 'Велосипеди',
 }
 
 export enum Control {
@@ -110,6 +110,5 @@ export enum Control {
   WIDTH,
   BICYCLE_SIZE,
   NUMBER_OF_GEARS,
-  DESCRIPTION
+  DESCRIPTION,
 }
-

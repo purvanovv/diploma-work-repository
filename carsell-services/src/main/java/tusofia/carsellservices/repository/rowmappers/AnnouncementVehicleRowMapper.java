@@ -28,9 +28,10 @@ public class AnnouncementVehicleRowMapper implements RowMapper<AnnouncementVehic
 	}
 
 	private AnnouncementVehicle extractAnnouncementVehicleFromResultSet(ResultSet rs) throws SQLException {
+		CategoriesRowMapper categoriesRowMapper = new CategoriesRowMapper();
 		AnnouncementVehicle announcementVehicle = new AnnouncementVehicle();
 		announcementVehicle.setId(rs.getLong("ID"));
-		announcementVehicle.setMainCategoryId(rs.getLong("MAIN_CATEGORY_ID"));
+		announcementVehicle.setMainCategory(categoriesRowMapper.extractMainCategoryFromResultSet(rs));
 		announcementVehicle.setMake(rs.getString("MAKE"));
 		announcementVehicle.setModel(rs.getString("MODEL"));
 		announcementVehicle.setEngineType(EngineType.lookupByStringValue(rs.getString("ENGINE_TYPE")));
@@ -39,7 +40,7 @@ public class AnnouncementVehicleRowMapper implements RowMapper<AnnouncementVehic
 		announcementVehicle.setEmissionStandartType(
 				EmissionStandartType.lookupByStringValue(rs.getString("EMISSION_STANDART_TYPE")));
 		announcementVehicle.setGearboxType(GearboxType.lookupByStringValue(rs.getString("GEARBOX_TYPE")));
-		announcementVehicle.setSubCategoryId(rs.getLong("SUB_CATEGORY_ID"));
+		announcementVehicle.setSubCategory(categoriesRowMapper.extractSubCategoryFromResultSet(rs));
 		announcementVehicle.setCoolingType(CoolingType.lookupByStringValue(rs.getString("COOLING_TYPE")));
 		announcementVehicle.setNumberOfAxels(rs.getShort("NUMBER_OF_AXELS"));
 		announcementVehicle.setNumberOfSeats(rs.getShort("NUMBER_OF_SEATS"));

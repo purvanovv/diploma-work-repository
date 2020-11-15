@@ -1,79 +1,68 @@
-<mat-card>
-    <mat-card-header>
-        <mat-card-title>Subaru Impreza WRX</mat-card-title>
-        <mat-card-subtitle>18 000 лв.</mat-card-subtitle>
-    </mat-card-header>
+<mat-card *ngIf="announcement != undefined">
+  <mat-card-header>
+    <mat-card-title>{{ announcement.make }} {{ announcement.model }}</mat-card-title>
+    <mat-card-subtitle>{{ announcement.price }} {{ announcement.currency }}</mat-card-subtitle>
+  </mat-card-header>
 
-    <div style="width:100%;height: 500px;">
-        <div style="width:50%;float: left;">
-            <div>
-                <a> <img class="big-image"
-                        src="https://hothatch.com.au/wp-content/uploads/2018/04/Subaru-Impreza-WRX-STi-hatchback-1.jpg">
-                </a>
-            </div>
-            <div style="overflow-x: scroll; display: flex;">
-                <a><img class="small-image"
-                        src="https://hothatch.com.au/wp-content/uploads/2018/04/Subaru-Impreza-WRX-STi-hatchback-1.jpg"></a>
-                <a><img class="small-image"
-                        src="https://hothatch.com.au/wp-content/uploads/2018/04/Subaru-Impreza-WRX-STi-hatchback-1.jpg"></a>
-                <a><img class="small-image"
-                        src="https://hothatch.com.au/wp-content/uploads/2018/04/Subaru-Impreza-WRX-STi-hatchback-1.jpg"></a>
-
-                <a><img class="small-image"
-                        src="https://hothatch.com.au/wp-content/uploads/2018/04/Subaru-Impreza-WRX-STi-hatchback-1.jpg"></a><a><img
-                        class="small-image"
-                        src="https://hothatch.com.au/wp-content/uploads/2018/04/Subaru-Impreza-WRX-STi-hatchback-1.jpg"></a>
-                <a><img class="small-image"
-                        src="https://hothatch.com.au/wp-content/uploads/2018/04/Subaru-Impreza-WRX-STi-hatchback-1.jpg"></a>
-
-                <a><img class="small-image"
-                        src="https://hothatch.com.au/wp-content/uploads/2018/04/Subaru-Impreza-WRX-STi-hatchback-1.jpg"></a>
-
-            </div>
-        </div>
-        <div style="width:50%;float: right;">
-            <table class="info-holder">
-                <tr>
-                    <td class="info-item-left">Дата на производство</td>
-                    <td class="info-item-right">октомври 2008</td>
-                </tr>
-                <tr>
-                    <td class="info-item-left">Тип двигател</td>
-                    <td class="info-item-right">бензинов</td>
-                </tr>
-                <tr>
-                    <td class="info-item-left">Мощност</td>
-                    <td class="info-item-right">230 к.с.</td>
-                </tr>
-                <tr>
-                    <td class="info-item-left">Евростандарт</td>
-                    <td class="info-item-right">евро 4</td>
-                </tr>
-                <tr>
-                    <td class="info-item-left">Скоростна кутия</td>
-                    <td class="info-item-right">ръчна</td>
-                </tr>
-                <tr>
-                    <td class="info-item-left">Категория</td>
-                    <td class="info-item-right">Хечбек</td>
-                </tr>
-                <tr>
-                    <td class="info-item-left">Пробег</td>
-                    <td class="info-item-right">226000 км</td>
-                </tr>
-                <tr>
-                    <td class="info-item-left">Цвят</td>
-                    <td class="info-item-right">Син</td>
-                </tr>
-            </table>
-        </div>
+  <div style="width: 100%; height: 500px">
+    <div style="width: 50%; float: left">
+      <div>
+        <a>
+          <img
+            class="big-image"
+            src="https://hothatch.com.au/wp-content/uploads/2018/04/Subaru-Impreza-WRX-STi-hatchback-1.jpg"
+          />
+        </a>
+      </div>
+      <div style="overflow-x: scroll; display: flex">
+        <a *ngFor="let url of imageUrls">
+          <img class="small-image" [src]="url" />
+        </a>
+      </div>
     </div>
+    <div style="width: 50%; float: right">
+      <table class="info-holder">
+        <tr>
+          <td class="info-item-left">Дата на производство</td>
+          <td class="info-item-right">{{ announcement.dateOfManufacture }}</td>
+        </tr>
+        <tr>
+          <td class="info-item-left">Тип двигател</td>
+          <td class="info-item-right">{{ announcement.engineType }}</td>
+        </tr>
+        <tr>
+          <td class="info-item-left">Мощност</td>
+          <td class="info-item-right">{{ announcement.horsePower }} к.с.</td>
+        </tr>
+        <tr>
+          <td class="info-item-left">Евростандарт</td>
+          <td class="info-item-right">{{ announcement.emissionStandartType }}</td>
+        </tr>
+        <tr>
+          <td class="info-item-left">Скоростна кутия</td>
+          <td class="info-item-right">{{ announcement.gearboxType }}</td>
+        </tr>
+        <tr>
+          <td class="info-item-left">Категория</td>
+          <td class="info-item-right">{{ announcement.subCategory.name }}</td>
+        </tr>
+        <tr>
+          <td class="info-item-left">Пробег</td>
+          <td class="info-item-right">{{ announcement.mileage }} км</td>
+        </tr>
+        <tr>
+          <td class="info-item-left">Цвят</td>
+          <td class="info-item-right">{{ announcement.color }}</td>
+        </tr>
+      </table>
+    </div>
+  </div>
 
-    <mat-card-content>
-        <p>dasdada</p>
-    </mat-card-content>
-    <mat-card-actions>
-        <button mat-raised-button color="primary">Потвърди обявата</button>
-        <button mat-raised-button color="warn">Изтрий обявата</button>
-    </mat-card-actions>
+  <mat-card-content>
+    <p>dasdada</p>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button color="primary">Потвърди обявата</button>
+    <button mat-raised-button color="warn">Изтрий обявата</button>
+  </mat-card-actions>
 </mat-card>

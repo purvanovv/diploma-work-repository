@@ -5,7 +5,11 @@ public class ImageFile {
 	private String name;
 	private String dataType;
 	private byte[] data;
+	private String encodedImage;
 	private Long announcementId;
+
+	public ImageFile() {
+	}
 
 	public ImageFile(String name, String dataType, byte[] data, Long announcementId) {
 		this.name = name;
@@ -53,5 +57,15 @@ public class ImageFile {
 	public void setAnnouncementId(Long announcementId) {
 		this.announcementId = announcementId;
 	}
+
+	public String getEncodedImage() {
+		return encodedImage;
+	}
+
+	public void setEncodedImage(String encodedImage) {
+		this.encodedImage = encodedImage;
+	}
+	
+	
 
 }

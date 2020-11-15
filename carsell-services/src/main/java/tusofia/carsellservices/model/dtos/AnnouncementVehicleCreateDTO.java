@@ -3,6 +3,8 @@ package tusofia.carsellservices.model.dtos;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import tusofia.carsellservices.model.MainCategory;
+import tusofia.carsellservices.model.SubCategory;
 import tusofia.carsellservices.model.enums.AirConditionType;
 import tusofia.carsellservices.model.enums.ConditionType;
 import tusofia.carsellservices.model.enums.CoolingType;
@@ -70,6 +72,14 @@ public class AnnouncementVehicleCreateDTO {
 		this.mainCategoryId = mainCategoryId;
 	}
 
+	public Long getSubCategoryId() {
+		return subCategoryId;
+	}
+
+	public void setSubCategoryId(Long subCategoryId) {
+		this.subCategoryId = subCategoryId;
+	}
+
 	public String getMake() {
 		return make;
 	}
@@ -124,14 +134,6 @@ public class AnnouncementVehicleCreateDTO {
 
 	public void setGearboxType(String gearboxType) {
 		this.gearboxType = gearboxType;
-	}
-
-	public Long getSubCategoryId() {
-		return subCategoryId;
-	}
-
-	public void setSubCategoryId(Long subCategoryId) {
-		this.subCategoryId = subCategoryId;
 	}
 
 	public String getCoolingType() {

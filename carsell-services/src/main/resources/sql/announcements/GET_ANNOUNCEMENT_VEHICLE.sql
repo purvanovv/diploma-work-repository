@@ -1,5 +1,8 @@
 SELECT av.id, 
        av.main_category_id, 
+       mc.NAME as MAIN_CATEGORY_NAME, 
+       mc.value as MAIN_CATEGORY_VALUE, 
+       sc.NAME as SUB_CATEGORY_NAME,
        av.make, 
        av.model, 
        av.engine_type, 
@@ -44,5 +47,9 @@ SELECT av.id,
        av.modified_on, 
        av.delete_by 
 FROM   announcement_vehicle av 
+       JOIN main_categories mc 
+         ON mc.id = av.main_category_id
+       JOIN sub_categories sc 
+         ON sc.id = av.sub_category_id
 WHERE  av.delete_flag = 'N' 
-       AND id = :announcementVehicleId
+       AND av.id = :announcementVehicleId

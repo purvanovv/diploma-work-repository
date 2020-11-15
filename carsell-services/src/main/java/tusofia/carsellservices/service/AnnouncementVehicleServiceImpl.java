@@ -6,9 +6,12 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import oracle.ucp.util.Pair;
 import tusofia.carsellservices.model.AnnouncementVehicle;
+import tusofia.carsellservices.model.CategoryPair;
 import tusofia.carsellservices.model.MainCategory;
 import tusofia.carsellservices.model.Make;
+import tusofia.carsellservices.model.SubCategory;
 import tusofia.carsellservices.repository.AnnouncementVehicleRepository;
 
 @Service
@@ -22,7 +25,7 @@ public class AnnouncementVehicleServiceImpl implements AnnouncementVehicleServic
 	}
 
 	@Override
-	public List<MainCategory> getCategories() {
+	public List<CategoryPair> getCategories() {
 		return this.announcementVehicleRepository.getCategories();
 	}
 

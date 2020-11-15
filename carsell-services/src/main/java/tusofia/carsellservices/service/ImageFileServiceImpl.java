@@ -1,6 +1,7 @@
 package tusofia.carsellservices.service;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -40,6 +41,11 @@ public class ImageFileServiceImpl implements ImageFileService {
 			throw new FailToStoreImageException("Could not upload the file: " + image.getName(), e);
 		}
 
+	}
+
+	@Override
+	public List<ImageFile> getImagesByAnnouncementId(Long announcementId) {
+		return this.imageFileRepository.getImagesByAnnouncementId(announcementId);
 	}
 
 	private boolean isAvailableType(String fileType) {

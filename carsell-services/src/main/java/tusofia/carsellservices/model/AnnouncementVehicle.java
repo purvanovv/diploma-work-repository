@@ -17,7 +17,7 @@ import tusofia.carsellservices.model.enums.ToiletType;
 
 public class AnnouncementVehicle {
 	private Long id;
-	private Long mainCategoryId;
+	private MainCategory mainCategory;
 	private String make;
 	private String model;
 	private EngineType engineType;
@@ -25,7 +25,7 @@ public class AnnouncementVehicle {
 	private Integer horsePower;
 	private EmissionStandartType emissionStandartType;
 	private GearboxType gearboxType;
-	private Long subCategoryId;
+	private SubCategory subCategory;
 	private CoolingType coolingType;
 	private Short numberOfAxels;
 	private Short numberOfSeats;
@@ -65,12 +65,12 @@ public class AnnouncementVehicle {
 		this.id = id;
 	}
 
-	public Long getMainCategoryId() {
-		return mainCategoryId;
+	public MainCategory getMainCategory() {
+		return mainCategory;
 	}
 
-	public void setMainCategoryId(Long mainCategoryId) {
-		this.mainCategoryId = mainCategoryId;
+	public void setMainCategory(MainCategory mainCategory) {
+		this.mainCategory = mainCategory;
 	}
 
 	public String getMake() {
@@ -129,12 +129,12 @@ public class AnnouncementVehicle {
 		this.gearboxType = gearboxType;
 	}
 
-	public Long getSubCategoryId() {
-		return subCategoryId;
+	public SubCategory getSubCategory() {
+		return subCategory;
 	}
 
-	public void setSubCategoryId(Long subCategoryId) {
-		this.subCategoryId = subCategoryId;
+	public void setSubCategory(SubCategory subCategory) {
+		this.subCategory = subCategory;
 	}
 
 	public CoolingType getCoolingType() {

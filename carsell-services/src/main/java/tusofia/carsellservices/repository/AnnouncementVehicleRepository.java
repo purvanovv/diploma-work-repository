@@ -4,11 +4,11 @@ import java.util.List;
 import java.util.Map;
 
 import tusofia.carsellservices.model.AnnouncementVehicle;
-import tusofia.carsellservices.model.MainCategory;
+import tusofia.carsellservices.model.CategoryPair;
 import tusofia.carsellservices.model.Make;
 
 public interface AnnouncementVehicleRepository {
-	public List<MainCategory> getCategories();
+	public List<CategoryPair> getCategories();
 
 	public Long createAnnouncementVehicle(AnnouncementVehicle announcementVehiclecement);
 

@@ -11,9 +11,12 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
+import oracle.ucp.util.Pair;
 import tusofia.carsellservices.model.AnnouncementVehicle;
+import tusofia.carsellservices.model.CategoryPair;
 import tusofia.carsellservices.model.MainCategory;
 import tusofia.carsellservices.model.Make;
+import tusofia.carsellservices.model.SubCategory;
 import tusofia.carsellservices.model.enums.AirConditionType;
 import tusofia.carsellservices.model.enums.ConditionType;
 import tusofia.carsellservices.model.enums.CoolingType;
@@ -45,10 +48,10 @@ public class AnnouncementVehicleRepositoryImpl implements AnnouncementVehicleRep
 	}
 
 	@Override
-	public List<MainCategory> getCategories() {
+	public List<CategoryPair> getCategories() {
 		try {
 			String sql = SqlContainer.GET_CATEGORIES;
-			List<MainCategory> categories = namedParameterJdbcTemplate.getJdbcTemplate().queryForObject(sql, null,
+			List<CategoryPair> categories = namedParameterJdbcTemplate.getJdbcTemplate().queryForObject(sql, null,
 					new CategoriesRowMapper());
 			return categories;
 		} catch (Exception e) {
@@ -61,7 +64,7 @@ public class AnnouncementVehicleRepositoryImpl implements AnnouncementVehicleRep
 	public Long createAnnouncementVehicle(AnnouncementVehicle announcementVehicle) {
 		try {
 			MapSqlParameterSource params = new MapSqlParameterSource();
-			params.addValue("mainCategoryId", announcementVehicle.getMainCategoryId());
+			params.addValue("mainCategoryId", announcementVehicle.getMainCategory().getId());
 			params.addValue("make", announcementVehicle.getMake());
 			params.addValue("model", announcementVehicle.getModel());
 			params.addValue("engineType", EngineType.getValue(announcementVehicle.getEngineType()));
@@ -70,7 +73,7 @@ public class AnnouncementVehicleRepositoryImpl implements AnnouncementVehicleRep
 			params.addValue("emissionStandartType",
 					EmissionStandartType.getValue(announcementVehicle.getEmissionStandartType()));
 			params.addValue("gearboxType", GearboxType.getValue(announcementVehicle.getGearboxType()));
-			params.addValue("subCategoryId", announcementVehicle.getSubCategoryId());
+			params.addValue("subCategoryId", announcementVehicle.getSubCategory().getId());
 			params.addValue("coolingType", CoolingType.getValue(announcementVehicle.getCoolingType()));
 			params.addValue("cubature", announcementVehicle.getCubature());
 			params.addValue("engineCategoryType",
