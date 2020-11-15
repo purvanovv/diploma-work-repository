@@ -6,6 +6,7 @@
 .info-item-left {
   text-align: left;
 }
+
 .info-item-right {
   font-weight: bold;
   text-align: left;
@@ -21,8 +22,34 @@
   width: 96px;
   height: 66px;
   object-fit: contain;
+  margin-left: 2px;
+  margin-right: 2px;
 }
 
-.selected-small-image{
+.selected-small-image {
   opacity: 0.5;
+}
+
+.images-slider {
+  overflow: hidden;
+  width: 90%;
+  white-space: nowrap;
+  scroll-behavior: smooth;
+}
+
+.images-container {
+  display: flex;
+}
+
+.btn-slide-left {
+  float: left;
+}
+
+.btn-slide-right {
+  float: left;
+}
+
+.btn-slide {
+  top: 50%;
+  transform: translateY(-50%);
 }

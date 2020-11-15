@@ -4,59 +4,73 @@
     <mat-card-subtitle>{{ announcement.price }} {{ announcement.currency }}</mat-card-subtitle>
   </mat-card-header>
 
-  <div style="width: 100%; height: 500px">
-    <div style="width: 50%; float: left">
-      <div>
-        <a>
-          <img class="selected-image" [src]="selectedImage.url" />
-        </a>
-      </div>
-      <div style="overflow-x: scroll; display: flex">
-        <a *ngFor="let image of images" (click)="selectImage(image)">
-          <img class="small-image" [ngClass]="{'selected-small-image': image.isSelected}" [src]="image.url" />
-        </a>
-      </div>
-    </div>
-    <div style="width: 50%; float: right">
-      <table class="info-holder">
-        <tr>
-          <td class="info-item-left">Дата на производство</td>
-          <td class="info-item-right">{{ announcement.dateOfManufacture }}</td>
-        </tr>
-        <tr>
-          <td class="info-item-left">Тип двигател</td>
-          <td class="info-item-right">{{ announcement.engineType }}</td>
-        </tr>
-        <tr>
-          <td class="info-item-left">Мощност</td>
-          <td class="info-item-right">{{ announcement.horsePower }} к.с.</td>
-        </tr>
-        <tr>
-          <td class="info-item-left">Евростандарт</td>
-          <td class="info-item-right">{{ announcement.emissionStandartType }}</td>
-        </tr>
-        <tr>
-          <td class="info-item-left">Скоростна кутия</td>
-          <td class="info-item-right">{{ announcement.gearboxType }}</td>
-        </tr>
-        <tr>
-          <td class="info-item-left">Категория</td>
-          <td class="info-item-right">{{ announcement.subCategory.name }}</td>
-        </tr>
-        <tr>
-          <td class="info-item-left">Пробег</td>
-          <td class="info-item-right">{{ announcement.mileage }} км</td>
-        </tr>
-        <tr>
-          <td class="info-item-left">Цвят</td>
-          <td class="info-item-right">{{ announcement.color }}</td>
-        </tr>
-      </table>
-    </div>
-  </div>
+
 
   <mat-card-content>
-    <p>dasdada</p>
+    <div style="width: 100%; height: 500px">
+      <div style="width: 50%; float: left">
+        <div>
+          <a>
+            <img class="selected-image" [src]="selectedImage.url" />
+          </a>
+        </div>
+        <div class="images-container">
+          <div style="position: relative;" class="btn-slide-left">
+            <button class="btn-slide" mat-icon-button color="primary" (click)="scrollLeft()">
+              <mat-icon>navigate_before</mat-icon>
+            </button>
+          </div>
+
+          <div #imagesContent class="images-slider">
+            <a *ngFor="let image of images" (click)="selectImage(image)">
+              <img class="small-image" [ngClass]="{'selected-small-image': image.isSelected}" [src]="image.url" />
+            </a>
+          </div>
+
+          <div class="btn-slide-right">
+            <button class="btn-slide" mat-icon-button color="primary" (click)="scrollRight()">
+              <mat-icon>navigate_next</mat-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div style="width: 50%; float: right">
+        <table class="info-holder">
+          <tr>
+            <td class="info-item-left">Дата на производство</td>
+            <td class="info-item-right">{{ announcement.dateOfManufacture }}</td>
+          </tr>
+          <tr>
+            <td class="info-item-left">Тип двигател</td>
+            <td class="info-item-right">{{ announcement.engineType }}</td>
+          </tr>
+          <tr>
+            <td class="info-item-left">Мощност</td>
+            <td class="info-item-right">{{ announcement.horsePower }} к.с.</td>
+          </tr>
+          <tr>
+            <td class="info-item-left">Евростандарт</td>
+            <td class="info-item-right">{{ announcement.emissionStandartType }}</td>
+          </tr>
+          <tr>
+            <td class="info-item-left">Скоростна кутия</td>
+            <td class="info-item-right">{{ announcement.gearboxType }}</td>
+          </tr>
+          <tr>
+            <td class="info-item-left">Категория</td>
+            <td class="info-item-right">{{ announcement.subCategory.name }}</td>
+          </tr>
+          <tr>
+            <td class="info-item-left">Пробег</td>
+            <td class="info-item-right">{{ announcement.mileage }} км</td>
+          </tr>
+          <tr>
+            <td class="info-item-left">Цвят</td>
+            <td class="info-item-right">{{ announcement.color }}</td>
+          </tr>
+        </table>
+      </div>
+    </div>
   </mat-card-content>
   <mat-card-actions>
     <button mat-raised-button color="primary">Потвърди обявата</button>

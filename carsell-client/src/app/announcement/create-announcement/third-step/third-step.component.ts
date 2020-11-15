@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit } from '@angular/core';
+import { Component, ElementRef, Input, OnChanges, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { AnnouncementFormBuilder } from '@app/announcement/announcement.form.builder';
@@ -13,6 +13,7 @@ import { AnnouncementPreview, ImageFile, ImageFilePreview, ImageFilePreviewModel
 })
 export class ThirdStepComponent implements OnInit {
   @Input() announcementId: number;
+  @ViewChild('imagesContent', { read: ElementRef }) public widgetsContent: ElementRef<any>;
   announcement: AnnouncementPreview;
   images: ImageFilePreview[] = [];
   selectedImage: ImageFilePreview;
@@ -27,6 +28,14 @@ export class ThirdStepComponent implements OnInit {
     this.images.forEach(i => i.isSelected = false)
     this.selectedImage = image;
     this.selectedImage.isSelected = true;
+  }
+
+  public scrollLeft() {
+    this.widgetsContent.nativeElement.scrollLeft -= 150;
+  }
+
+  public scrollRight() {
+    this.widgetsContent.nativeElement.scrollLeft += 150;
   }
 
   private initData() {
