@@ -11,7 +11,7 @@
   text-align: left;
 }
 
-.big-image {
+.selected-image {
   width: 490px;
   height: 341px;
   object-fit: contain;
@@ -21,4 +21,8 @@
   width: 96px;
   height: 66px;
   object-fit: contain;
+}
+
+.selected-small-image{
+  opacity: 0.5;
 }

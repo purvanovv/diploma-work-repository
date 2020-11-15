@@ -4,7 +4,7 @@ import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { AnnouncementFormBuilder } from '@app/announcement/announcement.form.builder';
 import { AnnouncementService } from '@app/announcement/announcement.service';
 import { MainCategoryType } from '@app/announcement/enums';
-import { AnnouncementPreview, ImageFile } from '@app/announcement/models';
+import { AnnouncementPreview, ImageFile, ImageFilePreview, ImageFilePreviewModel } from '@app/announcement/models';
 
 @Component({
   selector: 'app-third-step',
@@ -14,11 +14,19 @@ import { AnnouncementPreview, ImageFile } from '@app/announcement/models';
 export class ThirdStepComponent implements OnInit {
   @Input() announcementId: number;
   announcement: AnnouncementPreview;
-  imageUrls: SafeUrl[] = [];
-  constructor(private announcementService: AnnouncementService, private sanitizer: DomSanitizer) {}
+  images: ImageFilePreview[] = [];
+  selectedImage: ImageFilePreview;
+  constructor(private announcementService: AnnouncementService, private sanitizer: DomSanitizer) { }
 
   ngOnInit(): void {
     this.initData();
+  }
+
+
+  public selectImage(image: ImageFilePreview) {
+    this.images.forEach(i => i.isSelected = false)
+    this.selectedImage = image;
+    this.selectedImage.isSelected = true;
   }
 
   private initData() {
@@ -30,11 +38,25 @@ export class ThirdStepComponent implements OnInit {
 
     const $initImages = this.announcementService.getImages(this.announcementId);
     $initImages.subscribe((images: ImageFile[]) => {
-      this.imageUrls = images.map((i) => {
+      this.images = images.map((i) => {
         const blob = this.base64ToBlob(i.encodedImage, i.dataType);
-        return this.blobToUrl(blob);
+        return new ImageFilePreviewModel(i.id, this.blobToUrl(blob), false);
       });
+
+      this.initSelectedImage(this.images);
+
+
     });
+  }
+
+  private initSelectedImage(images: ImageFilePreview[]): void {
+    this.selectedImage = images[0];
+    images.forEach(i => {
+      if (i.id < this.selectedImage.id) {
+        this.selectedImage = i;
+      }
+    })
+    this.selectedImage.isSelected = true;
   }
 
   private blobToUrl(blob: Blob): SafeUrl {
@@ -50,4 +72,5 @@ export class ThirdStepComponent implements OnInit {
     }
     return new Blob([uintArray], { type: dataType });
   }
+
 }

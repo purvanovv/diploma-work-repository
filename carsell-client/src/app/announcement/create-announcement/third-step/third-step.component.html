@@ -8,15 +8,12 @@
     <div style="width: 50%; float: left">
       <div>
         <a>
-          <img
-            class="big-image"
-            src="https://hothatch.com.au/wp-content/uploads/2018/04/Subaru-Impreza-WRX-STi-hatchback-1.jpg"
-          />
+          <img class="selected-image" [src]="selectedImage.url" />
         </a>
       </div>
       <div style="overflow-x: scroll; display: flex">
-        <a *ngFor="let url of imageUrls">
-          <img class="small-image" [src]="url" />
+        <a *ngFor="let image of images" (click)="selectImage(image)">
+          <img class="small-image" [ngClass]="{'selected-small-image': image.isSelected}" [src]="image.url" />
         </a>
       </div>
     </div>

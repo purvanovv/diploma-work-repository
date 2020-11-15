@@ -1,4 +1,5 @@
 import { AbstractControl } from '@angular/forms';
+import { SafeUrl } from '@angular/platform-browser';
 import {
   EngineType,
   ConditionType,
@@ -146,3 +147,15 @@ export interface ImageFile {
   announcementId: number;
   encodedImage: string;
 }
+
+export interface ImageFilePreview {
+  id: number;
+  url: SafeUrl;
+  isSelected: boolean;
+}
+
+export class ImageFilePreviewModel implements ImageFilePreview {
+  constructor(public id: number, public url: SafeUrl, public isSelected: boolean) { }
+}
+
+
