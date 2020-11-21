@@ -1,8 +1,3 @@
-.info-holder {
-  position: relative;
-  top: 0;
-}
-
 .info-item-left {
   text-align: left;
 }
@@ -32,7 +27,7 @@
 
 .images-slider {
   overflow: hidden;
-  width: 90%;
+  width: 490px;
   white-space: nowrap;
   scroll-behavior: smooth;
 }
@@ -41,15 +36,24 @@
   display: flex;
 }
 
-.btn-slide-left {
-  float: left;
-}
-
-.btn-slide-right {
-  float: left;
+.title-holder {
+  width: 490px;
+  text-align: left;
 }
 
 .btn-slide {
   top: 50%;
   transform: translateY(-50%);
+}
+
+::ng-deep .mat-card-header-text {
+  margin: 0 !important;
+}
+
+@media(max-width:600px) {
+  .selected-image {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+  }
 }

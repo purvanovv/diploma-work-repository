@@ -5,11 +5,26 @@
   padding-top: 1rem;
   padding-bottom: 1rem;
 }
+
+
+
 .mat-form-field {
   width: 100%;
   margin-bottom: 18%;
 }
+
 .form-container {
   min-height: 100%;
   width: 100%;
+}
+
+
+.xs-container {
+  padding: 0px;
+}
+
+@media(max-width:600px) {
+  ::ng-deep .mat-horizontal-content-container {
+    padding: 0 !important;
+  }
 }

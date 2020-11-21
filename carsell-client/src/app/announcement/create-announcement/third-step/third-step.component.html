@@ -1,21 +1,22 @@
-<mat-card *ngIf="announcement != undefined">
+<mat-card *ngIf="announcement != undefined" ngClass.xs="xs-container">
   <mat-card-header>
-    <mat-card-title>{{ announcement.make }} {{ announcement.model }}</mat-card-title>
-    <mat-card-subtitle>{{ announcement.price }} {{ announcement.currency }}</mat-card-subtitle>
+    <div fxFlex="50%" fxFlex.xs="100%" fxLayoutAlign="center">
+      <div class="title-holder">
+        <mat-card-title>{{ announcement.make }} {{ announcement.model }}</mat-card-title>
+        <mat-card-subtitle>{{ announcement.price }} {{ announcement.currency }}</mat-card-subtitle>
+      </div>
+    </div>
   </mat-card-header>
-
-
-
   <mat-card-content>
-    <div style="width: 100%; height: 500px">
-      <div style="width: 50%; float: left">
+    <div fxLayout.xs="column" fxLayoutGap.xs="10px" fxLayout="row" fxLayoutAlign="center">
+      <div fxFlex="50%" fxFlex.xs="100%">
         <div>
           <a>
             <img class="selected-image" [src]="selectedImage.url" />
           </a>
         </div>
-        <div class="images-container">
-          <div style="position: relative;" class="btn-slide-left">
+        <div class="images-container" fxLayoutAlign="center">
+          <div>
             <button class="btn-slide" mat-icon-button color="primary" (click)="scrollLeft()">
               <mat-icon>navigate_before</mat-icon>
             </button>
@@ -27,15 +28,15 @@
             </a>
           </div>
 
-          <div class="btn-slide-right">
+          <div>
             <button class="btn-slide" mat-icon-button color="primary" (click)="scrollRight()">
               <mat-icon>navigate_next</mat-icon>
             </button>
           </div>
         </div>
       </div>
-      <div style="width: 50%; float: right">
-        <table class="info-holder">
+      <div fxFlex="50%" fxFlex.xs="100%" fxLayoutAlign.xs="center">
+        <table>
           <tr>
             <td class="info-item-left">Дата на производство</td>
             <td class="info-item-right">{{ announcement.dateOfManufacture }}</td>
