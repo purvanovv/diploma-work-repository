@@ -154,6 +154,19 @@ export interface ImageFilePreview {
   isSelected: boolean;
 }
 
+export interface PreviewImageModalData {
+  selectedImage: ImageFilePreview;
+  images: ImageFilePreview[];
+  announcement: AnnouncementPreview;
+}
+
+export class PreviewImageModalDataModel implements PreviewImageModalData {
+  constructor(
+    public selectedImage: ImageFilePreview,
+    public images: ImageFilePreview[],
+    public announcement: AnnouncementPreview) { }
+}
+
 export class ImageFilePreviewModel implements ImageFilePreview {
   constructor(public id: number, public url: SafeUrl, public isSelected: boolean) { }
 }

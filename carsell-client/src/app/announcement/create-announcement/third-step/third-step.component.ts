@@ -1,10 +1,12 @@
 import { Component, ElementRef, Input, OnChanges, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { AnnouncementFormBuilder } from '@app/announcement/announcement.form.builder';
 import { AnnouncementService } from '@app/announcement/announcement.service';
 import { MainCategoryType } from '@app/announcement/enums';
-import { AnnouncementPreview, ImageFile, ImageFilePreview, ImageFilePreviewModel } from '@app/announcement/models';
+import { AnnouncementPreview, ImageFile, ImageFilePreview, ImageFilePreviewModel, PreviewImageModalDataModel } from '@app/announcement/models';
+import { PreviewImageModalComponent } from '../preview-image-modal/preview-image-modal.component';
 
 @Component({
   selector: 'app-third-step',
@@ -17,12 +19,18 @@ export class ThirdStepComponent implements OnInit {
   announcement: AnnouncementPreview;
   images: ImageFilePreview[] = [];
   selectedImage: ImageFilePreview;
-  constructor(private announcementService: AnnouncementService, private sanitizer: DomSanitizer) { }
+  constructor(private announcementService: AnnouncementService,
+    private sanitizer: DomSanitizer, private dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.initData();
   }
 
+  public previewImage() {
+    this.dialog.open(PreviewImageModalComponent, {
+      data: new PreviewImageModalDataModel(this.selectedImage, this.images, this.announcement)
+    });
+  }
 
   public selectImage(image: ImageFilePreview) {
     this.images.forEach(i => i.isSelected = false)
@@ -42,7 +50,6 @@ export class ThirdStepComponent implements OnInit {
     const $initAnnouncement = this.announcementService.getAnnouncementPreview(this.announcementId);
     $initAnnouncement.subscribe((announcemet: AnnouncementPreview) => {
       this.announcement = announcemet;
-      console.log(announcemet);
     });
 
     const $initImages = this.announcementService.getImages(this.announcementId);

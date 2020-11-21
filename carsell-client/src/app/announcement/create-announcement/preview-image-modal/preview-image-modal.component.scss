@@ -1,0 +1,21 @@
+.selected-image {
+  width: 100%;
+  height: auto;
+}
+
+.small-image {
+  width: 96px;
+  height: 66px;
+  object-fit: contain;
+  margin-left: 2px;
+  margin-right: 2px;
+  cursor: pointer;
+}
+
+.selected-small-image {
+    opacity: 0.5;
+  }
+
+::ng-deep .mat-dialog-container {
+  padding: 0 !important;
+}

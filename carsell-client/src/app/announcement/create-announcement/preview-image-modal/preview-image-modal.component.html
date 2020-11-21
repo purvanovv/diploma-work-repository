@@ -1,0 +1,26 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>{{ data.announcement.make }} {{ data.announcement.model }}</mat-card-title>
+    <mat-card-subtitle>{{ data.announcement.price }} {{data.announcement.currency }}</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <div fxLayout="row" fxLayoutGap="20px">
+      <div fxFlex="80%">
+        <div>
+          <a>
+            <img class="selected-image" [src]="data.selectedImage.url" />
+          </a>
+        </div>
+      </div>
+      <div fxFlex="20%">
+        <div>
+          <a *ngFor="let image of data.images" (click)="selectImage(image)">
+            <img class="small-image" [ngClass]="{'selected-small-image': image.isSelected}" [src]="image.url" />
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </mat-card-content>
+
+</mat-card>
