@@ -1,5 +1,8 @@
 <mat-card>
   <mat-card-header>
+    <button (click)="closeModal()" style="position: absolute; top: 0; right: 0;" mat-icon-button>
+      <mat-icon>clear</mat-icon>
+    </button>
     <mat-card-title>
       <div class="bold"> {{ data.announcement.make }} {{ data.announcement.model }}</div>
       <div>
@@ -12,10 +15,22 @@
   <mat-card-content>
     <div fxLayout="row" fxLayoutGap="20px">
       <div fxFlex="80%">
-        <div>
-          <a>
-            <img class="selected-image" [src]="data.selectedImage.url" />
+        <div class="change-img-btn-holder">
+          <a class="change-img left" (click)="prev()">
+            <button mat-raised-button>
+              <mat-icon>navigate_before</mat-icon>
+            </button>
           </a>
+          <a class="change-img right" (click)="next()">
+            <button mat-raised-button>
+              <mat-icon>navigate_next</mat-icon>
+            </button>
+          </a>
+          <div>
+            <a>
+              <img class="selected-image" [src]="data.selectedImage.url" />
+            </a>
+          </div>
         </div>
       </div>
       <div fxFlex="20%">

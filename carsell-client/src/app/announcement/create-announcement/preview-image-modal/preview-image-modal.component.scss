@@ -29,3 +29,48 @@
 .blue {
   color: mat-color($app-primary, default);
 }
+
+.btn-change-img {
+  position: relative;
+  top: 50%;
+}
+
+.change-img-btn-holder {
+  position: relative;
+}
+
+a.change-img {
+  position: absolute;
+  width: 50%;
+  height: 100%;
+  cursor: pointer;
+}
+
+a.change-img.left {
+  left: 0;
+}
+
+a.change-img button {
+  opacity: 0.5;
+  transition: 0.3s
+}
+
+a.change-img:hover button {
+  opacity: 1;
+}
+
+a.change-img.left button {
+  position: absolute;
+  top: 50%;
+  left: 0;
+}
+
+a.change-img.right {
+  right: 0;
+}
+
+a.change-img.right button {
+  position: absolute;
+  top: 50%;
+  right: 0;
+}

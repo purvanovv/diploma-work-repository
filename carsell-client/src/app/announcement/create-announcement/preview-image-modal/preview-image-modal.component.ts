@@ -24,6 +24,45 @@ export class PreviewImageModalComponent implements OnInit {
     this.data.selectedImage.isSelected = true;
   }
 
+  public closeModal() {
+    this.dialogRef.close();
+  }
+
+  public prev() {
+    for (let index = 0; index < this.data.images.length; index++) {
+      const curr = this.data.images[index];
+      if (curr.id === this.data.selectedImage.id) {
+        this.data.images.forEach(i => i.isSelected = false);
+        let prevIndex = index - 1;
+        if (index <= 0) {
+          prevIndex = this.data.images.length - 1;
+        }
+        const prev = this.data.images[prevIndex];
+        prev.isSelected = true;
+        this.data.selectedImage = prev;
+        return;
+      }
+    }
+  }
+
+  public next() {
+    for (let index = 0; index < this.data.images.length; index++) {
+      const curr = this.data.images[index];
+      if (curr.id === this.data.selectedImage.id) {
+        this.data.images.forEach(i => i.isSelected = false);
+        let nextIndex = index + 1;
+        if (index >= this.data.images.length - 1) {
+          nextIndex = 0;
+        }
+        const next = this.data.images[nextIndex];
+        next.isSelected = true;
+        this.data.selectedImage = next;
+        return;
+      }
+    }
+  }
+
+
   private buildDescription(announcement: AnnouncementPreview): string {
     return `
     ${announcement.dateOfManufacture != null ? announcement.dateOfManufacture + ',' : ''}
@@ -36,4 +75,7 @@ export class PreviewImageModalComponent implements OnInit {
     ${announcement.region != null ? 'Регион:' + announcement.region : ''}
     `;
   }
+
+
+
 }
