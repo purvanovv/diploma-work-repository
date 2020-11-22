@@ -28,6 +28,7 @@ export class ThirdStepComponent implements OnInit {
 
   public previewImage() {
     this.dialog.open(PreviewImageModalComponent, {
+      width: '70%',
       data: new PreviewImageModalDataModel(this.selectedImage, this.images, this.announcement)
     });
   }

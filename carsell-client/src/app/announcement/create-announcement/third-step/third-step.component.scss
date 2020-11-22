@@ -1,3 +1,5 @@
+@import "../../../../theme/theme-variables.scss";
+
 .info-item-left {
   text-align: left;
 }
@@ -58,4 +60,12 @@
     height: auto;
     object-fit: contain;
   }
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.blue {
+  color: mat-color($app-primary, default);
 }

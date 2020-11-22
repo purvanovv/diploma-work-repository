@@ -161,10 +161,17 @@ export interface PreviewImageModalData {
 }
 
 export class PreviewImageModalDataModel implements PreviewImageModalData {
+  public selectedImage: ImageFilePreview;
+  public images: ImageFilePreview[];
+  public announcement: AnnouncementPreview;
   constructor(
-    public selectedImage: ImageFilePreview,
-    public images: ImageFilePreview[],
-    public announcement: AnnouncementPreview) { }
+    selectedImage: ImageFilePreview,
+    images: ImageFilePreview[],
+    announcement: AnnouncementPreview) {
+    this.selectedImage = Object.assign({}, selectedImage);
+    this.images = images.map(i => Object.assign({}, i));
+    this.announcement = Object.assign({}, announcement);
+  }
 }
 
 export class ImageFilePreviewModel implements ImageFilePreview {

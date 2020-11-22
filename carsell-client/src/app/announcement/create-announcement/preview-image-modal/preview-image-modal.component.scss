@@ -1,3 +1,5 @@
+@import "../../../../theme/theme-variables.scss";
+
 .selected-image {
   width: 100%;
   height: auto;
@@ -13,9 +15,17 @@
 }
 
 .selected-small-image {
-    opacity: 0.5;
-  }
+  opacity: 0.5;
+}
 
 ::ng-deep .mat-dialog-container {
   padding: 0 !important;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.blue {
+  color: mat-color($app-primary, default);
 }
