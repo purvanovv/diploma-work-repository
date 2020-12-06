@@ -2,6 +2,7 @@ import { Component, ElementRef, Input, OnChanges, OnInit, ViewChild } from '@ang
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import { AnnouncementStoreService } from '@app/announcement/announcement-store.service';
 import { AnnouncementFormBuilder } from '@app/announcement/announcement.form.builder';
 import { AnnouncementService } from '@app/announcement/announcement.service';
 import { MainCategoryType } from '@app/announcement/enums';
@@ -14,16 +15,19 @@ import { PreviewImageModalComponent } from '../preview-image-modal/preview-image
   styleUrls: ['./third-step.component.scss'],
 })
 export class ThirdStepComponent implements OnInit {
-  @Input() announcementId: number;
   @ViewChild('imagesContent', { read: ElementRef }) public widgetsContent: ElementRef<any>;
   announcement: AnnouncementPreview;
   images: ImageFilePreview[] = [];
   selectedImage: ImageFilePreview;
   constructor(private announcementService: AnnouncementService,
-    private sanitizer: DomSanitizer, private dialog: MatDialog) { }
+    private sanitizer: DomSanitizer, private dialog: MatDialog,
+    private announcementStoreService: AnnouncementStoreService) { }
 
   ngOnInit(): void {
-    this.initData();
+    this.announcementStoreService.initDataThirdStep$.subscribe(() => {
+      console.log(this.announcementStoreService.getAnnouncementId());
+      this.initData(this.announcementStoreService.getAnnouncementId());
+    })
   }
 
   public previewImage() {
@@ -47,13 +51,13 @@ export class ThirdStepComponent implements OnInit {
     this.widgetsContent.nativeElement.scrollLeft += 150;
   }
 
-  private initData() {
-    const $initAnnouncement = this.announcementService.getAnnouncementPreview(this.announcementId);
+  private initData(announcementId: number) {
+    const $initAnnouncement = this.announcementService.getAnnouncementPreview(announcementId);
     $initAnnouncement.subscribe((announcemet: AnnouncementPreview) => {
       this.announcement = announcemet;
     });
 
-    const $initImages = this.announcementService.getImages(this.announcementId);
+    const $initImages = this.announcementService.getImages(announcementId);
     $initImages.subscribe((images: ImageFile[]) => {
       this.images = images.map((i) => {
         const blob = this.base64ToBlob(i.encodedImage, i.dataType);

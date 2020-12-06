@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatStepper } from '@angular/material/stepper';
+import { AnnouncementStoreService } from '../announcement-store.service';
 
 @Component({
   selector: 'app-create-announcement',
@@ -7,28 +8,22 @@ import { MatStepper } from '@angular/material/stepper';
   styleUrls: ['./create-announcement.component.scss'],
 })
 export class CreateAnnouncementComponent implements OnInit {
-  public isEditable = true; //false
-  public isLinear = true; //false
-  public completed = true; //false
+  public isEditable = false;
+  public isLinear = false;
+  public completed = false;
   public announcementId: number;
 
   @ViewChild('stepper') stepper: MatStepper;
 
+  constructor(private announcementStoreService: AnnouncementStoreService) { }
+
   ngOnInit() {
-    this.announcementId = 2;
+    this.announcementStoreService.changeStep$.subscribe((step: number) => {
+      if (step !== undefined) {
+        this.stepper.selected.completed = true;
+        this.stepper.next();
+      }
+    })
   }
 
-  public prepareSecondStep(announcementId: number) {
-    this.announcementId = announcementId;
-    this.changeStep();
-  }
-
-  public prepareThirdStep(announcementId: number) {
-    this.changeStep();
-  }
-
-  private changeStep() {
-    this.stepper.selected.completed = true;
-    this.stepper.next();
-  }
 }

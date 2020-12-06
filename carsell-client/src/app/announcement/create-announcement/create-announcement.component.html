@@ -2,15 +2,15 @@
   <mat-horizontal-stepper linear #stepper>
     <mat-step [completed]="completed" [editable]="isEditable">
       <ng-template matStepLabel>Публикуване на обява</ng-template>
-      <app-first-step (onSubmitAnnouncement)="prepareSecondStep($event)"></app-first-step>
+      <app-first-step></app-first-step>
     </mat-step>
     <mat-step [completed]="completed" [editable]="isEditable">
       <ng-template matStepLabel>Добавяне на снимки</ng-template>
-      <app-second-step (onUploadFiles)="prepareThirdStep($event)" [announcementId]="announcementId"> </app-second-step>
+      <app-second-step> </app-second-step>
     </mat-step>
     <mat-step>
       <ng-template matStepLabel>Преглед на обявата</ng-template>
-      <app-third-step [announcementId]="announcementId"></app-third-step>
+      <app-third-step></app-third-step>
     </mat-step>
   </mat-horizontal-stepper>
 </div>

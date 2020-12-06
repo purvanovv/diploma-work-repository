@@ -3,7 +3,8 @@ import { AnnouncementService } from '@app/announcement/announcement.service';
 import { map, catchError } from 'rxjs/operators';
 import { HttpEventType, HttpErrorResponse } from '@angular/common/http';
 import { of } from 'rxjs';
-import { FileUpload } from '@app/announcement/models';
+import { AnnouncementCreate, FileUpload } from '@app/announcement/models';
+import { AnnouncementStoreService } from '@app/announcement/announcement-store.service';
 
 @Component({
   selector: 'app-second-step',
@@ -11,20 +12,24 @@ import { FileUpload } from '@app/announcement/models';
   styleUrls: ['./second-step.component.scss'],
 })
 
-//create subject of files
 export class SecondStepComponent implements OnInit {
   @ViewChild('fileInput', { static: false }) fileInput: ElementRef;
-  @Input() announcementId: number;
-  @Output() onUploadFiles: EventEmitter<number> = new EventEmitter<number>();
+
   public files: FileUpload[] = [];
   public disableSubmit = true;
   public disableUpload = false;
   public disableRemove = false;
   private maxNumberOfFiles = 3;
+  private announcementId: number;
 
-  constructor(private announcementService: AnnouncementService) {}
+  constructor(private announcementService: AnnouncementService,
+    private announcementStoreService: AnnouncementStoreService) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.announcementStoreService.initDataSecondStep$.subscribe(() => {
+      this.announcementId = this.announcementStoreService.getAnnouncementId();
+    })
+  }
 
   public upload() {
     const fileInput = this.fileInput.nativeElement;
@@ -88,7 +93,8 @@ export class SecondStepComponent implements OnInit {
           if (typeof event === 'object') {
             this.removeFileFromArray(file);
             if (this.files.length <= 0) {
-              this.onUploadFiles.emit(this.announcementId);
+              this.announcementStoreService.initDataThirdStep();
+              this.announcementStoreService.changeStep(2);
             }
           }
         });

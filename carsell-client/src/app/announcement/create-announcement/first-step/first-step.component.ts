@@ -21,6 +21,7 @@ import { Observable, concat, Subscription } from 'rxjs';
 import { AnnouncementFormBuilder } from '@app/announcement/announcement.form.builder';
 import { untilDestroyed } from '@app/@core';
 import { trigger } from '@angular/animations';
+import { AnnouncementStoreService } from '@app/announcement/announcement-store.service';
 
 @Component({
   selector: 'app-first-step',
@@ -53,13 +54,12 @@ export class FirstStepComponent implements OnInit, OnDestroy {
 
   public isFormInit = false;
 
-  @Output() onSubmitAnnouncement: EventEmitter<number> = new EventEmitter<number>();
-
   public initFormCategory: MainCategory = { id: 1, name: 'Автомобили и Джипове', value: 'CARS_AND_JEEPS' };
 
   private eventSubscriptions: Subscription[] = [];
 
-  constructor(private formBuilder: FormBuilder, private announcementService: AnnouncementService) {}
+  constructor(private formBuilder: FormBuilder, private announcementService: AnnouncementService,
+    private announcementStoreService: AnnouncementStoreService) { }
   ngOnDestroy(): void {
     this.clearEventSubsriptions();
   }
@@ -91,7 +91,9 @@ export class FirstStepComponent implements OnInit, OnDestroy {
       .pipe(untilDestroyed(this))
       .subscribe(
         (announcementId: number) => {
-          this.onSubmitAnnouncement.emit(announcementId);
+          this.announcementStoreService.setAnnouncementId(announcementId);
+          this.announcementStoreService.changeStep(1);
+          this.announcementStoreService.initDataSecondStep();
         },
         (err) => console.log(err)
       );
