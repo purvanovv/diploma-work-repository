@@ -42,9 +42,13 @@ public class AnnouncementVehicleRepositoryImpl implements AnnouncementVehicleRep
 
 	private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
+	private ImageFileRepository imageFileRepository;
+
 	@Autowired
-	public AnnouncementVehicleRepositoryImpl(NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
+	public AnnouncementVehicleRepositoryImpl(NamedParameterJdbcTemplate namedParameterJdbcTemplate,
+			ImageFileRepository imageFileRepository) {
 		this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
+		this.imageFileRepository = imageFileRepository;
 	}
 
 	@Override
@@ -136,7 +140,10 @@ public class AnnouncementVehicleRepositoryImpl implements AnnouncementVehicleRep
 			List<AnnouncementVehicle> announcementVehicles = namedParameterJdbcTemplate.query(sql, params,
 					new AnnouncementVehicleRowMapper());
 			if (null != announcementVehicles && !announcementVehicles.isEmpty()) {
-				return announcementVehicles.get(0);
+
+				AnnouncementVehicle announcementVehicle = announcementVehicles.get(0);
+				announcementVehicle.setImageFiles(imageFileRepository.getImagesByAnnouncementId(announcementVehicleId));
+				return announcementVehicle;
 			}
 			return null;
 
@@ -150,7 +157,8 @@ public class AnnouncementVehicleRepositoryImpl implements AnnouncementVehicleRep
 	public List<AnnouncementVehicle> getAnnouncementVehicles() {
 		try {
 			String sql = SqlContainer.GET_ANNOUNCEMENT_VEHICLES;
-			return namedParameterJdbcTemplate.query(sql, new AnnouncementVehiclesResultSetExtractor());
+			return namedParameterJdbcTemplate.query(sql,
+					new AnnouncementVehiclesResultSetExtractor(imageFileRepository));
 
 		} catch (Exception e) {
 			// TODO: handle exception

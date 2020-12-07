@@ -1,8 +1,9 @@
 package tusofia.carsellservices.model.dtos;
 
 import java.math.BigDecimal;
-import java.util.Date;
+import java.util.List;
 
+import tusofia.carsellservices.model.ImageFile;
 import tusofia.carsellservices.model.MainCategory;
 import tusofia.carsellservices.model.MetaProps;
 import tusofia.carsellservices.model.SubCategory;
@@ -47,6 +48,7 @@ public class AnnouncementVehiclePreviewDTO {
 	private Short numberOfGears;
 	private String description;
 	private MetaProps metaProps;
+	private List<ImageFile> imageFiles;
 
 	public Long getId() {
 		return id;
@@ -358,6 +360,14 @@ public class AnnouncementVehiclePreviewDTO {
 
 	public void setMetaProps(MetaProps metaProps) {
 		this.metaProps = metaProps;
+	}
+
+	public List<ImageFile> getImageFiles() {
+		return imageFiles;
+	}
+
+	public void setImageFiles(List<ImageFile> imageFiles) {
+		this.imageFiles = imageFiles;
 	}
 
 }

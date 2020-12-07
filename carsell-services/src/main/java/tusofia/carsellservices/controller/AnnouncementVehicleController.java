@@ -86,11 +86,11 @@ public class AnnouncementVehicleController {
 	}
 
 	@RequestMapping(value = "/announcements", method = RequestMethod.GET)
-	public ResponseEntity<List<AnnouncementVehicleCreateDTO>> getAnnouncementVehicles() {
+	public ResponseEntity<List<AnnouncementVehiclePreviewDTO>> getAnnouncementVehicles() {
 		List<AnnouncementVehicle> announcementVehicles = this.announcementVehicleService.getAnnouncementVehicles();
-		List<AnnouncementVehicleCreateDTO> announcementVehicleCreateDTOs = announcementVehicleModelMapper
-				.convertToCreateDTOs(announcementVehicles);
-		return new ResponseEntity<List<AnnouncementVehicleCreateDTO>>(announcementVehicleCreateDTOs, HttpStatus.OK);
+		List<AnnouncementVehiclePreviewDTO> announcementVehicleCreateDTOs = announcementVehicleModelMapper
+				.convertToPreviewDTOs(announcementVehicles);
+		return new ResponseEntity<List<AnnouncementVehiclePreviewDTO>>(announcementVehicleCreateDTOs, HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/groupmakes", method = RequestMethod.GET)

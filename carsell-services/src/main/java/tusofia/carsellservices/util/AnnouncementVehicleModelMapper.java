@@ -29,13 +29,22 @@ public class AnnouncementVehicleModelMapper {
 		return modelMapper.map(announcementVehicle, AnnouncementVehicleCreateDTO.class);
 	}
 
-	public AnnouncementVehiclePreviewDTO convertToPreviewDTO(AnnouncementVehicle announcementVehicle) {
-		return modelMapper.map(announcementVehicle, AnnouncementVehiclePreviewDTO.class);
+	public AnnouncementVehiclePreviewDTO convertToPreviewDTO(AnnouncementVehicle source) {
+		AnnouncementVehiclePreviewDTO target = modelMapper.map(source, AnnouncementVehiclePreviewDTO.class);
+		target.setImageFiles(source.getImageFiles());
+		return target;
 	}
 
 	public List<AnnouncementVehicleCreateDTO> convertToCreateDTOs(List<AnnouncementVehicle> announcementVehicles) {
 		if (null != announcementVehicles) {
 			return announcementVehicles.stream().map(a -> convertToCreateDTO(a)).collect(Collectors.toList());
+		}
+		return null;
+	}
+
+	public List<AnnouncementVehiclePreviewDTO> convertToPreviewDTOs(List<AnnouncementVehicle> announcementVehicles) {
+		if (null != announcementVehicles) {
+			return announcementVehicles.stream().map(a -> convertToPreviewDTO(a)).collect(Collectors.toList());
 		}
 		return null;
 	}

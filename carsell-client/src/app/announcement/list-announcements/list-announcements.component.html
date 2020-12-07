@@ -1,0 +1,39 @@
+<div>
+  <mat-grid-list cols="1" rowHeight="8:1">
+    <mat-grid-tile *ngFor="let announcement of announcements">
+      <mat-card [style.width]="'50%'">
+        <div fxLayout="row">
+          <div fxFlex="30%" class="list-item-left">
+            <img [src]="announcement.image.url" width="'100%'" />
+          </div>
+          <div fxFlex="70%" class="list-item-right">
+            <div class="list-item-right-content">
+              <mat-grid-list cols="2" rowHeight="50:14">
+                <mat-grid-tile>
+                  <div class="list-item-right-content-element">
+                    <a class="title">{{announcement.title}}</a>
+                  </div>
+                </mat-grid-tile>
+                <mat-grid-tile>
+                  <div class="list-item-right-content-element">
+                    <span class="sub-title">{{announcement.price}}</span>
+                  </div>
+                </mat-grid-tile>
+                <mat-grid-tile colspan="2">
+                  <div class="list-item-right-content-element">
+                    {{announcement.description}}
+                  </div>
+                </mat-grid-tile>
+              </mat-grid-list>
+
+            </div>
+          </div>
+        </div>
+      </mat-card>
+    </mat-grid-tile>
+
+  </mat-grid-list>
+
+
+
+</div>

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { MainCategory, Make, AnnouncementPreview, CategoryPair, AnnouncementCreate, ImageFile } from './models';
+import { MainCategory, Make, AnnouncementPreview, CategoryPair, AnnouncementCreate, ImageFile, AnnouncementListItemModel } from './models';
 import { HttpClient } from '@angular/common/http';
 
 const routes = {
@@ -8,6 +8,7 @@ const routes = {
   groupmakes: (mainCategoryId: number) => `announcements/groupmakes?mainCategoryId=${mainCategoryId}`,
   regions: () => `announcements/regions`,
   announcement: () => `announcements/announcement`,
+  announcements: () => `announcements/announcements`,
   upload: () => `announcements/upload`,
   announcementPreview: (announcementVehicleId: number) =>
     `announcements/announcementPreview?announcementVehicleId=${announcementVehicleId}`,
@@ -18,7 +19,7 @@ const routes = {
   providedIn: 'root',
 })
 export class AnnouncementService {
-  constructor(private httpClient: HttpClient) {}
+  constructor(private httpClient: HttpClient) { }
 
   public getCategories(): Observable<CategoryPair[]> {
     return this.httpClient.get<CategoryPair[]>(routes.categories());
@@ -40,6 +41,9 @@ export class AnnouncementService {
     return this.httpClient.get<AnnouncementPreview>(routes.announcementPreview(announcementId));
   }
 
+  public getAnnouncements(): Observable<AnnouncementPreview[]> {
+    return this.httpClient.get<AnnouncementPreview[]>(routes.announcements());
+  }
   public upload(file: File, announcementId: number): Observable<any> {
     const uploadData = new FormData();
     uploadData.append('imageFile', file, file.name);
@@ -54,4 +58,5 @@ export class AnnouncementService {
   public getImages(announcementId: number): Observable<ImageFile[]> {
     return this.httpClient.get<ImageFile[]>(routes.images(announcementId));
   }
+
 }

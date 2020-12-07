@@ -1,0 +1,31 @@
+@import "../../../theme/theme-variables.scss";
+
+.list-item-left img {
+  width: 100%;
+  height: auto;
+}
+
+.list-item-right-content {
+  padding-left: 10px;
+}
+
+.list-item-right-content-element {
+  width: 100%;
+  height: 100%;
+}
+
+.title {
+  font-size: 20px;
+  font-weight: bold;
+  transition: 0.2s;
+  cursor: pointer;
+}
+
+.title:hover {
+  color: mat-color($app-primary, default);
+}
+
+.sub-title {
+  font-size: 20px;
+  font-weight: bold;
+}

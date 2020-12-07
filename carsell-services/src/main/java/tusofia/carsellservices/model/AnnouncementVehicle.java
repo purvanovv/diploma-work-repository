@@ -2,6 +2,7 @@ package tusofia.carsellservices.model;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 import tusofia.carsellservices.model.enums.AirConditionType;
 import tusofia.carsellservices.model.enums.ConditionType;
@@ -56,6 +57,7 @@ public class AnnouncementVehicle {
 	private Short numberOfGears;
 	private String description;
 	private MetaProps metaProps;
+	private List<ImageFile> imageFiles;
 
 	public Long getId() {
 		return id;
@@ -376,4 +378,13 @@ public class AnnouncementVehicle {
 	public void setMetaProps(MetaProps metaProps) {
 		this.metaProps = metaProps;
 	}
+
+	public List<ImageFile> getImageFiles() {
+		return imageFiles;
+	}
+
+	public void setImageFiles(List<ImageFile> imageFiles) {
+		this.imageFiles = imageFiles;
+	}
+
 }

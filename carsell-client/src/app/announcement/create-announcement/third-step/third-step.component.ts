@@ -7,6 +7,7 @@ import { AnnouncementFormBuilder } from '@app/announcement/announcement.form.bui
 import { AnnouncementService } from '@app/announcement/announcement.service';
 import { MainCategoryType } from '@app/announcement/enums';
 import { AnnouncementPreview, ImageFile, ImageFilePreview, ImageFilePreviewModel, PreviewImageModalDataModel } from '@app/announcement/models';
+import { AnnouncementModelConverter } from '@app/announcement/utils';
 import { PreviewImageModalComponent } from '../preview-image-modal/preview-image-modal.component';
 
 @Component({
@@ -19,9 +20,12 @@ export class ThirdStepComponent implements OnInit {
   announcement: AnnouncementPreview;
   images: ImageFilePreview[] = [];
   selectedImage: ImageFilePreview;
+  announcementModelConverter: AnnouncementModelConverter;
   constructor(private announcementService: AnnouncementService,
     private sanitizer: DomSanitizer, private dialog: MatDialog,
-    private announcementStoreService: AnnouncementStoreService) { }
+    private announcementStoreService: AnnouncementStoreService) {
+    this.announcementModelConverter = new AnnouncementModelConverter(sanitizer);
+  }
 
   ngOnInit(): void {
     this.announcementStoreService.initDataThirdStep$.subscribe(() => {
@@ -55,18 +59,10 @@ export class ThirdStepComponent implements OnInit {
     const $initAnnouncement = this.announcementService.getAnnouncementPreview(announcementId);
     $initAnnouncement.subscribe((announcemet: AnnouncementPreview) => {
       this.announcement = announcemet;
-    });
-
-    const $initImages = this.announcementService.getImages(announcementId);
-    $initImages.subscribe((images: ImageFile[]) => {
-      this.images = images.map((i) => {
-        const blob = this.base64ToBlob(i.encodedImage, i.dataType);
-        return new ImageFilePreviewModel(i.id, this.blobToUrl(blob), false);
+      this.images = announcemet.imageFiles.map((i) => {
+        return this.announcementModelConverter.convertImageFileToImageFilePreview(i);
       });
-
       this.initSelectedImage(this.images);
-
-
     });
   }
 
@@ -78,20 +74,6 @@ export class ThirdStepComponent implements OnInit {
       }
     })
     this.selectedImage.isSelected = true;
-  }
-
-  private blobToUrl(blob: Blob): SafeUrl {
-    const unsafeImageUrl = URL.createObjectURL(blob);
-    return this.sanitizer.bypassSecurityTrustUrl(unsafeImageUrl);
-  }
-
-  private base64ToBlob(encodedString: string, dataType: string): Blob {
-    const byteCharacters = atob(encodedString);
-    const uintArray = new Uint8Array(byteCharacters.length);
-    for (let i = 0; i < byteCharacters.length; i++) {
-      uintArray[i] = byteCharacters.charCodeAt(i);
-    }
-    return new Blob([uintArray], { type: dataType });
   }
 
 }

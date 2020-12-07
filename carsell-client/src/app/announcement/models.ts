@@ -77,6 +77,22 @@ export interface AnnouncementCreate {
   description: string;
 }
 
+export interface AnnouncementListItem {
+  id: number;
+  price: string;
+  image: ImageFilePreview;
+  title: string;
+  description: string;
+}
+
+export class AnnouncementListItemModel implements AnnouncementListItem {
+  id: number;
+  price: string;
+  image: ImageFilePreview;
+  title: string;
+  description: string;
+}
+
 export interface AnnouncementPreview {
   id: number;
   mainCategory: MainCategory;
@@ -117,6 +133,7 @@ export interface AnnouncementPreview {
   numberOfGears: number;
   description: string;
   metaProps: MetaProps;
+  imageFiles: ImageFile[];
 }
 
 export interface FileUpload {

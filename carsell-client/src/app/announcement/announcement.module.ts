@@ -10,6 +10,7 @@ import { FirstStepComponent } from './create-announcement/first-step/first-step.
 import { SecondStepComponent } from './create-announcement/second-step/second-step.component';
 import { ThirdStepComponent } from './create-announcement/third-step/third-step.component';
 import { PreviewImageModalComponent } from './create-announcement/preview-image-modal/preview-image-modal.component';
+import { ListAnnouncementsComponent } from './list-announcements/list-announcements.component';
 
 @NgModule({
   imports: [
@@ -20,6 +21,6 @@ import { PreviewImageModalComponent } from './create-announcement/preview-image-
     ReactiveFormsModule,
     SharedModule,
   ],
-  declarations: [CreateAnnouncementComponent, FirstStepComponent, SecondStepComponent, ThirdStepComponent, PreviewImageModalComponent],
+  declarations: [CreateAnnouncementComponent, FirstStepComponent, SecondStepComponent, ThirdStepComponent, PreviewImageModalComponent, ListAnnouncementsComponent],
 })
 export class AnnouncementModule {}
