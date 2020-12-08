@@ -1,0 +1,12 @@
+<div class="container">
+  <mat-card>
+    <mat-card-content>
+      <app-announcement-details *ngIf="announcement!=undefined" [announcement]="announcement">
+      </app-announcement-details>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="warn">Изтрий обявата</button>
+      <button mat-raised-button color="primary">Редактирай обявата</button >
+    </mat-card-actions>
+  </mat-card>
+</div>

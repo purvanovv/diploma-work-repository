@@ -11,7 +11,7 @@
               <mat-grid-list cols="2" rowHeight="50:14">
                 <mat-grid-tile>
                   <div class="list-item-right-content-element">
-                    <a class="title">{{announcement.title}}</a>
+                    <a (click)="preview(announcement.id)" class="title">{{announcement.title}}</a>
                   </div>
                 </mat-grid-tile>
                 <mat-grid-tile>

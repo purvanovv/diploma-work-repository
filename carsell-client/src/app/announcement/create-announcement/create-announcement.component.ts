@@ -8,9 +8,9 @@ import { AnnouncementStoreService } from '../announcement-store.service';
   styleUrls: ['./create-announcement.component.scss'],
 })
 export class CreateAnnouncementComponent implements OnInit {
-  public isEditable = false;
-  public isLinear = false;
-  public completed = false;
+  public isEditable = true;
+  public isLinear = true;
+  public completed = true;
   public announcementId: number;
 
   @ViewChild('stepper') stepper: MatStepper;

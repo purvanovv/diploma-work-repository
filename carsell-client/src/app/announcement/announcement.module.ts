@@ -11,6 +11,8 @@ import { SecondStepComponent } from './create-announcement/second-step/second-st
 import { ThirdStepComponent } from './create-announcement/third-step/third-step.component';
 import { PreviewImageModalComponent } from './create-announcement/preview-image-modal/preview-image-modal.component';
 import { ListAnnouncementsComponent } from './list-announcements/list-announcements.component';
+import { PreviewAnnouncementComponent } from './preview-announcement/preview-announcement.component';
+import { AnnouncementDetailsComponent } from './announcement-details/announcement-details.component';
 
 @NgModule({
   imports: [
@@ -21,6 +23,6 @@ import { ListAnnouncementsComponent } from './list-announcements/list-announceme
     ReactiveFormsModule,
     SharedModule,
   ],
-  declarations: [CreateAnnouncementComponent, FirstStepComponent, SecondStepComponent, ThirdStepComponent, PreviewImageModalComponent, ListAnnouncementsComponent],
+  declarations: [CreateAnnouncementComponent, FirstStepComponent, SecondStepComponent, ThirdStepComponent, PreviewImageModalComponent, ListAnnouncementsComponent, PreviewAnnouncementComponent, AnnouncementDetailsComponent],
 })
 export class AnnouncementModule {}

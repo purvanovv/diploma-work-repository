@@ -22,58 +22,22 @@ export class ThirdStepComponent implements OnInit {
   selectedImage: ImageFilePreview;
   announcementModelConverter: AnnouncementModelConverter;
   constructor(private announcementService: AnnouncementService,
-    private sanitizer: DomSanitizer, private dialog: MatDialog,
     private announcementStoreService: AnnouncementStoreService) {
-    this.announcementModelConverter = new AnnouncementModelConverter(sanitizer);
   }
 
   ngOnInit(): void {
     this.announcementStoreService.initDataThirdStep$.subscribe(() => {
-      console.log(this.announcementStoreService.getAnnouncementId());
       this.initData(this.announcementStoreService.getAnnouncementId());
     })
   }
 
-  public previewImage() {
-    this.dialog.open(PreviewImageModalComponent, {
-      width: '70%',
-      data: new PreviewImageModalDataModel(this.selectedImage, this.images, this.announcement)
-    });
-  }
-
-  public selectImage(image: ImageFilePreview) {
-    this.images.forEach(i => i.isSelected = false)
-    this.selectedImage = image;
-    this.selectedImage.isSelected = true;
-  }
-
-  public scrollLeft() {
-    this.widgetsContent.nativeElement.scrollLeft -= 150;
-  }
-
-  public scrollRight() {
-    this.widgetsContent.nativeElement.scrollLeft += 150;
-  }
-
   private initData(announcementId: number) {
-    const $initAnnouncement = this.announcementService.getAnnouncementPreview(announcementId);
-    $initAnnouncement.subscribe((announcemet: AnnouncementPreview) => {
-      this.announcement = announcemet;
-      this.images = announcemet.imageFiles.map((i) => {
-        return this.announcementModelConverter.convertImageFileToImageFilePreview(i);
+    this.announcementService
+      .getAnnouncementPreview(announcementId)
+      .subscribe((announcemet: AnnouncementPreview) => {
+        this.announcement = announcemet;
       });
-      this.initSelectedImage(this.images);
-    });
-  }
 
-  private initSelectedImage(images: ImageFilePreview[]): void {
-    this.selectedImage = images[0];
-    images.forEach(i => {
-      if (i.id < this.selectedImage.id) {
-        this.selectedImage = i;
-      }
-    })
-    this.selectedImage.isSelected = true;
   }
 
 }

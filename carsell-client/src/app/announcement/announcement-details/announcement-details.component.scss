@@ -1,0 +1,65 @@
+@import "../../../theme/theme-variables.scss";
+
+.container{
+    width: 70%;
+    margin: auto;
+}
+
+.info-item-left {
+  text-align: left;
+}
+
+.info-item-right {
+  font-weight: bold;
+  text-align: left;
+}
+
+.selected-image {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  cursor: pointer;
+}
+
+.small-image {
+  width: 96px;
+  height: 66px;
+  object-fit: contain;
+  margin-left: 2px;
+  margin-right: 2px;
+  cursor: pointer;
+}
+
+.selected-small-image {
+  opacity: 0.5;
+}
+
+.images-slider {
+  overflow: hidden;
+  width: 100%;
+  white-space: nowrap;
+  scroll-behavior: smooth;
+}
+
+.images-container {
+  display: flex;
+}
+
+.title-holder {
+  text-align: left;
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.btn-slide {
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.blue {
+  color: mat-color($app-primary, default);
+}

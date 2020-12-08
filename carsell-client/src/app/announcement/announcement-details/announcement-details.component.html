@@ -1,0 +1,75 @@
+<div class="container" *ngIf="announcement != undefined">
+  <div>
+    <div class="title-holder">
+      <span class="bold">{{ announcement.make }} {{ announcement.model }}</span>
+      <span class="bold blue">{{ announcement.price }} {{ announcement.currency }}</span>
+    </div>
+
+    <div fxLayout.xs="column" fxLayoutGap.xs="10px" fxLayoutGap="10px"  fxLayout="row" fxLayoutAlign="center">
+      <div fxFlex="50%" fxFlex.xs="100%">
+        <div>
+          <a>
+            <img (click)="previewImage()" class="selected-image" [src]="selectedImage.url" />
+          </a>
+        </div>
+        <div class="images-container" fxLayoutAlign="center">
+          <div>
+            <button class="btn-slide" mat-icon-button color="primary" (click)="scrollLeft()">
+              <mat-icon>navigate_before</mat-icon>
+            </button>
+          </div>
+
+          <div #imagesContent class="images-slider">
+            <a *ngFor="let image of images" (click)="selectImage(image)">
+              <img class="small-image" [ngClass]="{'selected-small-image': image.isSelected}" [src]="image.url" />
+            </a>
+          </div>
+
+          <div>
+            <button class="btn-slide" mat-icon-button color="primary" (click)="scrollRight()">
+              <mat-icon>navigate_next</mat-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div fxFlex="50%" fxFlex.xs="100%" fxLayoutAlign.xs="center">
+        <table>
+          <tr>
+            <td class="info-item-left">Дата на производство</td>
+            <td class="info-item-right">{{ announcement.dateOfManufacture }}</td>
+          </tr>
+          <tr>
+            <td class="info-item-left">Тип двигател</td>
+            <td class="info-item-right">{{ announcement.engineType }}</td>
+          </tr>
+          <tr>
+            <td class="info-item-left">Мощност</td>
+            <td class="info-item-right">{{ announcement.horsePower }} к.с.</td>
+          </tr>
+          <tr>
+            <td class="info-item-left">Евростандарт</td>
+            <td class="info-item-right">{{ announcement.emissionStandartType }}</td>
+          </tr>
+          <tr>
+            <td class="info-item-left">Скоростна кутия</td>
+            <td class="info-item-right">{{ announcement.gearboxType }}</td>
+          </tr>
+          <tr>
+            <td class="info-item-left">Категория</td>
+            <td class="info-item-right">{{ announcement.subCategory.name }}</td>
+          </tr>
+          <tr>
+            <td class="info-item-left">Пробег</td>
+            <td class="info-item-right">{{ announcement.mileage }} км</td>
+          </tr>
+          <tr>
+            <td class="info-item-left">Цвят</td>
+            <td class="info-item-right">{{ announcement.color }}</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+  </div>
+
+</div>
