@@ -13,6 +13,7 @@ import { PreviewImageModalComponent } from './create-announcement/preview-image-
 import { ListAnnouncementsComponent } from './list-announcements/list-announcements.component';
 import { PreviewAnnouncementComponent } from './preview-announcement/preview-announcement.component';
 import { AnnouncementDetailsComponent } from './announcement-details/announcement-details.component';
+import { ListSearchResultComponent } from './list-search-result/list-search-result.component';
 
 @NgModule({
   imports: [
@@ -23,6 +24,14 @@ import { AnnouncementDetailsComponent } from './announcement-details/announcemen
     ReactiveFormsModule,
     SharedModule,
   ],
-  declarations: [CreateAnnouncementComponent, FirstStepComponent, SecondStepComponent, ThirdStepComponent, PreviewImageModalComponent, ListAnnouncementsComponent, PreviewAnnouncementComponent, AnnouncementDetailsComponent],
+  declarations: [CreateAnnouncementComponent,
+     FirstStepComponent, SecondStepComponent,
+      ThirdStepComponent, PreviewImageModalComponent, 
+      ListAnnouncementsComponent, PreviewAnnouncementComponent,
+       AnnouncementDetailsComponent,
+       ListSearchResultComponent],
+  exports: [
+    ListAnnouncementsComponent
+  ]     
 })
 export class AnnouncementModule {}

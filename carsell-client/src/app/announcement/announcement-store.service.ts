@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
-import { AnnouncementCreate } from './models';
+import { AnnouncementCreate, AnnouncementPreview } from './models';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +14,25 @@ export class AnnouncementStoreService {
   private readonly _initDataSecondStep = new Subject();
 
   private readonly _initDataThirdStep = new Subject();
+
+  private readonly _announcements = new BehaviorSubject<AnnouncementPreview[]>([]);
+
+  private get announcements(): AnnouncementPreview[] {
+    return this._announcements.getValue();
+  }
+
+  private set announcements(announcements: AnnouncementPreview[]) {
+    this._announcements.next(announcements);
+  }
+
+  public getAnnouncements$(): Observable<AnnouncementPreview[]> {
+    return this._announcements.asObservable();
+  }
+
+  public setAnnouncements(announcements: AnnouncementPreview[]) {
+    this.announcements = announcements;
+  }
+
 
   private get announcementId(): number {
     return this._announcementId.getValue();

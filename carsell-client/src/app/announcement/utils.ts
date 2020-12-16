@@ -21,10 +21,25 @@ export class AnnouncementModelConverter {
         const target = new AnnouncementListItemModel();
         target.id = source.id;
         target.image = this.convertImageFileToImageFilePreview(source.imageFiles[0]);
-        target.description = this.buildAnnouncemetListItemDescription(source);
         target.price = `${source.price} ${source.currency}`;
         target.title = `${source.make} ${source.model}`;
+        target.options = this.buildOptions(source);
         return target;
+    }
+
+    private buildOptions(source: AnnouncementPreview): Map<string, string> {
+        const options = new Map<string, string>();
+        if (source.dateOfManufacture != null) { options.set('/assets/calendar.gif', source.dateOfManufacture) }
+        if (source.cubature != null && source.cubature > 0) { options.set('/assets/cubature.gif', source.cubature.toString()) }
+        if (source.gearboxType != null) { options.set('/assets/gear.gif', source.gearboxType) }
+        if (source.mileage != null && source.mileage > 0) { options.set('/assets/mileage.gif', source.mileage.toString() + ' км') }
+        if (source.color != null) { options.set('/assets/palette.gif', source.color) }
+        if (source.horsePower != null && source.horsePower > 0) { options.set('/assets/power.gif', source.horsePower.toString() + ' к.с.') }
+        if (source.numberOfBeds != null && source.numberOfBeds > 0) { options.set('/assets/bed_icon.gif', source.numberOfBeds.toString()) }
+        if (source.lengthSize != null && source.lengthSize > 0) { options.set('/assets/ruler_icon.gif', source.lengthSize.toString()) }
+        if (source.width != null && source.width > 0) { options.set('/assets/ruler_icon.gif', source.width.toString()) }
+        return options;
+
     }
 
     private buildAnnouncemetListItemDescription(announcement: AnnouncementPreview): string {

@@ -1,6 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { MainCategory, Make, AnnouncementPreview, CategoryPair, AnnouncementCreate, ImageFile, AnnouncementListItemModel } from './models';
+import {
+  Make,
+  AnnouncementPreview,
+  CategoryPair,
+  AnnouncementCreate,
+  ImageFile,
+  AnnouncementSearch
+} from './models';
 import { HttpClient } from '@angular/common/http';
 
 const routes = {
@@ -13,6 +20,7 @@ const routes = {
   announcementPreview: (announcementVehicleId: number) =>
     `announcements/announcementPreview?announcementVehicleId=${announcementVehicleId}`,
   images: (announcementId: number) => `announcements/images?announcementId=${announcementId}`,
+  search: () => 'announcements/search'
 };
 
 @Injectable({
@@ -57,6 +65,10 @@ export class AnnouncementService {
 
   public getImages(announcementId: number): Observable<ImageFile[]> {
     return this.httpClient.get<ImageFile[]>(routes.images(announcementId));
+  }
+
+  public searchAnnouncements(searchData: AnnouncementSearch): Observable<AnnouncementPreview[]> {
+    return this.httpClient.post<AnnouncementPreview[]>(routes.search(), searchData);
   }
 
 }

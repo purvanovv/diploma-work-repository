@@ -1,10 +1,117 @@
 <div class="container">
   <mat-card>
-    <h1>
-      <mat-card-title>Home</mat-card-title>
-    </h1>
-    <mat-card-content>
-      <button mat-raised-button color="primary" routerLink="/announcement/list">Търси</button>
-    </mat-card-content>
+    <div fxLayout="row">
+      <div fxFlex="240px">
+        <div
+          style="background-color: rgba(243, 243, 243, 0.671); padding: 1rem; margin-bottom: 10px; border-radius: 5px;">
+          <form [formGroup]="searchForm">
+            <div *ngIf="containsControl('mainCategoryId')" class="form-element">
+              <mat-form-field appearance="legacy">
+                <mat-select placeholder="Основна категория" formControlName="mainCategoryId">
+                  <mat-option [value]="categoryPair.mainCategory.id" *ngFor="let categoryPair of categories">
+                    {{ categoryPair.mainCategory.name }}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div *ngIf="containsControl('make')">
+              <mat-form-field appearance="legacy">
+                <mat-select placeholder="Марка" formControlName="make">
+                  <mat-optgroup *ngFor="let group of makeGroups | keyvalue" [label]="group.key">
+                    <mat-option *ngFor="let make of group.value" [value]="make.make">
+                      {{ make.make }}
+                    </mat-option>
+                  </mat-optgroup>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div *ngIf="containsControl('model')">
+              <mat-form-field appearance="legacy">
+                <mat-select placeholder="Модел" formControlName="model">
+                  <mat-option [value]="model" *ngFor="let model of models">{{ model }}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div *ngIf="containsControl('region')">
+              <mat-form-field appearance="legacy">
+                <mat-select placeholder="Регион" formControlName="region">
+                  <mat-option [value]="region.key" *ngFor="let region of regions | keyvalue"> {{ region.key }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div>
+              <div *ngIf="containsControl('dateOfManufactureFrom')" style="display: inline-block;">
+                <mat-form-field appearance="legacy" style="width: 90px;">
+                  <mat-select placeholder="Година от" formControlName="dateOfManufactureFrom">
+                    <mat-option [value]="year" *ngFor="let year of years">{{year}}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div *ngIf="containsControl('dateOfManufactureTo')" style="display: inline-block;">
+                <mat-form-field appearance="legacy" style="width: 90px;">
+                  <mat-select placeholder="Година до" formControlName="dateOfManufactureTo">
+                    <mat-option [value]="year" *ngFor="let year of years">{{year}}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+            <div>
+              <div *ngIf="containsControl('priceMin')" style="display: inline-block;">
+                <mat-form-field appearance="legacy" style="width: 90px;">
+                  <input type="number" matInput placeholder="Цена от" formControlName="priceMin" />
+                </mat-form-field>
+              </div>
+              <div *ngIf="containsControl('priceMax')" style="display: inline-block;">
+                <mat-form-field appearance="legacy" style="width: 90px;">
+                  <input type="number" matInput placeholder="Цена до" formControlName="priceMax" />
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div>
+              <button type="submit" style="width: 100%;" mat-raised-button color="primary"
+                (click)="submitSearchForm()">Търси</button>
+            </div>
+          </form>
+        </div>
+        <div style="background-color: rgba(94, 94, 94, 0.671); padding: 1rem;  border-radius: 5px;">
+          <div>
+            <span style="font-weight: bold;">About our services</span>
+          </div>
+          <div>
+            <span>Text message marketing is one of the most popular modern marketing techniques and a great option for
+              small businesses looking to make a big impact with their customer outreach. Text, unlike other marketing
+              techniques, acts as a direct line to the customer and creates a personal connection between them and your
+              business. Customers are more likely to see and respond positively to a text message than to an email or
+              advertisement.</span>
+          </div>
+        </div>
+      </div>
+      <div fxFlex="90%">
+        <div style="padding-left: 20px;">
+          <div>
+            <app-image-slide></app-image-slide>
+          </div>
+          <div
+            style="font-weight: bold;border-radius: 10px;padding-top: 10px;padding-bottom: 5px;margin-top: 20px;margin-bottom: 5px; background-color: rgba(243, 243, 243, 0.671);">
+            <span>Последно добавени в категория {{initFormCategory.name}}</span>
+          </div>
+          <div>
+            <app-list-announcements *ngIf="isLoading == false" [countOfItemsToList]="countOfItemsToList"
+              [announcements]="announcements">
+            </app-list-announcements>
+            <div *ngIf="showAll" style="width: calc(90% + 30px); margin: auto;">
+              <div
+                style="text-align: right; width: 30%; min-width: 270px; margin-left: 5px; margin-right: 5px; float: right;">
+                <button color="primary" (click)="showAllAnnouncements()" mat-raised-button>Покажи всички</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
   </mat-card>
+
 </div>

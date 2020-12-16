@@ -20,7 +20,6 @@ import { tap, mergeMap } from 'rxjs/operators';
 import { Observable, concat, Subscription } from 'rxjs';
 import { AnnouncementFormBuilder } from '@app/announcement/announcement.form.builder';
 import { untilDestroyed } from '@app/@core';
-import { trigger } from '@angular/animations';
 import { AnnouncementStoreService } from '@app/announcement/announcement-store.service';
 
 @Component({

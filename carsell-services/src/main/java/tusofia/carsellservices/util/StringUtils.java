@@ -9,4 +9,8 @@ public class StringUtils {
 		}
 		return String.join(",", data);
 	}
+	
+	public static boolean isNullOrEmpty(String input){
+		return input == null || input.trim() == "";
+	}
 }

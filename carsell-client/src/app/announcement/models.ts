@@ -82,7 +82,7 @@ export interface AnnouncementListItem {
   price: string;
   image: ImageFilePreview;
   title: string;
-  description: string;
+  options: Map<string, string>;
 }
 
 export class AnnouncementListItemModel implements AnnouncementListItem {
@@ -90,7 +90,7 @@ export class AnnouncementListItemModel implements AnnouncementListItem {
   price: string;
   image: ImageFilePreview;
   title: string;
-  description: string;
+  options: Map<string, string>;
 }
 
 export interface AnnouncementPreview {
@@ -134,6 +134,47 @@ export interface AnnouncementPreview {
   description: string;
   metaProps: MetaProps;
   imageFiles: ImageFile[];
+}
+
+export interface AnnouncementSearch {
+  mainCategoryId: string;
+  make: string;
+  model: string;
+  engineType: string;
+  conditionType: string;
+  horsePowerMin: string;
+  horsePowerMax: string;
+  emissionStandartType: string;
+  gearboxType: string;
+  subCategoryId: string;
+  coolingType: string;
+  numberOfAxels: string;
+  numberOfSeats: string;
+  weightCapacityMin: string;
+  weightCapacityMax: string;
+  priceMin: string;
+  priceMax: string;
+  dateOfManufactureFrom: string;
+  dateOfManufactureTo: string;
+  mileageMax: string;
+  color: string;
+  region: string;
+  city: string;
+  cubatureMin: string;
+  cubatureMax: string;
+  engineCategoryType: string;
+  totalWeightMin: string;
+  workingVolumeMin: string;
+  hoursOfOperationMax: string;
+  numberOfBeds: string;
+  toiletType: string;
+  heatingType: string;
+  airConditionType: string;
+  lengthSizeMax: string;
+  materialType: string;
+  widthMax: string;
+  bicycleSize: string;
+  numberOfGears: string;
 }
 
 export interface FileUpload {

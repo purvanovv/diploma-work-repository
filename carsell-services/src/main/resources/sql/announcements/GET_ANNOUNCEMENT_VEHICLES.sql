@@ -51,4 +51,4 @@ FROM   announcement_vehicle av
          ON mc.id = av.main_category_id 
        JOIN sub_categories sc 
          ON sc.id = av.sub_category_id
-WHERE  av.delete_flag = 'N'
+WHERE  av.delete_flag = 'N' ORDER BY av.id desc

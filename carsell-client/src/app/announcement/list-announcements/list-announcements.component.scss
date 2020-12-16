@@ -1,31 +1,27 @@
-@import "../../../theme/theme-variables.scss";
+.option {
+  display: inline-block;
+  width: 30px;
+  text-align: center;
+}
 
-.list-item-left img {
+img {
+  vertical-align: middle;
+}
+
+.item-image {
+  height: 50%;
+}
+
+.item {
+  margin: 5px;
+  min-width: 270px;
+  width: 30%;
+}
+
+.item-btn{
   width: 100%;
-  height: auto;
 }
 
-.list-item-right-content {
-  padding-left: 10px;
-}
-
-.list-item-right-content-element {
-  width: 100%;
-  height: 100%;
-}
-
-.title {
-  font-size: 20px;
-  font-weight: bold;
-  transition: 0.2s;
-  cursor: pointer;
-}
-
-.title:hover {
-  color: mat-color($app-primary, default);
-}
-
-.sub-title {
-  font-size: 20px;
-  font-weight: bold;
+.item-holder{
+  text-align: start;
 }

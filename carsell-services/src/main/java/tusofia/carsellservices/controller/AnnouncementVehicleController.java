@@ -18,6 +18,7 @@ import tusofia.carsellservices.model.CategoryPair;
 import tusofia.carsellservices.model.Make;
 import tusofia.carsellservices.model.dtos.AnnouncementVehicleCreateDTO;
 import tusofia.carsellservices.model.dtos.AnnouncementVehiclePreviewDTO;
+import tusofia.carsellservices.model.dtos.AnnouncementVehicleSearchDTO;
 import tusofia.carsellservices.model.enums.MainCategoryType;
 import tusofia.carsellservices.service.AnnouncementVehicleService;
 import tusofia.carsellservices.util.AnnouncementVehicleModelMapper;
@@ -92,6 +93,14 @@ public class AnnouncementVehicleController {
 				.convertToPreviewDTOs(announcementVehicles);
 		return new ResponseEntity<List<AnnouncementVehiclePreviewDTO>>(announcementVehicleCreateDTOs, HttpStatus.OK);
 	}
+	
+	@RequestMapping(value = "/search", method = RequestMethod.POST)
+	public ResponseEntity<List<AnnouncementVehiclePreviewDTO>> getAnnouncementVehicles(@RequestBody AnnouncementVehicleSearchDTO searchData) {
+		List<AnnouncementVehicle> announcementVehicles = this.announcementVehicleService.getAnnouncementVehiclesBySearchQuery(searchData);
+		List<AnnouncementVehiclePreviewDTO> announcementVehiclePreviewDTOs = announcementVehicleModelMapper
+				.convertToPreviewDTOs(announcementVehicles);
+		return new ResponseEntity<List<AnnouncementVehiclePreviewDTO>>(announcementVehiclePreviewDTOs, HttpStatus.OK);
+	}
 
 	@RequestMapping(value = "/groupmakes", method = RequestMethod.GET)
 	public ResponseEntity<Map<String, List<Make>>> getMakesByMainCategory(@RequestParam Long mainCategoryId) {
@@ -104,5 +113,7 @@ public class AnnouncementVehicleController {
 		Map<String, List<String>> regions = announcementVehicleService.getRegions();
 		return new ResponseEntity<Map<String, List<String>>>(regions, HttpStatus.OK);
 	}
+	
+	
 
 }

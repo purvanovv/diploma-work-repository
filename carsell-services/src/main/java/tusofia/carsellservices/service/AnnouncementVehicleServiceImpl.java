@@ -12,6 +12,7 @@ import tusofia.carsellservices.model.CategoryPair;
 import tusofia.carsellservices.model.MainCategory;
 import tusofia.carsellservices.model.Make;
 import tusofia.carsellservices.model.SubCategory;
+import tusofia.carsellservices.model.dtos.AnnouncementVehicleSearchDTO;
 import tusofia.carsellservices.repository.AnnouncementVehicleRepository;
 
 @Service
@@ -57,6 +58,11 @@ public class AnnouncementVehicleServiceImpl implements AnnouncementVehicleServic
 	@Override
 	public Map<String, List<String>> getRegions() {
 		return announcementVehicleRepository.getRegions();
+	}
+	
+	@Override
+	public List<AnnouncementVehicle> getAnnouncementVehiclesBySearchQuery(AnnouncementVehicleSearchDTO searchModel){
+		return announcementVehicleRepository.getAnnouncementVehiclesBySearchQuery(searchModel);
 	}
 
 }

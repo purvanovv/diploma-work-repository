@@ -11,12 +11,10 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
-import oracle.ucp.util.Pair;
 import tusofia.carsellservices.model.AnnouncementVehicle;
 import tusofia.carsellservices.model.CategoryPair;
-import tusofia.carsellservices.model.MainCategory;
 import tusofia.carsellservices.model.Make;
-import tusofia.carsellservices.model.SubCategory;
+import tusofia.carsellservices.model.dtos.AnnouncementVehicleSearchDTO;
 import tusofia.carsellservices.model.enums.AirConditionType;
 import tusofia.carsellservices.model.enums.ConditionType;
 import tusofia.carsellservices.model.enums.CoolingType;
@@ -34,6 +32,7 @@ import tusofia.carsellservices.repository.rowmappers.MakesRowMapper;
 import tusofia.carsellservices.repository.rowmappers.RegionsRowMapper;
 import tusofia.carsellservices.repository.rsextractors.AnnouncementVehiclesResultSetExtractor;
 import tusofia.carsellservices.util.DateUtils;
+import tusofia.carsellservices.util.SearchAnnouncementQuery;
 import tusofia.carsellservices.util.SqlContainer;
 import tusofia.carsellservices.util.SqlUtils;
 
@@ -165,6 +164,19 @@ public class AnnouncementVehicleRepositoryImpl implements AnnouncementVehicleRep
 			return null;
 		}
 	}
+	
+	@Override
+	public List<AnnouncementVehicle> getAnnouncementVehiclesBySearchQuery(AnnouncementVehicleSearchDTO searchModel) {
+		try {
+			SearchAnnouncementQuery query = getSearchAnnouncemenQuery(searchModel);
+			return namedParameterJdbcTemplate.query(query.getQuery(),query.getParams(),
+					new AnnouncementVehiclesResultSetExtractor(imageFileRepository));
+
+		} catch (Exception e) {
+			// TODO: handle exception
+			return null;
+		}
+	}
 
 	@Override
 	public tusofia.carsellservices.model.enums.MainCategoryType getMainCategoryType(Long mainCategoryId) {
@@ -203,6 +215,19 @@ public class AnnouncementVehicleRepositoryImpl implements AnnouncementVehicleRep
 			// TODO: handle exception
 			return null;
 		}
+	}
+
+	private SearchAnnouncementQuery getSearchAnnouncemenQuery(AnnouncementVehicleSearchDTO searchModel) {
+		return new SearchAnnouncementQuery.Builder()
+				.addConditionValue("main_category_id", searchModel.getMainCategoryId(), SearchAnnouncementQuery.EQUAlS)
+				.addConditionValue("make", searchModel.getMake(), SearchAnnouncementQuery.EQUAlS)
+				.addConditionValue("model", searchModel.getModel(), SearchAnnouncementQuery.EQUAlS)
+				.addConditionValue("engine_type", searchModel.getEngineType(), SearchAnnouncementQuery.EQUAlS)
+				.addConditionValue("condition_type", searchModel.getConditionType(), SearchAnnouncementQuery.EQUAlS)
+				.addConditionValue("horse_power", searchModel.getHorsePowerMin(), SearchAnnouncementQuery.GREATER_OR_EQUAlS)
+				.addConditionValue("horse_power", searchModel.getHorsePowerMax(), SearchAnnouncementQuery.LESS_OR_EQUAlS)
+				.build();
+
 	}
 
 }

@@ -1,39 +1,24 @@
-<div>
-  <mat-grid-list cols="1" rowHeight="8:1">
-    <mat-grid-tile *ngFor="let announcement of announcements">
-      <mat-card [style.width]="'50%'">
-        <div fxLayout="row">
-          <div fxFlex="30%" class="list-item-left">
-            <img [src]="announcement.image.url" width="'100%'" />
+<div class="item-holder" fxLayout="row wrap" fxLayoutAlign="center">
+  <mat-card class="item" *ngFor="let announcement of announcementsToList">
+    <mat-card-header>
+      <mat-card-title>{{announcement.title}}</mat-card-title>
+      <mat-card-subtitle>{{announcement.price}}</mat-card-subtitle>
+    </mat-card-header>
+    <img class="item-image" mat-card-image [src]="announcement.image.url" />
+    <mat-card-content>
+      <div fxLayout="row wrap">
+        <div fxFlex="50%" *ngFor="let optionPair of announcement.options | keyvalue">
+          <div class="option">
+            <img [src]="optionPair.key" />
           </div>
-          <div fxFlex="70%" class="list-item-right">
-            <div class="list-item-right-content">
-              <mat-grid-list cols="2" rowHeight="50:14">
-                <mat-grid-tile>
-                  <div class="list-item-right-content-element">
-                    <a (click)="preview(announcement.id)" class="title">{{announcement.title}}</a>
-                  </div>
-                </mat-grid-tile>
-                <mat-grid-tile>
-                  <div class="list-item-right-content-element">
-                    <span class="sub-title">{{announcement.price}}</span>
-                  </div>
-                </mat-grid-tile>
-                <mat-grid-tile colspan="2">
-                  <div class="list-item-right-content-element">
-                    {{announcement.description}}
-                  </div>
-                </mat-grid-tile>
-              </mat-grid-list>
-
-            </div>
-          </div>
+          {{optionPair.value}}
         </div>
-      </mat-card>
-    </mat-grid-tile>
-
-  </mat-grid-list>
-
-
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button class="item-btn" (click)="preview(announcement.id)" mat-raised-button color="primary">Виж повече
+        детайли</button>
+    </mat-card-actions>
+  </mat-card>
 
 </div>

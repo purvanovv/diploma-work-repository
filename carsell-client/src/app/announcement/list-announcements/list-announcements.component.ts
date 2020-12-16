@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { map } from 'rxjs/operators';
@@ -11,27 +11,42 @@ import { AnnouncementModelConverter } from '../utils';
   templateUrl: './list-announcements.component.html',
   styleUrls: ['./list-announcements.component.scss']
 })
-export class ListAnnouncementsComponent implements OnInit {
-  public announcements: AnnouncementListItemModel[];
+export class ListAnnouncementsComponent implements OnChanges {
+  @Input()
+  public countOfItemsToList: number | undefined = undefined;
+  @Input()
+  public announcements: AnnouncementPreview[];
+  public announcementsToList: AnnouncementListItemModel[];
+
   private announcementModelConverter: AnnouncementModelConverter;
-
-
-  constructor(
-    private announcementService: AnnouncementService,
-    private sanitizer: DomSanitizer,
+  constructor(sanitizer: DomSanitizer,
     private router: Router) {
     this.announcementModelConverter = new AnnouncementModelConverter(sanitizer);
   }
 
-  ngOnInit(): void {
-    this.announcementService.getAnnouncements().pipe(map((announcements: AnnouncementPreview[]) => {
-      this.announcements = announcements
-        .map(a => this.announcementModelConverter.converAnnouncementPreviewToAnnouncementListItem(a))
-    })).subscribe();
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['announcements']) {
+      this.init();
+    }
+
   }
 
   preview(id: number) {
     this.router.navigate([`announcement/preview/${id}`]);
+  }
+
+  private init() {
+    this.announcementsToList = []
+    if (this.countOfItemsToList !== undefined && this.countOfItemsToList < this.announcements.length) {
+      for (let i = 0; i < this.countOfItemsToList; i++) {
+        this.announcementsToList
+          .push(this.announcementModelConverter.converAnnouncementPreviewToAnnouncementListItem(this.announcements[i]));
+      }
+    }
+    else {
+      this.announcementsToList = this.announcements
+        .map(a => this.announcementModelConverter.converAnnouncementPreviewToAnnouncementListItem(a));
+    }
   }
 
 }

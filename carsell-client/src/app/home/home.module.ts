@@ -8,9 +8,13 @@ import { MaterialModule } from '@app/material.module';
 import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home.component';
 import { QuoteService } from './quote.service';
+import { ImageSlideComponent } from './image-slide/image-slide.component';
+import { AnnouncementModule } from '@app/announcement/announcement.module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
-  imports: [CommonModule, CoreModule, SharedModule, FlexLayoutModule, MaterialModule, HomeRoutingModule],
-  declarations: [HomeComponent],
+  imports: [CommonModule, CoreModule, SharedModule,
+    FlexLayoutModule, MaterialModule, HomeRoutingModule, AnnouncementModule, ReactiveFormsModule],
+  declarations: [HomeComponent, ImageSlideComponent],
 })
-export class HomeModule {}
+export class HomeModule { }
