@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
@@ -8,6 +8,7 @@ import { AnnouncementService } from '@app/announcement/announcement.service';
 import { MainCategoryType } from '@app/announcement/enums';
 import { AnnouncementListItemModel, AnnouncementPreview, CategoryPair, MainCategory, Make, SubCategory } from '@app/announcement/models';
 import { AnnouncementModelConverter } from '@app/announcement/utils';
+import ResizeObserver from 'resize-observer-polyfill';
 import { concat, Observable } from 'rxjs';
 import { finalize, map, mergeMap, take, tap } from 'rxjs/operators';
 
@@ -18,7 +19,9 @@ import { QuoteService } from './quote.service';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, AfterViewInit {
+  @ViewChild('rightColumn', { static: false }) rightColumn: ElementRef;
+  @ViewChild('rightColumnWrapper', { static: false }) rightColumnWrapper: ElementRef;
   quote: string | undefined;
   isLoading = false;
   showAll = false;
@@ -36,7 +39,28 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private announcementService: AnnouncementService,
-    private router: Router, private formBuilder: FormBuilder, private announcementStore: AnnouncementStoreService) {
+    private router: Router,
+    private formBuilder: FormBuilder,
+    private announcementStore: AnnouncementStoreService,
+    private renderer: Renderer2) {
+  }
+
+  ngAfterViewInit() {
+    const resizeObserver = new ResizeObserver(entries => {
+      const cr = entries[0].contentRect;
+      let itemWidth = (cr.width * 0.3);
+      console.log(itemWidth);
+      if (itemWidth > 310) {
+        itemWidth = 310;
+      } else if (itemWidth <= 280) {
+        itemWidth = 280;
+      }
+      const numOfItems = Math.floor(cr.width / itemWidth);
+      const rightColumnWidth = itemWidth * numOfItems;
+      this.rightColumn.nativeElement.style.width = rightColumnWidth;
+      this.renderer.setStyle(this.rightColumn.nativeElement, 'width', rightColumnWidth + 'px');
+    });
+    resizeObserver.observe(this.rightColumnWrapper.nativeElement);
   }
 
   ngOnInit() {
@@ -60,7 +84,7 @@ export class HomeComponent implements OnInit {
     }))
   }
 
-  submitSearchForm(){
+  submitSearchForm() {
     this.$initAnnouncements().subscribe();
   }
 
@@ -71,7 +95,7 @@ export class HomeComponent implements OnInit {
     return false;
   }
 
-  showAllAnnouncements(){
+  showAllAnnouncements() {
     this.router.navigate(['announcement/list']);
   }
 
@@ -172,6 +196,6 @@ export class HomeComponent implements OnInit {
     };
   }
 
-  
+
 
 }

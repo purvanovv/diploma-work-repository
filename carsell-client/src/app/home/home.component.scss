@@ -1,7 +1,30 @@
-.container {
-  text-align: center;
-  padding-left: 10rem;
-  padding-right: 10rem;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
+.left-column {
+  width: 270px;
+}
+
+.right-column{
+  min-width: 270px;
+  // width: 75%;
+
+}
+
+@media screen and (min-width: 900px) {
+  .container {
+    padding-left: 10rem;
+    padding-right: 10rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    text-align: center;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .container {
+    padding-top: 1rem;
+    text-align: center;
+  }
+
+  .mat-card {
+    width: 310px !important;
+  }
 }
