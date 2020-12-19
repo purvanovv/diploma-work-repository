@@ -1,9 +1,9 @@
-<div class="container">
-  <mat-card style="margin: auto;">
-    <div fxLayout="row wrap" fxLayoutGap="10px">
+<div #container class="container">
+  <mat-card class="main-mat-card" [ngStyle]="{width: mainMatCardWidth}" #mainMatCard>
+    <div fxLayout="row wrap">
       <div class="left-column">
-        <div
-          style="background-color: rgba(243, 243, 243, 0.671); padding: 1rem; margin-bottom: 10px; border-radius: 5px;">
+        <div class="search-holder"
+          >
           <form [formGroup]="searchForm">
             <div *ngIf="containsControl('mainCategoryId')" class="form-element">
               <mat-form-field appearance="legacy">
@@ -40,15 +40,15 @@
               </mat-form-field>
             </div>
             <div>
-              <div *ngIf="containsControl('dateOfManufactureFrom')" style="display: inline-block;">
-                <mat-form-field appearance="legacy" style="width: 90px;">
+              <div *ngIf="containsControl('dateOfManufactureFrom')" class="inline-control">
+                <mat-form-field appearance="legacy">
                   <mat-select placeholder="Година от" formControlName="dateOfManufactureFrom">
                     <mat-option [value]="year" *ngFor="let year of years">{{year}}</mat-option>
                   </mat-select>
                 </mat-form-field>
               </div>
-              <div *ngIf="containsControl('dateOfManufactureTo')" style="display: inline-block;">
-                <mat-form-field appearance="legacy" style="width: 90px;">
+              <div *ngIf="containsControl('dateOfManufactureTo')" class="inline-control">
+                <mat-form-field appearance="legacy">
                   <mat-select placeholder="Година до" formControlName="dateOfManufactureTo">
                     <mat-option [value]="year" *ngFor="let year of years">{{year}}</mat-option>
                   </mat-select>
@@ -56,27 +56,26 @@
               </div>
             </div>
             <div>
-              <div *ngIf="containsControl('priceMin')" style="display: inline-block;">
-                <mat-form-field appearance="legacy" style="width: 90px;">
+              <div *ngIf="containsControl('priceMin')" class="inline-control">
+                <mat-form-field appearance="legacy">
                   <input type="number" matInput placeholder="Цена от" formControlName="priceMin" />
                 </mat-form-field>
               </div>
-              <div *ngIf="containsControl('priceMax')" style="display: inline-block;">
-                <mat-form-field appearance="legacy" style="width: 90px;">
+              <div *ngIf="containsControl('priceMax')" class="inline-control">
+                <mat-form-field appearance="legacy">
                   <input type="number" matInput placeholder="Цена до" formControlName="priceMax" />
                 </mat-form-field>
               </div>
             </div>
-
             <div>
-              <button type="submit" style="width: 100%;" mat-raised-button color="primary"
+              <button type="submit" class="btn-search" mat-raised-button color="primary"
                 (click)="submitSearchForm()">Търси</button>
             </div>
           </form>
         </div>
-        <div style="background-color: rgba(94, 94, 94, 0.671); padding: 1rem;  border-radius: 5px;">
+        <div class="about-services">
           <div>
-            <span style="font-weight: bold;">About our services</span>
+            <span class="bold">About our services</span>
           </div>
           <div>
             <span>Text message marketing is one of the most popular modern marketing techniques and a great option for
@@ -87,33 +86,28 @@
           </div>
         </div>
       </div>
-      <div style="width: calc(100% - 300px)">
-        <div #rightColumnWrapper style="width: 100%;">
-          <div #rightColumn class="right-column">
-            <div>
-              <app-image-slide></app-image-slide>
-            </div>
-            <div
-              style="font-weight: bold;border-radius: 10px;padding-top: 10px;padding-bottom: 5px;margin-top: 20px;margin-bottom: 5px; background-color: rgba(243, 243, 243, 0.671);">
-              <span>Последно добавени в категория {{initFormCategory.name}}</span>
-            </div>
-            <div>
-              <app-list-announcements *ngIf="isLoading == false" [countOfItemsToList]="countOfItemsToList"
-                [announcements]="announcements">
-              </app-list-announcements>
+      <div class="right-column">
+        <div class="image-slide-holder">
+          <app-image-slide></app-image-slide>
+        </div>
+        <div
+         class="bold categories-title-holder">
+          <span>Последно добавени в категория {{initFormCategory.name}}</span>
+        </div>
+        <div>
+          <app-list-announcements *ngIf="isLoading == false" [countOfItemsToList]="countOfItemsToList"
+            [announcements]="announcements">
+          </app-list-announcements>
 
-              <div *ngIf="showAll" style="float: right;">
-                <button color="primary" (click)="showAllAnnouncements()" mat-raised-button>Покажи всички</button>
-              </div>
-
-            </div>
+          <div class="show-all-btn-holder" *ngIf="showAll">
+            <button color="primary" (click)="showAllAnnouncements()" mat-raised-button>Покажи всички</button>
           </div>
 
         </div>
-
       </div>
 
     </div>
+
   </mat-card>
 
 </div>

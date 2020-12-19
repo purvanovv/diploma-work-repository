@@ -1,11 +1,62 @@
-.left-column {
-  width: 270px;
+.main-mat-card {
+  margin: auto;
 }
 
-.right-column{
-  min-width: 270px;
-  // width: 75%;
+.left-column {
+  width: 280px;
+  margin-right: 16px;
+}
 
+.right-column {
+  min-width: 280px;
+  width: calc(100% - 296px)
+}
+
+.search-holder {
+  background-color: rgba(243, 243, 243, 0.671);
+  padding: 1rem;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+
+.about-services {
+  background-color: rgba(94, 94, 94, 0.671);
+  padding: 1rem;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.show-all-btn-holder {
+  float: right;
+  padding-right: 5px;
+  margin-top: 5px;
+}
+
+.categories-title-holder {
+  border-radius: 5px;
+  padding: 1rem;
+  margin-bottom: 5px;
+  background-color: rgba(243, 243, 243, 0.671);
+}
+
+.image-slide-holder {
+  margin-bottom: 10px;
+}
+
+.inline-control {
+  display: inline-block;
+
+  mat-form-field {
+    width: 90px;
+  }
+}
+
+.btn-search {
+  width: 100%;
 }
 
 @media screen and (min-width: 900px) {
@@ -26,5 +77,9 @@
 
   .mat-card {
     width: 310px !important;
+  }
+
+  .left-column {
+    margin-right: 0px;
   }
 }
