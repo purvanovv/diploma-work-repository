@@ -2,8 +2,7 @@
   <mat-card class="main-mat-card" [ngStyle]="{width: mainMatCardWidth}" #mainMatCard>
     <div fxLayout="row wrap">
       <div class="left-column">
-        <div class="search-holder"
-          >
+        <div class="search-holder">
           <form [formGroup]="searchForm">
             <div *ngIf="containsControl('mainCategoryId')" class="form-element">
               <mat-form-field appearance="legacy">
@@ -75,14 +74,14 @@
         </div>
         <div class="about-services">
           <div>
-            <span class="bold">About our services</span>
+            <span class="bold">За нашите услуги</span>
           </div>
           <div>
-            <span>Text message marketing is one of the most popular modern marketing techniques and a great option for
-              small businesses looking to make a big impact with their customer outreach. Text, unlike other marketing
-              techniques, acts as a direct line to the customer and creates a personal connection between them and your
-              business. Customers are more likely to see and respond positively to a text message than to an email or
-              advertisement.</span>
+            <span>carsell.bg е сайт за безплатни авто обяви, където имате възможност да публикувате или търсите в
+              следните категории:
+              <span *ngFor="let categoryPair of categories; let i = index;">{{ categoryPair.mainCategory.name }} <span
+                  *ngIf="i < categories.length - 1">,</span></span>
+            </span>
           </div>
         </div>
       </div>
@@ -90,8 +89,7 @@
         <div class="image-slide-holder">
           <app-image-slide></app-image-slide>
         </div>
-        <div
-         class="bold categories-title-holder">
+        <div class="bold categories-title-holder">
           <span>Последно добавени в категория {{initFormCategory.name}}</span>
         </div>
         <div>

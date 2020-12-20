@@ -78,7 +78,6 @@ export interface AnnouncementCreate {
 }
 
 export interface AnnouncementSlide {
-  id: number;
   price: number;
   currency: string;
   mileage: number;
@@ -90,7 +89,6 @@ export interface AnnouncementSlide {
 
 export class AnnouncementSlideModel implements AnnouncementSlide {
   constructor(
-    public id: number,
     public price: number,
     public currency: string,
     public mileage: number,
@@ -98,10 +96,6 @@ export class AnnouncementSlideModel implements AnnouncementSlide {
     public model: string,
     public make: string,
     public imageUrl: string) { }
-
-  public select() {
-    this.isSelected = true;
-  }
 
 }
 

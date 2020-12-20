@@ -13,7 +13,6 @@ export class ImageSlideComponent implements OnInit {
     '/assets/slide/porsche911.jpg'];
 
   public slideData: AnnouncementSlide[] = [];
-  public currentSlide: AnnouncementSlide | undefined = undefined;
 
   startIndex = 0;
   constructor() { }
@@ -25,17 +24,16 @@ export class ImageSlideComponent implements OnInit {
 
   initSlideData() {
     this.slideData = [
-      new AnnouncementSlideModel(1, 23000, 'лв.', 120000, true, 'Impreza WRX STI', 'Subaru', '/assets/slide/subaruSTI.jpg'),
-      new AnnouncementSlideModel(2, 33000, 'лв.', 20000, false, 'A6', 'Audi', '/assets/slide/audiA6.jpg'),
-      new AnnouncementSlideModel(3, 53000, 'лв.', 125000, false, '911', 'Porsche', '/assets/slide/porsche911.jpg'),
+      new AnnouncementSlideModel(49900, 'лв.', 22000, true, 'Impreza WRX STI', 'Subaru', '/assets/slide/subaruSTI.jpg'),
+      new AnnouncementSlideModel(78800, 'лв.', 36000, false, 'A6 Sedan S line', 'Audi', '/assets/slide/audiA6.jpg'),
+      new AnnouncementSlideModel(380000, 'лв.', 1300, false, '911 Turbo S', 'Porsche', '/assets/slide/porsche911.jpg'),
     ]
-    // this.currentSlide = this.slideData[0];
   }
   repeat() {
     setTimeout(() => {
       this.slide();
       this.repeat();
-    }, 10000);
+    }, 5000);
   }
 
   slide() {
@@ -59,30 +57,12 @@ export class ImageSlideComponent implements OnInit {
     return 'none'
   }
 
-
-  // Repeat() {
-  //   setTimeout(() => {
-  //     this.__FunctionSlide();
-  //     this.Repeat();
-  //   }, 30000);
-  // }
-
-  // __FunctionSlide() {
-  //   const slides = Array.from(document.getElementsByClassName('mall-show-slide'));
-  //   if (slides === []) {
-  //     this.Repeat();
-  //   }
-  //   for (const x of slides) {
-  //     const y = x as HTMLElement;
-  //     y.style.display = 'none';
-  //   }
-  //   if (this.startIndex > slides.length - 1) {
-  //     this.startIndex = 0;
-  //   }
-  //   const slide = slides[this.startIndex] as HTMLElement;
-  //   slide.style.display = 'block';
-  //   this.startIndex++;
-
-  // }
+  select(index: number) {
+    for (const slide of this.slideData) {
+      slide.isSelected = false;
+    }
+    this.startIndex = index;
+    this.slideData[this.startIndex].isSelected = true;
+  }
 
 }

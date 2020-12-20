@@ -1,27 +1,5 @@
 <div class="mall-slide">
   <div class="slid-content">
-
-    <!-- <div class="mall-show-slide fade" *ngFor="let item of ImageData;">
-      <div>
-        <img src="{{item}}" />
-      </div>
-      <div class="caption">
-        <div class="heading">
-          <span>Subaru Impreza WRX STI</span>
-          <span><span class="blue">20000</span> лв.</span>
-        </div>
-        <div class="info">
-          <span>Пробег:<span class="bold blue">100 000</span> км</span>
-        </div>
-      </div>
-    </div>
-    <div class="mall-carousel-ind">
-      <ul>
-        <li *ngFor="let item of ImageData; let i = index;" [class.mall-this]="startIndex - 1 === i"></li>
-      </ul>
-    </div>
-  </div> -->
-
     <div class="mall-show-slide fade" [ngStyle]="{display: getDisplayStyle(slide.isSelected)}"
       *ngFor="let slide of slideData;">
       <div>
@@ -39,7 +17,7 @@
     </div>
     <div class="mall-carousel-ind">
       <ul>
-        <li *ngFor="let item of slideData; let i = index;" [class.mall-this]="startIndex - 1 === i"></li>
+        <li (click)="select(i)" *ngFor="let slide of slideData; let i = index;" [class.mall-this]="slide.isSelected"></li>
       </ul>
     </div>
   </div>
