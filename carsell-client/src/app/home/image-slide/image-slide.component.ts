@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AnnouncementSlide, AnnouncementSlideModel } from '@app/announcement/models';
 
 @Component({
   selector: 'app-image-slide',
@@ -7,43 +8,81 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ImageSlideComponent implements OnInit {
   public ImageData: string[] = [
-    'https://bringatrailer.com/wp-content/uploads/2019/02/2017_bmw_m2_1560182860d93c1c474674751PCLW2528.jpg?fit=940%2C602',
-    'https://s3-prod-europe.autonews.com/s3fs-public/Ferrari%20812%20GTS_web.jpg'];
+    '/assets/slide/audiA6.jpg',
+    '/assets/slide/subaruSTI.jpg',
+    '/assets/slide/porsche911.jpg'];
 
-startIndex = 0;    
-constructor() { }
+  public slideData: AnnouncementSlide[] = [];
+  public currentSlide: AnnouncementSlide | undefined = undefined;
 
-ngOnInit(): void {
-  this.Repeat();
-}
+  startIndex = 0;
+  constructor() { }
 
-Repeat() {
-  setTimeout(() => {
-    this.__FunctionSlide();
-    this.Repeat();
-  }, 10000);
-}
-
-__FunctionSlide() {
-  const slides = Array.from(document.getElementsByClassName('mall-show-slide'));
-  if (slides === []) {
-    this.Repeat();
+  ngOnInit(): void {
+    this.initSlideData();
+    this.repeat();
   }
-  for (const x of slides) {
-    const y = x as HTMLElement;
-    y.style.display = 'none';
+
+  initSlideData() {
+    this.slideData = [
+      new AnnouncementSlideModel(1, 23000, 'лв.', 120000, true, 'Impreza WRX STI', 'Subaru', '/assets/slide/subaruSTI.jpg'),
+      new AnnouncementSlideModel(2, 33000, 'лв.', 20000, false, 'A6', 'Audi', '/assets/slide/audiA6.jpg'),
+      new AnnouncementSlideModel(3, 53000, 'лв.', 125000, false, '911', 'Porsche', '/assets/slide/porsche911.jpg'),
+    ]
+    // this.currentSlide = this.slideData[0];
   }
-  if (this.startIndex > slides.length - 1) {
-    this.startIndex = 0;
-    const slide = slides[this.startIndex] as HTMLElement;
-    slide.style.display = 'block';
+  repeat() {
+    setTimeout(() => {
+      this.slide();
+      this.repeat();
+    }, 10000);
+  }
+
+  slide() {
+    if (this.slideData === []) {
+      this.repeat();
+    }
+    for (const slide of this.slideData) {
+      slide.isSelected = false;
+    }
+    if (this.startIndex > this.slideData.length - 1) {
+      this.startIndex = 0;
+    }
+    this.slideData[this.startIndex].isSelected = true;
     this.startIndex++;
-  } else {
-
-    const slide = slides[this.startIndex] as HTMLElement;
-    slide.style.display = 'block';
-    this.startIndex++;
   }
-}
+
+  getDisplayStyle(isSelected: boolean) {
+    if (isSelected) {
+      return 'block';
+    }
+    return 'none'
+  }
+
+
+  // Repeat() {
+  //   setTimeout(() => {
+  //     this.__FunctionSlide();
+  //     this.Repeat();
+  //   }, 30000);
+  // }
+
+  // __FunctionSlide() {
+  //   const slides = Array.from(document.getElementsByClassName('mall-show-slide'));
+  //   if (slides === []) {
+  //     this.Repeat();
+  //   }
+  //   for (const x of slides) {
+  //     const y = x as HTMLElement;
+  //     y.style.display = 'none';
+  //   }
+  //   if (this.startIndex > slides.length - 1) {
+  //     this.startIndex = 0;
+  //   }
+  //   const slide = slides[this.startIndex] as HTMLElement;
+  //   slide.style.display = 'block';
+  //   this.startIndex++;
+
+  // }
 
 }

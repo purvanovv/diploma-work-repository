@@ -1,12 +1,47 @@
 <div class="mall-slide">
-    <div class="slid-content">
-        <div class="mall-show-slide fade" *ngFor="let item of ImageData;">
-            <img src="{{item}}" style="width:100%;">
+  <div class="slid-content">
+
+    <!-- <div class="mall-show-slide fade" *ngFor="let item of ImageData;">
+      <div>
+        <img src="{{item}}" />
+      </div>
+      <div class="caption">
+        <div class="heading">
+          <span>Subaru Impreza WRX STI</span>
+          <span><span class="blue">20000</span> лв.</span>
         </div>
-        <div class="mall-carousel-ind">
-            <ul>
-                <li *ngFor="let item of ImageData; let i = index;" [class.mall-this]="startIndex - 1 === i"></li>
-            </ul>
+        <div class="info">
+          <span>Пробег:<span class="bold blue">100 000</span> км</span>
         </div>
+      </div>
     </div>
+    <div class="mall-carousel-ind">
+      <ul>
+        <li *ngFor="let item of ImageData; let i = index;" [class.mall-this]="startIndex - 1 === i"></li>
+      </ul>
+    </div>
+  </div> -->
+
+    <div class="mall-show-slide fade" [ngStyle]="{display: getDisplayStyle(slide.isSelected)}"
+      *ngFor="let slide of slideData;">
+      <div>
+        <img [src]="slide.imageUrl" />
+      </div>
+      <div class="caption">
+        <div class="heading">
+          <span>{{slide.make}} {{slide.model}}</span>
+          <span><span class="blue">{{slide.price}}</span> {{slide.currency}}</span>
+        </div>
+        <div class="info">
+          <span>Пробег:<span class="bold blue">{{slide.mileage}}</span> км</span>
+        </div>
+      </div>
+    </div>
+    <div class="mall-carousel-ind">
+      <ul>
+        <li *ngFor="let item of slideData; let i = index;" [class.mall-this]="startIndex - 1 === i"></li>
+      </ul>
+    </div>
+  </div>
+
 </div>

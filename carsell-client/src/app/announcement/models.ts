@@ -77,6 +77,34 @@ export interface AnnouncementCreate {
   description: string;
 }
 
+export interface AnnouncementSlide {
+  id: number;
+  price: number;
+  currency: string;
+  mileage: number;
+  isSelected: boolean;
+  make: string;
+  model: string;
+  imageUrl: string;
+}
+
+export class AnnouncementSlideModel implements AnnouncementSlide {
+  constructor(
+    public id: number,
+    public price: number,
+    public currency: string,
+    public mileage: number,
+    public isSelected: boolean,
+    public model: string,
+    public make: string,
+    public imageUrl: string) { }
+
+  public select() {
+    this.isSelected = true;
+  }
+
+}
+
 export interface AnnouncementListItem {
   id: number;
   price: string;
