@@ -164,12 +164,12 @@ public class AnnouncementVehicleRepositoryImpl implements AnnouncementVehicleRep
 			return null;
 		}
 	}
-	
+
 	@Override
 	public List<AnnouncementVehicle> getAnnouncementVehiclesBySearchQuery(AnnouncementVehicleSearchDTO searchModel) {
 		try {
 			SearchAnnouncementQuery query = getSearchAnnouncemenQuery(searchModel);
-			return namedParameterJdbcTemplate.query(query.getQuery(),query.getParams(),
+			return namedParameterJdbcTemplate.query(query.getQuery(), query.getParams(),
 					new AnnouncementVehiclesResultSetExtractor(imageFileRepository));
 
 		} catch (Exception e) {
@@ -217,6 +217,68 @@ public class AnnouncementVehicleRepositoryImpl implements AnnouncementVehicleRep
 		}
 	}
 
+	@Override
+	public Long editAnnouncementVehicle(AnnouncementVehicle announcementVehicle) {
+		try {
+			MapSqlParameterSource params = new MapSqlParameterSource();
+			params.addValue("id", announcementVehicle.getId());
+			params.addValue("make", announcementVehicle.getMake());
+			params.addValue("model", announcementVehicle.getModel());
+			params.addValue("engineType", EngineType.getValue(announcementVehicle.getEngineType()));
+			params.addValue("conditionType", ConditionType.getValue(announcementVehicle.getConditionType()));
+			params.addValue("horsePower", announcementVehicle.getHorsePower());
+			params.addValue("emissionStandartType",
+					EmissionStandartType.getValue(announcementVehicle.getEmissionStandartType()));
+			params.addValue("gearboxType", GearboxType.getValue(announcementVehicle.getGearboxType()));
+			params.addValue("subCategoryId", announcementVehicle.getSubCategory().getId());
+			params.addValue("coolingType", CoolingType.getValue(announcementVehicle.getCoolingType()));
+			params.addValue("cubature", announcementVehicle.getCubature());
+			params.addValue("engineCategoryType",
+					EngineCategoryType.getValue(announcementVehicle.getEngineCategoryType()));
+			params.addValue("price", announcementVehicle.getPrice());
+			params.addValue("currency", Currency.getValue(announcementVehicle.getCurrency()));
+			params.addValue("dateOfManufacture",
+					DateUtils.getSubmissionDate(announcementVehicle.getDateOfManufacture()));
+			params.addValue("mileage", announcementVehicle.getMileage());
+			params.addValue("color", announcementVehicle.getColor());
+			params.addValue("region", announcementVehicle.getRegion());
+			params.addValue("city", announcementVehicle.getCity());
+			params.addValue("validDays", announcementVehicle.getValidDays());
+			Date validTo = DateUtils.addDays(announcementVehicle.getValidFrom(), announcementVehicle.getValidDays());
+			params.addValue("validTo", DateUtils.getSubmissionDate(validTo));
+			params.addValue("numberOfAxels", announcementVehicle.getNumberOfAxels());
+			params.addValue("numberOfSeats", announcementVehicle.getNumberOfSeats());
+			params.addValue("weightCapacity", announcementVehicle.getWeightCapacity());
+			params.addValue("engineCategoryType",
+					EngineCategoryType.getValue(announcementVehicle.getEngineCategoryType()));
+			params.addValue("totalWeight", announcementVehicle.getTotalWeight());
+			params.addValue("workingVolume", announcementVehicle.getWorkingVolume());
+			params.addValue("hoursOfOperation", announcementVehicle.getHoursOfOperation());
+			params.addValue("numberOfBeds", announcementVehicle.getNumberOfBeds());
+			params.addValue("toiletType", ToiletType.getValue(announcementVehicle.getToiletType()));
+			params.addValue("heatingType", HeatingType.getValue(announcementVehicle.getHeatingType()));
+			params.addValue("airConditionType", AirConditionType.getValue(announcementVehicle.getAirConditionType()));
+			params.addValue("lengthSize", announcementVehicle.getLengthSize());
+			params.addValue("materialType", MaterialType.getValue(announcementVehicle.getMaterialType()));
+			params.addValue("width", announcementVehicle.getWidth());
+			params.addValue("bicycleSize", announcementVehicle.getBicycleSize());
+			params.addValue("numberOfGears", announcementVehicle.getNumberOfGears());
+			params.addValue("description", announcementVehicle.getDescription());
+			params.addValue("modifiedBy", "TEST_USER");
+			params.addValue("modifiedOn", DateUtils.getSubmissionDate(new Date()));
+
+			String sql = SqlContainer.EDIT_ANNOUNCEMENT_VEHICLE;
+			namedParameterJdbcTemplate.update(sql, params);
+
+			return announcementVehicle.getId();
+
+		} catch (Exception e) {
+			// TODO
+			return null;
+		}
+
+	}
+
 	private SearchAnnouncementQuery getSearchAnnouncemenQuery(AnnouncementVehicleSearchDTO searchModel) {
 		return new SearchAnnouncementQuery.Builder()
 				.addConditionValue("main_category_id", searchModel.getMainCategoryId(), SearchAnnouncementQuery.EQUAlS)
@@ -224,8 +286,10 @@ public class AnnouncementVehicleRepositoryImpl implements AnnouncementVehicleRep
 				.addConditionValue("model", searchModel.getModel(), SearchAnnouncementQuery.EQUAlS)
 				.addConditionValue("engine_type", searchModel.getEngineType(), SearchAnnouncementQuery.EQUAlS)
 				.addConditionValue("condition_type", searchModel.getConditionType(), SearchAnnouncementQuery.EQUAlS)
-				.addConditionValue("horse_power", searchModel.getHorsePowerMin(), SearchAnnouncementQuery.GREATER_OR_EQUAlS)
-				.addConditionValue("horse_power", searchModel.getHorsePowerMax(), SearchAnnouncementQuery.LESS_OR_EQUAlS)
+				.addConditionValue("horse_power", searchModel.getHorsePowerMin(),
+						SearchAnnouncementQuery.GREATER_OR_EQUAlS)
+				.addConditionValue("horse_power", searchModel.getHorsePowerMax(),
+						SearchAnnouncementQuery.LESS_OR_EQUAlS)
 				.build();
 
 	}

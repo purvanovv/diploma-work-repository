@@ -13,6 +13,13 @@ export class AnnouncementControlBuilder {
 
   public build(controlName: Control): AnnouncementControl {
     switch (controlName) {
+      case Control.ID:
+        return {
+          name: 'id',
+          control: new FormControl(
+            this.announcement !== undefined ? this.announcement.id : ''
+          ),
+        };
       case Control.MAIN_CATEGORY_ID:
         return {
           name: 'mainCategoryId',
@@ -37,6 +44,13 @@ export class AnnouncementControlBuilder {
           control: new FormControl(
             this.announcement !== undefined ? this.announcement.engineType : '',
             Validators.required
+          ),
+        };
+      case Control.VALID_FROM:
+        return {
+          name: 'validFrom',
+          control: new FormControl(
+            this.announcement !== undefined ? this.announcement.validFrom : ''
           ),
         };
       case Control.CONDITION_TYPE:

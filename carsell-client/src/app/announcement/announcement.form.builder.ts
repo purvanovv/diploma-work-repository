@@ -19,6 +19,7 @@ export class AnnouncementFormBuilder {
     const controlBuilder = new AnnouncementControlBuilder().withAnnnouncement(this.announcement);
     switch (this.category) {
       case MainCategoryType.CARS_AND_JEEPS: {
+        this.addControl(controlBuilder.build(Control.ID));
         this.addControl(controlBuilder.build(Control.MAIN_CATEGORY_ID));
         this.addControl(controlBuilder.build(Control.MAKE));
         this.addControl(controlBuilder.build(Control.MODEL));
@@ -36,9 +37,11 @@ export class AnnouncementFormBuilder {
         this.addControl(controlBuilder.build(Control.REGION));
         this.addControl(controlBuilder.build(Control.CITY));
         this.addControl(controlBuilder.build(Control.VALID_DAYS));
+        this.addControl(controlBuilder.build(Control.VALID_FROM));
         break;
       }
       case MainCategoryType.MOTORBIKES: {
+        this.addControl(controlBuilder.build(Control.ID));
         this.addControl(controlBuilder.build(Control.MAIN_CATEGORY_ID));
         this.addControl(controlBuilder.build(Control.MAKE));
         this.addControl(controlBuilder.build(Control.MODEL));
@@ -56,9 +59,11 @@ export class AnnouncementFormBuilder {
         this.addControl(controlBuilder.build(Control.CITY));
         this.addControl(controlBuilder.build(Control.ENGINE_CATEGORY_TYPE));
         this.addControl(controlBuilder.build(Control.VALID_DAYS));
+        this.addControl(controlBuilder.build(Control.VALID_FROM));
         break;
       }
       case MainCategoryType.BUSES: {
+        this.addControl(controlBuilder.build(Control.ID));
         this.addControl(controlBuilder.build(Control.MAIN_CATEGORY_ID));
         this.addControl(controlBuilder.build(Control.MAKE));
         this.addControl(controlBuilder.build(Control.MODEL));
@@ -77,6 +82,7 @@ export class AnnouncementFormBuilder {
         this.addControl(controlBuilder.build(Control.REGION));
         this.addControl(controlBuilder.build(Control.CITY));
         this.addControl(controlBuilder.build(Control.VALID_DAYS));
+        this.addControl(controlBuilder.build(Control.VALID_FROM));
         break;
       }
     }

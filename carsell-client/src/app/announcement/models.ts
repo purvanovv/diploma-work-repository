@@ -39,6 +39,7 @@ export interface Make {
 }
 
 export interface AnnouncementCreate {
+  id: number;
   mainCategoryId: number;
   make: string;
   model: string;
@@ -62,6 +63,48 @@ export interface AnnouncementCreate {
   validDays: number;
   cubature: number;
   engineCategoryType: EngineCategoryType;
+  validFrom: Date;
+  totalWeight: number;
+  workingVolume: number;
+  hoursOfOperation: number;
+  numberOfBeds: number;
+  toiletType: ToiletType;
+  heatingType: HeatingType;
+  airConditionType: AirConditionType;
+  lengthSize: number;
+  materialType: MaterialType;
+  width: number;
+  bicycleSize: number;
+  numberOfGears: number;
+  description: string;
+}
+
+export class AnnouncementCreateModel implements AnnouncementCreate {
+  id: number;
+  mainCategoryId: number;
+  make: string;
+  model: string;
+  engineType: EngineType;
+  conditionType: ConditionType;
+  horsePower: number;
+  emissionStandartType: EmissionStandartType;
+  gearboxType: GearboxType;
+  subCategoryId: number;
+  coolingType: CoolingType;
+  numberOfAxels: number;
+  numberOfSeats: number;
+  weightCapacity: number;
+  price: number;
+  currency: Currency;
+  dateOfManufacture: Date;
+  mileage: number;
+  color: string;
+  region: string;
+  city: string;
+  validDays: number;
+  cubature: number;
+  engineCategoryType: EngineCategoryType;
+  validFrom: Date;
   totalWeight: number;
   workingVolume: number;
   hoursOfOperation: number;

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AnnouncementService } from '../announcement.service';
 import { AnnouncementPreview } from '../models';
 
@@ -13,7 +13,10 @@ export class PreviewAnnouncementComponent implements OnInit {
   public announcement: AnnouncementPreview;
   private announcementId: number;
 
-  constructor(private route: ActivatedRoute, private announcementService: AnnouncementService) { }
+  constructor(
+    private route: ActivatedRoute,
+    private announcementService: AnnouncementService,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.announcementId = Number(this.route.snapshot.paramMap.get('id'));
@@ -23,6 +26,10 @@ export class PreviewAnnouncementComponent implements OnInit {
         console.log(announcement);
         this.announcement = announcement;
       })
+  }
+
+  edit(id: number) {
+    this.router.navigate([`announcement/edit/${id}`]);
   }
 
 }

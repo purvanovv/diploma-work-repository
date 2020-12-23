@@ -59,10 +59,15 @@ public class AnnouncementVehicleServiceImpl implements AnnouncementVehicleServic
 	public Map<String, List<String>> getRegions() {
 		return announcementVehicleRepository.getRegions();
 	}
-	
+
 	@Override
-	public List<AnnouncementVehicle> getAnnouncementVehiclesBySearchQuery(AnnouncementVehicleSearchDTO searchModel){
+	public List<AnnouncementVehicle> getAnnouncementVehiclesBySearchQuery(AnnouncementVehicleSearchDTO searchModel) {
 		return announcementVehicleRepository.getAnnouncementVehiclesBySearchQuery(searchModel);
+	}
+
+	@Override
+	public Long editAnnouncementVehicle(AnnouncementVehicle announcementVehicle) {
+		return announcementVehicleRepository.editAnnouncementVehicle(announcementVehicle);
 	}
 
 }

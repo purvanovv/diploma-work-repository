@@ -10,6 +10,7 @@ const routes: Routes = [
     { path: 'announcement/create', component: CreateAnnouncementComponent, data: { title: 'CreateAnnouncement' } },
     { path: 'announcement/list', component: ListSearchResultComponent },
     { path: 'announcement/preview/:id', component: PreviewAnnouncementComponent },
+    { path: 'announcement/edit/:id', component: CreateAnnouncementComponent }
   ]),
 ];
 @NgModule({

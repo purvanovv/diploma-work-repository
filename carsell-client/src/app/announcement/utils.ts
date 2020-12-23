@@ -1,13 +1,21 @@
 import { R3TargetBinder } from '@angular/compiler';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
-import { AnnouncementListItem, AnnouncementListItemModel, AnnouncementPreview, ImageFile, ImageFilePreviewModel } from './models';
-
-export class ImageFileUtility {
-
-    constructor(private sanitizer: DomSanitizer) { }
-
-
-}
+import {
+    AirConditionType,
+    ConditionType,
+    CoolingType,
+    Currency,
+    EmissionStandartType,
+    EngineCategoryType,
+    EngineType, GearboxType, HeatingType, MaterialType, ToiletType
+} from './enums';
+import {
+    AnnouncementCreate,
+    AnnouncementCreateModel,
+    AnnouncementListItem,
+    AnnouncementListItemModel,
+    AnnouncementPreview, ImageFile, ImageFilePreviewModel
+} from './models';
 
 export class AnnouncementModelConverter {
     constructor(private sanitizer: DomSanitizer) { }
@@ -26,6 +34,60 @@ export class AnnouncementModelConverter {
         target.options = this.buildOptions(source);
         return target;
     }
+
+    public convertAnnouncementPreviewToAnnouncementCreate(source: AnnouncementPreview): AnnouncementCreate {
+        const target = new AnnouncementCreateModel();
+        target.id = source.id;
+        target.mainCategoryId = source.mainCategory.id;
+        target.make = source.make;
+        target.model = source.model;
+        target.engineType = this.getEnumByEnumValue(EngineType, source.engineType);
+        target.conditionType = this.getEnumByEnumValue(ConditionType, source.conditionType);
+        target.horsePower = source.horsePower;
+        target.emissionStandartType = this.getEnumByEnumValue(EmissionStandartType, source.emissionStandartType);
+        target.gearboxType = this.getEnumByEnumValue(GearboxType, source.gearboxType);
+        target.subCategoryId = source.subCategory.id;
+        target.coolingType = this.getEnumByEnumValue(CoolingType, source.coolingType);
+        target.numberOfAxels = source.numberOfAxels;
+        target.numberOfSeats = source.numberOfSeats;
+        target.weightCapacity = source.weightCapacity;
+        target.price = source.price;
+        target.currency = this.getEnumByEnumValue(Currency, source.currency);
+        target.dateOfManufacture = new Date(source.dateOfManufacture);
+        target.mileage = source.mileage;
+        target.color = source.color;
+        target.region = source.region;
+        target.city = source.city;
+        target.validDays = source.validDays;
+        target.cubature = source.cubature;
+        target.engineCategoryType = this.getEnumByEnumValue(EngineCategoryType, source.engineCategoryType);
+        target.validFrom = new Date(source.validFrom);
+        target.totalWeight = source.totalWeight;
+        target.workingVolume = source.workingVolume;
+        target.hoursOfOperation = source.hoursOfOperation;
+        target.numberOfBeds = source.numberOfBeds;
+        target.toiletType = this.getEnumByEnumValue(ToiletType, source.toiletType);
+        target.heatingType = this.getEnumByEnumValue(HeatingType, source.heatingType);
+        target.airConditionType = this.getEnumByEnumValue(AirConditionType, source.airConditionType);
+        target.lengthSize = source.lengthSize;
+        target.materialType = this.getEnumByEnumValue(MaterialType, source.materialType);
+        target.width = source.width;
+        target.bicycleSize = source.bicycleSize;
+        target.numberOfGears = source.numberOfGears;
+        target.description = source.description;
+        return target;
+    }
+
+    public getEnumKeyByEnumValue(myEnum: any, enumValue: number | string): string {
+        const keys = Object.keys(myEnum).filter((x) => myEnum[x] === enumValue);
+        return keys.length > 0 ? keys[0] : '';
+    }
+
+    public getEnumByEnumValue(myEnum: any, enumValue: number | string): any {
+        const keys = Object.keys(myEnum).filter((x) => myEnum[x] === enumValue);
+        return keys.length > 0 ? keys[0] : undefined;
+    }
+
 
     private buildOptions(source: AnnouncementPreview): Map<string, string> {
         const options = new Map<string, string>();

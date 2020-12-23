@@ -45,6 +45,10 @@ export class AnnouncementService {
     return this.httpClient.post<number>(routes.announcement(), announcement);
   }
 
+  public editAnnouncement(announcement: AnnouncementCreate): Observable<number> {
+    return this.httpClient.put<number>(routes.announcement(), announcement);
+  }
+
   public getAnnouncementPreview(announcementId: number): Observable<AnnouncementPreview> {
     return this.httpClient.get<AnnouncementPreview>(routes.announcementPreview(announcementId));
   }

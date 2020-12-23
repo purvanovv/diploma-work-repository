@@ -24,4 +24,6 @@ public interface AnnouncementVehicleRepository {
 	public Map<String, List<String>> getRegions();
 
 	public List<AnnouncementVehicle> getAnnouncementVehiclesBySearchQuery(AnnouncementVehicleSearchDTO searchModel);
+	
+	public Long editAnnouncementVehicle(AnnouncementVehicle announcementVehiclecement);
 }

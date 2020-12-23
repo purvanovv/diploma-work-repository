@@ -1,5 +1,6 @@
 package tusofia.carsellservices.controller;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -66,6 +67,25 @@ public class AnnouncementVehicleController {
 		return new ResponseEntity<Long>(announcementVehicleId, HttpStatus.OK);
 	}
 
+	@RequestMapping(value = "/announcement", method = RequestMethod.PUT)
+	public ResponseEntity<Long> editAnnouncement(@RequestBody AnnouncementVehicleCreateDTO announcementVehicleCreateDTO)
+			throws ValidationException {
+
+		MainCategoryType mainCategoryType = announcementVehicleService
+				.getMainCategoryType(announcementVehicleCreateDTO.getMainCategoryId());
+		AnnouncementVehicleValidationContext validationContext = AnnouncementVehicleValidationContextBuilder
+				.build(mainCategoryType);
+		List<ValidationResult> validationErrors = validationContext.executeAndGetList(announcementVehicleCreateDTO);
+		if (!validationErrors.isEmpty()) {
+			throw new ValidationException(validationErrors);
+		}
+
+		AnnouncementVehicle announcementVehicle = announcementVehicleModelMapper
+				.convertToEntity(announcementVehicleCreateDTO);
+		Long announcementVehicleId = this.announcementVehicleService.editAnnouncementVehicle(announcementVehicle);
+		return new ResponseEntity<Long>(announcementVehicleId, HttpStatus.OK);
+	}
+
 	@RequestMapping(value = "/announcement", method = RequestMethod.GET)
 	public ResponseEntity<AnnouncementVehicleCreateDTO> getAnnouncementVehicle(
 			@RequestParam Long announcementVehicleId) {
@@ -93,10 +113,12 @@ public class AnnouncementVehicleController {
 				.convertToPreviewDTOs(announcementVehicles);
 		return new ResponseEntity<List<AnnouncementVehiclePreviewDTO>>(announcementVehicleCreateDTOs, HttpStatus.OK);
 	}
-	
+
 	@RequestMapping(value = "/search", method = RequestMethod.POST)
-	public ResponseEntity<List<AnnouncementVehiclePreviewDTO>> getAnnouncementVehicles(@RequestBody AnnouncementVehicleSearchDTO searchData) {
-		List<AnnouncementVehicle> announcementVehicles = this.announcementVehicleService.getAnnouncementVehiclesBySearchQuery(searchData);
+	public ResponseEntity<List<AnnouncementVehiclePreviewDTO>> getAnnouncementVehicles(
+			@RequestBody AnnouncementVehicleSearchDTO searchData) {
+		List<AnnouncementVehicle> announcementVehicles = this.announcementVehicleService
+				.getAnnouncementVehiclesBySearchQuery(searchData);
 		List<AnnouncementVehiclePreviewDTO> announcementVehiclePreviewDTOs = announcementVehicleModelMapper
 				.convertToPreviewDTOs(announcementVehicles);
 		return new ResponseEntity<List<AnnouncementVehiclePreviewDTO>>(announcementVehiclePreviewDTOs, HttpStatus.OK);
@@ -113,7 +135,5 @@ public class AnnouncementVehicleController {
 		Map<String, List<String>> regions = announcementVehicleService.getRegions();
 		return new ResponseEntity<Map<String, List<String>>>(regions, HttpStatus.OK);
 	}
-	
-	
 
 }

@@ -1,13 +1,12 @@
 <mat-card>
-  <mat-card-content *ngIf="isFormInit">
+  <mat-card-content *ngIf="!isLoading">
     <form [formGroup]="createForm">
       <div class="form-container" fxLayout="row wrap" fxLayout.xs="column" fxLayoutAlign="left">
         <div *ngIf="containsControl('mainCategoryId')" fxFlex="22%" class="form-element">
           <mat-form-field appearance="legacy">
-            <mat-select placeholder="Основна категория" formControlName="mainCategoryId">
+            <mat-select [disabled]="!isCreateMode" placeholder="Основна категория" formControlName="mainCategoryId">
               <mat-option [value]="categoryPair.mainCategory.id" *ngFor="let categoryPair of categories">
-                {{ categoryPair.mainCategory.name }}</mat-option
-              >
+                {{ categoryPair.mainCategory.name }}</mat-option>
             </mat-select>
           </mat-form-field>
         </div>
@@ -16,8 +15,7 @@
           <mat-form-field appearance="legacy">
             <mat-select placeholder="Категория" formControlName="subCategoryId">
               <mat-option [value]="subCategory.id" *ngFor="let subCategory of subCategories">
-                {{ subCategory.name }}</mat-option
-              >
+                {{ subCategory.name }}</mat-option>
             </mat-select>
           </mat-form-field>
         </div>
@@ -27,8 +25,7 @@
             <label>Състояние:</label>
             <mat-radio-group formControlName="conditionType">
               <mat-radio-button [value]="name" *ngFor="let name of conditionType | enumToArray">
-                {{ getEnumValue(name, conditionType) }}</mat-radio-button
-              >
+                {{ getEnumValue(name, conditionType) }}</mat-radio-button>
             </mat-radio-group>
           </section>
         </div>
@@ -108,12 +105,8 @@
 
         <div *ngIf="containsControl('dateOfManufacture')" fxFlex="22%" class="form-element">
           <mat-form-field color="primary" appearance="legacy">
-            <input
-              placeholder="Дата на производство"
-              formControlName="dateOfManufacture"
-              matInput
-              [matDatepicker]="dateOfManufacturePicker"
-            />
+            <input placeholder="Дата на производство" formControlName="dateOfManufacture" matInput
+              [matDatepicker]="dateOfManufacturePicker" />
             <mat-datepicker-toggle matSuffix [for]="dateOfManufacturePicker"></mat-datepicker-toggle>
             <mat-datepicker #dateOfManufacturePicker></mat-datepicker>
           </mat-form-field>
@@ -312,7 +305,7 @@
 
 
 <div>
-  
+
 
 
 </div>
