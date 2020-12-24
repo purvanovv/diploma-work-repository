@@ -6,10 +6,10 @@
         <span id="file-label">
           {{ file.data.name }}
         </span>
-        <button [disabled]="disableRemove" mat-icon-button color="warn" (click)="remove(i)">
+        <button mat-icon-button color="warn" (click)="remove(i)">
           <mat-icon>delete</mat-icon>
         </button>
-        <mat-progress-bar [value]="file.progress"></mat-progress-bar>
+        <mat-progress-bar *ngIf="file.inProgress" [value]="file.progress"></mat-progress-bar>
       </mat-list-item>
     </mat-list>
   </mat-card-content>

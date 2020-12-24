@@ -233,10 +233,11 @@ export class FirstStepComponent implements OnInit, OnDestroy {
       .valueChanges.pipe(
         startWith(this.createForm.get('make').value),
         tap((make: string) => {
-          console.log(make);
-          const groupName = make.substr(0, 1).toUpperCase();
-          const makes: Make[] = this.makeGroups[groupName];
-          this.models = makes.find((m) => m.make === make)?.models;
+          if (make.trim() !== '') {
+            const groupName = make.substr(0, 1).toUpperCase();
+            const makes: Make[] = this.makeGroups[groupName];
+            this.models = makes.find((m) => m.make === make)?.models;
+          }
         })
       )
       .subscribe();
@@ -247,7 +248,9 @@ export class FirstStepComponent implements OnInit, OnDestroy {
       .valueChanges.pipe(
         startWith(this.createForm.get('region').value),
         tap((region: string) => {
-          this.cities = this.regions[region];
+          if (region.trim() !== '') {
+            this.cities = this.regions[region];
+          }
         })
       )
       .subscribe();

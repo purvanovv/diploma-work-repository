@@ -14,7 +14,7 @@ import {
     AnnouncementCreateModel,
     AnnouncementListItem,
     AnnouncementListItemModel,
-    AnnouncementPreview, ImageFile, ImageFilePreviewModel
+    AnnouncementPreview, FileUploadModel, ImageFile, ImageFilePreviewModel
 } from './models';
 
 export class AnnouncementModelConverter {
@@ -23,6 +23,11 @@ export class AnnouncementModelConverter {
     public convertImageFileToImageFilePreview(image: ImageFile) {
         const blob = this.base64ToBlob(image.encodedImage, image.dataType);
         return new ImageFilePreviewModel(image.id, this.blobToUrl(blob), false);
+    }
+
+    public convertImageFileToFileUpload(image: ImageFile) {
+        const file = this.base64ToFile(image.encodedImage, image.dataType, image.name);
+        return new FileUploadModel(0, false, file);
     }
 
     public converAnnouncementPreviewToAnnouncementListItem(source: AnnouncementPreview): AnnouncementListItem {
@@ -123,13 +128,24 @@ export class AnnouncementModelConverter {
     }
 
     private base64ToBlob(encodedString: string, dataType: string): Blob {
+        const uintArray = this.encodedStringToUintArray(encodedString);
+        return new Blob([uintArray], { type: dataType });
+    }
+
+    private base64ToFile(encodedString: string, dataType: string, fileName: string): File {
+        const uintArray = this.encodedStringToUintArray(encodedString);
+        return new File([uintArray], fileName, { type: dataType })
+    }
+
+    private encodedStringToUintArray(encodedString: string): Uint8Array {
         const byteCharacters = atob(encodedString);
         const uintArray = new Uint8Array(byteCharacters.length);
         for (let i = 0; i < byteCharacters.length; i++) {
             uintArray[i] = byteCharacters.charCodeAt(i);
         }
-        return new Blob([uintArray], { type: dataType });
+        return uintArray;
     }
+
 
 
 }

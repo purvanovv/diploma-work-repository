@@ -248,6 +248,14 @@ export interface FileUpload {
   data: File;
 }
 
+export class FileUploadModel implements FileUpload {
+  constructor(
+    public progress: number,
+    public inProgress: boolean,
+    public data: File
+  ) { }
+}
+
 export interface AnnouncementControl {
   name: string;
   control: AbstractControl;

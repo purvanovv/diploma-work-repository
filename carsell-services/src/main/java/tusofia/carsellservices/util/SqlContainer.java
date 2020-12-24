@@ -18,6 +18,7 @@ public class SqlContainer {
 	public static String CREATE_IMAGE_FILE;
 	public static String GET_IMAGE_FILES_BY_ANNOUNCEMENT_ID;
 	public static String EDIT_ANNOUNCEMENT_VEHICLE;
+	public static String DELETE_IMAGE_FILES_BY_ANNOUNCEMENT_ID;
 
 	@Autowired
 	public SqlContainer(@Value("${sql.container}") String sqlPath) {
@@ -38,6 +39,8 @@ public class SqlContainer {
 		CREATE_IMAGE_FILE = SqlUtils.getClasspathResource(sqlPath, "announcements/CREATE_IMAGE_FILE.sql");
 		GET_IMAGE_FILES_BY_ANNOUNCEMENT_ID = SqlUtils.getClasspathResource(sqlPath,
 				"announcements/GET_IMAGE_FILES_BY_ANNOUNCEMENT_ID.sql");
+		DELETE_IMAGE_FILES_BY_ANNOUNCEMENT_ID = SqlUtils.getClasspathResource(sqlPath,
+				"announcements/DELETE_IMAGE_FILES_BY_ANNOUNCEMENT_ID.sql");
 
 	}
 }

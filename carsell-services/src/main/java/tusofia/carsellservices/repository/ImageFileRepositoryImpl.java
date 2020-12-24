@@ -49,15 +49,25 @@ public class ImageFileRepositoryImpl implements ImageFileRepository {
 			String sql = SqlContainer.GET_IMAGE_FILES_BY_ANNOUNCEMENT_ID;
 			MapSqlParameterSource params = new MapSqlParameterSource();
 			params.addValue("announcementId", announcementId);
-			List<ImageFile> images = namedParameterJdbcTemplate.query(sql, params,
-					new ImagesResultSetExtractor());
+			List<ImageFile> images = namedParameterJdbcTemplate.query(sql, params, new ImagesResultSetExtractor());
 			return images;
 		} catch (Exception e) {
 			// TODO
 			return null;
 		}
 	}
-	
-	
+
+	@Override
+	public void removeFilesByAnnouncementId(Long announcementId) {
+		try {
+			String sql = SqlContainer.DELETE_IMAGE_FILES_BY_ANNOUNCEMENT_ID;
+			MapSqlParameterSource params = new MapSqlParameterSource();
+			params.addValue("announcementId", announcementId);
+			namedParameterJdbcTemplate.update(sql, params);
+		} catch (Exception e) {
+			// TODO
+		}
+
+	}
 
 }

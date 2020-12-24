@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
-import { AnnouncementCreate, AnnouncementPreview } from './models';
+import { AnnouncementCreate, AnnouncementPreview, FileUpload, FileUploadModel } from './models';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +16,35 @@ export class AnnouncementStoreService {
   private readonly _initDataThirdStep = new Subject();
 
   private readonly _announcements = new BehaviorSubject<AnnouncementPreview[]>([]);
+
+  private readonly _filesToUpload = new BehaviorSubject<FileUpload[]>([]);
+
+  private get filesToUpload(): FileUpload[] {
+    return this._filesToUpload.getValue();
+  }
+
+  private set filesToUpload(files: FileUpload[]) {
+    this._filesToUpload.next(files);
+  }
+
+  public getFilesToUpload$(): Observable<FileUpload[]> {
+    return this._filesToUpload.asObservable();
+  }
+
+  public setFilesToUpload(files: FileUpload[]) {
+    this.filesToUpload = files;
+  }
+
+  public addFileToUpload(file: FileUpload) {
+    this.filesToUpload = [
+      ...this.filesToUpload,
+      file
+    ];
+  }
+
+  public removeFileToUpload(index: number) {
+    this.filesToUpload.splice(index, 1);
+  }
 
   private get announcements(): AnnouncementPreview[] {
     return this._announcements.getValue();

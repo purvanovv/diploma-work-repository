@@ -52,4 +52,9 @@ public class ImageFileServiceImpl implements ImageFileService {
 		return fileType != null && Constants.availableImageFileTypes.contains(fileType);
 	}
 
+	@Override
+	public void removeFilesByAnnouncementId(Long announcementId) {
+		this.imageFileRepository.removeFilesByAnnouncementId(announcementId);
+	}
+
 }

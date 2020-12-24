@@ -44,4 +44,11 @@ public class ImageFileController {
 		return new ResponseEntity<List<ImageFile>>(images, HttpStatus.OK);
 	}
 
+	@RequestMapping(value = "/images", method = RequestMethod.DELETE)
+	public ResponseEntity<ResponseMessage> deleteAllImages(@RequestParam Long announcementId) {
+		imageFileService.removeFilesByAnnouncementId(announcementId);
+		String message = "Removed the files successfully";
+		return new ResponseEntity<ResponseMessage>(new ResponseMessage(message), HttpStatus.OK);
+	}
+
 }

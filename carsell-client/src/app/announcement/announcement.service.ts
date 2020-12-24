@@ -75,4 +75,8 @@ export class AnnouncementService {
     return this.httpClient.post<AnnouncementPreview[]>(routes.search(), searchData);
   }
 
+  public deleteImages(announcementId: number): Observable<any>{
+    return this.httpClient.delete(routes.images(announcementId));
+  }
+
 }

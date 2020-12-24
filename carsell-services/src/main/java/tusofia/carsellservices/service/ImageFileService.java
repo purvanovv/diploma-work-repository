@@ -11,4 +11,6 @@ public interface ImageFileService {
 	public ImageFile storeImage(MultipartFile image, Long announcementId) throws FileTypeNotValidException;
 	
 	public List<ImageFile> getImagesByAnnouncementId(Long announcementId);
+
+	public void removeFilesByAnnouncementId(Long announcementId);
 }

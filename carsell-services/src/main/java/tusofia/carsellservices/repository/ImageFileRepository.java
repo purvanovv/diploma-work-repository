@@ -6,6 +6,8 @@ import tusofia.carsellservices.model.ImageFile;
 
 public interface ImageFileRepository {
 	public ImageFile storeImage(ImageFile image);
-	
+
 	public List<ImageFile> getImagesByAnnouncementId(Long announcementId);
+
+	public void removeFilesByAnnouncementId(Long announcementId);
 }
