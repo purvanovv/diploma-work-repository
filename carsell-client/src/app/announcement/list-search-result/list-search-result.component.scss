@@ -1,8 +1,43 @@
+@import "../../../theme/theme-variables.scss";
+
 .container {
-    text-align: center;
-    padding-left: 10rem;
-    padding-right: 10rem;
-    padding-top: 1rem;
-    padding-bottom: 1rem;
-  }
-  
+  text-align: center;
+  padding-left: 10rem;
+  padding-right: 10rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.pagination {
+  display: inline-block;
+}
+
+.pagination a {
+  color: mat-color($app-primary, default);
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+  transition: background-color .3s;
+  border: 1px solid #ddd;
+  cursor: pointer;
+}
+
+.pagination a.selected {
+  background-color: mat-color($app-primary, default);
+  color: white;
+  border: 1px solid mat-color($app-primary, default);
+}
+
+.pagination a:last-child {
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.pagination a:first-child {
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+.pagination a:hover:not(.selected) {
+  background-color: #ddd;
+}

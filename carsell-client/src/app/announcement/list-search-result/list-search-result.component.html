@@ -1,3 +1,11 @@
-<div class="container">
-    <app-list-announcements [announcements]="announcements"></app-list-announcements>
+<div class="container" *ngIf="!isLoading">
+  <mat-card>
+    <div class="pagination">
+      <a (click)="prev()">&laquo;</a>
+      <a (click)="select(page.key)" [class.selected]="page.key == currentPageIndex"
+        *ngFor="let page of pagesData | keyvalue">{{page.key}}</a>
+      <a (click)="next()">&raquo;</a>
+    </div>
+    <app-list-announcements [announcements]="selected"></app-list-announcements>
+  </mat-card>
 </div>
