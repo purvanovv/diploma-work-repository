@@ -14,6 +14,7 @@ import { ListAnnouncementsComponent } from './list-announcements/list-announceme
 import { PreviewAnnouncementComponent } from './preview-announcement/preview-announcement.component';
 import { AnnouncementDetailsComponent } from './announcement-details/announcement-details.component';
 import { ListSearchResultComponent } from './list-search-result/list-search-result.component';
+import { PaginationComponent } from './pagination/pagination.component';
 
 @NgModule({
   imports: [
@@ -29,7 +30,8 @@ import { ListSearchResultComponent } from './list-search-result/list-search-resu
       ThirdStepComponent, PreviewImageModalComponent, 
       ListAnnouncementsComponent, PreviewAnnouncementComponent,
        AnnouncementDetailsComponent,
-       ListSearchResultComponent],
+       ListSearchResultComponent,
+       PaginationComponent],
   exports: [
     ListAnnouncementsComponent
   ]     
