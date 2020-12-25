@@ -1,0 +1,42 @@
+@import "../../../theme/theme-variables.scss";
+
+.pagination {
+  display: inline-block;
+}
+
+.pagination a {
+  color: mat-color($app-primary, default);
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+  border: 1px solid #ddd;
+}
+
+.pagination a.allowed {
+  transition: background-color .3s;
+  cursor: pointer;
+}
+
+.pagination a.selected {
+  background-color: mat-color($app-primary, default);
+  color: white;
+  border: 1px solid mat-color($app-primary, default);
+}
+
+.pagination a:last-child {
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.pagination a:first-child {
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+.pagination a:hover:not(.selected):not(.not-allowed) {
+  background-color: #ddd;
+}
+
+.pagination a.not-allowed {
+  cursor: not-allowed;
+}

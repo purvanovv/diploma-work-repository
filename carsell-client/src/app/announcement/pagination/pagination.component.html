@@ -1,0 +1,10 @@
+<div class="pagination">
+  <a class="allowed" (click)="prev()">&laquo;</a>
+  <a class="allowed" *ngIf="showFirst()" (click)="select(1)">1</a>
+  <a class="not-allowed" *ngIf="showFirst()">...</a>
+  <a class="allowed" (click)="select(pageIndex)" [class.selected]="pageIndex == currentPageIndex"
+    *ngFor="let pageIndex of pageIndexes">{{pageIndex}}</a>
+  <a class="not-allowed" *ngIf="showLast()">...</a>
+  <a class="allowed" *ngIf="showLast()" (click)="select(totalPages)">{{totalPages}}</a>
+  <a class="allowed" (click)="next()">&raquo;</a>
+</div>
