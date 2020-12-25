@@ -1,10 +1,19 @@
 <div class="container" *ngIf="!isLoading">
   <mat-card>
-    <div class="pagination">
+    <!-- <div class="pagination">
       <a (click)="prev()">&laquo;</a>
       <a (click)="select(page.key)" [class.selected]="page.key == currentPageIndex"
         *ngFor="let page of pagesData | keyvalue">{{page.key}}</a>
       <a (click)="next()">&raquo;</a>
+    </div> -->
+    <div class="pagination">
+      <a class="allowed" (click)="prev()">&laquo;</a>
+      <a class="allowed" *ngIf="showFirst()" (click)="select(1)">1</a>
+      <a class="not-allowed" *ngIf="showFirst()">...</a>
+      <a class="allowed" (click)="select(page)" [class.selected]="page == currentPageIndex" *ngFor="let page of pages">{{page}}</a>
+      <a class="not-allowed" *ngIf="showLast()">...</a>
+      <a class="allowed" *ngIf="showLast()" (click)="select(pagesData.size)">{{pagesData.size}}</a>
+      <a class="allowed" (click)="next()">&raquo;</a>
     </div>
     <app-list-announcements [announcements]="selected"></app-list-announcements>
   </mat-card>
