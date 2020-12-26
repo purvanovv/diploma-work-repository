@@ -4,35 +4,8 @@
       <div style="text-align: start;">
         <button mat-raised-button color="primary">Промени търсенето</button>
       </div>
-      <form [formGroup]="filterForm">
-        <div fxLayout="row wrap" fxLayoutGap="10px">
-          <div>
-            <mat-form-field appearance="legacy">
-              <mat-select placeholder="Подреди по:" formControlName="orderBy">
-                <mat-option [value]="order.key" *ngFor="let order of orders | keyvalue">
-                  {{ order.value }}</mat-option>
-              </mat-select>
-            </mat-form-field>
-          </div>
-          <div>
-            <mat-form-field appearance="legacy">
-              <mat-select placeholder="Цена:" formControlName="orderByPrice">
-                <mat-option [value]="order.key" *ngFor="let order of ordersByPrice | keyvalue">
-                  {{ order.value }}</mat-option>
-              </mat-select>
-            </mat-form-field>
-          </div>
-          <div>
-            <mat-form-field appearance="legacy">
-              <mat-select placeholder="Публикувани:" formControlName="orderByPublished">
-                <mat-option [value]="order.key" *ngFor="let order of ordersByPublish | keyvalue">
-                  {{ order.value }}</mat-option>
-              </mat-select>
-            </mat-form-field>
-          </div>
-
-        </div>
-      </form>
+      <app-filter-announcements [announcements]="announcements" (filtered)="onFilter($event)">
+      </app-filter-announcements>
     </div>
     <app-pagination [totalPages]="pagesData.size" [currentPageIndex]="currentPageIndex" (selected)="onSelect($event)">
     </app-pagination>
