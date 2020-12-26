@@ -1,7 +1,7 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { DomSanitizer } from '@angular/platform-browser';
-import { PreviewImageModalComponent } from '../create-announcement/preview-image-modal/preview-image-modal.component';
+import { PreviewImageModalComponent } from '../create-edit-announcement/preview-image-modal/preview-image-modal.component';
 import { AnnouncementPreview, ImageFilePreview, PreviewImageModalDataModel } from '../models';
 import { AnnouncementModelConverter } from '../utils';
 

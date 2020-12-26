@@ -6,11 +6,11 @@ import { modeStepLabels } from '../constants';
 import { Mode } from '../enums';
 
 @Component({
-  selector: 'app-create-announcement',
-  templateUrl: './create-announcement.component.html',
-  styleUrls: ['./create-announcement.component.scss'],
+  selector: 'app-create-edit-announcement',
+  templateUrl: './create-edit-announcement.component.html',
+  styleUrls: ['./create-edit-announcement.component.scss'],
 })
-export class CreateAnnouncementComponent implements OnInit {
+export class CreateEditAnnouncementComponent implements OnInit {
   public isEditable = true;
   public isLinear = true;
   public completed = true;
