@@ -54,6 +54,10 @@ export class AnnouncementStoreService {
     this._announcements.next(announcements);
   }
 
+  public getAnnouncements(): AnnouncementPreview[] {
+    return this.announcements;
+  }
+
   public getAnnouncements$(): Observable<AnnouncementPreview[]> {
     return this._announcements.asObservable();
   }
@@ -61,7 +65,6 @@ export class AnnouncementStoreService {
   public setAnnouncements(announcements: AnnouncementPreview[]) {
     this.announcements = announcements;
   }
-
 
   private get announcementId(): number {
     return this._announcementId.getValue();

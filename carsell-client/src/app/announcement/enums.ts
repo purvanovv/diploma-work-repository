@@ -79,6 +79,28 @@ export enum Mode {
   EDIT
 }
 
+export enum OrderBy {
+  NEWEST,
+  PRICE_LOWEST,
+  PRICE_HIGHEST
+}
+
+export enum OrderByPrice {
+  ALL,
+  LEV,
+  USD,
+  EUR
+}
+
+export enum OrderByPublished {
+  ALL,
+  TODAY,
+  LAST_THREE_DAYS,
+  LAST_SEVEN_DAYS,
+  LAST_FOURTEEN_DAYS,
+  LAST_MONTH
+}
+
 
 
 
