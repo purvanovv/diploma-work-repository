@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { startWith, tap } from 'rxjs/operators';
 import { orders, priceОrders, publishОrders } from '../constants';
 import { OrderBy, OrderByPrice, OrderByPublished, Currency } from '../enums';
@@ -18,7 +19,7 @@ export class FilterAnnouncementsComponent implements OnInit {
 
   @Input() announcements: AnnouncementPreview[];
   @Output() filtered = new EventEmitter<AnnouncementPreview[]>();
-  constructor() { }
+  constructor(private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.initFilterForm();
@@ -26,10 +27,16 @@ export class FilterAnnouncementsComponent implements OnInit {
   }
 
   initFilterForm() {
+    console.log(Number(null));
+    const queryParams = this.route.snapshot.queryParamMap;
+    const orderBy = queryParams.get('orderBy');
+    const orderByPrice = queryParams.get('orderByPrice');
+    const orderByPublished = queryParams.get('orderByPublished');
+
     this.filterForm = new FormGroup({
-      orderBy: new FormControl(OrderBy.NEWEST),
-      orderByPrice: new FormControl(OrderByPrice.ALL),
-      orderByPublished: new FormControl(OrderByPublished.ALL)
+      orderBy: new FormControl(orderBy !== null ? Number(orderBy) : OrderBy.NEWEST),
+      orderByPrice: new FormControl(orderByPrice !== null ? Number(orderByPrice) : OrderByPrice.ALL),
+      orderByPublished: new FormControl(orderByPublished !== null ? Number(orderByPublished) : OrderByPublished.ALL)
     })
   }
 
