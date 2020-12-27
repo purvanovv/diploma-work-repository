@@ -44,7 +44,47 @@ export class ListSearchResultComponent implements OnInit {
 
   $initAnnouncements() {
     const queryParams = this.route.snapshot.queryParamMap;
-    const searchData: AnnouncementSearch = { mainCategoryId: queryParams.get('mainCategoryId') }
+    const searchData: AnnouncementSearch = {
+      mainCategoryId: queryParams.get('mainCategoryId'),
+      make: queryParams.get('make'),
+      model: queryParams.get('model'),
+      engineType: queryParams.get('engineType'),
+      conditionType: queryParams.get('conditionType'),
+      horsePowerMin: queryParams.get('horsePowerMin'),
+      horsePowerMax: queryParams.get('horsePowerMax'),
+      emissionStandartType: queryParams.get('emissionStandartType'),
+      gearboxType: queryParams.get('gearboxType'),
+      subCategoryId: queryParams.get('subCategoryId'),
+      coolingType: queryParams.get('coolingType'),
+      numberOfAxels: queryParams.get('numberOfAxels'),
+      numberOfSeats: queryParams.get('numberOfSeats'),
+      weightCapacityMin: queryParams.get('weightCapacityMin'),
+      weightCapacityMax: queryParams.get('weightCapacityMax'),
+      priceMin: queryParams.get('priceMin'),
+      priceMax: queryParams.get('priceMax'),
+      dateOfManufactureFrom: queryParams.get('dateOfManufactureFrom'),
+      dateOfManufactureTo: queryParams.get('dateOfManufactureTo'),
+      mileageMax: queryParams.get('mileageMax'),
+      color: queryParams.get('color'),
+      region: queryParams.get('region'),
+      city: queryParams.get('city'),
+      cubatureMin: queryParams.get('cubatureMin'),
+      cubatureMax: queryParams.get('cubatureMax'),
+      engineCategoryType: queryParams.get('engineCategoryType'),
+      totalWeightMin: queryParams.get('totalWeightMin'),
+      workingVolumeMin: queryParams.get('workingVolumeMin'),
+      hoursOfOperationMax: queryParams.get('hoursOfOperationMax'),
+      numberOfBeds: queryParams.get('numberOfBeds'),
+      toiletType: queryParams.get('toiletType'),
+      heatingType: queryParams.get('heatingType'),
+      airConditionType: queryParams.get('airConditionType'),
+      lengthSizeMax: queryParams.get('lengthSizeMax'),
+      materialType: queryParams.get('materialType'),
+      widthMax: queryParams.get('widthMax'),
+      bicycleSize: queryParams.get('bicycleSize'),
+      numberOfGears: queryParams.get('numberOfGears')
+
+    }
     return this.announcementService.searchAnnouncements(
       searchData)
       .pipe(

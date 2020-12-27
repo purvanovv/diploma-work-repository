@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatCard } from '@angular/material/card';
-import { Router } from '@angular/router';
+import { convertToParamMap, Params, Router } from '@angular/router';
 import { AnnouncementStoreService } from '@app/announcement/announcement-store.service';
 import { AnnouncementSearchFormBuilder } from '@app/announcement/announcement.search.form.builder';
 import { AnnouncementService } from '@app/announcement/announcement.service';
@@ -46,7 +46,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
     const resizeObserver = new ResizeObserver(entries => {
       const cr = entries[0].contentRect;
       const numOfColumns = Math.floor(cr.width / 280);
-      console.log(cr.width);
       const mainMatCardWidth = numOfColumns * 280 + 48;
       this.mainMatCardWidth = mainMatCardWidth + 'px';
     });
@@ -91,7 +90,42 @@ export class HomeComponent implements OnInit, AfterViewInit {
       queryParams: {
         mainCategoryId: searchForm.mainCategoryId,
         make: searchForm.make,
-        model: searchForm.model
+        model: searchForm.model,
+        engineType: searchForm.engineType,
+        conditionType: searchForm.conditionType,
+        horsePowerMin: searchForm.horsePowerMin,
+        horsePowerMax: searchForm.horsePowerMax,
+        emissionStandartType: searchForm.emissionStandartType,
+        gearboxType: searchForm.gearboxType,
+        subCategoryId: searchForm.subCategoryId,
+        coolingType: searchForm.coolingType,
+        numberOfAxels: searchForm.numberOfAxels,
+        numberOfSeats: searchForm.numberOfSeats,
+        weightCapacityMin: searchForm.weightCapacityMin,
+        weightCapacityMax: searchForm.weightCapacityMax,
+        priceMin: searchForm.priceMin,
+        priceMax: searchForm.priceMax,
+        dateOfManufactureFrom: searchForm.dateOfManufactureFrom,
+        dateOfManufactureTo: searchForm.dateOfManufactureTo,
+        mileageMax: searchForm.mileageMax,
+        color: searchForm.color,
+        region: searchForm.region,
+        city: searchForm.city,
+        cubatureMin: searchForm.cubatureMin,
+        cubatureMax: searchForm.cubatureMax,
+        engineCategoryType: searchForm.engineCategoryType,
+        totalWeightMin: searchForm.totalWeightMin,
+        workingVolumeMin: searchForm.workingVolumeMin,
+        hoursOfOperationMax: searchForm.hoursOfOperationMax,
+        numberOfBeds: searchForm.numberOfBeds,
+        toiletType: searchForm.toiletType,
+        heatingType: searchForm.heatingType,
+        airConditionType: searchForm.airConditionType,
+        lengthSizeMax: searchForm.lengthSizeMax,
+        materialType: searchForm.materialType,
+        widthMax: searchForm.widthMax,
+        bicycleSize: searchForm.bicycleSize,
+        numberOfGears: searchForm.numberOfGears
       }
     });
   }
