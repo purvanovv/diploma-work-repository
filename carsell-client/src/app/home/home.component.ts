@@ -86,7 +86,14 @@ export class HomeComponent implements OnInit, AfterViewInit {
   }
 
   showAllAnnouncements() {
-    this.router.navigate(['announcement/list']);
+    const searchForm = this.searchForm.getRawValue();
+    this.router.navigate(['announcement/list'], {
+      queryParams: {
+        mainCategoryId: searchForm.mainCategoryId,
+        make: searchForm.make,
+        model: searchForm.model
+      }
+    });
   }
 
   private initYears() {

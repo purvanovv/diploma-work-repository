@@ -7,7 +7,7 @@ import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChange
 })
 export class PaginationComponent implements OnChanges {
   @Input() totalPages: number | undefined = undefined
-  @Input() maxPageIndexes = 6;
+  @Input() maxPageIndexes = 3;
   @Input() currentPageIndex = 1;
   @Output() selected = new EventEmitter<number>();
   pageIndexes: number[] | undefined = undefined;
@@ -21,7 +21,15 @@ export class PaginationComponent implements OnChanges {
   initPageIndexes() {
     if (this.pageIndexes === undefined) {
       const totalPageIndexes = Math.min(this.totalPages, this.maxPageIndexes);
-      const firstPageIndex = this.currentPageIndex;
+      let firstPageIndex: number;
+      if (this.currentPageIndex > 1 &&
+        this.currentPageIndex <= this.totalPages &&
+        this.totalPages > this.maxPageIndexes) {
+        const indexRange = Math.ceil(this.currentPageIndex / this.maxPageIndexes);
+        firstPageIndex = this.maxPageIndexes * indexRange - this.maxPageIndexes + 1;
+      } else {
+        firstPageIndex = 1;
+      }
       const lastPageIndex = firstPageIndex + totalPageIndexes - 1;
       this.pageIndexes = [];
       for (let index = firstPageIndex; index <= lastPageIndex; index++) {

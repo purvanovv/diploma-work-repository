@@ -25,10 +25,7 @@ export class ListAnnouncementsComponent implements OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes['announcements']) {
-      this.init();
-    }
-
+    this.init();
   }
 
   preview(id: number) {
@@ -36,16 +33,20 @@ export class ListAnnouncementsComponent implements OnChanges {
   }
 
   private init() {
-    this.announcementsToList = []
-    if (this.countOfItemsToList !== undefined && this.countOfItemsToList < this.announcements.length) {
-      for (let i = 0; i < this.countOfItemsToList; i++) {
-        this.announcementsToList
-          .push(this.announcementModelConverter.converAnnouncementPreviewToAnnouncementListItem(this.announcements[i]));
+    this.announcementsToList = [];
+    if (this.announcements !== undefined && this.announcements.length > 0) {
+      if (this.countOfItemsToList !== undefined && this.countOfItemsToList < this.announcements.length) {
+        for (let i = 0; i < this.countOfItemsToList; i++) {
+          this.announcementsToList
+            .push(this.announcementModelConverter
+              .converAnnouncementPreviewToAnnouncementListItem(this.announcements[i]));
+        }
       }
-    }
-    else {
-      this.announcementsToList = this.announcements
-        .map(a => this.announcementModelConverter.converAnnouncementPreviewToAnnouncementListItem(a));
+      else {
+        this.announcementsToList = this.announcements
+          .map(a => this.announcementModelConverter.converAnnouncementPreviewToAnnouncementListItem(a));
+      }
+
     }
   }
 
