@@ -7,10 +7,12 @@
       <app-filter-announcements [announcements]="announcements" (filtered)="onFilter($event)">
       </app-filter-announcements>
     </div>
-    <app-pagination [totalPages]="pagesData.size" [currentPageIndex]="currentPageIndex" (selected)="onSelect($event)">
+    <app-pagination [totalPages]="pagesData.size" [currentPageIndex]="currentPageIndex"
+      [maxPageIndexes]="maxPageIndexes" (selected)="onSelect($event)">
     </app-pagination>
     <app-list-announcements [announcements]="selected"></app-list-announcements>
-    <app-pagination [totalPages]="pagesData.size" [currentPageIndex]="currentPageIndex" (selected)="onSelect($event)">
+    <app-pagination [totalPages]="pagesData.size" [currentPageIndex]="currentPageIndex"
+      [maxPageIndexes]="maxPageIndexes" (selected)="onSelect($event)">
     </app-pagination>
   </mat-card>
 </div>

@@ -27,7 +27,6 @@ export class FilterAnnouncementsComponent implements OnInit {
   }
 
   initFilterForm() {
-    console.log(Number(null));
     const queryParams = this.route.snapshot.queryParamMap;
     const orderBy = queryParams.get('orderBy');
     const orderByPrice = queryParams.get('orderByPrice');
@@ -80,25 +79,32 @@ export class FilterAnnouncementsComponent implements OnInit {
         const orderByPublished = filter.orderByPublished;
         let targetDate = new Date();
         if (orderByPublished === OrderByPublished.TODAY) {
-          return new Date(a.metaProps.createdOn).getDay() === targetDate.getDay();
+          return this.isToday(new Date(a.metaProps.createdOn));
         } else if (orderByPublished === OrderByPublished.LAST_MONTH) {
           targetDate.setMonth(targetDate.getMonth() - 1);
           return new Date(a.metaProps.createdOn).getTime() >= targetDate.getTime();
         } else if (orderByPublished === OrderByPublished.LAST_FOURTEEN_DAYS) {
           targetDate = new Date(targetDate.getTime() - (14 * 24 * 60 * 60 * 1000));
-          return new Date(a.metaProps.createdOn).getDay() >= targetDate.getDay();
+          return new Date(a.metaProps.createdOn).getTime() >= targetDate.getTime();
         } else if (orderByPublished === OrderByPublished.LAST_SEVEN_DAYS) {
           targetDate = new Date(targetDate.getTime() - (7 * 24 * 60 * 60 * 1000));
-          return new Date(a.metaProps.createdOn).getDay() >= targetDate.getDay();
+          return new Date(a.metaProps.createdOn).getTime() >= targetDate.getTime();
         } else if (orderByPublished === OrderByPublished.LAST_THREE_DAYS) {
           targetDate = new Date(targetDate.getTime() - (3 * 24 * 60 * 60 * 1000));
-          return new Date(a.metaProps.createdOn).getDay() >= targetDate.getDay();
+          return new Date(a.metaProps.createdOn).getTime() >= targetDate.getTime();
         } else if (orderByPublished === OrderByPublished.ALL) {
           return true;
         }
       });
     this.filtered.emit(currAnnouncements);
 
+  }
+
+  isToday(targetDate: Date) {
+    const today = new Date();
+    return targetDate.getDate() === today.getDate() &&
+      targetDate.getMonth() === today.getMonth() &&
+      targetDate.getFullYear() === today.getFullYear();
   }
 
 }

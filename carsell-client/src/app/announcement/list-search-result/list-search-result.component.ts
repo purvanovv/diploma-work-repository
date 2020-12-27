@@ -1,12 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { pipe } from 'rxjs';
-import { filter, finalize, startWith, take, tap } from 'rxjs/operators';
+import { take, tap } from 'rxjs/operators';
 import { AnnouncementStoreService } from '../announcement-store.service';
 import { AnnouncementService } from '../announcement.service';
-import { orders, priceОrders, publishОrders } from '../constants';
-import { Currency, OrderBy, OrderByPrice, OrderByPublished } from '../enums';
 import { AnnouncementPreview, AnnouncementSearch } from '../models';
 
 @Component({
@@ -16,10 +12,10 @@ import { AnnouncementPreview, AnnouncementSearch } from '../models';
 })
 export class ListSearchResultComponent implements OnInit {
   selected: AnnouncementPreview[];
-  itemsPerPage = 1;
+  itemsPerPage = 8;
   isLoading: boolean;
   currentPageIndex = 1;
-  maxPageIndexes = 4;
+  maxPageIndexes = 6;
   pagesData: Map<number, AnnouncementPreview[]>;
   announcements: AnnouncementPreview[];
   constructor(
@@ -68,14 +64,18 @@ export class ListSearchResultComponent implements OnInit {
       this.router.navigate([], { queryParams: { currentPageIndex: 1 }, queryParamsHandling: 'merge' });
     }
 
-    const currAnnouncements = Object.assign([], announcements);
-    const countOfPages = Math.ceil(currAnnouncements.length / this.itemsPerPage);
     this.pagesData = new Map();
-    for (let pageIndex = 1; pageIndex <= countOfPages; pageIndex++) {
-      const itemsPerPage = Math.min(this.itemsPerPage, currAnnouncements.length);
-      this.pagesData.set(pageIndex, currAnnouncements.splice(0, itemsPerPage));
+    this.selected = [];
+
+    if (announcements !== undefined && announcements.length > 0) {
+      const currAnnouncements = Object.assign([], announcements);
+      const countOfPages = Math.ceil(currAnnouncements.length / this.itemsPerPage);
+      for (let pageIndex = 1; pageIndex <= countOfPages; pageIndex++) {
+        const itemsPerPage = Math.min(this.itemsPerPage, currAnnouncements.length);
+        this.pagesData.set(pageIndex, currAnnouncements.splice(0, itemsPerPage));
+      }
+      this.selected = this.pagesData.get(this.currentPageIndex);
     }
-    this.selected = this.pagesData.get(this.currentPageIndex);
   }
 
   onSelect(pageIndex: number) {
