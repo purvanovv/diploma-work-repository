@@ -16,6 +16,7 @@ import { AnnouncementDetailsComponent } from './announcement-details/announcemen
 import { ListSearchResultComponent } from './list-search-result/list-search-result.component';
 import { PaginationComponent } from './pagination/pagination.component';
 import { FilterAnnouncementsComponent } from './filter-announcements/filter-announcements.component';
+import { SearchAnnouncementsComponent } from './search-announcements/search-announcements.component';
 
 @NgModule({
   imports: [
@@ -33,7 +34,8 @@ import { FilterAnnouncementsComponent } from './filter-announcements/filter-anno
     AnnouncementDetailsComponent,
     ListSearchResultComponent,
     PaginationComponent,
-    FilterAnnouncementsComponent],
+    FilterAnnouncementsComponent,
+    SearchAnnouncementsComponent],
   exports: [
     ListAnnouncementsComponent
   ]
