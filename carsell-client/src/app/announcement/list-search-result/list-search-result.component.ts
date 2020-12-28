@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { take, tap } from 'rxjs/operators';
 import { AnnouncementStoreService } from '../announcement-store.service';
 import { AnnouncementService } from '../announcement.service';
-import { AnnouncementPreview, AnnouncementSearch } from '../models';
+import { AnnouncementPreview, AnnouncementSearch, AnnouncementSearchModel } from '../models';
 
 @Component({
   selector: 'app-list-search-result',
@@ -18,6 +18,8 @@ export class ListSearchResultComponent implements OnInit {
   maxPageIndexes = 6;
   pagesData: Map<number, AnnouncementPreview[]>;
   announcements: AnnouncementPreview[];
+  searchData: AnnouncementSearchModel;
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -27,6 +29,8 @@ export class ListSearchResultComponent implements OnInit {
 
   ngOnInit(): void {
     this.isLoading = true;
+    const queryParams = this.route.snapshot.queryParamMap;
+    this.searchData = AnnouncementSearchModel.fromQueryParams(queryParams);
     this.announcements = this.announcementStore.getAnnouncements();
     if (this.announcements.length <= 0) {
       this.$initAnnouncements().pipe(tap(() => {
@@ -43,50 +47,10 @@ export class ListSearchResultComponent implements OnInit {
   }
 
   $initAnnouncements() {
-    const queryParams = this.route.snapshot.queryParamMap;
-    const searchData: AnnouncementSearch = {
-      mainCategoryId: queryParams.get('mainCategoryId'),
-      make: queryParams.get('make'),
-      model: queryParams.get('model'),
-      engineType: queryParams.get('engineType'),
-      conditionType: queryParams.get('conditionType'),
-      horsePowerMin: queryParams.get('horsePowerMin'),
-      horsePowerMax: queryParams.get('horsePowerMax'),
-      emissionStandartType: queryParams.get('emissionStandartType'),
-      gearboxType: queryParams.get('gearboxType'),
-      subCategoryId: queryParams.get('subCategoryId'),
-      coolingType: queryParams.get('coolingType'),
-      numberOfAxels: queryParams.get('numberOfAxels'),
-      numberOfSeats: queryParams.get('numberOfSeats'),
-      weightCapacityMin: queryParams.get('weightCapacityMin'),
-      weightCapacityMax: queryParams.get('weightCapacityMax'),
-      priceMin: queryParams.get('priceMin'),
-      priceMax: queryParams.get('priceMax'),
-      dateOfManufactureFrom: queryParams.get('dateOfManufactureFrom'),
-      dateOfManufactureTo: queryParams.get('dateOfManufactureTo'),
-      mileageMax: queryParams.get('mileageMax'),
-      color: queryParams.get('color'),
-      region: queryParams.get('region'),
-      city: queryParams.get('city'),
-      cubatureMin: queryParams.get('cubatureMin'),
-      cubatureMax: queryParams.get('cubatureMax'),
-      engineCategoryType: queryParams.get('engineCategoryType'),
-      totalWeightMin: queryParams.get('totalWeightMin'),
-      workingVolumeMin: queryParams.get('workingVolumeMin'),
-      hoursOfOperationMax: queryParams.get('hoursOfOperationMax'),
-      numberOfBeds: queryParams.get('numberOfBeds'),
-      toiletType: queryParams.get('toiletType'),
-      heatingType: queryParams.get('heatingType'),
-      airConditionType: queryParams.get('airConditionType'),
-      lengthSizeMax: queryParams.get('lengthSizeMax'),
-      materialType: queryParams.get('materialType'),
-      widthMax: queryParams.get('widthMax'),
-      bicycleSize: queryParams.get('bicycleSize'),
-      numberOfGears: queryParams.get('numberOfGears')
 
-    }
+
     return this.announcementService.searchAnnouncements(
-      searchData)
+      this.searchData)
       .pipe(
         take(1),
         tap((announcements: AnnouncementPreview[]) => {

@@ -77,22 +77,32 @@ export class FilterAnnouncementsComponent implements OnInit {
         }
       }).filter(a => {
         const orderByPublished = filter.orderByPublished;
-        let targetDate = new Date();
         if (orderByPublished === OrderByPublished.TODAY) {
           return this.isToday(new Date(a.metaProps.createdOn));
         } else if (orderByPublished === OrderByPublished.LAST_MONTH) {
+          const targetDate = new Date();
           targetDate.setMonth(targetDate.getMonth() - 1);
           return new Date(a.metaProps.createdOn).getTime() >= targetDate.getTime();
-        } else if (orderByPublished === OrderByPublished.LAST_FOURTEEN_DAYS) {
-          targetDate = new Date(targetDate.getTime() - (14 * 24 * 60 * 60 * 1000));
-          return new Date(a.metaProps.createdOn).getTime() >= targetDate.getTime();
-        } else if (orderByPublished === OrderByPublished.LAST_SEVEN_DAYS) {
-          targetDate = new Date(targetDate.getTime() - (7 * 24 * 60 * 60 * 1000));
-          return new Date(a.metaProps.createdOn).getTime() >= targetDate.getTime();
-        } else if (orderByPublished === OrderByPublished.LAST_THREE_DAYS) {
-          targetDate = new Date(targetDate.getTime() - (3 * 24 * 60 * 60 * 1000));
-          return new Date(a.metaProps.createdOn).getTime() >= targetDate.getTime();
-        } else if (orderByPublished === OrderByPublished.ALL) {
+        }
+
+        else if (orderByPublished === OrderByPublished.LAST_FOURTEEN_DAYS) {
+          const dateBefore14Days = new Date(new Date().getTime() - (14 * 24 * 60 * 60 * 1000));
+          return new Date(a.metaProps.createdOn).getTime() >= dateBefore14Days.getTime();
+        }
+
+        else if (orderByPublished === OrderByPublished.LAST_SEVEN_DAYS) {
+          const dateBefore7Days = new Date(new Date().getTime() - (7 * 24 * 60 * 60 * 1000));
+          return new Date(a.metaProps.createdOn).getTime() >= dateBefore7Days.getTime();
+        }
+
+        else if (orderByPublished === OrderByPublished.LAST_THREE_DAYS) {
+          const dateBefore3Days = new Date(new Date().getTime() - (3 * 24 * 60 * 60 * 1000));
+          return new Date(a.metaProps.createdOn).getTime() >= dateBefore3Days.getTime();
+        }
+
+
+
+        else if (orderByPublished === OrderByPublished.ALL) {
           return true;
         }
       });
@@ -106,5 +116,6 @@ export class FilterAnnouncementsComponent implements OnInit {
       targetDate.getMonth() === today.getMonth() &&
       targetDate.getFullYear() === today.getFullYear();
   }
+
 
 }

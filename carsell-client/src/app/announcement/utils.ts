@@ -1,4 +1,3 @@
-import { R3TargetBinder } from '@angular/compiler';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import {
     AirConditionType,

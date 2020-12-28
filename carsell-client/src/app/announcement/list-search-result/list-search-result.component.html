@@ -1,7 +1,13 @@
 <div class="container" *ngIf="!isLoading">
   <mat-card>
     <div>
-      <div style="text-align: start;">
+      <div class="search-holder">
+        <span class="bold">Търсене:</span>
+        <span>
+          {{this.searchData.toString()}}
+        </span>
+      </div>
+      <div  class="search-btn-holder">
         <button mat-raised-button color="primary">Промени търсенето</button>
       </div>
       <app-filter-announcements [announcements]="announcements" (filtered)="onFilter($event)">

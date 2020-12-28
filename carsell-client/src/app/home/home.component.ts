@@ -6,7 +6,7 @@ import { AnnouncementStoreService } from '@app/announcement/announcement-store.s
 import { AnnouncementSearchFormBuilder } from '@app/announcement/announcement.search.form.builder';
 import { AnnouncementService } from '@app/announcement/announcement.service';
 import { MainCategoryType } from '@app/announcement/enums';
-import { AnnouncementPreview, CategoryPair, MainCategory, Make } from '@app/announcement/models';
+import { AnnouncementPreview, AnnouncementSearchModel, CategoryPair, MainCategory, Make } from '@app/announcement/models';
 import ResizeObserver from 'resize-observer-polyfill';
 import { concat, Observable } from 'rxjs';
 import { finalize, mergeMap, take, tap } from 'rxjs/operators';
@@ -85,49 +85,8 @@ export class HomeComponent implements OnInit, AfterViewInit {
   }
 
   showAllAnnouncements() {
-    const searchForm = this.searchForm.getRawValue();
-    this.router.navigate(['announcement/list'], {
-      queryParams: {
-        mainCategoryId: searchForm.mainCategoryId,
-        make: searchForm.make,
-        model: searchForm.model,
-        engineType: searchForm.engineType,
-        conditionType: searchForm.conditionType,
-        horsePowerMin: searchForm.horsePowerMin,
-        horsePowerMax: searchForm.horsePowerMax,
-        emissionStandartType: searchForm.emissionStandartType,
-        gearboxType: searchForm.gearboxType,
-        subCategoryId: searchForm.subCategoryId,
-        coolingType: searchForm.coolingType,
-        numberOfAxels: searchForm.numberOfAxels,
-        numberOfSeats: searchForm.numberOfSeats,
-        weightCapacityMin: searchForm.weightCapacityMin,
-        weightCapacityMax: searchForm.weightCapacityMax,
-        priceMin: searchForm.priceMin,
-        priceMax: searchForm.priceMax,
-        dateOfManufactureFrom: searchForm.dateOfManufactureFrom,
-        dateOfManufactureTo: searchForm.dateOfManufactureTo,
-        mileageMax: searchForm.mileageMax,
-        color: searchForm.color,
-        region: searchForm.region,
-        city: searchForm.city,
-        cubatureMin: searchForm.cubatureMin,
-        cubatureMax: searchForm.cubatureMax,
-        engineCategoryType: searchForm.engineCategoryType,
-        totalWeightMin: searchForm.totalWeightMin,
-        workingVolumeMin: searchForm.workingVolumeMin,
-        hoursOfOperationMax: searchForm.hoursOfOperationMax,
-        numberOfBeds: searchForm.numberOfBeds,
-        toiletType: searchForm.toiletType,
-        heatingType: searchForm.heatingType,
-        airConditionType: searchForm.airConditionType,
-        lengthSizeMax: searchForm.lengthSizeMax,
-        materialType: searchForm.materialType,
-        widthMax: searchForm.widthMax,
-        bicycleSize: searchForm.bicycleSize,
-        numberOfGears: searchForm.numberOfGears
-      }
-    });
+    const queryParams = AnnouncementSearchModel.toQueryParams(this.searchForm.getRawValue());
+    this.router.navigate(['announcement/list'], { queryParams });
   }
 
   private initYears() {
