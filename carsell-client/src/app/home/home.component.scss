@@ -1,3 +1,5 @@
+@import "../../theme/theme-variables.scss";
+
 .main-mat-card {
   margin: auto;
   max-width: 1168px;
@@ -18,6 +20,16 @@
   padding: 1rem;
   margin-bottom: 10px;
   border-radius: 5px;
+}
+
+.search-btn-holder {
+  margin-top: 10px;
+  color: mat-color($app-primary, default);
+  cursor: pointer;
+}
+
+.search-btn-holder a:hover {
+  text-decoration: underline;
 }
 
 .about-services {

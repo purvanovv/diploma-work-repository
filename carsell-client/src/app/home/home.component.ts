@@ -89,6 +89,10 @@ export class HomeComponent implements OnInit, AfterViewInit {
     this.router.navigate(['announcement/list'], { queryParams });
   }
 
+  clean() {
+    this.init().subscribe();
+  }
+
   private initYears() {
     this.years = [];
     const max = new Date().getFullYear();
