@@ -47,8 +47,6 @@ export class ListSearchResultComponent implements OnInit {
   }
 
   $initAnnouncements() {
-
-
     return this.announcementService.searchAnnouncements(
       this.searchData)
       .pipe(
@@ -90,6 +88,11 @@ export class ListSearchResultComponent implements OnInit {
 
   onFilter(filteredAnnouncements: AnnouncementPreview[]) {
     this.initPagesData(filteredAnnouncements);
+  }
+
+  globalSearch() {
+    this.router.navigate(['announcement/search'],
+     { queryParams: AnnouncementSearchModel.toQueryParams(this.searchData) });
   }
 
 }

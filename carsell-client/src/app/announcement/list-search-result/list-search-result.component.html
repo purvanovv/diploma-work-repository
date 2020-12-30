@@ -7,8 +7,8 @@
           {{this.searchData.toString()}}
         </span>
       </div>
-      <div  class="search-btn-holder">
-        <button mat-raised-button color="primary">Промени търсенето</button>
+      <div class="search-btn-holder">
+        <button (click)="globalSearch()" mat-raised-button color="primary">Промени търсенето</button>
       </div>
       <app-filter-announcements [announcements]="announcements" (filtered)="onFilter($event)">
       </app-filter-announcements>

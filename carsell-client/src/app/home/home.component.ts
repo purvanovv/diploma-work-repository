@@ -93,6 +93,11 @@ export class HomeComponent implements OnInit, AfterViewInit {
     this.init().subscribe();
   }
 
+  globalSearch(){
+    const queryParams = AnnouncementSearchModel.toQueryParams(this.searchForm.getRawValue());
+    this.router.navigate(['announcement/search'], { queryParams });
+  }
+
   private initYears() {
     this.years = [];
     const max = new Date().getFullYear();

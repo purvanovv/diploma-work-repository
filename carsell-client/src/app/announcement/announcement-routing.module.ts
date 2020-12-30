@@ -4,13 +4,15 @@ import { CreateEditAnnouncementComponent } from './create-edit-announcement/crea
 import { Shell } from '@app/shell/shell.service';
 import { PreviewAnnouncementComponent } from './preview-announcement/preview-announcement.component';
 import { ListSearchResultComponent } from './list-search-result/list-search-result.component';
+import { SearchAnnouncementsComponent } from './search-announcements/search-announcements.component';
 
 const routes: Routes = [
   Shell.childRoutes([
     { path: 'announcement/create', component: CreateEditAnnouncementComponent, data: { title: 'CreateAnnouncement' } },
     { path: 'announcement/list', component: ListSearchResultComponent },
     { path: 'announcement/preview/:id', component: PreviewAnnouncementComponent },
-    { path: 'announcement/edit/:id', component: CreateEditAnnouncementComponent }
+    { path: 'announcement/edit/:id', component: CreateEditAnnouncementComponent },
+    { path: 'announcement/search', component: SearchAnnouncementsComponent }
   ]),
 ];
 @NgModule({

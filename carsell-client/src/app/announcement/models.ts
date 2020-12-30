@@ -17,8 +17,8 @@ import {
 
 export interface MainCategory {
   id: number;
-  name: string;
-  value: string;
+  name?: string;
+  value?: string;
 }
 
 export interface SubCategory {
