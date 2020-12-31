@@ -204,6 +204,7 @@ export interface AnnouncementPreview {
 
 export interface AnnouncementSearch {
   mainCategoryId: string;
+  mainCategoryName: string;
   make: string;
   model: string;
   engineType: string;
@@ -213,6 +214,7 @@ export interface AnnouncementSearch {
   emissionStandartType: string;
   gearboxType: string;
   subCategoryId: string;
+  subCategoryName: string;
   coolingType: string;
   numberOfAxels: string;
   numberOfSeats: string;
@@ -244,6 +246,8 @@ export interface AnnouncementSearch {
 }
 
 export class AnnouncementSearchModel implements AnnouncementSearch {
+  mainCategoryName: string;
+  subCategoryName: string;
   mainCategoryId: string;
   make: string;
   model: string;
@@ -371,7 +375,7 @@ export class AnnouncementSearchModel implements AnnouncementSearch {
 
   toString() {
     let searchString = `
-      ${this.mainCategoryId != null && this.mainCategoryId.trim() !== '' ? 'Основна категория: ' + this.mainCategoryId + ', ' : ''} 
+      ${this.mainCategoryName != null && this.mainCategoryName.trim() !== '' ? 'Основна категория: ' + this.mainCategoryName + ', ' : ''} 
       ${this.make != null && this.make.trim() !== '' ? 'Марка: ' + this.make + ', ' : ''} 
       ${this.model != null && this.model.trim() !== '' ? 'Модел: ' + this.model + ', ' : ''} 
       ${this.engineType != null && this.engineType.trim() !== '' ? 'Тип двигател: ' + this.engineType + ', ' : ''} 
@@ -380,7 +384,7 @@ export class AnnouncementSearchModel implements AnnouncementSearch {
       ${this.horsePowerMax != null && this.horsePowerMax.trim() !== '' ? 'Мощност до: ' + this.horsePowerMax + ', ' : ''} 
       ${this.emissionStandartType != null && this.emissionStandartType.trim() !== '' ? 'Евростандарт: ' + this.emissionStandartType + ', ' : ''} 
       ${this.gearboxType != null && this.gearboxType.trim() !== '' ? 'Скоростна кутия: ' + this.gearboxType + ', ' : ''} 
-      ${this.subCategoryId != null && this.subCategoryId.trim() !== '' ? 'Категория: ' + this.subCategoryId + ', ' : ''} 
+      ${this.subCategoryName != null && this.subCategoryName.trim() !== '' ? 'Категория: ' + this.subCategoryName + ', ' : ''} 
       ${this.coolingType != null && this.coolingType.trim() !== '' ? 'Вид охлаждане: ' + this.coolingType + ', ' : ''} 
       ${this.numberOfAxels != null && this.numberOfAxels.trim() !== '' ? 'Брой оси: ' + this.numberOfAxels + ', ' : ''} 
       ${this.numberOfSeats != null && this.numberOfSeats.trim() !== '' ? 'Брой места: ' + this.numberOfSeats + ', ' : ''} 

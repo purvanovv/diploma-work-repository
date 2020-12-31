@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" *ngIf="!isLoading">
   <mat-card class="main-mat-card">
     <mat-card-content>
       <form [formGroup]="searchForm">
@@ -36,7 +36,7 @@
             <div *ngIf="containsControl('engineType')">
               <mat-form-field appearance="legacy">
                 <mat-select placeholder="Тип двигател" formControlName="engineType">
-                  <mat-option [value]="name" *ngFor="let name of engineType | enumToArray">
+                  <mat-option [value]="getEnumValue(name, engineType)" *ngFor="let name of engineType | enumToArray">
                     {{ getEnumValue(name, engineType) }}
                   </mat-option>
                 </mat-select>
@@ -46,7 +46,7 @@
             <div *ngIf="containsControl('gearboxType')">
               <mat-form-field appearance="legacy">
                 <mat-select placeholder="Скоростна кутия" formControlName="gearboxType">
-                  <mat-option [value]="name" *ngFor="let name of gearboxType | enumToArray">
+                  <mat-option [value]="getEnumValue(name, gearboxType)" *ngFor="let name of gearboxType | enumToArray">
                     {{ getEnumValue(name, gearboxType) }}
                   </mat-option>
                 </mat-select>
@@ -68,7 +68,7 @@
             <div *ngIf="containsControl('coolingType')">
               <mat-form-field appearance="legacy">
                 <mat-select placeholder="Вид охлаждане" formControlName="coolingType">
-                  <mat-option [value]="name" *ngFor="let name of coolingType | enumToArray">
+                  <mat-option [value]="getEnumValue(name, coolingType)" *ngFor="let name of coolingType | enumToArray">
                     {{ getEnumValue(name, coolingType) }}
                   </mat-option>
                 </mat-select>
@@ -138,7 +138,6 @@
                 <mat-hint>в километри</mat-hint>
               </mat-form-field>
             </div>
-
           </div>
 
           <div class="form-control-column">
@@ -185,7 +184,7 @@
             <div *ngIf="containsControl('engineCategoryType')">
               <mat-form-field appearance="legacy">
                 <mat-select placeholder="Вид двигател" formControlName="engineCategoryType">
-                  <mat-option [value]="name" *ngFor="let name of engineCategoryType | enumToArray">
+                  <mat-option [value]="getEnumValue(name, engineCategoryType)" *ngFor="let name of engineCategoryType | enumToArray">
                     {{ getEnumValue(name, engineCategoryType) }}
                   </mat-option>
                 </mat-select>
@@ -231,7 +230,7 @@
             <div *ngIf="containsControl('emissionStandartType')">
               <mat-form-field appearance="legacy">
                 <mat-select placeholder="Евростандарт" formControlName="emissionStandartType">
-                  <mat-option [value]="name" *ngFor="let name of emissionStandartType | enumToArray">
+                  <mat-option [value]="getEnumValue(name, emissionStandartType)" *ngFor="let name of emissionStandartType | enumToArray">
                     {{ getEnumValue(name, emissionStandartType) }}
                   </mat-option>
                 </mat-select>
@@ -242,7 +241,7 @@
               <div class="form-control-condition">
                 <label>Състояние:</label>
                 <mat-radio-group class="condition-radio-group" formControlName="conditionType">
-                  <mat-radio-button class="condition-radio-button" [value]="name"
+                  <mat-radio-button color="primary" class="condition-radio-button" [value]="getEnumValue(name, conditionType)"
                     *ngFor="let name of conditionType | enumToArray">
                     {{ getEnumValue(name, conditionType) }}</mat-radio-button>
                 </mat-radio-group>
@@ -259,7 +258,7 @@
             <div *ngIf="containsControl('toiletType')">
               <mat-form-field appearance="legacy">
                 <mat-select placeholder="Тоалетна" formControlName="toiletType">
-                  <mat-option [value]="name" *ngFor="let name of toiletType | enumToArray">
+                  <mat-option [value]="getEnumValue(name, toiletType)" *ngFor="let name of toiletType | enumToArray">
                     {{ getEnumValue(name, toiletType) }}
                   </mat-option>
                 </mat-select>
@@ -269,7 +268,7 @@
             <div *ngIf="containsControl('heatingType')">
               <mat-form-field appearance="legacy">
                 <mat-select placeholder="Отопление" formControlName="heatingType">
-                  <mat-option [value]="name" *ngFor="let name of heatingType | enumToArray">
+                  <mat-option [value]="getEnumValue(name, heatingType)" *ngFor="let name of heatingType | enumToArray">
                     {{ getEnumValue(name, heatingType) }}
                   </mat-option>
                 </mat-select>
@@ -279,7 +278,7 @@
             <div *ngIf="containsControl('airConditionType')">
               <mat-form-field appearance="legacy">
                 <mat-select placeholder="Климатик" formControlName="airConditionType">
-                  <mat-option [value]="name" *ngFor="let name of airConditionType | enumToArray">
+                  <mat-option [value]="getEnumValue(name, airConditionType)" *ngFor="let name of airConditionType | enumToArray">
                     {{ getEnumValue(name, airConditionType) }}
                   </mat-option>
                 </mat-select>
@@ -296,7 +295,7 @@
             <div *ngIf="containsControl('materialType')">
               <mat-form-field appearance="legacy">
                 <mat-select placeholder="Материал" formControlName="materialType">
-                  <mat-option [value]="name" *ngFor="let name of materialType | enumToArray">
+                  <mat-option [value]="getEnumValue(name, materialType)" *ngFor="let name of materialType | enumToArray">
                     {{ getEnumValue(name, materialType) }}
                   </mat-option>
                 </mat-select>

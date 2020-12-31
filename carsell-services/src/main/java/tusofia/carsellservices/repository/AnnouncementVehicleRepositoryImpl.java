@@ -278,6 +278,8 @@ public class AnnouncementVehicleRepositoryImpl implements AnnouncementVehicleRep
 		}
 
 	}
+	
+	
 
 	private SearchAnnouncementQuery getSearchAnnouncemenQuery(AnnouncementVehicleSearchDTO searchModel) {
 		return new SearchAnnouncementQuery.Builder()
@@ -286,10 +288,39 @@ public class AnnouncementVehicleRepositoryImpl implements AnnouncementVehicleRep
 				.addConditionValue("model", searchModel.getModel(), SearchAnnouncementQuery.EQUAlS)
 				.addConditionValue("engine_type", searchModel.getEngineType(), SearchAnnouncementQuery.EQUAlS)
 				.addConditionValue("condition_type", searchModel.getConditionType(), SearchAnnouncementQuery.EQUAlS)
-				.addConditionValue("horse_power", searchModel.getHorsePowerMin(),
-						SearchAnnouncementQuery.GREATER_OR_EQUAlS)
-				.addConditionValue("horse_power", searchModel.getHorsePowerMax(),
-						SearchAnnouncementQuery.LESS_OR_EQUAlS)
+				.addConditionValue("horse_power","horse_power_min", searchModel.getHorsePowerMin(), SearchAnnouncementQuery.GREATER_OR_EQUAlS)
+				.addConditionValue("horse_power","horse_power_max", searchModel.getHorsePowerMax(), SearchAnnouncementQuery.LESS_OR_EQUAlS)
+				.addConditionValue("emission_standart_type", searchModel.getEmissionStandartType(), SearchAnnouncementQuery.EQUAlS)
+				.addConditionValue("gearbox_type", searchModel.getGearboxType(), SearchAnnouncementQuery.EQUAlS)
+				.addConditionValue("sub_category_id", searchModel.getSubCategoryId(), SearchAnnouncementQuery.EQUAlS)
+				.addConditionValue("cooling_type", searchModel.getCoolingType(), SearchAnnouncementQuery.EQUAlS)
+				.addConditionValue("number_of_axels", searchModel.getNumberOfAxels(), SearchAnnouncementQuery.EQUAlS)
+				.addConditionValue("number_of_seats", searchModel.getNumberOfSeats(), SearchAnnouncementQuery.EQUAlS)
+				.addConditionValue("weight_capacity","weight_capacity_min", searchModel.getWeightCapacityMin(), SearchAnnouncementQuery.GREATER_OR_EQUAlS)
+				.addConditionValue("weight_capacity","weight_capacity_max", searchModel.getWeightCapacityMax(), SearchAnnouncementQuery.LESS_OR_EQUAlS)			
+				.addConditionValue("price","price_min", searchModel.getPriceMin(), SearchAnnouncementQuery.GREATER_OR_EQUAlS)
+				.addConditionValue("price","price_max", searchModel.getPriceMax(), SearchAnnouncementQuery.LESS_OR_EQUAlS)
+				.addConditionValue("date_of_manufacture", "year_of_manufacture_from", searchModel.getDateOfManufactureFrom(), SearchAnnouncementQuery.GREATER_OR_EQUAlS)
+				.addConditionValue("date_of_manufacture", "year_of_manufacture_to", searchModel.getDateOfManufactureTo(), SearchAnnouncementQuery.LESS_OR_EQUAlS)			
+				.addConditionValue("mileage", searchModel.getMileageMax(), SearchAnnouncementQuery.LESS_OR_EQUAlS)			
+				.addConditionValue("color", searchModel.getColor(), SearchAnnouncementQuery.EQUAlS)
+				.addConditionValue("region", searchModel.getRegion(), SearchAnnouncementQuery.EQUAlS)
+				.addConditionValue("city", searchModel.getRegion(), SearchAnnouncementQuery.EQUAlS)		
+				.addConditionValue("cubature","cubature_min", searchModel.getCubatureMin(), SearchAnnouncementQuery.GREATER_OR_EQUAlS)
+				.addConditionValue("cubature","cubature_max", searchModel.getCubatureMax(), SearchAnnouncementQuery.LESS_OR_EQUAlS)		
+				.addConditionValue("engine_category_type", searchModel.getEngineCategoryType(), SearchAnnouncementQuery.EQUAlS)	
+				.addConditionValue("total_weight", searchModel.getTotalWeightMin(), SearchAnnouncementQuery.GREATER_OR_EQUAlS)
+				.addConditionValue("working_volume", searchModel.getWorkingVolumeMin(), SearchAnnouncementQuery.GREATER_OR_EQUAlS)
+				.addConditionValue("hours_of_operation", searchModel.getHoursOfOperationMax(), SearchAnnouncementQuery.LESS_OR_EQUAlS)
+				.addConditionValue("number_of_beds", searchModel.getNumberOfBeds(), SearchAnnouncementQuery.EQUAlS)		
+				.addConditionValue("toilet_type", searchModel.getToiletType(), SearchAnnouncementQuery.EQUAlS)
+				.addConditionValue("heatingType", searchModel.getHeatingType(), SearchAnnouncementQuery.EQUAlS)
+				.addConditionValue("air_condition_type", searchModel.getAirConditionType(), SearchAnnouncementQuery.EQUAlS)
+				.addConditionValue("length_size", searchModel.getLengthSizeMax(), SearchAnnouncementQuery.LESS_OR_EQUAlS)			
+				.addConditionValue("material_type", searchModel.getMaterialType(), SearchAnnouncementQuery.EQUAlS)			
+				.addConditionValue("width", searchModel.getWidthMax(), SearchAnnouncementQuery.LESS_OR_EQUAlS)			
+				.addConditionValue("bicycle_size", searchModel.getBicycleSize(), SearchAnnouncementQuery.EQUAlS)
+				.addConditionValue("number_of_gears", searchModel.getNumberOfGears(), SearchAnnouncementQuery.EQUAlS)
 				.build();
 
 	}

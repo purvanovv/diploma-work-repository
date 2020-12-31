@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { take, tap } from 'rxjs/operators';
 import { AnnouncementStoreService } from '../announcement-store.service';
 import { AnnouncementService } from '../announcement.service';
-import { AnnouncementPreview, AnnouncementSearch, AnnouncementSearchModel } from '../models';
+import { AnnouncementPreview, AnnouncementSearch, AnnouncementSearchModel, CategoryPair } from '../models';
 
 @Component({
   selector: 'app-list-search-result',
@@ -29,21 +29,20 @@ export class ListSearchResultComponent implements OnInit {
 
   ngOnInit(): void {
     this.isLoading = true;
-    const queryParams = this.route.snapshot.queryParamMap;
-    this.searchData = AnnouncementSearchModel.fromQueryParams(queryParams);
-    this.announcements = this.announcementStore.getAnnouncements();
-    if (this.announcements.length <= 0) {
-      this.$initAnnouncements().pipe(tap(() => {
-        this.announcements = this.announcementStore.getAnnouncements();
+    this.initSearchData().subscribe(() => {
+      this.announcements = this.announcementStore.getAnnouncements();
+      if (this.announcements.length <= 0) {
+        this.$initAnnouncements().pipe(tap(() => {
+          this.announcements = this.announcementStore.getAnnouncements();
+          this.initPagesData(this.announcements);
+          this.isLoading = false;
+        })).subscribe();
+      }
+      else {
         this.initPagesData(this.announcements);
         this.isLoading = false;
-      })).subscribe();
-    }
-    else {
-      this.initPagesData(this.announcements);
-      this.isLoading = false;
-    }
-
+      }
+    })
   }
 
   $initAnnouncements() {
@@ -54,6 +53,23 @@ export class ListSearchResultComponent implements OnInit {
         tap((announcements: AnnouncementPreview[]) => {
           this.announcementStore.setAnnouncements(announcements);
         }))
+  }
+
+  initSearchData() {
+    return this.announcementService.getCategories().pipe(
+      take(1),
+      tap((categories: CategoryPair[]) => {
+        const queryParams = this.route.snapshot.queryParamMap;
+        this.searchData = AnnouncementSearchModel.fromQueryParams(queryParams);
+        const categoryPair = categories.find((c) => c.mainCategory.id === Number(this.searchData.mainCategoryId));
+        this.searchData.mainCategoryName = categoryPair.mainCategory.name;
+        if (this.searchData.subCategoryId != null) {
+          this.searchData.subCategoryName =
+            categoryPair.subCategories.find((sc) => sc.id === Number(this.searchData.subCategoryId))?.name;
+        }
+
+      })
+    );
   }
 
   initPagesData(announcements: AnnouncementPreview[]) {
@@ -92,7 +108,7 @@ export class ListSearchResultComponent implements OnInit {
 
   globalSearch() {
     this.router.navigate(['announcement/search'],
-     { queryParams: AnnouncementSearchModel.toQueryParams(this.searchData) });
+      { queryParams: AnnouncementSearchModel.toQueryParams(this.searchData) });
   }
 
 }

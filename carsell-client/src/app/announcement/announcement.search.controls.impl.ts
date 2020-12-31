@@ -15,7 +15,8 @@ export class AnnouncementSearchControlBuilder {
             case Control.MAIN_CATEGORY_ID:
                 return {
                     name: 'mainCategoryId',
-                    control: new FormControl(this.data !== undefined ? this.data.mainCategoryId : '')
+                    control: new FormControl(this.data !== undefined &&
+                        Number(this.data.mainCategoryId) !== 0 ? Number(this.data.mainCategoryId) : '')
                 }
             case Control.MAKE:
                 return {
@@ -60,7 +61,8 @@ export class AnnouncementSearchControlBuilder {
             case Control.SUB_CATEGORY_ID:
                 return {
                     name: 'subCategoryId',
-                    control: new FormControl(this.data !== undefined ? this.data.subCategoryId : '')
+                    control: new FormControl(this.data !== undefined
+                        && Number(this.data.subCategoryId) !== 0 ? Number(this.data.subCategoryId) : '')
                 }
             case Control.COOLING_TYPE:
                 return {

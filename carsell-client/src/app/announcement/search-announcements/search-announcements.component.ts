@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, concat } from 'rxjs';
-import { finalize, take, tap } from 'rxjs/operators';
+import { finalize, mergeMap, startWith, take, tap } from 'rxjs/operators';
+import { AnnouncementStoreService } from '../announcement-store.service';
 import { AnnouncementSearchFormBuilder } from '../announcement.search.form.builder';
 import { AnnouncementService } from '../announcement.service';
-import { AirConditionType, ConditionType, CoolingType, Currency, EmissionStandartType, EngineType, GearboxType, HeatingType, MainCategoryType, MaterialType, ToiletType } from '../enums';
-import { AnnouncementSearchModel, CategoryPair, MainCategory, Make, SubCategory } from '../models';
+import { AirConditionType, ConditionType, CoolingType, Currency, EmissionStandartType, EngineCategoryType, EngineType, GearboxType, HeatingType, MainCategoryType, MaterialType, ToiletType } from '../enums';
+import { AnnouncementPreview, AnnouncementSearchModel, CategoryPair, MainCategory, Make, SubCategory } from '../models';
 
 @Component({
   selector: 'app-search-announcements',
@@ -31,7 +32,7 @@ export class SearchAnnouncementsComponent implements OnInit {
   coolingType = CoolingType;
   currency = Currency;
   emissionStandartType = EmissionStandartType;
-  engineCategoryType = MainCategoryType;
+  engineCategoryType = EngineCategoryType;
   gearboxType = GearboxType;
   heatingType = HeatingType;
   materialType = MaterialType;
@@ -43,7 +44,9 @@ export class SearchAnnouncementsComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
     private announcementService: AnnouncementService,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute,
+    private announcementStore: AnnouncementStoreService,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.initYears();
@@ -55,6 +58,7 @@ export class SearchAnnouncementsComponent implements OnInit {
     this.isLoading = true;
     return this.initData().pipe(finalize(() => {
       this.initForm();
+      this.initEvents();
       this.isLoading = false;
     }))
   }
@@ -75,7 +79,7 @@ export class SearchAnnouncementsComponent implements OnInit {
         this.categories = categories;
         const categoryPair = this.categories.find((c) => c.mainCategory.id === this.initMainCategory.id);
         this.initMainCategory = categoryPair.mainCategory;
-        // this.subCategories = categoryPair.subCategories;
+        this.subCategories = categoryPair.subCategories;
       })
     );
 
@@ -111,6 +115,56 @@ export class SearchAnnouncementsComponent implements OnInit {
     this.searchForm.get('mainCategoryId').setValue(this.initMainCategory.id);
   }
 
+  initEvents() {
+    const mainCategorySubsrc$ = this.searchForm
+      .get('mainCategoryId')
+      .valueChanges.pipe(
+        take(1),
+        mergeMap((mainCategoryId) => {
+          if (this.categories !== undefined) {
+            this.onChangeMainCategory(mainCategoryId);
+            return this.init();
+          }
+        }),
+      )
+      .subscribe();
+
+    const makeSubscr$ = this.searchForm
+      .get('make')
+      .valueChanges.pipe(
+        startWith(this.searchForm.get('make').value),
+        tap((make: string) => {
+          if (make !== null && make.trim() !== '') {
+            const groupName = make.substr(0, 1).toUpperCase();
+            const makes: Make[] = this.makeGroups[groupName];
+            this.models = makes.find((m) => m.make === make)?.models;
+          }
+        })
+      )
+      .subscribe();
+
+    const regionSubscr$ = this.searchForm
+      .get('region')
+      .valueChanges.pipe(
+        startWith(this.searchForm.get('region').value),
+        tap((region: string) => {
+          if (region !== null && region.trim() !== '') {
+            this.cities = this.regions[region];
+          }
+        })
+      )
+      .subscribe();
+  }
+
+  onChangeMainCategory(mainCategoryId: number) {
+    const categoryPair = this.categories.find((c) => c.mainCategory.id === mainCategoryId);
+    this.initMainCategory = {
+      id: categoryPair.mainCategory.id,
+      name: categoryPair.mainCategory.name,
+      value: categoryPair.mainCategory.value,
+    };
+  }
+
   containsControl(controlName: string): boolean {
     if (this.searchForm.get(controlName)) {
       return true;
@@ -132,11 +186,24 @@ export class SearchAnnouncementsComponent implements OnInit {
   }
 
   submitSearchForm() {
+    this.$initAnnouncements().subscribe(() => {
+      const queryParams = AnnouncementSearchModel.toQueryParams(this.searchForm.getRawValue());
+      this.router.navigate(['announcement/list'], { queryParams });
+    });
+  }
 
+  $initAnnouncements() {
+    return this.announcementService.searchAnnouncements(
+      this.searchForm.getRawValue())
+      .pipe(
+        take(1),
+        tap((announcements: AnnouncementPreview[]) => {
+          this.announcementStore.setAnnouncements(announcements);
+        }))
   }
 
   clean() {
-
+    this.init().subscribe(() => this.router.navigate([]));
   }
 
 }
