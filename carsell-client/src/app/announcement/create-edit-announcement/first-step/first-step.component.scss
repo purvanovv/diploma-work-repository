@@ -1,7 +1,31 @@
-.form-element {
-  margin-left: 1.5%;
-  margin-right: 1.5%;
+
+.main-mat-card {
+  margin: auto;
+  max-width: 1168px;
 }
-.form-element.condition {
-  padding-top: 20px;
+
+.app-form-control {
+  width: 280px;
+}
+
+.condition-radio-group {
+  display: flex;
+  flex-direction: column;
+  margin: 15px 0;
+}
+
+.form-control-condition {
+  width: 180px;
+  text-align: start;
+  margin: auto;
+}
+
+.condition-radio-button {
+  margin: 5px;
+}
+
+@media screen and (max-width: 900px) {
+  .mat-card {
+    width: 310px !important;
+  }
 }
