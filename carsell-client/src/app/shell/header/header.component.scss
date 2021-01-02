@@ -17,3 +17,24 @@
 .menu-button {
   margin-right: 1rem;
 }
+
+.brand-icon {
+  vertical-align: middle;
+  background-color: white;
+  border-radius: 200px;
+  font-size: 35px;
+  width: auto;
+  height: auto;
+  padding: 5px;
+}
+
+.wrapper{
+  display: inline-block;
+  font-size: 30px;
+  cursor: pointer;
+}
+
+.wrapper strong{
+  margin-left: -6px;
+  margin-right: -6px;
+}
