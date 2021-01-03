@@ -17,9 +17,10 @@
 .selected-small-image {
   opacity: 0.5;
 }
-
-::ng-deep .mat-dialog-container {
-  padding: 0 !important;
+.preview-image-dialog{
+  .mat-dialog-container {
+    padding: 0;
+  }
 }
 
 .bold {

@@ -31,6 +31,7 @@ export class AnnouncementDetailsComponent implements OnInit {
 
   public previewImage() {
     this.dialog.open(PreviewImageModalComponent, {
+      panelClass: 'preview-image-dialog',
       width: '70%',
       data: new PreviewImageModalDataModel(this.selectedImage, this.images, this.announcement)
     });

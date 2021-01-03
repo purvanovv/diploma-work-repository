@@ -59,6 +59,13 @@ export class ThirdStepComponent implements OnInit {
 
   }
 
+  edit(id: number) {
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+      this.router.navigate([`announcement/edit/${id}`]);
+    })
+
+  }
+
   private initData(announcementId: number) {
     this.announcementService
       .getAnnouncementPreview(announcementId)

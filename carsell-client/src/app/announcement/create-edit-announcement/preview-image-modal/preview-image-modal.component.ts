@@ -1,11 +1,12 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, ViewEncapsulation } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { AnnouncementPreview, ImageFilePreview, PreviewImageModalData, PreviewImageModalDataModel } from '@app/announcement/models';
 
 @Component({
   selector: 'app-preview-image-modal',
   templateUrl: './preview-image-modal.component.html',
-  styleUrls: ['./preview-image-modal.component.scss']
+  styleUrls: ['./preview-image-modal.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class PreviewImageModalComponent implements OnInit {
 
