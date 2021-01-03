@@ -3,7 +3,6 @@
     <app-announcement-details *ngIf="announcement!=undefined" [announcement]="announcement"></app-announcement-details>
   </mat-card-content>
   <mat-card-actions>
-    <button mat-raised-button color="primary">Потвърди обявата</button>
-    <button mat-raised-button color="warn">Изтрий обявата</button>
+    <button (click)="remove(announcement.id)" mat-raised-button color="warn">Изтрий обявата</button>
   </mat-card-actions>
 </mat-card>

@@ -14,7 +14,7 @@ const routes = {
   categories: () => `announcements/categories`,
   groupmakes: (mainCategoryId: number) => `announcements/groupmakes?mainCategoryId=${mainCategoryId}`,
   regions: () => `announcements/regions`,
-  announcement: () => `announcements/announcement`,
+  announcement: (announcementId?: number) => announcementId !== null ? `announcements/announcement?announcementId=${announcementId}` : `announcements/announcement`,
   announcements: () => `announcements/announcements`,
   upload: () => `announcements/upload`,
   announcementPreview: (announcementVehicleId: number) =>
@@ -75,8 +75,12 @@ export class AnnouncementService {
     return this.httpClient.post<AnnouncementPreview[]>(routes.search(), searchData);
   }
 
-  public deleteImages(announcementId: number): Observable<any>{
+  public deleteImages(announcementId: number): Observable<any> {
     return this.httpClient.delete(routes.images(announcementId));
+  }
+
+  public removeAnnouncementById(announcementId: number): Observable<any> {
+    return this.httpClient.delete(routes.announcement(announcementId));
   }
 
 }

@@ -324,5 +324,18 @@ public class AnnouncementVehicleRepositoryImpl implements AnnouncementVehicleRep
 				.build();
 
 	}
+	
+	@Override
+	public void removeAnnouncementById(Long announcementId) {
+		try {
+			String sql = SqlContainer.DELETE_ANNOUNCEMENT_VEHICLE;
+			MapSqlParameterSource params = new MapSqlParameterSource();
+			params.addValue("announcementId", announcementId);
+			namedParameterJdbcTemplate.update(sql, params);
+		} catch (Exception e) {
+			// TODO
+		}
+
+	}
 
 }

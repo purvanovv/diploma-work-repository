@@ -26,4 +26,6 @@ public interface AnnouncementVehicleService {
 	public List<AnnouncementVehicle> getAnnouncementVehiclesBySearchQuery(AnnouncementVehicleSearchDTO searchModel);
 	
 	public Long editAnnouncementVehicle(AnnouncementVehicle announcementVehicle);
+
+	public void removeAnnouncementById(Long announcementId);
 }

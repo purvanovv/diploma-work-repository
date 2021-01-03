@@ -17,6 +17,7 @@ import tusofia.carsellservices.exceptions.ValidationException;
 import tusofia.carsellservices.model.AnnouncementVehicle;
 import tusofia.carsellservices.model.CategoryPair;
 import tusofia.carsellservices.model.Make;
+import tusofia.carsellservices.model.ResponseMessage;
 import tusofia.carsellservices.model.dtos.AnnouncementVehicleCreateDTO;
 import tusofia.carsellservices.model.dtos.AnnouncementVehiclePreviewDTO;
 import tusofia.carsellservices.model.dtos.AnnouncementVehicleSearchDTO;
@@ -84,6 +85,13 @@ public class AnnouncementVehicleController {
 				.convertToEntity(announcementVehicleCreateDTO);
 		Long announcementVehicleId = this.announcementVehicleService.editAnnouncementVehicle(announcementVehicle);
 		return new ResponseEntity<Long>(announcementVehicleId, HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "/announcement", method = RequestMethod.DELETE)
+	public ResponseEntity<ResponseMessage> removeAnnouncementById(@RequestParam Long announcementId){
+		announcementVehicleService.removeAnnouncementById(announcementId);
+		ResponseMessage message = new ResponseMessage("Announcement deleted successfully");
+		return new ResponseEntity<ResponseMessage>(message,HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/announcement", method = RequestMethod.GET)

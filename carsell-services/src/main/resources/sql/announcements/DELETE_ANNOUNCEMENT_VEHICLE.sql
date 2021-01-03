@@ -1,2 +1,2 @@
-DELETE FROM announcements 
-WHERE  id = :announcementId 
+DELETE FROM ANNOUNCEMENT_VEHICLE 
+WHERE id = :announcementId

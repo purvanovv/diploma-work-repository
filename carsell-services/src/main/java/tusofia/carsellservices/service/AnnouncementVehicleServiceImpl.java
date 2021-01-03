@@ -14,15 +14,19 @@ import tusofia.carsellservices.model.Make;
 import tusofia.carsellservices.model.SubCategory;
 import tusofia.carsellservices.model.dtos.AnnouncementVehicleSearchDTO;
 import tusofia.carsellservices.repository.AnnouncementVehicleRepository;
+import tusofia.carsellservices.repository.ImageFileRepository;
 
 @Service
 public class AnnouncementVehicleServiceImpl implements AnnouncementVehicleService {
 
 	private AnnouncementVehicleRepository announcementVehicleRepository;
+	
+	private ImageFileRepository imageFileRepository;
 
 	@Autowired
-	public AnnouncementVehicleServiceImpl(AnnouncementVehicleRepository announcementRepository) {
+	public AnnouncementVehicleServiceImpl(AnnouncementVehicleRepository announcementRepository,ImageFileRepository imageFileRepository) {
 		this.announcementVehicleRepository = announcementRepository;
+		this.imageFileRepository = imageFileRepository;
 	}
 
 	@Override
@@ -68,6 +72,12 @@ public class AnnouncementVehicleServiceImpl implements AnnouncementVehicleServic
 	@Override
 	public Long editAnnouncementVehicle(AnnouncementVehicle announcementVehicle) {
 		return announcementVehicleRepository.editAnnouncementVehicle(announcementVehicle);
+	}
+	
+	@Override
+	public void removeAnnouncementById(Long announcementId){
+		this.imageFileRepository.removeFilesByAnnouncementId(announcementId);
+		this.announcementVehicleRepository.removeAnnouncementById(announcementId);
 	}
 
 }

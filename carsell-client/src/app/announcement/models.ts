@@ -469,6 +469,15 @@ export interface PreviewImageModalData {
   announcement: AnnouncementPreview;
 }
 
+export interface ConfirmDialogData {
+  title: string;
+  message: string;
+}
+
+export class ConfirmDialogDataModel implements ConfirmDialogData {
+  constructor(public title: string, public message: string) { }
+}
+
 export class PreviewImageModalDataModel implements PreviewImageModalData {
   public selectedImage: ImageFilePreview;
   public images: ImageFilePreview[];

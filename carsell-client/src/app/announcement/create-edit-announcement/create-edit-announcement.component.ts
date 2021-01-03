@@ -1,6 +1,7 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatStepper } from '@angular/material/stepper';
 import { ActivatedRoute } from '@angular/router';
+import { untilDestroyed } from '@app/@core';
 import { AnnouncementStoreService } from '../announcement-store.service';
 import { modeStepLabels } from '../constants';
 import { Mode } from '../enums';
@@ -10,10 +11,9 @@ import { Mode } from '../enums';
   templateUrl: './create-edit-announcement.component.html',
   styleUrls: ['./create-edit-announcement.component.scss'],
 })
-export class CreateEditAnnouncementComponent implements OnInit {
-  public isEditable = true;
-  public isLinear = true;
-  public completed = true;
+export class CreateEditAnnouncementComponent implements OnInit, OnDestroy {
+  public isEditable = false;
+  public completed = false;
   public announcementId: number;
   public stepLabel: string[];
 
@@ -26,12 +26,19 @@ export class CreateEditAnnouncementComponent implements OnInit {
   ngOnInit() {
     this.initStepLabel();
 
-    this.announcementStoreService.changeStep$.subscribe((step: number) => {
-      if (step !== undefined) {
-        this.stepper.selected.completed = true;
-        this.stepper.next();
-      }
-    })
+    this.announcementStoreService.changeStep$
+      .pipe(untilDestroyed(this))
+      .subscribe((step: number) => {
+        console.log(step);
+        if (step !== undefined) {
+          this.stepper.selected.completed = true;
+          this.stepper.next();
+        }
+      })
+  }
+
+  ngOnDestroy() { 
+    this.announcementStoreService.changeStep(undefined);
   }
 
   private initStepLabel() {
