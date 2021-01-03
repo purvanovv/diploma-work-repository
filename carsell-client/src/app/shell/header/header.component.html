@@ -1,41 +1,23 @@
-<mat-toolbar class="mat-elevation-z6 navbar" color="primary">
+<mat-toolbar class="mat-elevation-z6 navbar" color="accent">
   <div fxHide.gt-sm fxLayoutAlign="start center">
     <button class="menu-button" mat-icon-button (click)="sidenav.toggle()">
       <mat-icon>menu</mat-icon>
     </button>
-    <h1 class="wrapper" (click)="home()">
-      <a>
-        <span>
-          <mat-icon color="primary" class="brand-icon">directions_car</mat-icon>
-          <strong>car</strong>
-          <span>sell</span>
-        </span>
-      </a>
-    </h1>
+    <app-logo (click)="home()"></app-logo>
   </div>
   <div fxHide.lt-md>
-    <!-- <a class="brand" href="https://github.com/ngx-rocket">APP_NAME</a> -->
-
-    <h1 class="wrapper" (click)="home()">
-      <a>
-        <span>
-          <mat-icon color="primary" class="brand-icon">directions_car</mat-icon>
-          <strong>car</strong>
-          <span>sell</span>
-        </span>
-      </a>
-    </h1>
-    <button mat-button routerLink="/home" routerLinkActive="active">
+    <app-logo (click)="home()"></app-logo>
+    <button class="active-btn" mat-button routerLink="/home" routerLinkActive="active">
       <mat-icon>home</mat-icon>
       <span>Начало</span>
     </button>
-    <button mat-button routerLink="/announcement/create" routerLinkActive="active">
+    <button class="active-btn" mat-button routerLink="/announcement/create" routerLinkActive="active">
       <mat-icon>add_circle</mat-icon>
       <span>Добави обява</span>
     </button>
   </div>
   <span fxFlex></span>
-  <button mat-icon-button [matMenuTriggerFor]="userMenu">
+  <button class="active-btn" mat-icon-button [matMenuTriggerFor]="userMenu">
     <mat-icon>person</mat-icon>
   </button>
   <mat-menu #userMenu="matMenu">

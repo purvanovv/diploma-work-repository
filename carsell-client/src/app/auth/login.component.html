@@ -1,6 +1,6 @@
 <div fxFill fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="1.5rem" class="mat-typography">
   <div>
-    <h1 fxLayoutAlign="center">APP_NAME</h1>
+    <app-logo></app-logo>
     <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="2rem">
       <h4 class="version">v{{ version }}</h4>
     </div>
@@ -12,27 +12,15 @@
         <br />
         <div class="login-fields" fxLayout="column">
           <mat-form-field [hideRequiredMarker]="true">
-            <input
-              type="text"
-              matInput
-              formControlName="username"
-              autocomplete="username"
-              [placeholder]="'Username'"
-              required
-            />
+            <input type="text" matInput formControlName="username" autocomplete="username" [placeholder]="'Username'"
+              required />
             <mat-error *ngIf="loginForm.controls.username.invalid && loginForm.controls.username.touched">
               <span>Username is required</span>
             </mat-error>
           </mat-form-field>
           <mat-form-field [hideRequiredMarker]="true">
-            <input
-              type="password"
-              matInput
-              formControlName="password"
-              autocomplete="current-password"
-              [placeholder]="'Password'"
-              required
-            />
+            <input type="password" matInput formControlName="password" autocomplete="current-password"
+              [placeholder]="'Password'" required />
             <mat-error *ngIf="loginForm.controls.password.invalid && loginForm.controls.password.touched">
               <span>Password is required</span>
             </mat-error>

@@ -1,0 +1,23 @@
+@import "../../../theme/theme-variables.scss";
+
+.brand-icon {
+  vertical-align: middle;
+  background-color: mat-color($app-primary);
+  border-radius: 200px;
+  font-size: 35px;
+  width: auto;
+  height: auto;
+  padding: 5px;
+  color: white;
+}
+
+.wrapper {
+  display: inline-block;
+  font-size: 30px;
+  cursor: pointer;
+}
+
+.wrapper strong {
+  margin-left: -6px;
+  margin-right: -6px;
+}

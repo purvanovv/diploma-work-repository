@@ -33,10 +33,16 @@
 }
 
 .about-services {
-  background-color: rgba(94, 94, 94, 0.671);
+  background-color: mat-color($app-accent, 900);
   padding: 1rem;
   margin-bottom: 10px;
   border-radius: 5px;
+  color: mat-color($app-accent, 100);
+}
+
+.about-services .title {
+  font-weight: bold;
+  color: white;
 }
 
 .bold {
