@@ -86,7 +86,6 @@ export enum OrderBy {
 }
 
 export enum OrderByPrice {
-  ALL,
   LEV,
   USD,
   EUR

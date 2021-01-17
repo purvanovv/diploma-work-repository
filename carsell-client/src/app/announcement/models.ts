@@ -145,7 +145,8 @@ export class AnnouncementSlideModel implements AnnouncementSlide {
 
 export interface AnnouncementListItem {
   id: number;
-  price: string;
+  price: number;
+  currency: string;
   image: ImageFilePreview;
   title: string;
   options: Map<string, string>;
@@ -153,7 +154,8 @@ export interface AnnouncementListItem {
 
 export class AnnouncementListItemModel implements AnnouncementListItem {
   id: number;
-  price: string;
+  price: number;
+  currency: string;
   image: ImageFilePreview;
   title: string;
   options: Map<string, string>;

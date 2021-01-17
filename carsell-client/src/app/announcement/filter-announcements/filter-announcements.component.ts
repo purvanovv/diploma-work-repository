@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { startWith, tap } from 'rxjs/operators';
-import { orders, priceОrders, publishОrders } from '../constants';
+import { EUR, orders, priceОrders, publishОrders, USD } from '../constants';
 import { OrderBy, OrderByPrice, OrderByPublished, Currency } from '../enums';
 import { AnnouncementPreview } from '../models';
 
@@ -34,7 +34,7 @@ export class FilterAnnouncementsComponent implements OnInit {
 
     this.filterForm = new FormGroup({
       orderBy: new FormControl(orderBy !== null ? Number(orderBy) : OrderBy.NEWEST),
-      orderByPrice: new FormControl(orderByPrice !== null ? Number(orderByPrice) : OrderByPrice.ALL),
+      orderByPrice: new FormControl(orderByPrice !== null ? Number(orderByPrice) : OrderByPrice.LEV),
       orderByPublished: new FormControl(orderByPublished !== null ? Number(orderByPublished) : OrderByPublished.ALL)
     })
   }
@@ -54,6 +54,28 @@ export class FilterAnnouncementsComponent implements OnInit {
       filter(filter);
     }
     currAnnouncements = currAnnouncements
+      .map(a => {
+        const orderByPrice = filter.orderByPrice;
+        let priceInLev = a.price;
+        if (a.currency === Currency.EUR) {
+          priceInLev = a.price * EUR;
+        }
+        else if (a.currency === Currency.USD) {
+          priceInLev = a.price * USD;
+        }
+        if (orderByPrice === OrderByPrice.EUR) {
+          a.price = priceInLev / EUR;
+          a.currency = Currency.EUR;
+        } else if (orderByPrice === OrderByPrice.USD) {
+          a.price = priceInLev / USD;
+          a.currency = Currency.USD;
+        }
+        else {
+          a.price = priceInLev;
+          a.currency = Currency.LEV;
+        }
+        return a;
+      })
       .sort((a, b) => {
         const orderBy = filter.orderBy
         if (orderBy === OrderBy.PRICE_LOWEST) {
@@ -65,17 +87,6 @@ export class FilterAnnouncementsComponent implements OnInit {
         }
       })
       .filter(a => {
-        const orderByPrice = filter.orderByPrice;
-        if (orderByPrice === OrderByPrice.EUR) {
-          return a.currency === Currency.EUR;
-        } else if (orderByPrice === OrderByPrice.LEV) {
-          return a.currency === Currency.LEV;
-        } else if (orderByPrice === OrderByPrice.USD) {
-          return a.currency === Currency.USD;
-        } else if (orderByPrice === OrderByPrice.ALL) {
-          return true;
-        }
-      }).filter(a => {
         const orderByPublished = filter.orderByPublished;
         if (orderByPublished === OrderByPublished.TODAY) {
           return this.isToday(new Date(a.metaProps.createdOn));
@@ -99,8 +110,6 @@ export class FilterAnnouncementsComponent implements OnInit {
           const dateBefore3Days = new Date(new Date().getTime() - (3 * 24 * 60 * 60 * 1000));
           return new Date(a.metaProps.createdOn).getTime() >= dateBefore3Days.getTime();
         }
-
-
 
         else if (orderByPublished === OrderByPublished.ALL) {
           return true;

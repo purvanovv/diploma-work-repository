@@ -2,7 +2,7 @@
   <mat-card class="item" *ngFor="let announcement of announcementsToList">
     <mat-card-header>
       <mat-card-title>{{announcement.title}}</mat-card-title>
-      <mat-card-subtitle>{{announcement.price}}</mat-card-subtitle>
+      <mat-card-subtitle>{{announcement.price | number : '1.0-2'}} {{announcement.currency}}</mat-card-subtitle>
     </mat-card-header>
     <img class="item-image" mat-card-image [src]="announcement.image.url" />
     <mat-card-content>

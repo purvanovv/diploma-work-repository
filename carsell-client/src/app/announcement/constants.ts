@@ -14,7 +14,6 @@ export const orders: Map<OrderBy, string> = new Map([
 ]);
 
 export const priceОrders: Map<OrderByPrice, string> = new Map([
-    [OrderByPrice.ALL, 'Всички'],
     [OrderByPrice.LEV, 'В лева'],
     [OrderByPrice.EUR, 'В евро'],
     [OrderByPrice.USD, 'В долари']
@@ -28,3 +27,7 @@ export const publishОrders: Map<OrderByPublished, string> = new Map([
     [OrderByPublished.LAST_FOURTEEN_DAYS, 'Последните 14 дена'],
     [OrderByPublished.LAST_MONTH, 'Послдния 1 месец']
 ]);
+
+
+export const EUR = 1.96;
+export const USD = 1.62;

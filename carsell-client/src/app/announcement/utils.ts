@@ -33,7 +33,8 @@ export class AnnouncementModelConverter {
         const target = new AnnouncementListItemModel();
         target.id = source.id;
         target.image = this.convertImageFileToImageFilePreview(source.imageFiles[0]);
-        target.price = `${source.price} ${source.currency}`;
+        target.price = source.price;
+        target.currency = source.currency;
         target.title = `${source.make} ${source.model}`;
         target.options = this.buildOptions(source);
         return target;

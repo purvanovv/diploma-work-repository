@@ -105,12 +105,12 @@
           <div class="app-form-control" *ngIf="containsControl('priceMin') || containsControl('priceMax')">
             <div class="inline-control" *ngIf="containsControl('priceMin')">
               <mat-form-field appearance="legacy">
-                <input matInput type="number" placeholder="Цена от" formControlName="priceMin" />
+                <input matInput type="number" placeholder="Цена от (лв.)" formControlName="priceMin" />
               </mat-form-field>
             </div>
             <div class="inline-control" *ngIf="containsControl('priceMax')">
               <mat-form-field appearance="legacy">
-                <input matInput type="number" placeholder="Цена до" formControlName="priceMax" />
+                <input matInput type="number" placeholder="Цена до (лв.)" formControlName="priceMax" />
               </mat-form-field>
             </div>
           </div>
