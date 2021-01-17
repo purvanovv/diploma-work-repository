@@ -1,4 +1,4 @@
-<div class="item-holder" fxLayout="row wrap" fxLayoutAlign.sm="center" fxLayoutAlign="flex-start">
+<div *ngIf="announcementsToList.length > 0; else emptyMessage" class="item-holder" fxLayout="row wrap" fxLayoutAlign.sm="center" fxLayoutAlign="flex-start">
   <mat-card class="item" *ngFor="let announcement of announcementsToList">
     <mat-card-header>
       <mat-card-title>{{announcement.title}}</mat-card-title>
@@ -20,5 +20,7 @@
         детайли</button>
     </mat-card-actions>
   </mat-card>
-
 </div>
+<ng-template #emptyMessage>
+  <span>Няма намерени резултати!</span>
+</ng-template>
