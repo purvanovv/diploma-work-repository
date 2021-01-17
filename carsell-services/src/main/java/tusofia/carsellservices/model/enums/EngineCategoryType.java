@@ -4,12 +4,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 public enum EngineCategoryType {
-	TACT_2(2), TACT_4(4);
+	TACT_2("Двутактов"), TACT_4("Четиритактов");
 
-	private final Integer value;
+	private final String value;
 
 	private static final Map<String, EngineCategoryType> displayNameIndex = new HashMap<String, EngineCategoryType>();
-	private static final Map<Integer, EngineCategoryType> displayNameString = new HashMap<Integer, EngineCategoryType>();
+	private static final Map<String, EngineCategoryType> displayNameString = new HashMap<String, EngineCategoryType>();
 
 	static {
 		for (EngineCategoryType e : EngineCategoryType.values()) {
@@ -18,15 +18,15 @@ public enum EngineCategoryType {
 		}
 	}
 
-	private EngineCategoryType(Integer value) {
+	private EngineCategoryType(String value) {
 		this.value = value;
 	}
 
-	public Integer getValue() {
+	public String getValue() {
 		return value;
 	}
 
-	public static Integer getValue(EngineCategoryType input) {
+	public static String getValue(EngineCategoryType input) {
 		if (null == input) {
 			return null;
 		}
@@ -37,7 +37,7 @@ public enum EngineCategoryType {
 		return displayNameIndex.get(name);
 	}
 
-	public static EngineCategoryType lookupByIntegerValue(Integer input) {
+	public static EngineCategoryType lookupByStringValue(String input) {
 		return displayNameString.get(input);
 	}
 

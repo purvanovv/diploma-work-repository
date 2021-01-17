@@ -141,6 +141,26 @@ export class FirstStepComponent implements OnInit, OnDestroy {
     };
   }
 
+  private $initRegions() {
+    return this.announcementService.getRegions().pipe(
+      take(1),
+      tap((regions: Map<string, string[]>) => {
+        this.regions = regions;
+      })
+    );
+  }
+
+  private $initCategories(mainCategoryId: number) {
+    return this.announcementService.getCategories().pipe(
+      take(1),
+      tap((categories: CategoryPair[]) => {
+        this.categories = categories;
+        const categoryPair = this.categories.find((c) => c.mainCategory.id === mainCategoryId);
+        this.subCategories = categoryPair.subCategories;
+      })
+    );
+  }
+
   private $initMakes(mainCategoryId: number): Observable<Map<string, Make[]>> {
     return this.announcementService.getMakes(mainCategoryId).pipe(
       tap((makeGroups: Map<string, Make[]>) => {
@@ -156,7 +176,6 @@ export class FirstStepComponent implements OnInit, OnDestroy {
   }
 
   private $initData(): Observable<any> {
-    const observables = [];
     if (!this.isCreateMode) {
       const $initForm = this.announcementService.getAnnouncementPreview(this.announcementId)
         .pipe(
@@ -166,31 +185,25 @@ export class FirstStepComponent implements OnInit, OnDestroy {
             this.announcementForEdit = announcementCreate;
             this.initFormCategory = announcement.mainCategory;
           }));
-      observables.push($initForm);
+      return $initForm.pipe(mergeMap(() => {
+        const observables = [];
+        observables.push(this.$initCategories(this.initFormCategory.id));
+        observables.push(this.$initMakes(this.initFormCategory.id));
+        observables.push(this.$initRegions());
+        return concat(...observables);
+      }))
+    } else {
+      const observables = [];
+      observables.push(this.$initCategories(this.initFormCategory.id));
+      observables.push(this.$initMakes(this.initFormCategory.id));
+      observables.push(this.$initRegions());
+      return concat(...observables);
     }
 
-    const $initCategories = this.announcementService.getCategories().pipe(
-      take(1),
-      tap((categories: CategoryPair[]) => {
-        this.categories = categories;
-        const categoryPair = this.categories.find((c) => c.mainCategory.id === this.initFormCategory.id);
-        this.subCategories = categoryPair.subCategories;
-      })
-    );
-    observables.push($initCategories);
 
-    const $initMakes = this.$initMakes(this.initFormCategory.id);
-    observables.push($initMakes);
 
-    const $initRegions = this.announcementService.getRegions().pipe(
-      take(1),
-      tap((regions: Map<string, string[]>) => {
-        this.regions = regions;
-      })
-    );
-    observables.push($initRegions);
 
-    return concat(...observables);
+
   }
   private initFormForEdit(announcementCreate: AnnouncementCreateModel) {
     this.createForm = new AnnouncementFormBuilder(

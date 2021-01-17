@@ -32,7 +32,7 @@ public class AnnouncementVehiclePreviewDTO {
 	private String city;
 	private Long validDays;
 	private Integer cubature;
-	private Integer engineCategoryType;
+	private String engineCategoryType;
 	private String validFrom;
 	private Integer totalWeight;
 	private Integer workingVolume;
@@ -234,11 +234,11 @@ public class AnnouncementVehiclePreviewDTO {
 		this.cubature = cubature;
 	}
 
-	public Integer getEngineCategoryType() {
+	public String getEngineCategoryType() {
 		return engineCategoryType;
 	}
 
-	public void setEngineCategoryType(Integer engineCategoryType) {
+	public void setEngineCategoryType(String engineCategoryType) {
 		this.engineCategoryType = engineCategoryType;
 	}
 

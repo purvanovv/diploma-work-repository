@@ -185,7 +185,7 @@ export interface AnnouncementPreview {
   city: string;
   validDays: number;
   cubature: number;
-  engineCategoryType: number;
+  engineCategoryType: string;
   validFrom: string;
   totalWeight: number;
   workingVolume: number;

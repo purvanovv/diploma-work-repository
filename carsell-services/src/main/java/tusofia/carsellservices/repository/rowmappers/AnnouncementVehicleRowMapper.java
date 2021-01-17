@@ -55,7 +55,7 @@ public class AnnouncementVehicleRowMapper implements RowMapper<AnnouncementVehic
 		announcementVehicle.setValidDays(rs.getLong("VALID_DAYS"));
 		announcementVehicle.setCubature(rs.getInt("CUBATURE"));
 		announcementVehicle
-				.setEngineCategoryType(EngineCategoryType.lookupByIntegerValue(rs.getInt("ENGINE_CATEGORY_TYPE")));
+				.setEngineCategoryType(EngineCategoryType.lookupByStringValue(rs.getString("ENGINE_CATEGORY_TYPE")));
 		announcementVehicle.setValidFrom(rs.getDate("VALID_FROM"));
 		announcementVehicle.setValidTo(rs.getDate("VALID_TO"));
 		announcementVehicle.setTotalWeight(rs.getInt("TOTAL_WEIGHT"));

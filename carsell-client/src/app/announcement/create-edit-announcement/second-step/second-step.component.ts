@@ -22,7 +22,7 @@ export class SecondStepComponent implements OnInit {
   public files: FileUpload[] = [];
   public disableSubmit = true;
   public disableUpload = false;
-  private maxNumberOfFiles = 3;
+  private maxNumberOfFiles = 6;
   private announcementId: number;
   private modelConverter: AnnouncementModelConverter;
 

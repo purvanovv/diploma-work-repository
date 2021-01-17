@@ -66,10 +66,38 @@ export class AnnouncementSearchFormBuilder {
                 this.addControl(controlBuilder.build(Control.MODEL));
                 this.addControl(controlBuilder.build(Control.ENGINE_TYPE));
                 this.addControl(controlBuilder.build(Control.CONDITION_TYPE));
+                this.addControl(controlBuilder.build(Control.HORSE_POWER_MIN));
+                this.addControl(controlBuilder.build(Control.HORSE_POWER_MAX));
                 this.addControl(controlBuilder.build(Control.EMISSION_STANDART_TYPE));
                 this.addControl(controlBuilder.build(Control.GEARBOX_TYPE));
                 this.addControl(controlBuilder.build(Control.SUB_CATEGORY_ID));
                 this.addControl(controlBuilder.build(Control.NUMBER_OF_AXELS));
+                this.addControl(controlBuilder.build(Control.NUMBER_OF_SEATS));
+                this.addControl(controlBuilder.build(Control.WEIGHT_CAPACITY_MIN));
+                this.addControl(controlBuilder.build(Control.WEIGHT_CAPACITY_MAX));
+                this.addControl(controlBuilder.build(Control.PRICE_MIN));
+                this.addControl(controlBuilder.build(Control.PRICE_MAX));
+                this.addControl(controlBuilder.build(Control.DATE_OF_MANUACTURE_FROM));
+                this.addControl(controlBuilder.build(Control.DATE_OF_MANUACTURE_TO));
+                this.addControl(controlBuilder.build(Control.MILEAGE_MAX));
+                this.addControl(controlBuilder.build(Control.COLOR));
+                this.addControl(controlBuilder.build(Control.REGION));
+                this.addControl(controlBuilder.build(Control.CITY));
+                break;
+            }
+            case MainCategoryType.TRUCKS: {
+                this.addControl(controlBuilder.build(Control.MAIN_CATEGORY_ID));
+                this.addControl(controlBuilder.build(Control.MAKE));
+                this.addControl(controlBuilder.build(Control.MODEL));
+                this.addControl(controlBuilder.build(Control.ENGINE_TYPE));
+                this.addControl(controlBuilder.build(Control.CONDITION_TYPE));
+                this.addControl(controlBuilder.build(Control.HORSE_POWER_MIN));
+                this.addControl(controlBuilder.build(Control.HORSE_POWER_MAX));
+                this.addControl(controlBuilder.build(Control.EMISSION_STANDART_TYPE));
+                this.addControl(controlBuilder.build(Control.GEARBOX_TYPE));
+                this.addControl(controlBuilder.build(Control.SUB_CATEGORY_ID));
+                this.addControl(controlBuilder.build(Control.NUMBER_OF_AXELS));
+                this.addControl(controlBuilder.build(Control.NUMBER_OF_SEATS));
                 this.addControl(controlBuilder.build(Control.WEIGHT_CAPACITY_MIN));
                 this.addControl(controlBuilder.build(Control.WEIGHT_CAPACITY_MAX));
                 this.addControl(controlBuilder.build(Control.PRICE_MIN));

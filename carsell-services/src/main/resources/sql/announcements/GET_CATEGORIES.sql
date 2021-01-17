@@ -6,3 +6,4 @@ SELECT mc.id as MAIN_CATEGORY_ID,
 FROM   main_categories mc 
        left join sub_categories sc 
               ON mc.id = sc.main_category_id
+WHERE mc.implemented = 'Y'
