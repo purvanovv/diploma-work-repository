@@ -28,7 +28,6 @@ export class PreviewAnnouncementComponent implements OnInit {
     this.announcementService
       .getAnnouncementPreview(this.announcementId)
       .subscribe((announcement: AnnouncementPreview) => {
-        console.log(announcement);
         this.announcement = announcement;
       })
   }
