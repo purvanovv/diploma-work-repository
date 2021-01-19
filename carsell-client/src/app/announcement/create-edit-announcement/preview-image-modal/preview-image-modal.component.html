@@ -13,8 +13,8 @@
     </mat-card-subtitle>
   </mat-card-header>
   <mat-card-content>
-    <div fxLayout="row" fxLayoutGap="20px">
-      <div fxFlex="80%">
+    <div fxLayout="row wrap" fxLayoutGap="20px">
+      <div fxFlex="60%">
         <div class="change-img-btn-holder">
           <a class="change-img left" (click)="prev()">
             <button mat-raised-button>
@@ -33,7 +33,7 @@
           </div>
         </div>
       </div>
-      <div fxFlex="20%">
+      <div fxFlex="30%">
         <div>
           <a *ngFor="let image of data.images" (click)="selectImage(image)">
             <img class="small-image" [ngClass]="{'selected-small-image': image.isSelected}" [src]="image.url" />
