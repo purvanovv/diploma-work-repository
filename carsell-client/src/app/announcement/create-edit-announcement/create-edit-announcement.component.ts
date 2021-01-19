@@ -29,7 +29,6 @@ export class CreateEditAnnouncementComponent implements OnInit, OnDestroy {
     this.announcementStoreService.changeStep$
       .pipe(untilDestroyed(this))
       .subscribe((step: number) => {
-        console.log(step);
         if (step !== undefined) {
           this.stepper.selected.completed = true;
           this.stepper.next();

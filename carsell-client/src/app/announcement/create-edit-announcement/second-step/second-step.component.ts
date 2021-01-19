@@ -106,7 +106,6 @@ export class SecondStepComponent implements OnInit {
           })
         )
         .subscribe((event: any) => {
-          console.log(event);
           if (typeof event === 'object') {
             this.removeFileFromArray(file);
             if (this.files.length <= 0) {
