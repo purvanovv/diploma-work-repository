@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Configuration status="warn" packages="tusofia.carsellservices">
+	<Appenders>
+		<Console name="businessap" target="SYSTEM_OUT">
+			<PatternLayout
+				pattern="%d{yyyy-MM-dd HH:mm:ss} [business] [%X{transactionId}] %-5p %c{1}:%L - %m  %throwable{separator(###)}%n" />
+		</Console>
+		<Async name="asyncbusinessap" bufferSize="500">
+			<appender-ref ref="businessap" />
+		</Async>
+		<Console name="technicalap" target="SYSTEM_OUT">
+			<PatternLayout
+				pattern="%d{yyyy-MM-dd HH:mm:ss} [technical] [%X{transactionId}] %-5p %c{1}:%L - %m  %throwable{separator(###)}%n" />
+		</Console>
+		<Async name="asynctechnicalap" bufferSize="500">
+			<appender-ref ref="technicalap" />
+		</Async>
+		<Console name="performanceap" target="SYSTEM_OUT">
+			<PatternLayout
+				pattern="%d{yyyy-MM-dd HH:mm:ss} [performance] [%X{transactionId}] %-5p %c{1}:%L - %m  %throwable{separator(###)}%n" />
+		</Console>
+		<Async name="asyncperformanceap" bufferSize="500">
+			<appender-ref ref="performanceap" />
+		</Async>
+		<Console name="webserviceap" target="SYSTEM_OUT">
+			<PatternLayout
+				pattern="%d{yyyy-MM-dd HH:mm:ss} [webservice] [%X{transactionId}] %-5p %c{1}:%L - %m  %throwable{separator(###)}%n" />
+		</Console>
+		<Async name="asyncwebserviceap" bufferSize="500">
+			<appender-ref ref="webserviceap" />
+		</Async>
+	</Appenders>
+	<Loggers>
+		<Logger name="business" level="debug" additivity="false">
+			<appender-ref ref="asyncbusinessap" />
+		</Logger>
+		<Logger name="technical" level="debug" additivity="false">
+			<appender-ref ref="asynctechnicalap" />
+		</Logger>
+		<Logger name="performance" level="debug" additivity="false">
+			<appender-ref ref="asyncperformanceap" />
+		</Logger>
+		<Logger name="webservice" level="debug" additivity="false">
+			<appender-ref ref="asyncwebserviceap" />
+		</Logger>
+		<Root level="info" additivity="false">
+			<appender-ref ref="asynctechnicalap" />
+		</Root>
+	</Loggers>
+</Configuration>

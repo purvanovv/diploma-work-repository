@@ -9,6 +9,7 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
+import tusofia.carsellservices.exceptions.DatabaseException;
 import tusofia.carsellservices.model.ImageFile;
 import tusofia.carsellservices.repository.rowmappers.ImageRowMapper;
 import tusofia.carsellservices.repository.rsextractors.ImagesResultSetExtractor;
@@ -39,7 +40,7 @@ public class ImageFileRepositoryImpl implements ImageFileRepository {
 			image.setId(keyHolder.getKey().longValue());
 			return image;
 		} catch (Exception e) {
-			return null;
+			throw new DatabaseException("Exception in database layer", e);
 		}
 	}
 
@@ -52,8 +53,7 @@ public class ImageFileRepositoryImpl implements ImageFileRepository {
 			List<ImageFile> images = namedParameterJdbcTemplate.query(sql, params, new ImagesResultSetExtractor());
 			return images;
 		} catch (Exception e) {
-			// TODO
-			return null;
+			throw new DatabaseException("Exception in database layer", e);
 		}
 	}
 
@@ -65,7 +65,7 @@ public class ImageFileRepositoryImpl implements ImageFileRepository {
 			params.addValue("announcementId", announcementId);
 			namedParameterJdbcTemplate.update(sql, params);
 		} catch (Exception e) {
-			// TODO
+			throw new DatabaseException("Exception in database layer", e);
 		}
 
 	}

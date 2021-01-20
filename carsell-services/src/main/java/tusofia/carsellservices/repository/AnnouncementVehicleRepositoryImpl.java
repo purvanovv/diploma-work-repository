@@ -13,6 +13,7 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
+import tusofia.carsellservices.exceptions.DatabaseException;
 import tusofia.carsellservices.model.AnnouncementVehicle;
 import tusofia.carsellservices.model.CategoryPair;
 import tusofia.carsellservices.model.Make;
@@ -57,13 +58,12 @@ public class AnnouncementVehicleRepositoryImpl implements AnnouncementVehicleRep
 	@Override
 	public List<CategoryPair> getCategories() {
 		try {
-			String sql = SqlContainer.GET_CATEGORIES;
+			String sql = SqlContainer.GET_ANNOUNCEMENT_VEHICLE;
 			List<CategoryPair> categories = namedParameterJdbcTemplate.getJdbcTemplate().queryForObject(sql, null,
 					new CategoriesRowMapper());
 			return categories;
 		} catch (Exception e) {
-			// TODO
-			return null;
+			throw new DatabaseException("Exception in database layer", e);
 		}
 	}
 
@@ -129,8 +129,7 @@ public class AnnouncementVehicleRepositoryImpl implements AnnouncementVehicleRep
 			return keyHolder.getKey().longValue();
 
 		} catch (Exception e) {
-			// TODO
-			return null;
+			throw new DatabaseException("Exception in database layer", e);
 		}
 	}
 
@@ -151,8 +150,7 @@ public class AnnouncementVehicleRepositoryImpl implements AnnouncementVehicleRep
 			return null;
 
 		} catch (Exception e) {
-			// TODO: handle exception
-			return null;
+			throw new DatabaseException("Exception in database layer", e);
 		}
 	}
 
@@ -164,8 +162,7 @@ public class AnnouncementVehicleRepositoryImpl implements AnnouncementVehicleRep
 					new AnnouncementVehiclesResultSetExtractor(imageFileRepository));
 
 		} catch (Exception e) {
-			// TODO: handle exception
-			return null;
+			throw new DatabaseException("Exception in database layer", e);
 		}
 	}
 
@@ -184,7 +181,8 @@ public class AnnouncementVehicleRepositoryImpl implements AnnouncementVehicleRep
 					priceInLev = a.getPrice().multiply(Constants.USD);
 				}
 
-				if (!StringUtils.isNullOrEmpty(searchModel.getPriceMin()) && !StringUtils.isNullOrEmpty(searchModel.getPriceMax())) {
+				if (!StringUtils.isNullOrEmpty(searchModel.getPriceMin())
+						&& !StringUtils.isNullOrEmpty(searchModel.getPriceMax())) {
 					return priceInLev.compareTo(new BigDecimal(searchModel.getPriceMin())) >= 0
 							&& priceInLev.compareTo(new BigDecimal(searchModel.getPriceMax())) <= 0;
 				} else if (!StringUtils.isNullOrEmpty(searchModel.getPriceMin())) {
@@ -196,8 +194,7 @@ public class AnnouncementVehicleRepositoryImpl implements AnnouncementVehicleRep
 			}).collect(Collectors.toList());
 
 		} catch (Exception e) {
-			// TODO: handle exception
-			return null;
+			throw new DatabaseException("Exception in database layer", e);
 		}
 	}
 
@@ -211,8 +208,7 @@ public class AnnouncementVehicleRepositoryImpl implements AnnouncementVehicleRep
 			return tusofia.carsellservices.model.enums.MainCategoryType.lookupByStringValue(mainCategory);
 
 		} catch (Exception e) {
-			// TODO: handle exception
-			return null;
+			throw new DatabaseException("Exception in database layer", e);
 		}
 	}
 
@@ -224,8 +220,7 @@ public class AnnouncementVehicleRepositoryImpl implements AnnouncementVehicleRep
 			params.addValue("mainCategoryId", mainCategoryId);
 			return namedParameterJdbcTemplate.queryForObject(sql, params, new MakesRowMapper());
 		} catch (Exception e) {
-			// TODO: handle exception
-			return null;
+			throw new DatabaseException("Exception in database layer", e);
 		}
 	}
 
@@ -235,8 +230,7 @@ public class AnnouncementVehicleRepositoryImpl implements AnnouncementVehicleRep
 			String sql = SqlContainer.GET_REGIONS;
 			return namedParameterJdbcTemplate.getJdbcTemplate().queryForObject(sql, null, new RegionsRowMapper());
 		} catch (Exception e) {
-			// TODO: handle exception
-			return null;
+			throw new DatabaseException("Exception in database layer", e);
 		}
 	}
 
@@ -296,8 +290,7 @@ public class AnnouncementVehicleRepositoryImpl implements AnnouncementVehicleRep
 			return announcementVehicle.getId();
 
 		} catch (Exception e) {
-			// TODO
-			return null;
+			throw new DatabaseException("Exception in database layer", e);
 		}
 
 	}
@@ -367,7 +360,7 @@ public class AnnouncementVehicleRepositoryImpl implements AnnouncementVehicleRep
 			params.addValue("announcementId", announcementId);
 			namedParameterJdbcTemplate.update(sql, params);
 		} catch (Exception e) {
-			// TODO
+			throw new DatabaseException("Exception in database layer", e);
 		}
 
 	}
