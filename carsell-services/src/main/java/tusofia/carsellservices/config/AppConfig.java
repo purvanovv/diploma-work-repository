@@ -8,9 +8,11 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import tusofia.carsellservices.util.AnnouncementVehicleModelMapper;
 import tusofia.carsellservices.util.AnnouncementVehicleModelMapperConverter;
+import tusofia.carsellservices.util.Constants;
 
 @Configuration
 public class AppConfig {
@@ -58,6 +60,11 @@ public class AppConfig {
 	@Bean
 	public AnnouncementVehicleModelMapper AnnouncementModelMapper(ModelMapper modelMapper) {
 		return new AnnouncementVehicleModelMapper(modelMapper);
+	}
+	
+	@Bean
+	public BCryptPasswordEncoder encoder() {
+		return new BCryptPasswordEncoder(Constants.BCRYPT_ROUND);
 	}
 
 }

@@ -7,6 +7,7 @@ import tusofia.carsellservices.model.ImageFile;
 import tusofia.carsellservices.model.MainCategory;
 import tusofia.carsellservices.model.MetaProps;
 import tusofia.carsellservices.model.SubCategory;
+import tusofia.carsellservices.model.UserInfo;
 
 public class AnnouncementVehiclePreviewDTO {
 	private Long id;
@@ -49,6 +50,7 @@ public class AnnouncementVehiclePreviewDTO {
 	private String description;
 	private MetaProps metaProps;
 	private List<ImageFile> imageFiles;
+	private UserInfo userInfo;
 
 	public Long getId() {
 		return id;
@@ -368,6 +370,14 @@ public class AnnouncementVehiclePreviewDTO {
 
 	public void setImageFiles(List<ImageFile> imageFiles) {
 		this.imageFiles = imageFiles;
+	}
+
+	public UserInfo getUserInfo() {
+		return userInfo;
+	}
+
+	public void setUserInfo(UserInfo userInfo) {
+		this.userInfo = userInfo;
 	}
 
 }

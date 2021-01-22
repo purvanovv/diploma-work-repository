@@ -1,0 +1,4 @@
+SELECT USERNAME, 
+       PASSWORD 
+FROM   USERS 
+WHERE  USERNAME = :username 

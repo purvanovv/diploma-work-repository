@@ -1,0 +1,3 @@
+prompt creating PK for USERS
+
+ALTER TABLE &&sapp.."USERS" ADD CONSTRAINT "USERS_PK" PRIMARY KEY ("ID") ENABLE;

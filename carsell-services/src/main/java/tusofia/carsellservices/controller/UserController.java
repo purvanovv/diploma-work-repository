@@ -1,0 +1,58 @@
+package tusofia.carsellservices.controller;
+
+import java.lang.invoke.MethodHandles;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import tusofia.carsellservices.model.ResponseMessage;
+import tusofia.carsellservices.model.UserInfo;
+import tusofia.carsellservices.service.UserService;
+
+@RestController
+@RequestMapping(path = "users")
+public class UserController {
+	private UserService userService;
+
+	private final Logger businessLog = LoggerFactory
+			.getLogger("business." + MethodHandles.lookup().lookupClass().getCanonicalName());
+
+	@Autowired
+	public UserController(UserService userService) {
+		this.userService = userService;
+	}
+
+	@RequestMapping(value = "/updatePassword", method = RequestMethod.PUT)
+	public ResponseEntity<ResponseMessage> updatePassword(@RequestParam Long userId, @RequestParam String password) {
+		businessLog.info("Calling updatePassword for userId={}", userId);
+		userService.updatePassword(password, userId);
+		String message = "Updated the passswoed successfully";
+		businessLog.info("Call to updatePassword for userId={} completed", userId);
+		return new ResponseEntity<ResponseMessage>(new ResponseMessage(message), HttpStatus.OK);
+	}
+
+	@RequestMapping(value = "/userInfo", method = RequestMethod.GET)
+	public ResponseEntity<UserInfo> getUserInfo(@RequestParam Long userId) {
+		businessLog.info("Calling getUserInfo for userId={}", userId);
+		UserInfo userInfo = userService.getUserInfoByUserId(userId);
+		businessLog.info("Call to getUserInfo for userId={} completed", userId);
+		return new ResponseEntity<UserInfo>(userInfo, HttpStatus.OK);
+	}
+
+	@RequestMapping(value = "/userInfo", method = RequestMethod.PUT)
+	public ResponseEntity<ResponseMessage> updateUserInfo(@RequestBody UserInfo userInfo) {
+		businessLog.info("Calling updateUserInfo for userId={}", userInfo.getUserId());
+		userService.updateUserInfo(userInfo);
+		businessLog.info("Call to updateUserInfo for userId={} completed", userInfo.getUserId());
+		String message = "Updated the user info successfully";
+		return new ResponseEntity<ResponseMessage>(new ResponseMessage(message), HttpStatus.OK);
+	}
+}

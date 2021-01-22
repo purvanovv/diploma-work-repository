@@ -19,6 +19,12 @@ public class SqlContainer {
 	public static String GET_IMAGE_FILES_BY_ANNOUNCEMENT_ID;
 	public static String EDIT_ANNOUNCEMENT_VEHICLE;
 	public static String DELETE_IMAGE_FILES_BY_ANNOUNCEMENT_ID;
+	public static String CREATE_USER_INFO;
+	public static String CREATE_USER;
+	public static String GET_USER_BY_USERNAME;
+	public static String GET_USER_INFO_BY_USER_ID;
+	public static String EDIT_PASSWORD;
+	public static String EDIT_USER_INFO;
 
 	@Autowired
 	public SqlContainer(@Value("${sql.container}") String sqlPath) {
@@ -41,6 +47,12 @@ public class SqlContainer {
 				"announcements/GET_IMAGE_FILES_BY_ANNOUNCEMENT_ID.sql");
 		DELETE_IMAGE_FILES_BY_ANNOUNCEMENT_ID = SqlUtils.getClasspathResource(sqlPath,
 				"announcements/DELETE_IMAGE_FILES_BY_ANNOUNCEMENT_ID.sql");
+		CREATE_USER_INFO = SqlUtils.getClasspathResource(sqlPath, "users/CREATE_USER_INFO.sql");
+		CREATE_USER = SqlUtils.getClasspathResource(sqlPath, "users/CREATE_USER.sql");
+		GET_USER_BY_USERNAME = SqlUtils.getClasspathResource(sqlPath, "users/GET_USER_BY_USERNAME.sql");
+		GET_USER_INFO_BY_USER_ID = SqlUtils.getClasspathResource(sqlPath, "users/GET_USER_INFO_BY_USER_ID.sql");
+		EDIT_PASSWORD = SqlUtils.getClasspathResource(sqlPath, "users/EDIT_PASSWORD.sql");
+		EDIT_USER_INFO = SqlUtils.getClasspathResource(sqlPath, "users/EDIT_USER_INFO.sql");
 
 	}
 }

@@ -1,0 +1,3 @@
+UPDATE USER 
+SET    PASSWORD = :password 
+WHERE  ID = USERID 

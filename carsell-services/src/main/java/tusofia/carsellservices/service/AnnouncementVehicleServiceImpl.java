@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import oracle.ucp.util.Pair;
 import tusofia.carsellservices.model.AnnouncementVehicle;
@@ -17,14 +18,16 @@ import tusofia.carsellservices.repository.AnnouncementVehicleRepository;
 import tusofia.carsellservices.repository.ImageFileRepository;
 
 @Service
+@Transactional
 public class AnnouncementVehicleServiceImpl implements AnnouncementVehicleService {
 
 	private AnnouncementVehicleRepository announcementVehicleRepository;
-	
+
 	private ImageFileRepository imageFileRepository;
 
 	@Autowired
-	public AnnouncementVehicleServiceImpl(AnnouncementVehicleRepository announcementRepository,ImageFileRepository imageFileRepository) {
+	public AnnouncementVehicleServiceImpl(AnnouncementVehicleRepository announcementRepository,
+			ImageFileRepository imageFileRepository) {
 		this.announcementVehicleRepository = announcementRepository;
 		this.imageFileRepository = imageFileRepository;
 	}
@@ -73,9 +76,9 @@ public class AnnouncementVehicleServiceImpl implements AnnouncementVehicleServic
 	public Long editAnnouncementVehicle(AnnouncementVehicle announcementVehicle) {
 		return announcementVehicleRepository.editAnnouncementVehicle(announcementVehicle);
 	}
-	
+
 	@Override
-	public void removeAnnouncementById(Long announcementId){
+	public void removeAnnouncementById(Long announcementId) {
 		this.imageFileRepository.removeFilesByAnnouncementId(announcementId);
 		this.announcementVehicleRepository.removeAnnouncementById(announcementId);
 	}
