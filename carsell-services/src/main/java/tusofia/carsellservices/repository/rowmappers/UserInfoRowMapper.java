@@ -19,10 +19,10 @@ public class UserInfoRowMapper implements RowMapper<UserInfo> {
 		userInfo.setId(rs.getLong("ID"));
 		userInfo.setEmail(rs.getString("EMAIL"));
 		userInfo.setUsername(rs.getString("USERNAME"));
-		userInfo.setFirstName(rs.getString("FIRSTNAME"));
-		userInfo.setLastName(rs.getString("LASTNAME"));
+		userInfo.setFirstName(rs.getString("FIRST_NAME"));
+		userInfo.setLastName(rs.getString("LAST_NAME"));
 		userInfo.setTelephone(rs.getString("TELEPHONE"));
-		userInfo.setUserId(rs.getLong("USERID"));
+		userInfo.setUserId(rs.getLong("USER_ID"));
 		userInfo.setImage(rs.getBytes("IMAGE"));
 		return userInfo;
 	}

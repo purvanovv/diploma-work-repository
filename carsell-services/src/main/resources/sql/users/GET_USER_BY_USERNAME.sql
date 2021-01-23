@@ -1,4 +1,5 @@
-SELECT USERNAME, 
+SELECT ID,
+	   USERNAME, 
        PASSWORD 
 FROM   USERS 
-WHERE  USERNAME = :username 
+WHERE  USERNAME = :username

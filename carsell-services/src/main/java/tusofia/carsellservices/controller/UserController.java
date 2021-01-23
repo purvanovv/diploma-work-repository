@@ -18,7 +18,7 @@ import tusofia.carsellservices.model.UserInfo;
 import tusofia.carsellservices.service.UserService;
 
 @RestController
-@RequestMapping(path = "users")
+@RequestMapping(path = "api")
 public class UserController {
 	private UserService userService;
 
@@ -30,7 +30,7 @@ public class UserController {
 		this.userService = userService;
 	}
 
-	@RequestMapping(value = "/updatePassword", method = RequestMethod.PUT)
+	@RequestMapping(value = "/users/updatePassword", method = RequestMethod.PUT)
 	public ResponseEntity<ResponseMessage> updatePassword(@RequestParam Long userId, @RequestParam String password) {
 		businessLog.info("Calling updatePassword for userId={}", userId);
 		userService.updatePassword(password, userId);
@@ -39,7 +39,7 @@ public class UserController {
 		return new ResponseEntity<ResponseMessage>(new ResponseMessage(message), HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/userInfo", method = RequestMethod.GET)
+	@RequestMapping(value = "/users/userInfo", method = RequestMethod.GET)
 	public ResponseEntity<UserInfo> getUserInfo(@RequestParam Long userId) {
 		businessLog.info("Calling getUserInfo for userId={}", userId);
 		UserInfo userInfo = userService.getUserInfoByUserId(userId);
@@ -47,7 +47,7 @@ public class UserController {
 		return new ResponseEntity<UserInfo>(userInfo, HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/userInfo", method = RequestMethod.PUT)
+	@RequestMapping(value = "/users/userInfo", method = RequestMethod.PUT)
 	public ResponseEntity<ResponseMessage> updateUserInfo(@RequestBody UserInfo userInfo) {
 		businessLog.info("Calling updateUserInfo for userId={}", userInfo.getUserId());
 		userService.updateUserInfo(userInfo);

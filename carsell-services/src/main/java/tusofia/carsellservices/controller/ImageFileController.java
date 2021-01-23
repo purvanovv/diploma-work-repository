@@ -20,7 +20,7 @@ import tusofia.carsellservices.model.ResponseMessage;
 import tusofia.carsellservices.service.ImageFileService;
 
 @RestController
-@RequestMapping(path = "announcements")
+@RequestMapping(path = "api")
 public class ImageFileController {
 
 	private ImageFileService imageFileService;
@@ -33,7 +33,7 @@ public class ImageFileController {
 		this.imageFileService = imageFileService;
 	}
 
-	@RequestMapping(value = "/upload", method = RequestMethod.POST)
+	@RequestMapping(value = "/announcements/upload", method = RequestMethod.POST)
 	public ResponseEntity<ResponseMessage> uploadImage(@RequestParam("imageFile") MultipartFile file,
 			@RequestParam Long announcementId) throws FileTypeNotValidException {
 
@@ -44,7 +44,7 @@ public class ImageFileController {
 		return new ResponseEntity<ResponseMessage>(new ResponseMessage(message), HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/images", method = RequestMethod.GET)
+	@RequestMapping(value = "/announcements/images", method = RequestMethod.GET)
 	public ResponseEntity<List<ImageFile>> getImages(@RequestParam Long announcementId)
 			throws FileTypeNotValidException {
 		businessLog.info("Calling getImages for announcementId={}", announcementId);
@@ -53,7 +53,7 @@ public class ImageFileController {
 		return new ResponseEntity<List<ImageFile>>(images, HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/images", method = RequestMethod.DELETE)
+	@RequestMapping(value = "/announcements/images", method = RequestMethod.DELETE)
 	public ResponseEntity<ResponseMessage> deleteAllImages(@RequestParam Long announcementId) {
 		businessLog.info("Calling deleteAllImages for announcementId={}", announcementId);
 		imageFileService.removeFilesByAnnouncementId(announcementId);

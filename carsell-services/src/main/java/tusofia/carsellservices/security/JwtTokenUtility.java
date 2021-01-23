@@ -4,7 +4,6 @@ import java.sql.Date;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import io.jsonwebtoken.security.Keys;
 import tusofia.carsellservices.model.User;
 import tusofia.carsellservices.util.Constants;
 
@@ -20,9 +19,8 @@ public class JwtTokenUtility {
 
 		byte[] signingKey = jwtSecret.getBytes();
 
-		return Jwts.builder().signWith(Keys.hmacShaKeyFor(signingKey), SignatureAlgorithm.HS512)
-				.setHeaderParam("typ", Constants.TOKEN_TYPE).setIssuer(Constants.TOKEN_ISSUER)
-				.setAudience(Constants.TOKEN_AUDIENCE).setSubject(user.getUsername())
+		return Jwts.builder().signWith(SignatureAlgorithm.HS512, signingKey).setHeaderParam("type", Constants.TOKEN_TYPE)
+				.setIssuer(Constants.TOKEN_ISSUER).setAudience(Constants.TOKEN_AUDIENCE).setSubject(user.getUsername())
 				.setExpiration(new Date(jwtExpirationTime)).compact();
 	}
 }

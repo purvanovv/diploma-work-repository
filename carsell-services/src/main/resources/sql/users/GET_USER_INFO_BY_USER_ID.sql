@@ -5,6 +5,6 @@ SELECT ID,
        USERNAME, 
        TELEPHONE, 
        IMAGE, 
-       USER_ID 
+       USER_ID
 FROM   USER_INFO 
 WHERE  USER_ID = :userId

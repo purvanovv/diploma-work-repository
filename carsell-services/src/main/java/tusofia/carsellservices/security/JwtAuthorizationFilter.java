@@ -1,5 +1,6 @@
 package tusofia.carsellservices.security;
 
+import java.io.IOException;
 import java.io.OutputStream;
 import java.lang.invoke.MethodHandles;
 
@@ -24,9 +25,8 @@ import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.MalformedJwtException;
+import io.jsonwebtoken.SignatureException;
 import io.jsonwebtoken.UnsupportedJwtException;
-import io.jsonwebtoken.io.IOException;
-import io.jsonwebtoken.security.SignatureException;
 import tusofia.carsellservices.exceptions.AuthorizeException;
 import tusofia.carsellservices.model.User;
 import tusofia.carsellservices.util.Constants;
@@ -36,17 +36,10 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
 	private final static Logger securityLog = LoggerFactory
 			.getLogger("security." + MethodHandles.lookup().lookupClass().getCanonicalName());
 
-	private final JwtTokenUtility jwtTokenUtility;
-
-	private final long jwtValidationTime;
-
 	private final String jwtSecret;
 
-	public JwtAuthorizationFilter(AuthenticationManager authenticationManager, JwtTokenUtility jwtTokenUtility,
-			long jwtValidationTime,String jwtSecret) {
+	public JwtAuthorizationFilter(AuthenticationManager authenticationManager, String jwtSecret) {
 		super(authenticationManager);
-		this.jwtTokenUtility = jwtTokenUtility;
-		this.jwtValidationTime = jwtValidationTime;
 		this.jwtSecret = jwtSecret;
 	}
 
@@ -64,12 +57,6 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
 			SecurityContextHolder.getContext().setAuthentication(authentication);
 			User user = new User();
 			user.setUsername(authentication.getName());
-
-			long jwtExpirationTime = System.currentTimeMillis() + jwtValidationTime;
-			String token = jwtTokenUtility.buildToken(user, jwtExpirationTime);
-
-			response.setHeader(Constants.TOKEN_HEADER, token);
-			response.setHeader(Constants.TOKEN_EXPIRED, Long.toString(jwtExpirationTime));
 
 		} catch (AuthorizeException authException) {
 			OutputStream out = response.getOutputStream();
@@ -97,7 +84,6 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
 
 				String username = parsedToken.getBody().getSubject();
 				MDC.put("username", username);
-				
 
 				if (!StringUtils.isEmpty(username)) {
 					return new UsernamePasswordAuthenticationToken(username, null, null);

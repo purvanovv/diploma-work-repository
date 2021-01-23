@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -26,11 +27,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	private String jwtSecret;
 
 	private UserService userService;
-	
+
 	private BCryptPasswordEncoder encoder;
 
-    @Autowired
-	public void globalUserDetails(AuthenticationManagerBuilder auth,UserService userService,BCryptPasswordEncoder encoder) throws Exception {
+	@Bean
+	@Override
+	public AuthenticationManager authenticationManagerBean() throws Exception {
+		return super.authenticationManagerBean();
+	}
+
+	@Autowired
+	public void globalUserDetails(AuthenticationManagerBuilder auth, UserService userService,
+			BCryptPasswordEncoder encoder) throws Exception {
 		auth.userDetailsService(userService).passwordEncoder(encoder);
 		this.userService = userService;
 		this.encoder = encoder;
@@ -38,18 +46,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	private static final String[] AUTH_WHITELIST = {
 			// -- swagger ui
-			"/v2/api-docs", "/swagger-resources", "/swagger-resources/**", "/configuration/ui",
-			"/configuration/security", "/swagger-ui.html", "/webjars/**", "/version" , "/api/resetPassword"
+			"/v2/api-docs", "/swagger-resources", "/swagger-resources/**", "/configuration/ui", "/swagger-ui.html",
+			"/webjars/**", "/version", "/api/auth/*"
 			// other public endpoints of your API may be appended to this array
 	};
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.cors().and().csrf().disable().authorizeRequests().antMatchers(AUTH_WHITELIST).permitAll()
-				.antMatchers("/announcements/**","/users/**").authenticated().and().exceptionHandling().accessDeniedHandler(accessDeniedHandler())
-				.authenticationEntryPoint(authenticationEntryPoint()).and()
-				.addFilter(new JwtAuthenticationFilter(authenticationManager(), jwtTokenUtility(),jwtValidationTime))
-				.addFilter(new JwtAuthorizationFilter(authenticationManager(),jwtTokenUtility(),jwtValidationTime,jwtSecret)).sessionManagement()
+				.antMatchers("/api/announcements/**", "/api/users/**").authenticated().and().exceptionHandling()
+				.accessDeniedHandler(accessDeniedHandler()).authenticationEntryPoint(authenticationEntryPoint()).and()
+				.addFilter(new JwtAuthorizationFilter(authenticationManagerBean(), jwtSecret)).sessionManagement()
 				.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 	}
 
