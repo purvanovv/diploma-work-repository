@@ -18,12 +18,16 @@ export class HeaderComponent implements OnInit {
     private titleService: Title,
     private authenticationService: AuthenticationService,
     private credentialsService: CredentialsService
-  ) {}
+  ) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   logout() {
-    this.authenticationService.logout().subscribe(() => this.router.navigate(['/login'], { replaceUrl: true }));
+    this.authenticationService.logout().subscribe(() => this.router.navigate(['/home'], { replaceUrl: true }));
+  }
+
+  isAuthenticated() {
+    return this.credentialsService.isAuthenticated();
   }
 
   get username(): string | null {
@@ -35,7 +39,7 @@ export class HeaderComponent implements OnInit {
     return this.titleService.getTitle();
   }
 
-  home(){
+  home() {
     this.router.navigate(['home']);
   }
 }

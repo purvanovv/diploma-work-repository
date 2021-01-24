@@ -17,9 +17,20 @@
     </button>
   </div>
   <span fxFlex></span>
-  <button class="active-btn" mat-icon-button [matMenuTriggerFor]="userMenu">
+  <div *ngIf="!isAuthenticated()" fxHide.lt-md>
+    <button class="active-btn" mat-button routerLink="/user/login" routerLinkActive="active">
+      <span>Вход</span>
+    </button>
+    <button class="active-btn" mat-button routerLink="/user/register" routerLinkActive="active">
+      <span>Регистрация</span>
+    </button>
+  </div>
+  <button *ngIf="isAuthenticated()" class="active-btn" mat-icon-button [matMenuTriggerFor]="userMenu">
     <mat-icon>person</mat-icon>
   </button>
+  <div>
+
+  </div>
   <mat-menu #userMenu="matMenu">
     <mat-list>
       <mat-list-item>
