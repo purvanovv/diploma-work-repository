@@ -6,6 +6,7 @@ import { RouteReuseStrategy, RouterModule } from '@angular/router';
 import { RouteReusableStrategy } from './route-reusable-strategy';
 import { ApiPrefixInterceptor } from './http/api-prefix.interceptor';
 import { ErrorHandlerInterceptor } from './http/error-handler.interceptor';
+import { HttpAuthenticateInterceptor } from './http/http-authenticate.interceptor';
 
 @NgModule({
   imports: [CommonModule, HttpClientModule, RouterModule],
@@ -18,6 +19,11 @@ import { ErrorHandlerInterceptor } from './http/error-handler.interceptor';
     {
       provide: HTTP_INTERCEPTORS,
       useClass: ErrorHandlerInterceptor,
+      multi: true,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpAuthenticateInterceptor,
       multi: true,
     },
     {
