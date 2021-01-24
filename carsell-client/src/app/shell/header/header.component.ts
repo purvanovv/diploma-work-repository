@@ -42,4 +42,14 @@ export class HeaderComponent implements OnInit {
   home() {
     this.router.navigate(['home']);
   }
+
+  createAnnouncementOrLogin() {
+    if (this.isAuthenticated()) {
+      this.router.navigate(['/announcement/create']);
+    } else {
+      this.router.navigate(['/user/login']);
+    }
+  }
+
+
 }

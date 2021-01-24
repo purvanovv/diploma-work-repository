@@ -49,7 +49,7 @@ public class AnnouncementVehicleController {
 		this.announcementVehicleModelMapper = announcementModelMapper;
 	}
 
-	@RequestMapping(value = "/announcements/categories", method = RequestMethod.GET)
+	@RequestMapping(value = "/auth/announcements/categories", method = RequestMethod.GET)
 	public ResponseEntity<List<CategoryPair>> getCategories() {
 		businessLog.info("Calling getCategories");
 		List<CategoryPair> categories = this.announcementVehicleService.getCategories();
@@ -108,7 +108,7 @@ public class AnnouncementVehicleController {
 		return new ResponseEntity<ResponseMessage>(message, HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/announcements/announcement", method = RequestMethod.GET)
+	@RequestMapping(value = "auth/announcements/announcement", method = RequestMethod.GET)
 	public ResponseEntity<AnnouncementVehicleCreateDTO> getAnnouncementVehicle(
 			@RequestParam Long announcementVehicleId) {
 		businessLog.info("Calling getAnnouncementVehicle for announcementId={}", announcementVehicleId);
@@ -120,7 +120,7 @@ public class AnnouncementVehicleController {
 		return new ResponseEntity<AnnouncementVehicleCreateDTO>(announcementVehicleCreateDTO, HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/announcements/announcementPreview", method = RequestMethod.GET)
+	@RequestMapping(value = "/auth/announcements/announcementPreview", method = RequestMethod.GET)
 	public ResponseEntity<AnnouncementVehiclePreviewDTO> getAnnouncementVehiclePreview(
 			@RequestParam Long announcementVehicleId) {
 		businessLog.info("Calling getAnnouncementVehiclePreview for announcementId={}", announcementVehicleId);
@@ -133,7 +133,7 @@ public class AnnouncementVehicleController {
 		return new ResponseEntity<AnnouncementVehiclePreviewDTO>(announcementVehiclePreviewDTO, HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/announcements/announcements", method = RequestMethod.GET)
+	@RequestMapping(value = "/auth/announcements/announcements", method = RequestMethod.GET)
 	public ResponseEntity<List<AnnouncementVehiclePreviewDTO>> getAnnouncementVehicles() {
 		businessLog.info("Calling getAnnouncementVehicles");
 		List<AnnouncementVehicle> announcementVehicles = this.announcementVehicleService.getAnnouncementVehicles();
@@ -143,7 +143,7 @@ public class AnnouncementVehicleController {
 		return new ResponseEntity<List<AnnouncementVehiclePreviewDTO>>(announcementVehicleCreateDTOs, HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/announcements/search", method = RequestMethod.POST)
+	@RequestMapping(value = "/auth/announcements/search", method = RequestMethod.POST)
 	public ResponseEntity<List<AnnouncementVehiclePreviewDTO>> getAnnouncementVehicles(
 			@RequestBody AnnouncementVehicleSearchDTO searchData) {
 		businessLog.info("Calling getAnnouncementVehicles for search");
@@ -155,7 +155,7 @@ public class AnnouncementVehicleController {
 		return new ResponseEntity<List<AnnouncementVehiclePreviewDTO>>(announcementVehiclePreviewDTOs, HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/announcements/groupmakes", method = RequestMethod.GET)
+	@RequestMapping(value = "/auth/announcements/groupmakes", method = RequestMethod.GET)
 	public ResponseEntity<Map<String, List<Make>>> getMakesByMainCategory(@RequestParam Long mainCategoryId) {
 		businessLog.info("Calling getMakesByMainCategory for mainCategoryId={}", mainCategoryId);
 		Map<String, List<Make>> groupMakes = announcementVehicleService.getMakesByMainCategory(mainCategoryId);
@@ -163,7 +163,7 @@ public class AnnouncementVehicleController {
 		return new ResponseEntity<Map<String, List<Make>>>(groupMakes, HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/announcements/regions", method = RequestMethod.GET)
+	@RequestMapping(value = "/auth/announcements/regions", method = RequestMethod.GET)
 	public ResponseEntity<Map<String, List<String>>> getRegions() {
 		businessLog.info("Calling getRegions");
 		Map<String, List<String>> regions = announcementVehicleService.getRegions();

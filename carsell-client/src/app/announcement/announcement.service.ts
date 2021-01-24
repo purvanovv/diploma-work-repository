@@ -11,16 +11,16 @@ import {
 import { HttpClient } from '@angular/common/http';
 
 const routes = {
-  categories: () => `announcements/categories`,
-  groupmakes: (mainCategoryId: number) => `announcements/groupmakes?mainCategoryId=${mainCategoryId}`,
-  regions: () => `announcements/regions`,
-  announcement: (announcementId?: number) => announcementId !== null ? `announcements/announcement?announcementId=${announcementId}` : `announcements/announcement`,
-  announcements: () => `announcements/announcements`,
+  categories: () => `api/auth/announcements/categories`,
+  groupmakes: (mainCategoryId: number) => `api/auth/announcements/groupmakes?mainCategoryId=${mainCategoryId}`,
+  regions: () => `api/auth/announcements/regions`,
+  announcement: (announcementId?: number) => announcementId !== null ? `api/announcements/announcement?announcementId=${announcementId}` : `api/announcements/announcement`,
+  announcements: () => `api/auth/announcements/announcements`,
   upload: () => `announcements/upload`,
   announcementPreview: (announcementVehicleId: number) =>
-    `announcements/announcementPreview?announcementVehicleId=${announcementVehicleId}`,
-  images: (announcementId: number) => `announcements/images?announcementId=${announcementId}`,
-  search: () => 'announcements/search'
+    `api/auth/announcements/announcementPreview?announcementVehicleId=${announcementVehicleId}`,
+  images: (announcementId: number) => `api/auth/announcements/images?announcementId=${announcementId}`,
+  search: () => 'api/auth/announcements/search'
 };
 
 @Injectable({

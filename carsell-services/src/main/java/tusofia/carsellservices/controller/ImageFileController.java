@@ -44,7 +44,7 @@ public class ImageFileController {
 		return new ResponseEntity<ResponseMessage>(new ResponseMessage(message), HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/announcements/images", method = RequestMethod.GET)
+	@RequestMapping(value = "/auth/announcements/images", method = RequestMethod.GET)
 	public ResponseEntity<List<ImageFile>> getImages(@RequestParam Long announcementId)
 			throws FileTypeNotValidException {
 		businessLog.info("Calling getImages for announcementId={}", announcementId);

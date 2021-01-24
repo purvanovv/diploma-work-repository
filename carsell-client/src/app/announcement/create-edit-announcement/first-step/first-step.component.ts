@@ -25,6 +25,7 @@ import { Route } from '@angular/compiler/src/core';
 import { ActivatedRoute } from '@angular/router';
 import { AnnouncementModelConverter } from '@app/announcement/utils';
 import { DomSanitizer } from '@angular/platform-browser';
+import { CredentialsService } from '@app/auth';
 
 @Component({
   selector: 'app-first-step',
@@ -66,6 +67,7 @@ export class FirstStepComponent implements OnInit, OnDestroy {
     private announcementService: AnnouncementService,
     private announcementStoreService: AnnouncementStoreService,
     private route: ActivatedRoute,
+    private credentialsService: CredentialsService,
     sanitizer: DomSanitizer) {
     this.modelConverter = new AnnouncementModelConverter(sanitizer);
   }
@@ -220,6 +222,7 @@ export class FirstStepComponent implements OnInit, OnDestroy {
     ).build();
     this.createForm.get('mainCategoryId').setValue(this.initFormCategory.id);
     this.createForm.get('conditionType').setValue('USED');
+    this.createForm.get('userId').setValue(this.credentialsService.credentials.userId);
 
   }
 

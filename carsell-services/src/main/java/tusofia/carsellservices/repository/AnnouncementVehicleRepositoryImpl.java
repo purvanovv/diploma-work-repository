@@ -58,7 +58,7 @@ public class AnnouncementVehicleRepositoryImpl implements AnnouncementVehicleRep
 	@Override
 	public List<CategoryPair> getCategories() {
 		try {
-			String sql = SqlContainer.GET_ANNOUNCEMENT_VEHICLE;
+			String sql = SqlContainer.GET_CATEGORIES;
 			List<CategoryPair> categories = namedParameterJdbcTemplate.getJdbcTemplate().queryForObject(sql, null,
 					new CategoriesRowMapper());
 			return categories;
@@ -116,6 +116,7 @@ public class AnnouncementVehicleRepositoryImpl implements AnnouncementVehicleRep
 			params.addValue("bicycleSize", announcementVehicle.getBicycleSize());
 			params.addValue("numberOfGears", announcementVehicle.getNumberOfGears());
 			params.addValue("description", announcementVehicle.getDescription());
+			params.addValue("userInfoId", announcementVehicle.getUserId());
 			params.addValue("createdBy", announcementVehicle.getMetaProps().getCreatedBy());
 			params.addValue("createdOn",
 					DateUtils.getSubmissionDate(announcementVehicle.getMetaProps().getCreatedOn()));

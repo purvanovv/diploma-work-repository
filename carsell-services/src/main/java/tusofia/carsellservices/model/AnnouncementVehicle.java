@@ -58,7 +58,7 @@ public class AnnouncementVehicle {
 	private String description;
 	private MetaProps metaProps;
 	private List<ImageFile> imageFiles;
-	private UserInfo userInfo;
+	private Long userId;
 
 	public Long getId() {
 		return id;
@@ -388,12 +388,12 @@ public class AnnouncementVehicle {
 		this.imageFiles = imageFiles;
 	}
 
-	public UserInfo getUserInfo() {
-		return userInfo;
+	public Long getUserId() {
+		return userId;
 	}
 
-	public void setUserInfo(UserInfo userInfo) {
-		this.userInfo = userInfo;
+	public void setUserId(Long userId) {
+		this.userId = userId;
 	}
 
 }

@@ -303,6 +303,14 @@ export class AnnouncementControlBuilder {
             Validators.required
           ),
         };
+      case Control.USER_ID:
+        return {
+          name: 'userId',
+          control: new FormControl(
+            this.announcement !== undefined ? this.announcement.userId : '',
+            Validators.required
+          ),
+        };
     }
   }
 }

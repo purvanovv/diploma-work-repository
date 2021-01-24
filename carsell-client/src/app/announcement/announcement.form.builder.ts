@@ -38,6 +38,7 @@ export class AnnouncementFormBuilder {
         this.addControl(controlBuilder.build(Control.CITY));
         this.addControl(controlBuilder.build(Control.VALID_DAYS));
         this.addControl(controlBuilder.build(Control.VALID_FROM));
+        this.addControl(controlBuilder.build(Control.USER_ID));
         break;
       }
       case MainCategoryType.MOTORBIKES: {
@@ -62,6 +63,7 @@ export class AnnouncementFormBuilder {
         this.addControl(controlBuilder.build(Control.CITY));
         this.addControl(controlBuilder.build(Control.VALID_DAYS));
         this.addControl(controlBuilder.build(Control.VALID_FROM));
+        this.addControl(controlBuilder.build(Control.USER_ID));
         break;
       }
      
@@ -88,6 +90,7 @@ export class AnnouncementFormBuilder {
         this.addControl(controlBuilder.build(Control.CITY));
         this.addControl(controlBuilder.build(Control.VALID_DAYS));
         this.addControl(controlBuilder.build(Control.VALID_FROM));
+        this.addControl(controlBuilder.build(Control.USER_ID));
         break;
       }
       case MainCategoryType.TRUCKS: {
@@ -113,6 +116,7 @@ export class AnnouncementFormBuilder {
         this.addControl(controlBuilder.build(Control.CITY));
         this.addControl(controlBuilder.build(Control.VALID_DAYS));
         this.addControl(controlBuilder.build(Control.VALID_FROM));
+        this.addControl(controlBuilder.build(Control.USER_ID));
         break;
       }
     }

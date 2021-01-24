@@ -1,7 +1,15 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
+import { tap } from 'rxjs/operators';
+import { Credentials, Signup } from './auth.models';
 
-import { Credentials, CredentialsService } from './credentials.service';
+import { CredentialsService } from './credentials.service';
+
+const routes = {
+  login: () => 'api/auth/signin',
+  register: () => 'api/auth/signup'
+}
 
 export interface LoginContext {
   username: string;
@@ -17,7 +25,10 @@ export interface LoginContext {
   providedIn: 'root',
 })
 export class AuthenticationService {
-  constructor(private credentialsService: CredentialsService) {}
+
+
+
+  constructor(private credentialsService: CredentialsService, private httpClient: HttpClient) { }
 
   /**
    * Authenticates the user.
@@ -25,13 +36,13 @@ export class AuthenticationService {
    * @return The user credentials.
    */
   login(context: LoginContext): Observable<Credentials> {
-    // Replace by proper authentication call
-    const data = {
-      username: context.username,
-      token: '123456',
-    };
-    this.credentialsService.setCredentials(data, context.remember);
-    return of(data);
+    return this.httpClient.post<Credentials>(routes.login(), context).pipe(tap((credentials: Credentials) => {
+      this.credentialsService.setCredentials(credentials, context.remember);
+    }))
+  }
+
+  register(data: Signup) {
+    return this.httpClient.post<any>(routes.register(), data);
   }
 
   /**

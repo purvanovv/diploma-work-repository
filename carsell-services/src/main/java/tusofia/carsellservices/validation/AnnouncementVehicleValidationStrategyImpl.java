@@ -476,6 +476,15 @@ public enum AnnouncementVehicleValidationStrategyImpl implements AnnouncementVeh
 			return new ValidationResult(true);
 		}
 	},
+	USER_ID(ValidationType.USER_ID) {
+		public ValidationResult validate(AnnouncementVehicleCreateDTO input) {
+			if (null == input.getUserId()) {
+				return new ValidationResult(ValidationType.USER_ID,
+						ValidationConstants.ERROR_MESSAGE_FIELD_IS_EMPTY, false);
+			}
+			return new ValidationResult(true);
+		}
+	},
 	UNSUPPORTED(ValidationType.UNSUPPORTED) {
 		public ValidationResult validate(AnnouncementVehicleCreateDTO input) {
 			return new ValidationResult(false);

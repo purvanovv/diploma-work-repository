@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import tusofia.carsellservices.model.JwtResponse;
+import tusofia.carsellservices.model.Credentials;
 import tusofia.carsellservices.model.ResponseMessage;
 import tusofia.carsellservices.model.User;
 import tusofia.carsellservices.model.dtos.SigninDTO;
@@ -61,7 +61,7 @@ public class AuthController {
 	}
 
 	@RequestMapping(value = "/auth/signin", method = RequestMethod.POST)
-	public ResponseEntity<JwtResponse> authenticateUser(@RequestBody SigninDTO signinDTO) {
+	public ResponseEntity<Credentials> authenticateUser(@RequestBody SigninDTO signinDTO) {
 		businessLog.info("Calling authenticateUser for username={}", signinDTO.getUsername());
 		UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
 				signinDTO.getUsername(), signinDTO.getPassword());
@@ -73,8 +73,8 @@ public class AuthController {
 		long jwtExpirationTime = System.currentTimeMillis() + jwtValidationTime;
 		String token = jwtTokenUtility.buildToken(user, jwtExpirationTime);
 
-		JwtResponse dto = new JwtResponse(user.getId(), user.getUsername(), token, jwtExpirationTime);
+		Credentials dto = new Credentials(user.getId(), user.getUsername(), token, jwtExpirationTime);
 		businessLog.info("Call to authenticateUser for username={} completed", signinDTO.getUsername());
-		return new ResponseEntity<JwtResponse>(dto, HttpStatus.OK);
+		return new ResponseEntity<Credentials>(dto, HttpStatus.OK);
 	}
 }

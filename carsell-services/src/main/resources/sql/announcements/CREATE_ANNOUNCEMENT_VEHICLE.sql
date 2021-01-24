@@ -38,6 +38,7 @@ INSERT INTO announcement_vehicle
              bicycle_size,
              number_of_gears,         
              description, 
+             user_info_id,
              created_by,
              created_on,
              delete_flag) 
@@ -80,6 +81,7 @@ VALUES     (announcement_vehicle_seq.nextval,
              :bicycleSize,
              :numberOfGears,         
              :description, 
+             :userInfoId,
              :createdBy,
              :createdOn,
              :deleteFlag) 

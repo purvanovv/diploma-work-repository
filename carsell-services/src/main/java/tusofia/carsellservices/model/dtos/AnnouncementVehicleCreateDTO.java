@@ -55,6 +55,7 @@ public class AnnouncementVehicleCreateDTO {
 	private Short bicycleSize;
 	private Short numberOfGears;
 	private String description;
+	private Long userId;
 
 	public Long getId() {
 		return id;
@@ -358,6 +359,14 @@ public class AnnouncementVehicleCreateDTO {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public Long getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Long userId) {
+		this.userId = userId;
 	}
 
 }

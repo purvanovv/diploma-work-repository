@@ -1,28 +1,28 @@
 package tusofia.carsellservices.model;
 
-public class JwtResponse {
-	private long id;
+public class Credentials {
+	private Long userId;
 
 	private String username;
 
 	private String token;
 
-	private long tokenExpired;
+	private Long tokenExpired;
 
-	public JwtResponse(long id, String username, String token, long tokenExpired) {
+	public Credentials(Long userId, String username, String token, Long tokenExpired) {
 		super();
-		this.id = id;
+		this.userId = userId;
 		this.username = username;
 		this.token = token;
 		this.tokenExpired = tokenExpired;
 	}
 
-	public long getId() {
-		return id;
+	public Long getUserId() {
+		return userId;
 	}
 
-	public void setId(long id) {
-		this.id = id;
+	public void setUserId(Long userId) {
+		this.userId = userId;
 	}
 
 	public String getUsername() {
@@ -41,11 +41,11 @@ public class JwtResponse {
 		this.token = token;
 	}
 
-	public long getTokenExpired() {
+	public Long getTokenExpired() {
 		return tokenExpired;
 	}
 
-	public void setTokenExpired(long tokenExpired) {
+	public void setTokenExpired(Long tokenExpired) {
 		this.tokenExpired = tokenExpired;
 	}
 

@@ -26,6 +26,7 @@ public class AnnouncementVehicleValidationContextBuilder {
 			strategies.add(AnnouncementVehicleValidationStrategyImpl.REGION);
 			strategies.add(AnnouncementVehicleValidationStrategyImpl.CITY);
 			strategies.add(AnnouncementVehicleValidationStrategyImpl.VALID_DAYS);
+			strategies.add(AnnouncementVehicleValidationStrategyImpl.USER_ID);
 			return new AnnouncementVehicleValidationContext(strategies);
 		}
 
@@ -49,6 +50,7 @@ public class AnnouncementVehicleValidationContextBuilder {
 			strategies.add(AnnouncementVehicleValidationStrategyImpl.REGION);
 			strategies.add(AnnouncementVehicleValidationStrategyImpl.CITY);
 			strategies.add(AnnouncementVehicleValidationStrategyImpl.VALID_DAYS);
+			strategies.add(AnnouncementVehicleValidationStrategyImpl.USER_ID);
 			return new AnnouncementVehicleValidationContext(strategies);
 		}
 
@@ -73,6 +75,7 @@ public class AnnouncementVehicleValidationContextBuilder {
 			strategies.add(AnnouncementVehicleValidationStrategyImpl.REGION);
 			strategies.add(AnnouncementVehicleValidationStrategyImpl.CITY);
 			strategies.add(AnnouncementVehicleValidationStrategyImpl.VALID_DAYS);
+			strategies.add(AnnouncementVehicleValidationStrategyImpl.USER_ID);
 			return new AnnouncementVehicleValidationContext(strategies);
 		}
 
@@ -97,6 +100,7 @@ public class AnnouncementVehicleValidationContextBuilder {
 			strategies.add(AnnouncementVehicleValidationStrategyImpl.REGION);
 			strategies.add(AnnouncementVehicleValidationStrategyImpl.CITY);
 			strategies.add(AnnouncementVehicleValidationStrategyImpl.VALID_DAYS);
+			strategies.add(AnnouncementVehicleValidationStrategyImpl.USER_ID);
 			return new AnnouncementVehicleValidationContext(strategies);
 		}
 

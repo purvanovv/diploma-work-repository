@@ -78,6 +78,7 @@ export interface AnnouncementCreate {
   bicycleSize: number;
   numberOfGears: number;
   description: string;
+  userId: number;
 }
 
 export class AnnouncementCreateModel implements AnnouncementCreate {
@@ -119,6 +120,7 @@ export class AnnouncementCreateModel implements AnnouncementCreate {
   bicycleSize: number;
   numberOfGears: number;
   description: string;
+  userId: number;
 }
 
 export interface AnnouncementSlide {
