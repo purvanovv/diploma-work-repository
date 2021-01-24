@@ -36,13 +36,14 @@ export class AuthenticationService {
    * @return The user credentials.
    */
   login(context: LoginContext): Observable<Credentials> {
-    return this.httpClient.post<Credentials>(routes.login(), context).pipe(tap((credentials: Credentials) => {
+    return this.httpClient
+    .disableHttpAuth().post<Credentials>(routes.login(), context).pipe(tap((credentials: Credentials) => {
       this.credentialsService.setCredentials(credentials, context.remember);
     }))
   }
 
   register(data: Signup) {
-    return this.httpClient.post<any>(routes.register(), data);
+    return this.httpClient.disableHttpAuth().post<any>(routes.register(), data);
   }
 
   /**

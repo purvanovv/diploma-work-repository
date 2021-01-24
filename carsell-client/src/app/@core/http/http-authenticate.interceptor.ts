@@ -8,7 +8,9 @@ import {
 import { Observable } from 'rxjs';
 import { CredentialsService } from '@app/auth';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class HttpAuthenticateInterceptor implements HttpInterceptor {
 
   constructor(private credentialsService: CredentialsService) { }

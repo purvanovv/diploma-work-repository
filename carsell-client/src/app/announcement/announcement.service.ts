@@ -16,10 +16,11 @@ const routes = {
   regions: () => `api/auth/announcements/regions`,
   announcement: (announcementId?: number) => announcementId !== null ? `api/announcements/announcement?announcementId=${announcementId}` : `api/announcements/announcement`,
   announcements: () => `api/auth/announcements/announcements`,
-  upload: () => `announcements/upload`,
+  upload: () => `api/announcements/upload`,
   announcementPreview: (announcementVehicleId: number) =>
     `api/auth/announcements/announcementPreview?announcementVehicleId=${announcementVehicleId}`,
-  images: (announcementId: number) => `api/auth/announcements/images?announcementId=${announcementId}`,
+  getImages: (announcementId: number) => `api/auth/announcements/images?announcementId=${announcementId}`,
+  deleteImage:(announcementId: number) => `api/announcements/images?announcementId=${announcementId}`,
   search: () => 'api/auth/announcements/search'
 };
 
@@ -30,15 +31,15 @@ export class AnnouncementService {
   constructor(private httpClient: HttpClient) { }
 
   public getCategories(): Observable<CategoryPair[]> {
-    return this.httpClient.get<CategoryPair[]>(routes.categories());
+    return this.httpClient.disableHttpAuth().get<CategoryPair[]>(routes.categories());
   }
 
   public getMakes(mainCategoryId: number): Observable<Map<string, Make[]>> {
-    return this.httpClient.get<Map<string, Make[]>>(routes.groupmakes(mainCategoryId));
+    return this.httpClient.disableHttpAuth().get<Map<string, Make[]>>(routes.groupmakes(mainCategoryId));
   }
 
   public getRegions(): Observable<Map<string, string[]>> {
-    return this.httpClient.get<Map<string, string[]>>(routes.regions());
+    return this.httpClient.disableHttpAuth().get<Map<string, string[]>>(routes.regions());
   }
 
   public createAnnouncement(announcement: AnnouncementCreate): Observable<number> {
@@ -50,11 +51,11 @@ export class AnnouncementService {
   }
 
   public getAnnouncementPreview(announcementId: number): Observable<AnnouncementPreview> {
-    return this.httpClient.get<AnnouncementPreview>(routes.announcementPreview(announcementId));
+    return this.httpClient.disableHttpAuth().get<AnnouncementPreview>(routes.announcementPreview(announcementId));
   }
 
   public getAnnouncements(): Observable<AnnouncementPreview[]> {
-    return this.httpClient.get<AnnouncementPreview[]>(routes.announcements());
+    return this.httpClient.disableHttpAuth().get<AnnouncementPreview[]>(routes.announcements());
   }
   public upload(file: File, announcementId: number): Observable<any> {
     const uploadData = new FormData();
@@ -68,15 +69,15 @@ export class AnnouncementService {
   }
 
   public getImages(announcementId: number): Observable<ImageFile[]> {
-    return this.httpClient.get<ImageFile[]>(routes.images(announcementId));
+    return this.httpClient.disableHttpAuth().get<ImageFile[]>(routes.getImages(announcementId));
   }
 
   public searchAnnouncements(searchData: AnnouncementSearch): Observable<AnnouncementPreview[]> {
-    return this.httpClient.post<AnnouncementPreview[]>(routes.search(), searchData);
+    return this.httpClient.disableHttpAuth().post<AnnouncementPreview[]>(routes.search(), searchData);
   }
 
   public deleteImages(announcementId: number): Observable<any> {
-    return this.httpClient.delete(routes.images(announcementId));
+    return this.httpClient.delete(routes.deleteImage(announcementId));
   }
 
   public removeAnnouncementById(announcementId: number): Observable<any> {
