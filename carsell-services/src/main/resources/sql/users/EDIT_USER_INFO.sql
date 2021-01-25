@@ -1,4 +1,4 @@
-UPDATE USER info 
+UPDATE USER_INFO
 SET    FIRST_NAME = :firstName, 
        LAST_NAME = :lastName, 
        EMAIL = :email, 

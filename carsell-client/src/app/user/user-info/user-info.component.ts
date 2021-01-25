@@ -14,7 +14,8 @@ import { UserService } from '../user.service';
 export class UserInfoComponent implements OnInit, OnDestroy {
 
   userInfoForm!: FormGroup;
-  isLoading = true;
+  isLoading = false;
+  isInit = false;
 
   constructor(
     private userService: UserService,
@@ -31,14 +32,21 @@ export class UserInfoComponent implements OnInit, OnDestroy {
       this.createForm(userInfo);
     }),
       finalize(() => {
-        this.isLoading = false;
+        this.isInit = true;
       }),
       untilDestroyed(this)).subscribe();
 
   }
 
   editUserInfo() {
-
+    this.isLoading = true;
+    this.userService.editUserInfo(this.userInfoForm.value).pipe(
+      finalize(() => {
+        this.userInfoForm.markAsPristine();
+        this.isLoading = false;
+      }),
+      untilDestroyed(this)
+    ).subscribe();
   }
 
   private createForm(userInfo: UserInfo) {
