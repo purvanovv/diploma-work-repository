@@ -80,6 +80,7 @@ export class AnnouncementModelConverter {
         target.bicycleSize = source.bicycleSize;
         target.numberOfGears = source.numberOfGears;
         target.description = source.description;
+        target.userId = source.userInfo.id;
         return target;
     }
 

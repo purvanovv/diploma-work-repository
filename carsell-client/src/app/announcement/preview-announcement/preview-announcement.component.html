@@ -4,7 +4,7 @@
       <app-announcement-details *ngIf="announcement!=undefined" [announcement]="announcement">
       </app-announcement-details>
     </mat-card-content>
-    <mat-card-actions>
+    <mat-card-actions *ngIf="canChange()">
       <button (click)="remove(announcement.id)" mat-raised-button color="warn">Изтрий обявата</button>
       <button (click)="edit(announcement.id)" mat-raised-button color="primary">Редактирай обявата</button>
     </mat-card-actions>

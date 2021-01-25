@@ -86,6 +86,7 @@ public class UserRepositoryImpl implements UserRepository {
 			params.addValue("telephone", userInfo.getTelephone());
 			params.addValue("userId", userInfo.getUserId());
 			params.addValue("image", userInfo.getImage());
+			params.addValue("id", userInfo.getId());
 			KeyHolder keyHolder = new GeneratedKeyHolder();
 			String sql = SqlContainer.CREATE_USER_INFO;
 			namedParameterJdbcTemplate.update(sql, params, keyHolder, new String[] { "ID" });

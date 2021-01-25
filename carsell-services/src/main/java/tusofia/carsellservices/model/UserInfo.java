@@ -13,8 +13,9 @@ public class UserInfo {
 	public UserInfo() {
 	}
 
-	public UserInfo(String email, String username, String firstName, String lastName, String telephone, Long userId,
+	public UserInfo(Long id,String email, String username, String firstName, String lastName, String telephone, Long userId,
 			byte[] image) {
+		this.id = id;
 		this.email = email;
 		this.username = username;
 		this.firstName = firstName;

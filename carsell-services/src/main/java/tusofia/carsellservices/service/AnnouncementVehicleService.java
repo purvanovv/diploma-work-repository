@@ -6,6 +6,7 @@ import java.util.Map;
 import tusofia.carsellservices.model.AnnouncementVehicle;
 import tusofia.carsellservices.model.CategoryPair;
 import tusofia.carsellservices.model.Make;
+import tusofia.carsellservices.model.dtos.AnnouncementVehiclePreviewDTO;
 import tusofia.carsellservices.model.dtos.AnnouncementVehicleSearchDTO;
 
 public interface AnnouncementVehicleService {
@@ -28,4 +29,9 @@ public interface AnnouncementVehicleService {
 	public Long editAnnouncementVehicle(AnnouncementVehicle announcementVehicle);
 
 	public void removeAnnouncementById(Long announcementId);
+	
+	public AnnouncementVehiclePreviewDTO getAnnouncementVehiclePreview(Long announcementVehicleId);
+	
+	public List<AnnouncementVehiclePreviewDTO> getAnnouncementPreviewVehicles();
+
 }

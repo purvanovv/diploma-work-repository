@@ -33,12 +33,23 @@
         </div>
       </div>
       <div fxFlex="50%" fxFlex.xs="100%" fxLayoutAlign.xs="center">
+
         <table>
-          <tr *ngFor="let optionPair of options | keyvalue">
+          <th colspan="2">Технически данни</th>
+          <tr *ngFor="let optionPair of vehicleOptions | keyvalue">
+            <td class="info-item-left">{{optionPair.key}}</td>
+            <td class="info-item-right">{{optionPair.value}}</td>
+          </tr>
+          <tr class="blank_row">
+            <td colspan="2"></td>
+          </tr>
+          <th colspan="2">За контакти</th>
+          <tr *ngFor="let optionPair of userOptions | keyvalue">
             <td class="info-item-left">{{optionPair.key}}</td>
             <td class="info-item-right">{{optionPair.value}}</td>
           </tr>
         </table>
+
       </div>
     </div>
 

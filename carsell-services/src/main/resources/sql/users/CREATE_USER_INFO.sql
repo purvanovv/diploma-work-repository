@@ -7,7 +7,7 @@ INSERT INTO USER_INFO
              TELEPHONE, 
              IMAGE, 
              USER_ID) 
-VALUES     (USER_INFO_SEQ.nextval, 
+VALUES     (:id, 
             :email, 
             :firstName, 
             :lastName, 

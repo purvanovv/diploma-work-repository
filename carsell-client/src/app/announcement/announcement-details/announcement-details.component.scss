@@ -5,6 +5,10 @@
     margin: auto;
 }
 
+table{
+  width: 100%;
+}
+
 .info-item-left {
   text-align: left;
 }
@@ -62,4 +66,10 @@
 
 .primary {
   color: mat-color($app-primary, default);
+}
+
+.blank_row
+{
+    height: 10px !important; /* overwrites any other rules */
+    background-color: #FFFFFF;
 }

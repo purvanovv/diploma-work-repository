@@ -1,6 +1,7 @@
 import { AbstractControl } from '@angular/forms';
 import { SafeUrl } from '@angular/platform-browser';
 import { ParamMap } from '@angular/router';
+import { UserInfo } from '@app/user/user.models';
 import {
   EngineType,
   ConditionType,
@@ -204,6 +205,7 @@ export interface AnnouncementPreview {
   description: string;
   metaProps: MetaProps;
   imageFiles: ImageFile[];
+  userInfo: UserInfo;
 }
 
 export interface AnnouncementSearch {

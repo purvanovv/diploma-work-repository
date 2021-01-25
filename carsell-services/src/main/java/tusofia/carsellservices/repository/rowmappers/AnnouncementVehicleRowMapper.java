@@ -72,6 +72,7 @@ public class AnnouncementVehicleRowMapper implements RowMapper<AnnouncementVehic
 		announcementVehicle.setBicycleSize(rs.getShort("BICYCLE_SIZE"));
 		announcementVehicle.setNumberOfGears(rs.getShort("NUMBER_OF_GEARS"));
 		announcementVehicle.setDescription(rs.getString("DESCRIPTION"));
+		announcementVehicle.setUserId(rs.getLong("USER_INFO_ID"));
 
 		MetaProps metaProps = new MetaProps();
 		metaProps.setCreatedBy(rs.getString("CREATED_BY"));

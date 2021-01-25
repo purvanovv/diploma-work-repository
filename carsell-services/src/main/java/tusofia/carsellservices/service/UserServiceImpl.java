@@ -41,7 +41,7 @@ public class UserServiceImpl implements UserService {
 		String bCryptedPassword = bCryptPasswordEncoder.encode(createUserDTO.getPassword());
 		User user = new User(createUserDTO.getUsername(), bCryptedPassword);
 		Long userId = userRepository.createUser(user);
-		UserInfo userInfo = new UserInfo(createUserDTO.getEmail(), createUserDTO.getUsername(),
+		UserInfo userInfo = new UserInfo(userId,createUserDTO.getEmail(), createUserDTO.getUsername(),
 				createUserDTO.getFirstName(), createUserDTO.getLastName(), createUserDTO.getTelephone(), userId,
 				createUserDTO.getImage());
 		userRepository.createUserInfo(userInfo);

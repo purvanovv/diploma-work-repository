@@ -17,6 +17,7 @@ import { ListSearchResultComponent } from './list-search-result/list-search-resu
 import { PaginationComponent } from './pagination/pagination.component';
 import { FilterAnnouncementsComponent } from './filter-announcements/filter-announcements.component';
 import { SearchAnnouncementsComponent } from './search-announcements/search-announcements.component';
+import { UserModule } from '@app/user/user.module';
 
 @NgModule({
   imports: [
@@ -26,6 +27,7 @@ import { SearchAnnouncementsComponent } from './search-announcements/search-anno
     MaterialModule,
     ReactiveFormsModule,
     SharedModule,
+    UserModule
   ],
   declarations: [CreateEditAnnouncementComponent,
     FirstStepComponent, SecondStepComponent,

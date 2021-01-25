@@ -19,6 +19,6 @@ import { MaterialModule } from '@app/material.module';
     MaterialModule,
     ReactiveFormsModule,
     SharedModule
-  ]
+  ],
 })
 export class UserModule { }

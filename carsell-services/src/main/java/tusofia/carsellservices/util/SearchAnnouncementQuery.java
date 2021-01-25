@@ -28,7 +28,7 @@ public class SearchAnnouncementQuery {
 		private StringBuilder query;
 
 		public Builder() {
-			String queryBase = "" + "SELECT av.id, " + "       av.main_category_id, "
+			String queryBase = "" + "SELECT av.id, " + "       av.main_category_id, " + "av.user_info_id, "
 					+ "       mc.NAME as MAIN_CATEGORY_NAME, " + "       mc.value as MAIN_CATEGORY_VALUE, "
 					+ "       sc.NAME as SUB_CATEGORY_NAME, " + "       av.make, " + "       av.model, "
 					+ "       av.engine_type, " + "       av.condition_type, " + "       av.horse_power, "
@@ -54,32 +54,33 @@ public class SearchAnnouncementQuery {
 
 		public Builder addConditionValue(String columnName, String value, String operator) {
 			if (!StringUtils.isNullOrEmpty(value)) {
-				if(columnName.equals("date_of_manufacture")){
-					String parameter = " AND extract(year from av.date_of_manufacture) " + operator + " :" + columnName;				
+				if (columnName.equals("date_of_manufacture")) {
+					String parameter = " AND extract(year from av.date_of_manufacture) " + operator + " :" + columnName;
 					query.append(parameter);
 					params.addValue(columnName, value);
-				}else{
+				} else {
 					String parameter = " AND av." + columnName + " " + operator + " :" + columnName;
 					query.append(parameter);
 					params.addValue(columnName, value);
 				}
-			
+
 			}
 			return this;
 		}
-		
+
 		public Builder addConditionValue(String columnName, String propertyName, String value, String operator) {
 			if (!StringUtils.isNullOrEmpty(value)) {
-				if(columnName.equals("date_of_manufacture")){
-					String parameter = " AND extract(year from av.date_of_manufacture) " + operator + " :" + propertyName;				
+				if (columnName.equals("date_of_manufacture")) {
+					String parameter = " AND extract(year from av.date_of_manufacture) " + operator + " :"
+							+ propertyName;
 					query.append(parameter);
 					params.addValue(propertyName, value);
-				}else{
+				} else {
 					String parameter = " AND av." + columnName + " " + operator + " :" + propertyName;
 					query.append(parameter);
 					params.addValue(propertyName, value);
 				}
-			
+
 			}
 			return this;
 		}

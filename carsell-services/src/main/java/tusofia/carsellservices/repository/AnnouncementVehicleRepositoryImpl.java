@@ -282,7 +282,7 @@ public class AnnouncementVehicleRepositoryImpl implements AnnouncementVehicleRep
 			params.addValue("bicycleSize", announcementVehicle.getBicycleSize());
 			params.addValue("numberOfGears", announcementVehicle.getNumberOfGears());
 			params.addValue("description", announcementVehicle.getDescription());
-			params.addValue("modifiedBy", "TEST_USER");
+			params.addValue("modifiedBy", announcementVehicle.getMetaProps().getModifiedBy());
 			params.addValue("modifiedOn", DateUtils.getSubmissionDate(new Date()));
 
 			String sql = SqlContainer.EDIT_ANNOUNCEMENT_VEHICLE;

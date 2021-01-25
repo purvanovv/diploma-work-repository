@@ -82,7 +82,7 @@ public class AnnouncementVehicleController {
 	@RequestMapping(value = "/announcements/announcement", method = RequestMethod.PUT)
 	public ResponseEntity<Long> editAnnouncement(@RequestBody AnnouncementVehicleCreateDTO announcementVehicleCreateDTO)
 			throws ValidationException {
-
+		String username = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		businessLog.info("Calling editAnnouncement for announcementId={}", announcementVehicleCreateDTO.getId());
 		MainCategoryType mainCategoryType = announcementVehicleService
 				.getMainCategoryType(announcementVehicleCreateDTO.getMainCategoryId());
@@ -95,6 +95,7 @@ public class AnnouncementVehicleController {
 
 		AnnouncementVehicle announcementVehicle = announcementVehicleModelMapper
 				.convertToEntity(announcementVehicleCreateDTO);
+		announcementVehicle.getMetaProps().setModifiedBy(username);
 		Long announcementVehicleId = this.announcementVehicleService.editAnnouncementVehicle(announcementVehicle);
 		businessLog.info("Call to editAnnouncement for announcementId={} completed",
 				announcementVehicleCreateDTO.getId());
@@ -126,10 +127,8 @@ public class AnnouncementVehicleController {
 	public ResponseEntity<AnnouncementVehiclePreviewDTO> getAnnouncementVehiclePreview(
 			@RequestParam Long announcementVehicleId) {
 		businessLog.info("Calling getAnnouncementVehiclePreview for announcementId={}", announcementVehicleId);
-		AnnouncementVehicle announcementVehicle = announcementVehicleService
-				.getAnnouncementVehicle(announcementVehicleId);
-		AnnouncementVehiclePreviewDTO announcementVehiclePreviewDTO = announcementVehicleModelMapper
-				.convertToPreviewDTO(announcementVehicle);
+		AnnouncementVehiclePreviewDTO announcementVehiclePreviewDTO = announcementVehicleService
+				.getAnnouncementVehiclePreview(announcementVehicleId);
 		businessLog.info("Call to getAnnouncementVehiclePreview for announcementId={} completed",
 				announcementVehicleId);
 		return new ResponseEntity<AnnouncementVehiclePreviewDTO>(announcementVehiclePreviewDTO, HttpStatus.OK);
@@ -138,11 +137,10 @@ public class AnnouncementVehicleController {
 	@RequestMapping(value = "/auth/announcements/announcements", method = RequestMethod.GET)
 	public ResponseEntity<List<AnnouncementVehiclePreviewDTO>> getAnnouncementVehicles() {
 		businessLog.info("Calling getAnnouncementVehicles");
-		List<AnnouncementVehicle> announcementVehicles = this.announcementVehicleService.getAnnouncementVehicles();
-		List<AnnouncementVehiclePreviewDTO> announcementVehicleCreateDTOs = announcementVehicleModelMapper
-				.convertToPreviewDTOs(announcementVehicles);
+		List<AnnouncementVehiclePreviewDTO> announcementVehiclePreviewDTOs = announcementVehicleService
+				.getAnnouncementPreviewVehicles();
 		businessLog.info("Call to getAnnouncementVehicles completed");
-		return new ResponseEntity<List<AnnouncementVehiclePreviewDTO>>(announcementVehicleCreateDTOs, HttpStatus.OK);
+		return new ResponseEntity<List<AnnouncementVehiclePreviewDTO>>(announcementVehiclePreviewDTOs, HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/auth/announcements/search", method = RequestMethod.POST)

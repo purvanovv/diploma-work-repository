@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ConfirmationDialogComponent } from '@app/@shared/confirmation-dialog/confirmation-dialog.component';
+import { CredentialsService } from '@app/auth';
 import { of } from 'rxjs';
 import { mergeMap } from 'rxjs/operators';
 import { AnnouncementService } from '../announcement.service';
@@ -21,7 +22,8 @@ export class PreviewAnnouncementComponent implements OnInit {
     private route: ActivatedRoute,
     private announcementService: AnnouncementService,
     private router: Router,
-    private dialog: MatDialog) { }
+    private dialog: MatDialog,
+    private credentialsService: CredentialsService) { }
 
   ngOnInit(): void {
     this.announcementId = Number(this.route.snapshot.paramMap.get('id'));
@@ -30,6 +32,12 @@ export class PreviewAnnouncementComponent implements OnInit {
       .subscribe((announcement: AnnouncementPreview) => {
         this.announcement = announcement;
       })
+  }
+
+  canChange() {
+    return this.credentialsService.isAuthenticated()
+      && this.credentialsService.credentials.userId
+      === this.announcement.userInfo.userId;
   }
 
   edit(id: number) {
