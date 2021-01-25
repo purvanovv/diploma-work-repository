@@ -4,6 +4,8 @@ import { MatSidenav } from '@angular/material/sidenav';
 import { filter } from 'rxjs/operators';
 
 import { untilDestroyed } from '@core';
+import { CredentialsService } from '@app/auth/credentials.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-shell',
@@ -13,7 +15,9 @@ import { untilDestroyed } from '@core';
 export class ShellComponent implements OnInit, OnDestroy {
   @ViewChild('sidenav', { static: false }) sidenav!: MatSidenav;
 
-  constructor(private media: MediaObserver) {}
+  constructor(private media: MediaObserver,
+    private credentialsService: CredentialsService,
+    private router: Router) { }
 
   ngOnInit() {
     // Automatically close side menu on screens > sm breakpoint
@@ -31,4 +35,17 @@ export class ShellComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     // Needed for automatic unsubscribe with untilDestroyed
   }
+
+  isAuthenticated() {
+    return this.credentialsService.isAuthenticated();
+  }
+
+  createAnnouncementOrLogin() {
+    if (this.isAuthenticated()) {
+      this.router.navigate(['/announcement/create']);
+    } else {
+      this.router.navigate(['/user/login']);
+    }
+  }
+
 }

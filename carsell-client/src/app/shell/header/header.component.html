@@ -28,16 +28,10 @@
   <button *ngIf="isAuthenticated()" class="active-btn" mat-icon-button [matMenuTriggerFor]="userMenu">
     <mat-icon>person</mat-icon>
   </button>
-  <div>
-
-  </div>
   <mat-menu #userMenu="matMenu">
-    <mat-list>
-      <mat-list-item>
-        <span>Logged in as</span>&nbsp;<b>{{ username }}</b>
-      </mat-list-item>
-      <mat-divider></mat-divider>
-    </mat-list>
+    <button mat-menu-item routerLink="/user/info">
+      <span>Влезли като</span>&nbsp;<b>{{ username }}</b>
+    </button>
     <button mat-menu-item (click)="logout()">Logout</button>
   </mat-menu>
 </mat-toolbar>

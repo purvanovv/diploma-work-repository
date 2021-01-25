@@ -7,11 +7,12 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '@app/@shared';
 import { MaterialModule } from '@app/material.module';
+import { UserInfoComponent } from './user-info/user-info.component';
 
 
 
 @NgModule({
-  declarations: [LoginComponent, RegisterComponent],
+  declarations: [LoginComponent, RegisterComponent, UserInfoComponent],
   imports: [
     CommonModule,
     UserRoutingModule,
