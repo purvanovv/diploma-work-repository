@@ -40,12 +40,4 @@ export class ShellComponent implements OnInit, OnDestroy {
     return this.credentialsService.isAuthenticated();
   }
 
-  createAnnouncementOrLogin() {
-    if (this.isAuthenticated()) {
-      this.router.navigate(['/announcement/create']);
-    } else {
-      this.router.navigate(['/user/login']);
-    }
-  }
-
 }
