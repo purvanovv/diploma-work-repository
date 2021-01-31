@@ -8,6 +8,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
@@ -43,11 +45,21 @@ public class ExceptionControllerAdvice {
 		return new ResponseEntity<ResponseMessage>(new ResponseMessage(e.getMessage()),
 				HttpStatus.INTERNAL_SERVER_ERROR);
 	}
-
-	@ExceptionHandler(value = Exception.class)
-	public ResponseEntity<ResponseMessage> handleGlobalException(Exception e) {
-		technicalLog.error("[handleGlobalException] message: {}", e.getMessage(), e);
+	
+	@ExceptionHandler(value = AuthenticationException.class)
+	public ResponseEntity<ResponseMessage> handleAuthenticateException(AuthenticationException e) {
+		technicalLog.error("[handleAuthenticateException] message: {}", e.getMessage(), e);
 		return new ResponseEntity<ResponseMessage>(new ResponseMessage(e.getMessage()),
-				HttpStatus.INTERNAL_SERVER_ERROR);
+				HttpStatus.UNAUTHORIZED);
 	}
+
+
+//	@ExceptionHandler(value = Exception.class)
+//	public ResponseEntity<ResponseMessage> handleGlobalException(Exception e) {
+//		technicalLog.error("[handleGlobalException] message: {}", e.getMessage(), e);
+//		return new ResponseEntity<ResponseMessage>(new ResponseMessage(e.getMessage()),
+//				HttpStatus.INTERNAL_SERVER_ERROR);
+//	}
+	
+
 }

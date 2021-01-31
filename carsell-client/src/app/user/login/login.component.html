@@ -5,22 +5,14 @@
         <mat-card-title>Вход</mat-card-title>
       </mat-card-header>
       <form (ngSubmit)="login()" [formGroup]="loginForm" novalidate>
-        <div class="login-error" [hidden]="!error || isLoading">Потребителското име или паролата е грешна.</div>
-        <br />
         <div class="login-fields" fxLayout="column">
           <mat-form-field [hideRequiredMarker]="true">
             <input type="text" matInput formControlName="username" autocomplete="username"
-              [placeholder]="'Потребителско име'" required />
-            <mat-error *ngIf="loginForm.controls.username.invalid && loginForm.controls.username.touched">
-              <span>Потребителското име е задължително</span>
-            </mat-error>
+              [placeholder]="'Потребителско име'" required />         
           </mat-form-field>
           <mat-form-field [hideRequiredMarker]="true">
             <input type="password" matInput formControlName="password" autocomplete="current-password"
-              [placeholder]="'Парола'" required />
-            <mat-error *ngIf="loginForm.controls.password.invalid && loginForm.controls.password.touched">
-              <span>Паролата е задължителна</span>
-            </mat-error>
+              [placeholder]="'Парола'" required />         
           </mat-form-field>
           <mat-slide-toggle color="primary" formControlName="remember">Запомни ме</mat-slide-toggle>
           <br />

@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { untilDestroyed } from '@app/@core/until-destroyed';
+import { NotificationService } from '@app/@shared';
 import { CredentialsService } from '@app/auth';
 import { finalize, tap } from 'rxjs/operators';
 import { UserInfo } from '../user.models';
@@ -20,7 +21,8 @@ export class UserInfoComponent implements OnInit, OnDestroy {
   constructor(
     private userService: UserService,
     private formBuilder: FormBuilder,
-    private credentialsService: CredentialsService) { }
+    private credentialsService: CredentialsService,
+    private notificationService: NotificationService) { }
 
   ngOnDestroy() { }
 
@@ -46,7 +48,9 @@ export class UserInfoComponent implements OnInit, OnDestroy {
         this.isLoading = false;
       }),
       untilDestroyed(this)
-    ).subscribe();
+    ).subscribe(() => {
+      this.notificationService.success('Потребителските данни бяха запазени успешно.')
+    });
   }
 
   private createForm(userInfo: UserInfo) {

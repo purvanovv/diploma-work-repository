@@ -6,6 +6,7 @@ import { finalize } from 'rxjs/operators';
 import { environment } from '@env/environment';
 import { Logger, untilDestroyed } from '@core';
 import { AuthenticationService } from '@app/auth/authentication.service';
+import { NotificationService } from '@app/@shared';
 
 const log = new Logger('Login');
 
@@ -24,14 +25,15 @@ export class LoginComponent implements OnInit, OnDestroy {
     private router: Router,
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
+    private notificationService: NotificationService
   ) {
     this.createForm();
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
-  ngOnDestroy() {}
+  ngOnDestroy() { }
 
   login() {
     this.isLoading = true;
@@ -47,6 +49,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       .subscribe(
         (credentials) => {
           log.debug(`${credentials.username} successfully logged in`);
+          this.notificationService.success(`${credentials.username} влязохте успешно`);
           this.router.navigate([this.route.snapshot.queryParams.redirect || '/'], { replaceUrl: true });
         },
         (error) => {

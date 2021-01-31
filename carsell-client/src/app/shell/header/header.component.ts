@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { MatSidenav } from '@angular/material/sidenav';
 
 import { AuthenticationService, CredentialsService } from '@app/auth';
+import { NotificationService } from '@app/@shared';
 
 @Component({
   selector: 'app-header',
@@ -17,13 +18,17 @@ export class HeaderComponent implements OnInit {
     private router: Router,
     private titleService: Title,
     private authenticationService: AuthenticationService,
-    private credentialsService: CredentialsService
+    private credentialsService: CredentialsService,
+    private notificationService: NotificationService
   ) { }
 
   ngOnInit() { }
 
   logout() {
-    this.authenticationService.logout().subscribe(() => this.router.navigate(['/home'], { replaceUrl: true }));
+    this.authenticationService.logout().subscribe(() => {
+      this.notificationService.success('Излязохте успешно');
+      this.router.navigate(['/home'], { replaceUrl: true })
+    });
   }
 
   isAuthenticated() {

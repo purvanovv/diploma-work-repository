@@ -26,6 +26,7 @@ import { ActivatedRoute } from '@angular/router';
 import { AnnouncementModelConverter } from '@app/announcement/utils';
 import { DomSanitizer } from '@angular/platform-browser';
 import { CredentialsService } from '@app/auth';
+import { NotificationService } from '@app/@shared';
 
 @Component({
   selector: 'app-first-step',
@@ -68,7 +69,8 @@ export class FirstStepComponent implements OnInit, OnDestroy {
     private announcementStoreService: AnnouncementStoreService,
     private route: ActivatedRoute,
     private credentialsService: CredentialsService,
-    sanitizer: DomSanitizer) {
+    sanitizer: DomSanitizer,
+    private notificationService: NotificationService) {
     this.modelConverter = new AnnouncementModelConverter(sanitizer);
   }
   ngOnDestroy(): void {
@@ -114,6 +116,7 @@ export class FirstStepComponent implements OnInit, OnDestroy {
           this.announcementStoreService.setAnnouncementId(announcementId);
           this.announcementStoreService.changeStep(1);
           this.announcementStoreService.initDataSecondStep();
+          this.notificationService.success('Обявата беше запазена успешно');
         },
         (err) => console.log(err)
       );

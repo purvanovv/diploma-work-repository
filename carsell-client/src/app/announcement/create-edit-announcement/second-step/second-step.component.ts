@@ -8,6 +8,7 @@ import { AnnouncementStoreService } from '@app/announcement/announcement-store.s
 import { ActivatedRoute } from '@angular/router';
 import { AnnouncementModelConverter } from '@app/announcement/utils';
 import { DomSanitizer } from '@angular/platform-browser';
+import { NotificationService } from '@app/@shared';
 
 @Component({
   selector: 'app-second-step',
@@ -30,7 +31,8 @@ export class SecondStepComponent implements OnInit {
     private announcementStoreService: AnnouncementStoreService,
     private route: ActivatedRoute,
     private announcementStore: AnnouncementStoreService,
-    sanitizer: DomSanitizer) {
+    sanitizer: DomSanitizer,
+    private notificationService: NotificationService) {
     this.modelConverter = new AnnouncementModelConverter(sanitizer);
   }
 
@@ -111,6 +113,7 @@ export class SecondStepComponent implements OnInit {
             if (this.files.length <= 0) {
               this.announcementStoreService.initDataThirdStep();
               this.announcementStoreService.changeStep(2);
+              this.notificationService.success('Снимките към обявата бяха запазени успешно.')
             }
           }
         });
