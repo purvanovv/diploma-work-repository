@@ -4,10 +4,8 @@ import { Title } from '@angular/platform-browser';
 
 import { environment } from '@env/environment';
 import { Logger, untilDestroyed } from '@core';
-import { NotificationService } from './@shared/notification/notification.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { NotificationData } from './@shared/notification/notification.models';
-import { SnackBarComponent } from './@shared';
+import { NotificationData, NotificationService, SnackBarComponent } from './@shared';
 
 
 

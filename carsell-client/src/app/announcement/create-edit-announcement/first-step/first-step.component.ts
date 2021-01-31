@@ -1,5 +1,11 @@
 import { Component, OnInit, Output, EventEmitter, OnDestroy } from '@angular/core';
-import { Make, MainCategory, SubCategory, CategoryPair, AnnouncementPreview, AnnouncementCreateModel, AnnouncementCreate } from '@app/announcement/models';
+import { Make,
+   MainCategory,
+    SubCategory, 
+    CategoryPair,
+     AnnouncementPreview,
+      AnnouncementCreateModel,
+       AnnouncementCreate } from '@app/announcement/models';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import {
   EngineType,
@@ -243,7 +249,7 @@ export class FirstStepComponent implements OnInit, OnDestroy {
           })
         )
         .subscribe();
-      //this.eventSubscriptions.push(mainCategorySubsrc$);
+      // this.eventSubscriptions.push(mainCategorySubsrc$);
     }
 
 
