@@ -53,10 +53,7 @@ prompt create foreign keys for tables staging area
 prompt create sequences
 -- -----------------------------------------------
 
-@ddl/crsq/crsq_ANNOUNCEMENT_VEHICLE.sql
-@ddl/crsq/crsq_IMAGE_FILES.sql
-@ddl/crsq/crsq_USERS.sql
-@ddl/crsq/crsq_USER_INFO.sql
+@ddl/crsq/crsq_APP.sql
 
 -- Rolf Krissel, 23.01.2017
 -- -----------------------------------------------

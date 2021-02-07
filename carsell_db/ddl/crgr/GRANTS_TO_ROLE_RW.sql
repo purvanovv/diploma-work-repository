@@ -1,9 +1,6 @@
 prompt Granting privileges for synonyms to &role_rw
 
-GRANT SELECT ON &&sapp..ANNOUNCEMENT_VEHICLE_SEQ TO &role_rw;
-GRANT SELECT ON &&sapp..IMAGE_FILES_SEQ TO &role_rw;
-GRANT SELECT ON &&sapp..USERS_SEQ TO &role_rw;
-GRANT SELECT ON &&sapp..USER_INFO_SEQ TO &role_rw;
+GRANT SELECT ON &&sapp..APP_SEQ TO &role_rw;
 
 GRANT SELECT, INSERT, DELETE, UPDATE ON &&sapp..ANNOUNCEMENT_VEHICLE TO &role_rw;
 GRANT SELECT, INSERT, DELETE, UPDATE ON &&sapp..MAIN_CATEGORIES TO &role_rw;

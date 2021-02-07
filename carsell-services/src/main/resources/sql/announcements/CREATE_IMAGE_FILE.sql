@@ -4,7 +4,7 @@ INSERT INTO image_files
              type, 
              data, 
              announcement_id) 
-VALUES     (image_files_seq.nextval, 
+VALUES     (app_seq.nextval, 
             :name, 
             :dataType, 
             :data, 

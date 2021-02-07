@@ -42,7 +42,7 @@ INSERT INTO announcement_vehicle
              created_by,
              created_on,
              delete_flag) 
-VALUES     (announcement_vehicle_seq.nextval, 
+VALUES     (app_seq.nextval, 
              :mainCategoryId, 
              :make, 
              :model, 
