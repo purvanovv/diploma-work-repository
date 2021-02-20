@@ -3,30 +3,47 @@
     <div>
       <mat-form-field appearance="legacy">
         <mat-select placeholder="Подреди по:" formControlName="orderBy">
-          <mat-option [routerLink]="[]" [queryParams]="{orderBy: order.key}" queryParamsHandling="merge"
-            [value]="order.key" *ngFor="let order of orders | keyvalue">
-            {{ order.value }}</mat-option>
+          <mat-option
+            [routerLink]="[]"
+            [queryParams]="{ orderBy: order.key }"
+            queryParamsHandling="merge"
+            [value]="order.key"
+            *ngFor="let order of orders | keyvalue"
+          >
+            {{ order.value }}</mat-option
+          >
         </mat-select>
       </mat-form-field>
     </div>
     <div>
       <mat-form-field appearance="legacy">
         <mat-select placeholder="Цена:" formControlName="orderByPrice">
-          <mat-option [routerLink]="[]" [queryParams]="{orderByPrice: order.key}" queryParamsHandling="merge"
-            [value]="order.key" *ngFor="let order of ordersByPrice | keyvalue">
-            {{ order.value }}</mat-option>
+          <mat-option
+            [routerLink]="[]"
+            [queryParams]="{ orderByPrice: order.key }"
+            queryParamsHandling="merge"
+            [value]="order.key"
+            *ngFor="let order of ordersByPrice | keyvalue"
+          >
+            {{ order.value }}</mat-option
+          >
         </mat-select>
       </mat-form-field>
     </div>
     <div>
       <mat-form-field appearance="legacy">
         <mat-select placeholder="Публикувани:" formControlName="orderByPublished">
-          <mat-option [routerLink]="[]" [queryParams]="{orderByPublished: order.key}" queryParamsHandling="merge"
-            [value]="order.key" *ngFor="let order of ordersByPublish | keyvalue">
-            {{ order.value }}</mat-option>
+          <mat-option
+            [routerLink]="[]"
+            [queryParams]="{ orderByPublished: order.key }"
+            queryParamsHandling="merge"
+            [value]="order.key"
+            *ngFor="let order of ordersByPublish | keyvalue"
+          >
+            {{ order.value }}</mat-option
+          >
         </mat-select>
       </mat-form-field>
     </div>
-
   </div>
 </form>

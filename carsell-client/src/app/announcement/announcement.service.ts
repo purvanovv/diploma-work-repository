@@ -1,34 +1,30 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import {
-  Make,
-  AnnouncementPreview,
-  CategoryPair,
-  AnnouncementCreate,
-  ImageFile,
-  AnnouncementSearch
-} from './models';
+import { Make, AnnouncementPreview, CategoryPair, AnnouncementCreate, ImageFile, AnnouncementSearch } from './models';
 import { HttpClient } from '@angular/common/http';
 
 const routes = {
   categories: () => `api/auth/announcements/categories`,
   groupmakes: (mainCategoryId: number) => `api/auth/announcements/groupmakes?mainCategoryId=${mainCategoryId}`,
   regions: () => `api/auth/announcements/regions`,
-  announcement: (announcementId?: number) => announcementId !== null ? `api/announcements/announcement?announcementId=${announcementId}` : `api/announcements/announcement`,
+  announcement: (announcementId?: number) =>
+    announcementId !== null
+      ? `api/announcements/announcement?announcementId=${announcementId}`
+      : `api/announcements/announcement`,
   announcements: () => `api/auth/announcements/announcements`,
   upload: () => `api/announcements/upload`,
   announcementPreview: (announcementVehicleId: number) =>
     `api/auth/announcements/announcementPreview?announcementVehicleId=${announcementVehicleId}`,
   getImages: (announcementId: number) => `api/auth/announcements/images?announcementId=${announcementId}`,
-  deleteImage:(announcementId: number) => `api/announcements/images?announcementId=${announcementId}`,
-  search: () => 'api/auth/announcements/search'
+  deleteImage: (announcementId: number) => `api/announcements/images?announcementId=${announcementId}`,
+  search: () => 'api/auth/announcements/search',
 };
 
 @Injectable({
   providedIn: 'root',
 })
 export class AnnouncementService {
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient) {}
 
   public getCategories(): Observable<CategoryPair[]> {
     return this.httpClient.disableHttpAuth().get<CategoryPair[]>(routes.categories());
@@ -83,5 +79,4 @@ export class AnnouncementService {
   public removeAnnouncementById(announcementId: number): Observable<any> {
     return this.httpClient.delete(routes.announcement(announcementId));
   }
-
 }

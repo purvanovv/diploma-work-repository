@@ -25,6 +25,7 @@ public class SqlContainer {
 	public static String GET_USER_INFO_BY_USER_ID;
 	public static String EDIT_PASSWORD;
 	public static String EDIT_USER_INFO;
+	public static String GET_USER_BY_EMAIL;
 
 	@Autowired
 	public SqlContainer(@Value("${sql.container}") String sqlPath) {
@@ -53,6 +54,7 @@ public class SqlContainer {
 		GET_USER_INFO_BY_USER_ID = SqlUtils.getClasspathResource(sqlPath, "users/GET_USER_INFO_BY_USER_ID.sql");
 		EDIT_PASSWORD = SqlUtils.getClasspathResource(sqlPath, "users/EDIT_PASSWORD.sql");
 		EDIT_USER_INFO = SqlUtils.getClasspathResource(sqlPath, "users/EDIT_USER_INFO.sql");
+		GET_USER_BY_EMAIL = SqlUtils.getClasspathResource(sqlPath, "users/GET_USER_BY_EMAIL.sql");
 
 	}
 }

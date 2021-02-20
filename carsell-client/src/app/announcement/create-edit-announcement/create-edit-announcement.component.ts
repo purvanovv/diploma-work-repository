@@ -19,34 +19,28 @@ export class CreateEditAnnouncementComponent implements OnInit, OnDestroy {
 
   @ViewChild('stepper') stepper: MatStepper;
 
-  constructor(
-    private announcementStoreService: AnnouncementStoreService,
-    private route: ActivatedRoute) { }
+  constructor(private announcementStoreService: AnnouncementStoreService, private route: ActivatedRoute) {}
 
   ngOnInit() {
     this.initStepLabel();
 
-    this.announcementStoreService.changeStep$
-      .pipe(untilDestroyed(this))
-      .subscribe((step: number) => {
-        if (step !== undefined) {
-          this.stepper.selected.completed = true;
-          this.stepper.next();
-        }
-      })
+    this.announcementStoreService.changeStep$.pipe(untilDestroyed(this)).subscribe((step: number) => {
+      if (step !== undefined) {
+        this.stepper.selected.completed = true;
+        this.stepper.next();
+      }
+    });
   }
 
-  ngOnDestroy() { 
+  ngOnDestroy() {
     this.announcementStoreService.changeStep(undefined);
   }
 
   private initStepLabel() {
     if (!this.route.snapshot.paramMap.get('id')) {
       this.stepLabel = modeStepLabels.get(Mode.CREATE);
-    }
-    else {
+    } else {
       this.stepLabel = modeStepLabels.get(Mode.EDIT);
     }
   }
-
 }

@@ -10,12 +10,12 @@
   padding: 0px;
 }
 
-@media(max-width:600px) {
+@media (max-width: 600px) {
   ::ng-deep .mat-horizontal-content-container {
     padding: 0 !important;
   }
 }
 
-::ng-deep .mat-stepper-horizontal{
+::ng-deep .mat-stepper-horizontal {
   background-color: inherit;
 }

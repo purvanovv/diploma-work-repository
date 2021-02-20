@@ -3,12 +3,12 @@
     <mat-card-content>
       <form [formGroup]="searchForm">
         <div fxLayout="row wrap">
-
           <div *ngIf="containsControl('mainCategoryId')" class="app-form-control">
             <mat-form-field appearance="legacy">
               <mat-select placeholder="Основна категория" formControlName="mainCategoryId">
                 <mat-option [value]="categoryPair.mainCategory.id" *ngFor="let categoryPair of categories">
-                  {{ categoryPair.mainCategory.name }}</mat-option>
+                  {{ categoryPair.mainCategory.name }}</mat-option
+                >
               </mat-select>
             </mat-form-field>
           </div>
@@ -53,13 +53,12 @@
             </mat-form-field>
           </div>
 
-
-
           <div *ngIf="containsControl('subCategoryId')" class="app-form-control">
             <mat-form-field appearance="legacy">
               <mat-select placeholder="Категория" formControlName="subCategoryId">
                 <mat-option [value]="subCategory.id" *ngFor="let subCategory of subCategories">
-                  {{ subCategory.name }}</mat-option>
+                  {{ subCategory.name }}</mat-option
+                >
               </mat-select>
             </mat-form-field>
           </div>
@@ -86,8 +85,10 @@
             </mat-form-field>
           </div>
 
-          <div *ngIf="containsControl('weightCapacityMin') ||  containsControl('weightCapacityMax')"
-            class="app-form-control">
+          <div
+            *ngIf="containsControl('weightCapacityMin') || containsControl('weightCapacityMax')"
+            class="app-form-control"
+          >
             <div class="inline-control" *ngIf="containsControl('weightCapacityMin')">
               <mat-form-field appearance="legacy">
                 <input matInput type="number" placeholder="Мин.товароносимост" formControlName="weightCapacityMin" />
@@ -115,19 +116,21 @@
             </div>
           </div>
 
-          <div class="app-form-control"
-            *ngIf="containsControl('dateOfManufactureFrom') || containsControl('dateOfManufactureTo')">
+          <div
+            class="app-form-control"
+            *ngIf="containsControl('dateOfManufactureFrom') || containsControl('dateOfManufactureTo')"
+          >
             <div class="inline-control" *ngIf="containsControl('dateOfManufactureFrom')">
               <mat-form-field appearance="legacy">
                 <mat-select placeholder="Година от" formControlName="dateOfManufactureFrom">
-                  <mat-option [value]="year" *ngFor="let year of years">{{year}}</mat-option>
+                  <mat-option [value]="year" *ngFor="let year of years">{{ year }}</mat-option>
                 </mat-select>
               </mat-form-field>
             </div>
             <div class="inline-control" *ngIf="containsControl('dateOfManufactureTo')">
               <mat-form-field appearance="legacy">
                 <mat-select placeholder="Година до" formControlName="dateOfManufactureTo">
-                  <mat-option [value]="year" *ngFor="let year of years">{{year}}</mat-option>
+                  <mat-option [value]="year" *ngFor="let year of years">{{ year }}</mat-option>
                 </mat-select>
               </mat-form-field>
             </div>
@@ -153,7 +156,8 @@
           <div *ngIf="containsControl('region')" class="app-form-control">
             <mat-form-field appearance="legacy">
               <mat-select placeholder="Регион" formControlName="region">
-                <mat-option [value]="region.key" *ngFor="let region of regions | keyvalue"> {{ region.key }}
+                <mat-option [value]="region.key" *ngFor="let region of regions | keyvalue">
+                  {{ region.key }}
                 </mat-option>
               </mat-select>
             </mat-form-field>
@@ -183,8 +187,10 @@
           <div *ngIf="containsControl('engineCategoryType')" class="app-form-control">
             <mat-form-field appearance="legacy">
               <mat-select placeholder="Вид двигател" formControlName="engineCategoryType">
-                <mat-option [value]="getEnumValue(name, engineCategoryType)"
-                  *ngFor="let name of engineCategoryType | enumToArray">
+                <mat-option
+                  [value]="getEnumValue(name, engineCategoryType)"
+                  *ngFor="let name of engineCategoryType | enumToArray"
+                >
                   {{ getEnumValue(name, engineCategoryType) }}
                 </mat-option>
               </mat-select>
@@ -228,15 +234,15 @@
           <div *ngIf="containsControl('emissionStandartType')" class="app-form-control">
             <mat-form-field appearance="legacy">
               <mat-select placeholder="Евростандарт" formControlName="emissionStandartType">
-                <mat-option [value]="getEnumValue(name, emissionStandartType)"
-                  *ngFor="let name of emissionStandartType | enumToArray">
+                <mat-option
+                  [value]="getEnumValue(name, emissionStandartType)"
+                  *ngFor="let name of emissionStandartType | enumToArray"
+                >
                   {{ getEnumValue(name, emissionStandartType) }}
                 </mat-option>
               </mat-select>
             </mat-form-field>
           </div>
-
-
 
           <div *ngIf="containsControl('numberOfBeds')" class="app-form-control">
             <mat-form-field appearance="legacy">
@@ -267,8 +273,10 @@
           <div *ngIf="containsControl('airConditionType')" class="app-form-control">
             <mat-form-field appearance="legacy">
               <mat-select placeholder="Климатик" formControlName="airConditionType">
-                <mat-option [value]="getEnumValue(name, airConditionType)"
-                  *ngFor="let name of airConditionType | enumToArray">
+                <mat-option
+                  [value]="getEnumValue(name, airConditionType)"
+                  *ngFor="let name of airConditionType | enumToArray"
+                >
                   {{ getEnumValue(name, airConditionType) }}
                 </mat-option>
               </mat-select>
@@ -315,18 +323,21 @@
             </mat-form-field>
           </div>
 
-
           <div *ngIf="containsControl('conditionType')" class="app-form-control">
             <div class="form-control-condition">
               <label>Състояние:</label>
               <mat-radio-group class="condition-radio-group" formControlName="conditionType">
-                <mat-radio-button color="primary" class="condition-radio-button"
-                  [value]="getEnumValue(name, conditionType)" *ngFor="let name of conditionType | enumToArray">
-                  {{ getEnumValue(name, conditionType) }}</mat-radio-button>
+                <mat-radio-button
+                  color="primary"
+                  class="condition-radio-button"
+                  [value]="getEnumValue(name, conditionType)"
+                  *ngFor="let name of conditionType | enumToArray"
+                >
+                  {{ getEnumValue(name, conditionType) }}</mat-radio-button
+                >
               </mat-radio-group>
             </div>
           </div>
-
         </div>
         <div>
           <button type="submit" mat-raised-button color="primary" (click)="submitSearchForm()">Търси</button>

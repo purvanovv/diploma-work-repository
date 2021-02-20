@@ -8,7 +8,14 @@ import { AnnouncementStoreService } from '@app/announcement/announcement-store.s
 import { AnnouncementFormBuilder } from '@app/announcement/announcement.form.builder';
 import { AnnouncementService } from '@app/announcement/announcement.service';
 import { MainCategoryType } from '@app/announcement/enums';
-import { AnnouncementPreview, ConfirmDialogDataModel, ImageFile, ImageFilePreview, ImageFilePreviewModel, PreviewImageModalDataModel } from '@app/announcement/models';
+import {
+  AnnouncementPreview,
+  ConfirmDialogDataModel,
+  ImageFile,
+  ImageFilePreview,
+  ImageFilePreviewModel,
+  PreviewImageModalDataModel,
+} from '@app/announcement/models';
 import { AnnouncementModelConverter } from '@app/announcement/utils';
 import { of } from 'rxjs';
 import { mergeMap } from 'rxjs/operators';
@@ -25,55 +32,55 @@ export class ThirdStepComponent implements OnInit {
   images: ImageFilePreview[] = [];
   selectedImage: ImageFilePreview;
   announcementModelConverter: AnnouncementModelConverter;
-  constructor(private announcementService: AnnouncementService,
+  constructor(
+    private announcementService: AnnouncementService,
     private announcementStoreService: AnnouncementStoreService,
     private router: Router,
-    private dialog: MatDialog) {
-  }
+    private dialog: MatDialog
+  ) {}
 
   ngOnInit(): void {
     this.announcementStoreService.initDataThirdStep$.subscribe(() => {
       this.initData(this.announcementStoreService.getAnnouncementId());
-    })
+    });
   }
 
   remove(id: number) {
     const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
-      data: new ConfirmDialogDataModel('Потвърждение за изтриване', 'Сигурни ли сте, че искате да изтриете обявата?')
-    })
+      data: new ConfirmDialogDataModel('Потвърждение за изтриване', 'Сигурни ли сте, че искате да изтриете обявата?'),
+    });
 
-    dialogRef.afterClosed().pipe(mergeMap(dialogResult => {
-      if (dialogResult) {
-        return this.announcementService.removeAnnouncementById(id).pipe(mergeMap(() => {
-          return of(true);
-        }));
-      } else {
-        return of(false);
-      }
-    })).subscribe(result => {
-      if (result) {
-        this.router.navigate(['home']);
-      }
-    })
-
-
+    dialogRef
+      .afterClosed()
+      .pipe(
+        mergeMap((dialogResult) => {
+          if (dialogResult) {
+            return this.announcementService.removeAnnouncementById(id).pipe(
+              mergeMap(() => {
+                return of(true);
+              })
+            );
+          } else {
+            return of(false);
+          }
+        })
+      )
+      .subscribe((result) => {
+        if (result) {
+          this.router.navigate(['home']);
+        }
+      });
   }
 
   edit(id: number) {
     this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
       this.router.navigate([`announcement/edit/${id}`]);
-    })
-
+    });
   }
 
   private initData(announcementId: number) {
-    this.announcementService
-      .getAnnouncementPreview(announcementId)
-      .subscribe((announcemet: AnnouncementPreview) => {
-        this.announcement = announcemet;
-      });
+    this.announcementService.getAnnouncementPreview(announcementId).subscribe((announcemet: AnnouncementPreview) => {
+      this.announcement = announcemet;
+    });
   }
-
-
-
 }

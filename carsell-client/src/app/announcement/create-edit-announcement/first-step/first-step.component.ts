@@ -1,11 +1,13 @@
 import { Component, OnInit, Output, EventEmitter, OnDestroy } from '@angular/core';
-import { Make,
-   MainCategory,
-    SubCategory, 
-    CategoryPair,
-     AnnouncementPreview,
-      AnnouncementCreateModel,
-       AnnouncementCreate } from '@app/announcement/models';
+import {
+  Make,
+  MainCategory,
+  SubCategory,
+  CategoryPair,
+  AnnouncementPreview,
+  AnnouncementCreateModel,
+  AnnouncementCreate,
+} from '@app/announcement/models';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import {
   EngineType,
@@ -70,13 +72,15 @@ export class FirstStepComponent implements OnInit, OnDestroy {
   private announcementId: number | undefined = undefined;
   private announcementForEdit: AnnouncementCreate | undefined = undefined;
 
-  constructor(private formBuilder: FormBuilder,
+  constructor(
+    private formBuilder: FormBuilder,
     private announcementService: AnnouncementService,
     private announcementStoreService: AnnouncementStoreService,
     private route: ActivatedRoute,
     private credentialsService: CredentialsService,
     sanitizer: DomSanitizer,
-    private notificationService: NotificationService) {
+    private notificationService: NotificationService
+  ) {
     this.modelConverter = new AnnouncementModelConverter(sanitizer);
   }
   ngOnDestroy(): void {
@@ -90,17 +94,18 @@ export class FirstStepComponent implements OnInit, OnDestroy {
 
   init() {
     this.isLoading = true;
-    return this.$initData().pipe(finalize(() => {
-      if (this.isCreateMode) {
-        this.initForm();
-      } else {
-        this.initFormForEdit(this.announcementForEdit)
-      }
-      this.initEvents()
-      this.isLoading = false;
-    }));
+    return this.$initData().pipe(
+      finalize(() => {
+        if (this.isCreateMode) {
+          this.initForm();
+        } else {
+          this.initFormForEdit(this.announcementForEdit);
+        }
+        this.initEvents();
+        this.isLoading = false;
+      })
+    );
   }
-
 
   public getEnumValue(name: string, enumeration: object) {
     return enumeration[name];
@@ -109,23 +114,19 @@ export class FirstStepComponent implements OnInit, OnDestroy {
   public submitForm() {
     let observer: Observable<number>;
     if (this.isCreateMode) {
-      observer = this.announcementService
-        .createAnnouncement(this.createForm.value);
+      observer = this.announcementService.createAnnouncement(this.createForm.value);
     } else {
-      observer = this.announcementService
-        .editAnnouncement(this.createForm.value);
+      observer = this.announcementService.editAnnouncement(this.createForm.value);
     }
-    observer
-      .pipe(untilDestroyed(this))
-      .subscribe(
-        (announcementId: number) => {
-          this.announcementStoreService.setAnnouncementId(announcementId);
-          this.announcementStoreService.changeStep(1);
-          this.announcementStoreService.initDataSecondStep();
-          this.notificationService.success('Обявата беше запазена успешно');
-        },
-        (err) => console.log(err)
-      );
+    observer.pipe(untilDestroyed(this)).subscribe(
+      (announcementId: number) => {
+        this.announcementStoreService.setAnnouncementId(announcementId);
+        this.announcementStoreService.changeStep(1);
+        this.announcementStoreService.initDataSecondStep();
+        this.notificationService.success('Обявата беше запазена успешно');
+      },
+      (err) => console.log(err)
+    );
   }
 
   public containsControl(controlName: string): boolean {
@@ -188,21 +189,23 @@ export class FirstStepComponent implements OnInit, OnDestroy {
 
   private $initData(): Observable<any> {
     if (!this.isCreateMode) {
-      const $initForm = this.announcementService.getAnnouncementPreview(this.announcementId)
-        .pipe(
-          take(1),
-          tap((announcement: AnnouncementPreview) => {
-            const announcementCreate = this.modelConverter.convertAnnouncementPreviewToAnnouncementCreate(announcement);
-            this.announcementForEdit = announcementCreate;
-            this.initFormCategory = announcement.mainCategory;
-          }));
-      return $initForm.pipe(mergeMap(() => {
-        const observables = [];
-        observables.push(this.$initCategories(this.initFormCategory.id));
-        observables.push(this.$initMakes(this.initFormCategory.id));
-        observables.push(this.$initRegions());
-        return concat(...observables);
-      }))
+      const $initForm = this.announcementService.getAnnouncementPreview(this.announcementId).pipe(
+        take(1),
+        tap((announcement: AnnouncementPreview) => {
+          const announcementCreate = this.modelConverter.convertAnnouncementPreviewToAnnouncementCreate(announcement);
+          this.announcementForEdit = announcementCreate;
+          this.initFormCategory = announcement.mainCategory;
+        })
+      );
+      return $initForm.pipe(
+        mergeMap(() => {
+          const observables = [];
+          observables.push(this.$initCategories(this.initFormCategory.id));
+          observables.push(this.$initMakes(this.initFormCategory.id));
+          observables.push(this.$initRegions());
+          return concat(...observables);
+        })
+      );
     } else {
       const observables = [];
       observables.push(this.$initCategories(this.initFormCategory.id));
@@ -210,17 +213,10 @@ export class FirstStepComponent implements OnInit, OnDestroy {
       observables.push(this.$initRegions());
       return concat(...observables);
     }
-
-
-
-
-
   }
   private initFormForEdit(announcementCreate: AnnouncementCreateModel) {
-    this.createForm = new AnnouncementFormBuilder(
-      this.formBuilder,
-      MainCategoryType[this.initFormCategory.value]
-    ).withAnnouncement(announcementCreate)
+    this.createForm = new AnnouncementFormBuilder(this.formBuilder, MainCategoryType[this.initFormCategory.value])
+      .withAnnouncement(announcementCreate)
       .build();
   }
 
@@ -232,7 +228,6 @@ export class FirstStepComponent implements OnInit, OnDestroy {
     this.createForm.get('mainCategoryId').setValue(this.initFormCategory.id);
     this.createForm.get('conditionType').setValue('USED');
     this.createForm.get('userId').setValue(this.credentialsService.credentials.userId);
-
   }
 
   private initEvents() {
@@ -251,7 +246,6 @@ export class FirstStepComponent implements OnInit, OnDestroy {
         .subscribe();
       // this.eventSubscriptions.push(mainCategorySubsrc$);
     }
-
 
     const makeSubscr$ = this.createForm
       .get('make')

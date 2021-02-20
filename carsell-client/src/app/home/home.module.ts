@@ -13,8 +13,16 @@ import { AnnouncementModule } from '@app/announcement/announcement.module';
 import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
-  imports: [CommonModule, CoreModule, SharedModule,
-    FlexLayoutModule, MaterialModule, HomeRoutingModule, AnnouncementModule, ReactiveFormsModule],
+  imports: [
+    CommonModule,
+    CoreModule,
+    SharedModule,
+    FlexLayoutModule,
+    MaterialModule,
+    HomeRoutingModule,
+    AnnouncementModule,
+    ReactiveFormsModule,
+  ],
   declarations: [HomeComponent, ImageSlideComponent],
 })
-export class HomeModule { }
+export class HomeModule {}

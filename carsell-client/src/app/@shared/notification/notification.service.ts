@@ -1,15 +1,19 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { NotificationData, NotificationDataModel, NotificationType } from './notification.models';
+import {
+  ErrorModalNotificationData,
+  NotificationData,
+  NotificationType,
+  SnackBarNotificationData,
+} from './notification.models';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class NotificationService {
-
   private readonly _notification = new BehaviorSubject<NotificationData>(undefined);
 
-  constructor() { }
+  constructor() {}
 
   private get notification(): NotificationData {
     return this._notification.getValue();
@@ -24,9 +28,17 @@ export class NotificationService {
   }
 
   public success(message: string) {
-    this.notification = new NotificationDataModel(message, NotificationType.SUCESS, 'success-snackbar', 'done');
+    this.notification = new SnackBarNotificationData('success-snackbar', 'done', NotificationType.SUCESS, message);
   }
-  public error(message: string) {
-    this.notification = new NotificationDataModel(message, NotificationType.ERROR, 'error-snackbar', 'error');
+  public businessError(message: string) {
+    this.notification = new SnackBarNotificationData(
+      'error-snackbar',
+      'error',
+      NotificationType.BUSINESS_ERROR,
+      message
+    );
+  }
+  public technicalError(message: string, errorCode: string, title: string) {
+    this.notification = new ErrorModalNotificationData(errorCode, NotificationType.TECHNICAL_ERROR, message, title);
   }
 }

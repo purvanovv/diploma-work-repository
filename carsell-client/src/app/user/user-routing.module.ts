@@ -11,8 +11,10 @@ const routes: Routes = [
     { path: 'user/login', component: LoginComponent, data: { title: 'Login' } },
     { path: 'user/register', component: RegisterComponent, data: { title: 'Register' } },
     {
-      path: 'user/info', component: UserInfoComponent,
-      data: { title: 'UserInfo' }, canActivate: [AuthenticationGuard]
+      path: 'user/info',
+      component: UserInfoComponent,
+      data: { title: 'UserInfo' },
+      canActivate: [AuthenticationGuard],
     },
   ]),
 ];
@@ -21,4 +23,4 @@ const routes: Routes = [
   exports: [RouterModule],
   providers: [],
 })
-export class UserRoutingModule { }
+export class UserRoutingModule {}

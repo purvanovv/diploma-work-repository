@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import tusofia.carsellservices.exceptions.EmailExistsException;
 import tusofia.carsellservices.model.ResponseMessage;
+import tusofia.carsellservices.model.User;
 import tusofia.carsellservices.model.UserInfo;
 import tusofia.carsellservices.service.UserService;
 
@@ -30,15 +32,6 @@ public class UserController {
 		this.userService = userService;
 	}
 
-	@RequestMapping(value = "/users/updatePassword", method = RequestMethod.PUT)
-	public ResponseEntity<ResponseMessage> updatePassword(@RequestParam Long userId, @RequestParam String password) {
-		businessLog.info("Calling updatePassword for userId={}", userId);
-		userService.updatePassword(password, userId);
-		String message = "Updated the passswoed successfully";
-		businessLog.info("Call to updatePassword for userId={} completed", userId);
-		return new ResponseEntity<ResponseMessage>(new ResponseMessage(message), HttpStatus.OK);
-	}
-
 	@RequestMapping(value = "/users/userInfo", method = RequestMethod.GET)
 	public ResponseEntity<UserInfo> getUserInfo(@RequestParam Long userId) {
 		businessLog.info("Calling getUserInfo for userId={}", userId);
@@ -48,8 +41,12 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/users/userInfo", method = RequestMethod.PUT)
-	public ResponseEntity<ResponseMessage> updateUserInfo(@RequestBody UserInfo userInfo) {
+	public ResponseEntity<ResponseMessage> updateUserInfo(@RequestBody UserInfo userInfo) throws EmailExistsException {
 		businessLog.info("Calling updateUserInfo for userId={}", userInfo.getUserId());
+		User user = userService.getUserByEmail(userInfo.getEmail());
+		if (user != null && user.getId() != userInfo.getId()) {
+			throw new EmailExistsException("Потребител с имейл " + userInfo.getEmail() + " съществува.", (short) 407);
+		}
 		userService.updateUserInfo(userInfo);
 		businessLog.info("Call to updateUserInfo for userId={} completed", userInfo.getUserId());
 		String message = "Updated the user info successfully";

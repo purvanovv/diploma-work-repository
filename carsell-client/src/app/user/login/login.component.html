@@ -7,12 +7,24 @@
       <form (ngSubmit)="login()" [formGroup]="loginForm" novalidate>
         <div class="login-fields" fxLayout="column">
           <mat-form-field [hideRequiredMarker]="true">
-            <input type="text" matInput formControlName="username" autocomplete="username"
-              [placeholder]="'Потребителско име'" required />         
+            <input
+              type="text"
+              matInput
+              formControlName="username"
+              autocomplete="username"
+              [placeholder]="'Потребителско име'"
+              required
+            />
           </mat-form-field>
           <mat-form-field [hideRequiredMarker]="true">
-            <input type="password" matInput formControlName="password" autocomplete="current-password"
-              [placeholder]="'Парола'" required />         
+            <input
+              type="password"
+              matInput
+              formControlName="password"
+              autocomplete="current-password"
+              [placeholder]="'Парола'"
+              required
+            />
           </mat-form-field>
           <mat-slide-toggle color="primary" formControlName="remember">Запомни ме</mat-slide-toggle>
           <br />

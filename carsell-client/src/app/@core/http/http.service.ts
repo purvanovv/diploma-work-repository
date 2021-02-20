@@ -5,15 +5,12 @@ import { ApiPrefixInterceptor } from './api-prefix.interceptor';
 import { ErrorHandlerInterceptor } from './error-handler.interceptor';
 import { HttpAuthenticateInterceptor } from './http-authenticate.interceptor';
 
-
 // HttpClient is declared in a re-exported module, so we have to extend the original module to make it work properly
 // (see https://github.com/Microsoft/TypeScript/issues/13897)
 declare module '@angular/common/http/http' {
   // Augment HttpClient with the added configuration methods from HttpService, to allow in-place replacement of
   // HttpClient with HttpService using dependency injection
   export interface HttpClient {
-
-
     /**
      * Skips default error handler for this request.
      * @return The new instance.
@@ -31,18 +28,12 @@ declare module '@angular/common/http/http' {
      * @return The new instance.
      */
     disableHttpAuth(): HttpClient;
-
-    /**
-     * Use Blob handler for this request.
-     * @return The new instance.
-     */
-    enableBlobHttpHandler(): HttpClient;
   }
 }
 
 // From @angular/common/http/src/interceptor: allows to chain interceptors
 class HttpInterceptorHandler implements HttpHandler {
-  constructor(private next: HttpHandler, private interceptor: HttpInterceptor) { }
+  constructor(private next: HttpHandler, private interceptor: HttpInterceptor) {}
 
   handle(request: HttpRequest<any>): Observable<HttpEvent<any>> {
     return this.interceptor.intercept(request, this.next);
@@ -63,7 +54,7 @@ export const HTTP_DYNAMIC_INTERCEPTORS = new InjectionToken<HttpInterceptor>('HT
  * Extends HttpClient with per request configuration using dynamic interceptors.
  */
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class HttpService extends HttpClient {
   constructor(
@@ -78,13 +69,12 @@ export class HttpService extends HttpClient {
       this.interceptors = [
         this.injector.get(ApiPrefixInterceptor),
         this.injector.get(ErrorHandlerInterceptor),
-        this.injector.get(HttpAuthenticateInterceptor)
+        this.injector.get(HttpAuthenticateInterceptor),
       ];
     }
   }
 
-
-  skipErrorHandler(): HttpClient {
+  sErrorHandler(): HttpClient {
     return this.removeInterceptor(ErrorHandlerInterceptor);
   }
 
@@ -109,7 +99,7 @@ export class HttpService extends HttpClient {
     return new HttpService(
       this.httpHandler,
       this.injector,
-      this.interceptors.filter(i => !(i instanceof interceptorType))
+      this.interceptors.filter((i) => !(i instanceof interceptorType))
     );
   }
 

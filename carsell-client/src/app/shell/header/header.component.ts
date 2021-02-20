@@ -20,14 +20,14 @@ export class HeaderComponent implements OnInit {
     private authenticationService: AuthenticationService,
     private credentialsService: CredentialsService,
     private notificationService: NotificationService
-  ) { }
+  ) {}
 
-  ngOnInit() { }
+  ngOnInit() {}
 
   logout() {
     this.authenticationService.logout().subscribe(() => {
       this.notificationService.success('Излязохте успешно');
-      this.router.navigate(['/home'], { replaceUrl: true })
+      this.router.navigate(['/home'], { replaceUrl: true });
     });
   }
 
@@ -55,6 +55,4 @@ export class HeaderComponent implements OnInit {
       this.router.navigate(['/user/login']);
     }
   }
-
-
 }

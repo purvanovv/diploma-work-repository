@@ -1,5 +1,5 @@
 <div #container class="container">
-  <mat-card class="main-mat-card" [ngStyle]="{width: mainMatCardWidth}" #mainMatCard>
+  <mat-card class="main-mat-card" [ngStyle]="{ width: mainMatCardWidth }" #mainMatCard>
     <div fxLayout="row wrap">
       <div class="left-column">
         <div class="search-holder">
@@ -8,7 +8,8 @@
               <mat-form-field appearance="legacy">
                 <mat-select placeholder="Основна категория" formControlName="mainCategoryId">
                   <mat-option [value]="categoryPair.mainCategory.id" *ngFor="let categoryPair of categories">
-                    {{ categoryPair.mainCategory.name }}</mat-option>
+                    {{ categoryPair.mainCategory.name }}</mat-option
+                  >
                 </mat-select>
               </mat-form-field>
             </div>
@@ -33,7 +34,8 @@
             <div *ngIf="containsControl('region')">
               <mat-form-field appearance="legacy">
                 <mat-select placeholder="Регион" formControlName="region">
-                  <mat-option [value]="region.key" *ngFor="let region of regions | keyvalue"> {{ region.key }}
+                  <mat-option [value]="region.key" *ngFor="let region of regions | keyvalue">
+                    {{ region.key }}
                   </mat-option>
                 </mat-select>
               </mat-form-field>
@@ -42,14 +44,14 @@
               <div *ngIf="containsControl('dateOfManufactureFrom')" class="inline-control">
                 <mat-form-field appearance="legacy">
                   <mat-select placeholder="Година от" formControlName="dateOfManufactureFrom">
-                    <mat-option [value]="year" *ngFor="let year of years">{{year}}</mat-option>
+                    <mat-option [value]="year" *ngFor="let year of years">{{ year }}</mat-option>
                   </mat-select>
                 </mat-form-field>
               </div>
               <div *ngIf="containsControl('dateOfManufactureTo')" class="inline-control">
                 <mat-form-field appearance="legacy">
                   <mat-select placeholder="Година до" formControlName="dateOfManufactureTo">
-                    <mat-option [value]="year" *ngFor="let year of years">{{year}}</mat-option>
+                    <mat-option [value]="year" *ngFor="let year of years">{{ year }}</mat-option>
                   </mat-select>
                 </mat-form-field>
               </div>
@@ -67,8 +69,9 @@
               </div>
             </div>
             <div>
-              <button type="submit" class="btn-search" mat-raised-button color="primary"
-                (click)="submitSearchForm()">Търси</button>
+              <button type="submit" class="btn-search" mat-raised-button color="primary" (click)="submitSearchForm()">
+                Търси
+              </button>
             </div>
             <div class="search-btn-holder">
               <a (click)="globalSearch()">Разширено търсене</a>
@@ -82,10 +85,12 @@
             <span class="title">За нашите услуги</span>
           </div>
           <div>
-            <span>carsell е сайт за безплатни авто обяви, където имате възможност да публикувате или търсите в
-              следните категории:
-              <span *ngFor="let categoryPair of categories; let i = index;">{{ categoryPair.mainCategory.name }} <span
-                  *ngIf="i < categories.length - 1">,</span></span>
+            <span
+              >carsell е сайт за безплатни авто обяви, където имате възможност да публикувате или търсите в следните
+              категории:
+              <span *ngFor="let categoryPair of categories; let i = index"
+                >{{ categoryPair.mainCategory.name }} <span *ngIf="i < categories.length - 1">,</span></span
+              >
             </span>
           </div>
         </div>
@@ -95,22 +100,21 @@
           <app-image-slide></app-image-slide>
         </div>
         <div class="bold categories-title-holder">
-          <span>Последно добавени в категория {{initFormCategory.name}}</span>
+          <span>Последно добавени в категория {{ initFormCategory.name }}</span>
         </div>
         <div>
-          <app-list-announcements *ngIf="isLoading == false" [countOfItemsToList]="countOfItemsToList"
-            [announcements]="announcements">
+          <app-list-announcements
+            *ngIf="isLoading == false"
+            [countOfItemsToList]="countOfItemsToList"
+            [announcements]="announcements"
+          >
           </app-list-announcements>
 
           <div class="show-all-btn-holder" *ngIf="showAll">
             <button color="primary" (click)="showAllAnnouncements()" mat-raised-button>Покажи всички</button>
           </div>
-
         </div>
       </div>
-
     </div>
-
   </mat-card>
-
 </div>

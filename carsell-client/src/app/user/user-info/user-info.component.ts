@@ -10,10 +10,9 @@ import { UserService } from '../user.service';
 @Component({
   selector: 'app-user-info',
   templateUrl: './user-info.component.html',
-  styleUrls: ['./user-info.component.scss']
+  styleUrls: ['./user-info.component.scss'],
 })
 export class UserInfoComponent implements OnInit, OnDestroy {
-
   userInfoForm!: FormGroup;
   isLoading = false;
   isInit = false;
@@ -22,35 +21,42 @@ export class UserInfoComponent implements OnInit, OnDestroy {
     private userService: UserService,
     private formBuilder: FormBuilder,
     private credentialsService: CredentialsService,
-    private notificationService: NotificationService) { }
+    private notificationService: NotificationService
+  ) {}
 
-  ngOnDestroy() { }
-
+  ngOnDestroy() {}
 
   ngOnInit(): void {
     const userId = this.credentialsService.credentials.userId;
-    this.userService.getUserInfo(userId).pipe(tap((userInfo: UserInfo) => {
-      console.log(userInfo);
-      this.createForm(userInfo);
-    }),
-      finalize(() => {
-        this.isInit = true;
-      }),
-      untilDestroyed(this)).subscribe();
-
+    this.userService
+      .getUserInfo(userId)
+      .pipe(
+        tap((userInfo: UserInfo) => {
+          console.log(userInfo);
+          this.createForm(userInfo);
+        }),
+        finalize(() => {
+          this.isInit = true;
+        }),
+        untilDestroyed(this)
+      )
+      .subscribe();
   }
 
   editUserInfo() {
     this.isLoading = true;
-    this.userService.editUserInfo(this.userInfoForm.value).pipe(
-      finalize(() => {
-        this.userInfoForm.markAsPristine();
-        this.isLoading = false;
-      }),
-      untilDestroyed(this)
-    ).subscribe(() => {
-      this.notificationService.success('Потребителските данни бяха запазени успешно.')
-    });
+    this.userService
+      .editUserInfo(this.userInfoForm.value)
+      .pipe(
+        finalize(() => {
+          this.userInfoForm.markAsPristine();
+          this.isLoading = false;
+        }),
+        untilDestroyed(this)
+      )
+      .subscribe(() => {
+        this.notificationService.success('Потребителските данни бяха запазени успешно.');
+      });
   }
 
   private createForm(userInfo: UserInfo) {
@@ -64,7 +70,4 @@ export class UserInfoComponent implements OnInit, OnDestroy {
       userId: [userInfo.userId, [Validators.required]],
     });
   }
-
-
-
 }

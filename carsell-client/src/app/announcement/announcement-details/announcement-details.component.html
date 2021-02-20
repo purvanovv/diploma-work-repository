@@ -21,7 +21,7 @@
 
           <div #imagesContent class="images-slider">
             <a *ngFor="let image of images" (click)="selectImage(image)">
-              <img class="small-image" [ngClass]="{'selected-small-image': image.isSelected}" [src]="image.url" />
+              <img class="small-image" [ngClass]="{ 'selected-small-image': image.isSelected }" [src]="image.url" />
             </a>
           </div>
 
@@ -33,26 +33,22 @@
         </div>
       </div>
       <div fxFlex="50%" fxFlex.xs="100%" fxLayoutAlign.xs="center">
-
         <table>
           <th colspan="2">Технически данни</th>
           <tr *ngFor="let optionPair of vehicleOptions | keyvalue">
-            <td class="info-item-left">{{optionPair.key}}</td>
-            <td class="info-item-right">{{optionPair.value}}</td>
+            <td class="info-item-left">{{ optionPair.key }}</td>
+            <td class="info-item-right">{{ optionPair.value }}</td>
           </tr>
           <tr class="blank_row">
             <td colspan="2"></td>
           </tr>
           <th colspan="2">За контакти</th>
           <tr *ngFor="let optionPair of userOptions | keyvalue">
-            <td class="info-item-left">{{optionPair.key}}</td>
-            <td class="info-item-right">{{optionPair.value}}</td>
+            <td class="info-item-left">{{ optionPair.key }}</td>
+            <td class="info-item-right">{{ optionPair.value }}</td>
           </tr>
         </table>
-
       </div>
     </div>
-
   </div>
-
 </div>

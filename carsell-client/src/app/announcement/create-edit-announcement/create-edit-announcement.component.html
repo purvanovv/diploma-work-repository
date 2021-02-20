@@ -1,15 +1,15 @@
 <div class="container" ngClass.xs="xs-container">
   <mat-horizontal-stepper linear #stepper>
     <mat-step [completed]="completed" [editable]="isEditable">
-      <ng-template matStepLabel>{{stepLabel[0]}}</ng-template>
+      <ng-template matStepLabel>{{ stepLabel[0] }}</ng-template>
       <app-first-step></app-first-step>
     </mat-step>
     <mat-step [completed]="completed" [editable]="isEditable">
-      <ng-template matStepLabel>{{stepLabel[1]}}</ng-template>
+      <ng-template matStepLabel>{{ stepLabel[1] }}</ng-template>
       <app-second-step> </app-second-step>
     </mat-step>
     <mat-step>
-      <ng-template matStepLabel>{{stepLabel[2]}}</ng-template>
+      <ng-template matStepLabel>{{ stepLabel[2] }}</ng-template>
       <app-third-step></app-third-step>
     </mat-step>
   </mat-horizontal-stepper>

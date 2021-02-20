@@ -6,7 +6,6 @@ import { RouteReuseStrategy, RouterModule } from '@angular/router';
 import { RouteReusableStrategy } from './route-reusable-strategy';
 import { ApiPrefixInterceptor } from './http/api-prefix.interceptor';
 import { ErrorHandlerInterceptor } from './http/error-handler.interceptor';
-import { HttpAuthenticateInterceptor } from './http/http-authenticate.interceptor';
 import { HttpService } from './http/http.service';
 
 @NgModule({

@@ -6,13 +6,26 @@ import { finalize, mergeMap, startWith, take, tap } from 'rxjs/operators';
 import { AnnouncementStoreService } from '../announcement-store.service';
 import { AnnouncementSearchFormBuilder } from '../announcement.search.form.builder';
 import { AnnouncementService } from '../announcement.service';
-import { AirConditionType, ConditionType, CoolingType, Currency, EmissionStandartType, EngineCategoryType, EngineType, GearboxType, HeatingType, MainCategoryType, MaterialType, ToiletType } from '../enums';
+import {
+  AirConditionType,
+  ConditionType,
+  CoolingType,
+  Currency,
+  EmissionStandartType,
+  EngineCategoryType,
+  EngineType,
+  GearboxType,
+  HeatingType,
+  MainCategoryType,
+  MaterialType,
+  ToiletType,
+} from '../enums';
 import { AnnouncementPreview, AnnouncementSearchModel, CategoryPair, MainCategory, Make, SubCategory } from '../models';
 
 @Component({
   selector: 'app-search-announcements',
   templateUrl: './search-announcements.component.html',
-  styleUrls: ['./search-announcements.component.scss']
+  styleUrls: ['./search-announcements.component.scss'],
 })
 export class SearchAnnouncementsComponent implements OnInit {
   isLoading = false;
@@ -42,11 +55,13 @@ export class SearchAnnouncementsComponent implements OnInit {
   bicycleSizes = [10, 12, 14, 16, 18, 20, 22, 24, 26, 27, 28, 29];
   numberOfGears = [3, 4, 5, 6, 7, 8, 9, 10, 12, 14, 16, 18, 20, 21, 24];
 
-  constructor(private formBuilder: FormBuilder,
+  constructor(
+    private formBuilder: FormBuilder,
     private announcementService: AnnouncementService,
     private route: ActivatedRoute,
     private announcementStore: AnnouncementStoreService,
-    private router: Router) { }
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.initYears();
@@ -56,17 +71,19 @@ export class SearchAnnouncementsComponent implements OnInit {
 
   init() {
     this.isLoading = true;
-    return this.initData().pipe(finalize(() => {
-      this.initForm();
-      this.initEvents();
-      this.isLoading = false;
-    }))
+    return this.initData().pipe(
+      finalize(() => {
+        this.initForm();
+        this.initEvents();
+        this.isLoading = false;
+      })
+    );
   }
 
   initFormCategory() {
     const queryParams = this.route.snapshot.queryParamMap;
     if (queryParams.get('mainCategoryId') != null) {
-      this.initMainCategory = { id: Number(queryParams.get('mainCategoryId')) }
+      this.initMainCategory = { id: Number(queryParams.get('mainCategoryId')) };
     } else {
       this.initMainCategory = { id: 1, name: 'Автомобили и Джипове', value: 'CARS_AND_JEEPS' };
     }
@@ -108,10 +125,9 @@ export class SearchAnnouncementsComponent implements OnInit {
   initForm() {
     const queryParams = this.route.snapshot.queryParamMap;
     const searchData = AnnouncementSearchModel.fromQueryParams(queryParams);
-    this.searchForm =
-      new AnnouncementSearchFormBuilder(this.formBuilder, MainCategoryType[this.initMainCategory.value])
-        .withSearchData(searchData)
-        .build();
+    this.searchForm = new AnnouncementSearchFormBuilder(this.formBuilder, MainCategoryType[this.initMainCategory.value])
+      .withSearchData(searchData)
+      .build();
     this.searchForm.get('mainCategoryId').setValue(this.initMainCategory.id);
   }
 
@@ -125,7 +141,7 @@ export class SearchAnnouncementsComponent implements OnInit {
             this.onChangeMainCategory(mainCategoryId);
             return this.init();
           }
-        }),
+        })
       )
       .subscribe();
 
@@ -193,17 +209,15 @@ export class SearchAnnouncementsComponent implements OnInit {
   }
 
   $initAnnouncements() {
-    return this.announcementService.searchAnnouncements(
-      this.searchForm.getRawValue())
-      .pipe(
-        take(1),
-        tap((announcements: AnnouncementPreview[]) => {
-          this.announcementStore.setAnnouncements(announcements);
-        }))
+    return this.announcementService.searchAnnouncements(this.searchForm.getRawValue()).pipe(
+      take(1),
+      tap((announcements: AnnouncementPreview[]) => {
+        this.announcementStore.setAnnouncements(announcements);
+      })
+    );
   }
 
   clean() {
     this.init().subscribe(() => this.router.navigate([]));
   }
-
 }

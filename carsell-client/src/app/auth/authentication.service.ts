@@ -8,8 +8,8 @@ import { CredentialsService } from './credentials.service';
 
 const routes = {
   login: () => 'api/auth/signin',
-  register: () => 'api/auth/signup'
-}
+  register: () => 'api/auth/signup',
+};
 
 export interface LoginContext {
   username: string;
@@ -25,10 +25,7 @@ export interface LoginContext {
   providedIn: 'root',
 })
 export class AuthenticationService {
-
-
-
-  constructor(private credentialsService: CredentialsService, private httpClient: HttpClient) { }
+  constructor(private credentialsService: CredentialsService, private httpClient: HttpClient) {}
 
   /**
    * Authenticates the user.
@@ -37,9 +34,13 @@ export class AuthenticationService {
    */
   login(context: LoginContext): Observable<Credentials> {
     return this.httpClient
-    .disableHttpAuth().post<Credentials>(routes.login(), context).pipe(tap((credentials: Credentials) => {
-      this.credentialsService.setCredentials(credentials, context.remember);
-    }))
+      .disableHttpAuth()
+      .post<Credentials>(routes.login(), context)
+      .pipe(
+        tap((credentials: Credentials) => {
+          this.credentialsService.setCredentials(credentials, context.remember);
+        })
+      );
   }
 
   register(data: Signup) {

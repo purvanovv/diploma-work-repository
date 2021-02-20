@@ -129,4 +129,22 @@ public class UserRepositoryImpl implements UserRepository {
 		}
 	}
 
+	@Override
+	public User getUserByEmail(String email) {
+		try {
+			String sql = SqlContainer.GET_USER_BY_EMAIL;
+			MapSqlParameterSource params = new MapSqlParameterSource();
+			params.addValue("email", email);
+			List<User> users = namedParameterJdbcTemplate.query(sql, params, new UserRowMapper());
+			if (users != null && !users.isEmpty()) {
+				return users.get(0);
+			}
+			return null;
+		} catch (Exception e) {
+			throw new DatabaseException("Exception in database layer", e);
+		}
+	}
+	
+	
+
 }

@@ -6,7 +6,13 @@ import { AnnouncementStoreService } from '@app/announcement/announcement-store.s
 import { AnnouncementSearchFormBuilder } from '@app/announcement/announcement.search.form.builder';
 import { AnnouncementService } from '@app/announcement/announcement.service';
 import { MainCategoryType } from '@app/announcement/enums';
-import { AnnouncementPreview, AnnouncementSearchModel, CategoryPair, MainCategory, Make } from '@app/announcement/models';
+import {
+  AnnouncementPreview,
+  AnnouncementSearchModel,
+  CategoryPair,
+  MainCategory,
+  Make,
+} from '@app/announcement/models';
 import ResizeObserver from 'resize-observer-polyfill';
 import { concat, Observable } from 'rxjs';
 import { finalize, mergeMap, take, tap } from 'rxjs/operators';
@@ -34,16 +40,15 @@ export class HomeComponent implements OnInit, AfterViewInit {
   years: string[];
   mainMatCardWidth: string = undefined;
 
-
   constructor(
     private announcementService: AnnouncementService,
     private router: Router,
     private formBuilder: FormBuilder,
-    private announcementStore: AnnouncementStoreService) {
-  }
+    private announcementStore: AnnouncementStoreService
+  ) {}
 
   ngAfterViewInit() {
-    const resizeObserver = new ResizeObserver(entries => {
+    const resizeObserver = new ResizeObserver((entries) => {
       const cr = entries[0].contentRect;
       const numOfColumns = Math.floor(cr.width / 280);
       const mainMatCardWidth = numOfColumns * 280 + 48;
@@ -54,23 +59,30 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.initYears();
-    this.announcementStore.getAnnouncements$().pipe(tap((announcements: AnnouncementPreview[]) => {
-      this.showAll = false;
-      if (announcements.length > this.countOfItemsToList) {
-        this.showAll = true;
-      }
-      this.announcements = announcements;
-    })).subscribe();
+    this.announcementStore
+      .getAnnouncements$()
+      .pipe(
+        tap((announcements: AnnouncementPreview[]) => {
+          this.showAll = false;
+          if (announcements.length > this.countOfItemsToList) {
+            this.showAll = true;
+          }
+          this.announcements = announcements;
+        })
+      )
+      .subscribe();
     this.init().subscribe();
   }
 
   init() {
     this.isLoading = true;
     this.initForm();
-    return this.initData().pipe(finalize(() => {
-      this.initEvents()
-      this.isLoading = false;
-    }))
+    return this.initData().pipe(
+      finalize(() => {
+        this.initEvents();
+        this.isLoading = false;
+      })
+    );
   }
 
   submitSearchForm() {
@@ -93,7 +105,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
     this.init().subscribe();
   }
 
-  globalSearch(){
+  globalSearch() {
     const queryParams = AnnouncementSearchModel.toQueryParams(this.searchForm.getRawValue());
     this.router.navigate(['announcement/search'], { queryParams });
   }
@@ -108,9 +120,10 @@ export class HomeComponent implements OnInit, AfterViewInit {
   }
 
   private initForm() {
-    this.searchForm =
-      new AnnouncementSearchFormBuilder(this.formBuilder, MainCategoryType[this.initFormCategory.value])
-        .build();
+    this.searchForm = new AnnouncementSearchFormBuilder(
+      this.formBuilder,
+      MainCategoryType[this.initFormCategory.value]
+    ).build();
     this.searchForm.get('mainCategoryId').setValue(this.initFormCategory.id);
   }
 
@@ -139,13 +152,12 @@ export class HomeComponent implements OnInit, AfterViewInit {
   }
 
   private $initAnnouncements() {
-    return this.announcementService.searchAnnouncements(
-      this.searchForm.getRawValue())
-      .pipe(
-        take(1),
-        tap((announcements: AnnouncementPreview[]) => {
-          this.announcementStore.setAnnouncements(announcements);
-        }))
+    return this.announcementService.searchAnnouncements(this.searchForm.getRawValue()).pipe(
+      take(1),
+      tap((announcements: AnnouncementPreview[]) => {
+        this.announcementStore.setAnnouncements(announcements);
+      })
+    );
   }
 
   private initEvents() {
@@ -159,7 +171,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
             this.onChangeMainCategory(mainCategoryId);
             return this.init();
           }
-        }),
+        })
       )
       .subscribe();
 
@@ -194,7 +206,4 @@ export class HomeComponent implements OnInit, AfterViewInit {
       value: categoryPair.mainCategory.value,
     };
   }
-
-
-
 }

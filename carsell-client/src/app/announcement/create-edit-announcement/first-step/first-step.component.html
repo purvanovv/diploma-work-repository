@@ -6,7 +6,8 @@
           <mat-form-field appearance="legacy">
             <mat-select [disabled]="!isCreateMode" placeholder="Основна категория" formControlName="mainCategoryId">
               <mat-option [value]="categoryPair.mainCategory.id" *ngFor="let categoryPair of categories">
-                {{ categoryPair.mainCategory.name }}</mat-option>
+                {{ categoryPair.mainCategory.name }}</mat-option
+              >
             </mat-select>
           </mat-form-field>
         </div>
@@ -15,7 +16,8 @@
           <mat-form-field appearance="legacy">
             <mat-select placeholder="Категория" formControlName="subCategoryId">
               <mat-option [value]="subCategory.id" *ngFor="let subCategory of subCategories">
-                {{ subCategory.name }}</mat-option>
+                {{ subCategory.name }}</mat-option
+              >
             </mat-select>
           </mat-form-field>
         </div>
@@ -95,8 +97,12 @@
 
         <div *ngIf="containsControl('dateOfManufacture')" class="app-form-control">
           <mat-form-field color="primary" appearance="legacy">
-            <input placeholder="Дата на производство" formControlName="dateOfManufacture" matInput
-              [matDatepicker]="dateOfManufacturePicker" />
+            <input
+              placeholder="Дата на производство"
+              formControlName="dateOfManufacture"
+              matInput
+              [matDatepicker]="dateOfManufacturePicker"
+            />
             <mat-datepicker-toggle matSuffix [for]="dateOfManufacturePicker"></mat-datepicker-toggle>
             <mat-datepicker #dateOfManufacturePicker></mat-datepicker>
           </mat-form-field>
@@ -288,13 +294,17 @@
           <div class="form-control-condition">
             <label>Състояние:</label>
             <mat-radio-group class="condition-radio-group" formControlName="conditionType">
-              <mat-radio-button color="primary" class="condition-radio-button"
-                [value]="name" *ngFor="let name of conditionType | enumToArray">
-                {{ getEnumValue(name, conditionType) }}</mat-radio-button>
+              <mat-radio-button
+                color="primary"
+                class="condition-radio-button"
+                [value]="name"
+                *ngFor="let name of conditionType | enumToArray"
+              >
+                {{ getEnumValue(name, conditionType) }}</mat-radio-button
+              >
             </mat-radio-group>
           </div>
         </div>
-
       </div>
     </form>
 
@@ -304,10 +314,4 @@
   </mat-card-content>
 </mat-card>
 
-
-
-<div>
-
-
-
-</div>
+<div></div>

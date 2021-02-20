@@ -12,4 +12,4 @@ import { SharedModule } from '@app/@shared';
   imports: [CommonModule, FlexLayoutModule, MaterialModule, RouterModule, SharedModule],
   declarations: [HeaderComponent, ShellComponent],
 })
-export class ShellModule { }
+export class ShellModule {}

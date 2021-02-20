@@ -1,25 +1,35 @@
 <div class="mall-slide">
   <div class="slid-content">
-    <div class="mall-show-slide fade" [ngStyle]="{display: getDisplayStyle(slide.isSelected)}"
-      *ngFor="let slide of slideData;">
+    <div
+      class="mall-show-slide fade"
+      [ngStyle]="{ display: getDisplayStyle(slide.isSelected) }"
+      *ngFor="let slide of slideData"
+    >
       <div>
         <img [src]="slide.imageUrl" />
       </div>
       <div class="caption">
         <div class="heading">
-          <span>{{slide.make}} {{slide.model}}</span>
-          <span><span class="primary">{{slide.price}}</span> {{slide.currency}}</span>
+          <span>{{ slide.make }} {{ slide.model }}</span>
+          <span
+            ><span class="primary">{{ slide.price }}</span> {{ slide.currency }}</span
+          >
         </div>
         <div class="info">
-          <span>Пробег:<span class="bold primary">{{slide.mileage}}</span> км</span>
+          <span
+            >Пробег:<span class="bold primary">{{ slide.mileage }}</span> км</span
+          >
         </div>
       </div>
     </div>
     <div class="mall-carousel-ind">
       <ul>
-        <li (click)="select(i)" *ngFor="let slide of slideData; let i = index;" [class.mall-this]="slide.isSelected"></li>
+        <li
+          (click)="select(i)"
+          *ngFor="let slide of slideData; let i = index"
+          [class.mall-this]="slide.isSelected"
+        ></li>
       </ul>
     </div>
   </div>
-
 </div>

@@ -3,10 +3,9 @@ import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { AnnouncementCreate, AnnouncementPreview, FileUpload, FileUploadModel } from './models';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AnnouncementStoreService {
-
   private readonly _announcementId = new BehaviorSubject<number>(undefined);
 
   private readonly _changeStep = new BehaviorSubject<number>(undefined);
@@ -36,10 +35,7 @@ export class AnnouncementStoreService {
   }
 
   public addFileToUpload(file: FileUpload) {
-    this.filesToUpload = [
-      ...this.filesToUpload,
-      file
-    ];
+    this.filesToUpload = [...this.filesToUpload, file];
   }
 
   public removeFileToUpload(index: number) {
@@ -113,7 +109,4 @@ export class AnnouncementStoreService {
   public changeStep(step: number) {
     this.step = step;
   }
-
-
-
 }

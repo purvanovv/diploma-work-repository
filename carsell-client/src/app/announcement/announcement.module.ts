@@ -27,19 +27,22 @@ import { UserModule } from '@app/user/user.module';
     MaterialModule,
     ReactiveFormsModule,
     SharedModule,
-    UserModule
+    UserModule,
   ],
-  declarations: [CreateEditAnnouncementComponent,
-    FirstStepComponent, SecondStepComponent,
-    ThirdStepComponent, PreviewImageModalComponent,
-    ListAnnouncementsComponent, PreviewAnnouncementComponent,
+  declarations: [
+    CreateEditAnnouncementComponent,
+    FirstStepComponent,
+    SecondStepComponent,
+    ThirdStepComponent,
+    PreviewImageModalComponent,
+    ListAnnouncementsComponent,
+    PreviewAnnouncementComponent,
     AnnouncementDetailsComponent,
     ListSearchResultComponent,
     PaginationComponent,
     FilterAnnouncementsComponent,
-    SearchAnnouncementsComponent],
-  exports: [
-    ListAnnouncementsComponent
-  ]
+    SearchAnnouncementsComponent,
+  ],
+  exports: [ListAnnouncementsComponent],
 })
-export class AnnouncementModule { }
+export class AnnouncementModule {}

@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.MDC;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -27,6 +28,7 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.SignatureException;
 import io.jsonwebtoken.UnsupportedJwtException;
+import tusofia.carsellservices.exceptions.ApiError;
 import tusofia.carsellservices.exceptions.AuthorizeException;
 import tusofia.carsellservices.model.User;
 import tusofia.carsellservices.util.Constants;
@@ -60,11 +62,10 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
 
 		} catch (AuthorizeException authException) {
 			OutputStream out = response.getOutputStream();
-
-			response.setStatus(Constants.HTTP_STATUS_UNAUTHORIZED);
+			ApiError apiError = new ApiError(HttpStatus.UNAUTHORIZED, authException.getMessage());
+			response.setStatus(apiError.getStatus().value());
 			ObjectMapper mapper = new ObjectMapper();
-			mapper.writeValue(out, "Няма потребителски права!");
-
+			mapper.writeValue(out, apiError);
 			out.flush();
 		}
 
@@ -93,23 +94,23 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
 			catch (ExpiredJwtException exception) {
 				securityLog
 						.warn("Request to parse expired JWT : {} failed : {}" + token + "  " + exception.getMessage());
-				throw new AuthorizeException(exception.getMessage());
+				throw new AuthorizeException("Токена е изтекъл");
 			} catch (UnsupportedJwtException exception) {
 				securityLog.warn(
 						"Request to parse unsupported JWT : {} failed : {}" + token + "  " + exception.getMessage());
-				throw new AuthorizeException(exception.getMessage());
+				throw new AuthorizeException("Грешен формат на токена");
 			} catch (MalformedJwtException exception) {
 				securityLog
 						.warn("Request to parse invalid JWT : {} failed : {}" + token + "  " + exception.getMessage());
-				throw new AuthorizeException(exception.getMessage());
+				throw new AuthorizeException("Невалиден токен");
 			} catch (SignatureException exception) {
 				securityLog.warn("Request to parse JWT with invalid signature : {} failed : {}" + token + "  "
 						+ exception.getMessage());
-				throw new AuthorizeException(exception.getMessage());
+				throw new AuthorizeException("Невалиден подпис на токена");
 			} catch (IllegalArgumentException exception) {
 				securityLog.warn(
 						"Request to parse empty or null JWT : {} failed : {}" + token + "  " + exception.getMessage());
-				throw new AuthorizeException(exception.getMessage());
+				throw new AuthorizeException("Не е изпратен токен");
 			}
 		}
 

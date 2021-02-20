@@ -9,7 +9,7 @@ import { AnnouncementPreview } from '../models';
 @Component({
   selector: 'app-filter-announcements',
   templateUrl: './filter-announcements.component.html',
-  styleUrls: ['./filter-announcements.component.scss']
+  styleUrls: ['./filter-announcements.component.scss'],
 })
 export class FilterAnnouncementsComponent implements OnInit {
   filterForm: FormGroup;
@@ -19,7 +19,7 @@ export class FilterAnnouncementsComponent implements OnInit {
 
   @Input() announcements: AnnouncementPreview[];
   @Output() filtered = new EventEmitter<AnnouncementPreview[]>();
-  constructor(private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute) {}
 
   ngOnInit(): void {
     this.initFilterForm();
@@ -35,17 +35,19 @@ export class FilterAnnouncementsComponent implements OnInit {
     this.filterForm = new FormGroup({
       orderBy: new FormControl(orderBy !== null ? Number(orderBy) : OrderBy.NEWEST),
       orderByPrice: new FormControl(orderByPrice !== null ? Number(orderByPrice) : OrderByPrice.LEV),
-      orderByPublished: new FormControl(orderByPublished !== null ? Number(orderByPublished) : OrderByPublished.ALL)
-    })
+      orderByPublished: new FormControl(orderByPublished !== null ? Number(orderByPublished) : OrderByPublished.ALL),
+    });
   }
 
   initEvents() {
-    this.filterForm.valueChanges.pipe(
-      startWith(this.filterForm.value),
-      tap(filter => {
-        this.filter(filter);
-      })
-    ).subscribe();
+    this.filterForm.valueChanges
+      .pipe(
+        startWith(this.filterForm.value),
+        tap((filter) => {
+          this.filter(filter);
+        })
+      )
+      .subscribe();
   }
 
   filter(filter: any) {
@@ -54,13 +56,12 @@ export class FilterAnnouncementsComponent implements OnInit {
       filter(filter);
     }
     currAnnouncements = currAnnouncements
-      .map(a => {
+      .map((a) => {
         const orderByPrice = filter.orderByPrice;
         let priceInLev = a.price;
         if (a.currency === Currency.EUR) {
           priceInLev = a.price * EUR;
-        }
-        else if (a.currency === Currency.USD) {
+        } else if (a.currency === Currency.USD) {
           priceInLev = a.price * USD;
         }
         if (orderByPrice === OrderByPrice.EUR) {
@@ -69,15 +70,14 @@ export class FilterAnnouncementsComponent implements OnInit {
         } else if (orderByPrice === OrderByPrice.USD) {
           a.price = priceInLev / USD;
           a.currency = Currency.USD;
-        }
-        else {
+        } else {
           a.price = priceInLev;
           a.currency = Currency.LEV;
         }
         return a;
       })
       .sort((a, b) => {
-        const orderBy = filter.orderBy
+        const orderBy = filter.orderBy;
         if (orderBy === OrderBy.PRICE_LOWEST) {
           return a.price - b.price;
         } else if (orderBy === OrderBy.PRICE_HIGHEST) {
@@ -86,7 +86,7 @@ export class FilterAnnouncementsComponent implements OnInit {
           return new Date(b.metaProps.createdOn).getTime() - new Date(a.metaProps.createdOn).getTime();
         }
       })
-      .filter(a => {
+      .filter((a) => {
         const orderByPublished = filter.orderByPublished;
         if (orderByPublished === OrderByPublished.TODAY) {
           return this.isToday(new Date(a.metaProps.createdOn));
@@ -94,37 +94,28 @@ export class FilterAnnouncementsComponent implements OnInit {
           const targetDate = new Date();
           targetDate.setMonth(targetDate.getMonth() - 1);
           return new Date(a.metaProps.createdOn).getTime() >= targetDate.getTime();
-        }
-
-        else if (orderByPublished === OrderByPublished.LAST_FOURTEEN_DAYS) {
-          const dateBefore14Days = new Date(new Date().getTime() - (14 * 24 * 60 * 60 * 1000));
+        } else if (orderByPublished === OrderByPublished.LAST_FOURTEEN_DAYS) {
+          const dateBefore14Days = new Date(new Date().getTime() - 14 * 24 * 60 * 60 * 1000);
           return new Date(a.metaProps.createdOn).getTime() >= dateBefore14Days.getTime();
-        }
-
-        else if (orderByPublished === OrderByPublished.LAST_SEVEN_DAYS) {
-          const dateBefore7Days = new Date(new Date().getTime() - (7 * 24 * 60 * 60 * 1000));
+        } else if (orderByPublished === OrderByPublished.LAST_SEVEN_DAYS) {
+          const dateBefore7Days = new Date(new Date().getTime() - 7 * 24 * 60 * 60 * 1000);
           return new Date(a.metaProps.createdOn).getTime() >= dateBefore7Days.getTime();
-        }
-
-        else if (orderByPublished === OrderByPublished.LAST_THREE_DAYS) {
-          const dateBefore3Days = new Date(new Date().getTime() - (3 * 24 * 60 * 60 * 1000));
+        } else if (orderByPublished === OrderByPublished.LAST_THREE_DAYS) {
+          const dateBefore3Days = new Date(new Date().getTime() - 3 * 24 * 60 * 60 * 1000);
           return new Date(a.metaProps.createdOn).getTime() >= dateBefore3Days.getTime();
-        }
-
-        else if (orderByPublished === OrderByPublished.ALL) {
+        } else if (orderByPublished === OrderByPublished.ALL) {
           return true;
         }
       });
     this.filtered.emit(currAnnouncements);
-
   }
 
   isToday(targetDate: Date) {
     const today = new Date();
-    return targetDate.getDate() === today.getDate() &&
+    return (
+      targetDate.getDate() === today.getDate() &&
       targetDate.getMonth() === today.getMonth() &&
-      targetDate.getFullYear() === today.getFullYear();
+      targetDate.getFullYear() === today.getFullYear()
+    );
   }
-
-
 }

@@ -13,7 +13,7 @@
             <span>Добави обява</span>
           </a>
           <mat-divider></mat-divider>
-          <div *ngIf=" !isAuthenticated()">
+          <div *ngIf="!isAuthenticated()">
             <a mat-list-item routerLink="/user/login" routerLinkActive="active" (click)="sidenav.close()">
               <span>Вход</span>
             </a>

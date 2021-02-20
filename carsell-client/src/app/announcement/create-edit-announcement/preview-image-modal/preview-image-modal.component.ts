@@ -1,26 +1,32 @@
 import { Component, Inject, OnInit, ViewEncapsulation } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { AnnouncementPreview, ImageFilePreview, PreviewImageModalData, PreviewImageModalDataModel } from '@app/announcement/models';
+import {
+  AnnouncementPreview,
+  ImageFilePreview,
+  PreviewImageModalData,
+  PreviewImageModalDataModel,
+} from '@app/announcement/models';
 
 @Component({
   selector: 'app-preview-image-modal',
   templateUrl: './preview-image-modal.component.html',
   styleUrls: ['./preview-image-modal.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
 })
 export class PreviewImageModalComponent implements OnInit {
-
   public description: string;
 
-  constructor(public dialogRef: MatDialogRef<PreviewImageModalComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: PreviewImageModalData) { }
+  constructor(
+    public dialogRef: MatDialogRef<PreviewImageModalComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: PreviewImageModalData
+  ) {}
 
   ngOnInit(): void {
     this.description = this.buildDescription(this.data.announcement);
   }
 
   public selectImage(image: ImageFilePreview) {
-    this.data.images.forEach(i => i.isSelected = false)
+    this.data.images.forEach((i) => (i.isSelected = false));
     this.data.selectedImage = image;
     this.data.selectedImage.isSelected = true;
   }
@@ -33,7 +39,7 @@ export class PreviewImageModalComponent implements OnInit {
     for (let index = 0; index < this.data.images.length; index++) {
       const curr = this.data.images[index];
       if (curr.id === this.data.selectedImage.id) {
-        this.data.images.forEach(i => i.isSelected = false);
+        this.data.images.forEach((i) => (i.isSelected = false));
         let prevIndex = index - 1;
         if (index <= 0) {
           prevIndex = this.data.images.length - 1;
@@ -50,7 +56,7 @@ export class PreviewImageModalComponent implements OnInit {
     for (let index = 0; index < this.data.images.length; index++) {
       const curr = this.data.images[index];
       if (curr.id === this.data.selectedImage.id) {
-        this.data.images.forEach(i => i.isSelected = false);
+        this.data.images.forEach((i) => (i.isSelected = false));
         let nextIndex = index + 1;
         if (index >= this.data.images.length - 1) {
           nextIndex = 0;
@@ -62,7 +68,6 @@ export class PreviewImageModalComponent implements OnInit {
       }
     }
   }
-
 
   private buildDescription(announcement: AnnouncementPreview): string {
     return `
@@ -76,7 +81,4 @@ export class PreviewImageModalComponent implements OnInit {
     ${announcement.region != null ? 'Регион:' + announcement.region : ''}
     `;
   }
-
-
-
 }

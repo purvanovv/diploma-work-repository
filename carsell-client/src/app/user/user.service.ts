@@ -4,15 +4,14 @@ import { Observable } from 'rxjs';
 import { UserInfo } from './user.models';
 
 const routes = {
-  userInfo: (userId?: number) => userId !== null ? `api/users/userInfo?userId=${userId}` : `api/users/userInfo`
-}
+  userInfo: (userId?: number) => (userId !== null ? `api/users/userInfo?userId=${userId}` : `api/users/userInfo`),
+};
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UserService {
-
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient) {}
 
   public getUserInfo(userId: number): Observable<UserInfo> {
     return this.httpClient.get<UserInfo>(routes.userInfo(userId));

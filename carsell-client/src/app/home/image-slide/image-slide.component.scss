@@ -28,7 +28,6 @@
   color: white;
 }
 
-
 @media screen and (max-width: 1177px) {
   .caption .heading {
     font-size: 20px;
@@ -38,7 +37,6 @@
     font-size: 16px;
     color: white;
   }
-
 }
 
 .caption .info {
@@ -64,7 +62,6 @@
   text-align: center;
   font-size: 0;
   bottom: 16px;
-
 }
 
 .mall-show-slide div img {
@@ -76,10 +73,10 @@
 .mall-carousel-ind ul {
   display: inline-block;
   padding: 5px;
-  background-color: rgba(0, 0, 0, .2);
+  background-color: rgba(0, 0, 0, 0.2);
   border-radius: 10px;
-  -webkit-transition-duration: .3s;
-  transition-duration: .3s;
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
 }
 
 .mall-carousel-ind li {
@@ -89,16 +86,15 @@
   margin: 0 3px;
   font-size: 14px;
   background-color: #e2e2e2;
-  background-color: rgba(255, 255, 255, .5);
+  background-color: rgba(255, 255, 255, 0.5);
   border-radius: 50%;
   cursor: pointer;
-  -webkit-transition-duration: .3s;
-  transition-duration: .3s;
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
 }
 
-
 .mall-carousel-ind li.mall-this {
-  background-color: mat-color($app-primary, default);;
+  background-color: mat-color($app-primary, default);
   filter: alpha(opacity=100);
   -moz-opacity: 1;
   opacity: 1;
@@ -114,20 +110,20 @@
 
 @-webkit-keyframes fade {
   from {
-    opacity: .4
+    opacity: 0.4;
   }
 
   to {
-    opacity: 1
+    opacity: 1;
   }
 }
 
 @keyframes fade {
   from {
-    opacity: .4
+    opacity: 0.4;
   }
 
   to {
-    opacity: 1
+    opacity: 1;
   }
 }

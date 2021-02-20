@@ -10,16 +10,19 @@ import { AuthenticationGuard } from '@app/auth/authentication.guard';
 const routes: Routes = [
   Shell.childRoutes([
     {
-      path: 'announcement/create', component: CreateEditAnnouncementComponent,
-      data: { title: 'CreateAnnouncement' }, canActivate: [AuthenticationGuard]
+      path: 'announcement/create',
+      component: CreateEditAnnouncementComponent,
+      data: { title: 'CreateAnnouncement' },
+      canActivate: [AuthenticationGuard],
     },
     { path: 'announcement/list', component: ListSearchResultComponent },
     { path: 'announcement/preview/:id', component: PreviewAnnouncementComponent },
     {
-      path: 'announcement/edit/:id', component: CreateEditAnnouncementComponent,
-      canActivate: [AuthenticationGuard]
+      path: 'announcement/edit/:id',
+      component: CreateEditAnnouncementComponent,
+      canActivate: [AuthenticationGuard],
     },
-    { path: 'announcement/search', component: SearchAnnouncementsComponent }
+    { path: 'announcement/search', component: SearchAnnouncementsComponent },
   ]),
 ];
 @NgModule({
@@ -27,4 +30,4 @@ const routes: Routes = [
   exports: [RouterModule],
   providers: [],
 })
-export class AnnouncementRoutingModule { }
+export class AnnouncementRoutingModule {}

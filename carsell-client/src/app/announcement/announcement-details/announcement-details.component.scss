@@ -1,11 +1,11 @@
 @import "../../../theme/theme-variables.scss";
 
-.container{
-    width: 70%;
-    margin: auto;
+.container {
+  width: 70%;
+  margin: auto;
 }
 
-table{
+table {
   width: 100%;
 }
 
@@ -68,8 +68,7 @@ table{
   color: mat-color($app-primary, default);
 }
 
-.blank_row
-{
-    height: 10px !important; /* overwrites any other rules */
-    background-color: #FFFFFF;
+.blank_row {
+  height: 10px !important; /* overwrites any other rules */
+  background-color: #ffffff;
 }

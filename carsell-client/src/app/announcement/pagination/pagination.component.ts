@@ -3,16 +3,16 @@ import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChange
 @Component({
   selector: 'app-pagination',
   templateUrl: './pagination.component.html',
-  styleUrls: ['./pagination.component.scss']
+  styleUrls: ['./pagination.component.scss'],
 })
 export class PaginationComponent implements OnChanges {
-  @Input() totalPages: number | undefined = undefined
+  @Input() totalPages: number | undefined = undefined;
   @Input() maxPageIndexes = 3;
   @Input() currentPageIndex = 1;
   @Output() selected = new EventEmitter<number>();
   pageIndexes: number[] | undefined = undefined;
 
-  constructor() { }
+  constructor() {}
 
   ngOnChanges(): void {
     this.initPageIndexes();
@@ -22,9 +22,11 @@ export class PaginationComponent implements OnChanges {
     if (this.pageIndexes === undefined || this.pageIndexes.length <= 0) {
       const totalPageIndexes = Math.min(this.totalPages, this.maxPageIndexes);
       let firstPageIndex: number;
-      if (this.currentPageIndex > 1 &&
+      if (
+        this.currentPageIndex > 1 &&
         this.currentPageIndex <= this.totalPages &&
-        this.totalPages > this.maxPageIndexes) {
+        this.totalPages > this.maxPageIndexes
+      ) {
         const indexRange = Math.ceil(this.currentPageIndex / this.maxPageIndexes);
         firstPageIndex = this.maxPageIndexes * indexRange - this.maxPageIndexes + 1;
       } else {
@@ -39,17 +41,17 @@ export class PaginationComponent implements OnChanges {
       const totalPageIndexes = Math.min(this.totalPages, this.maxPageIndexes);
       if (totalPageIndexes <= 0) {
         this.pageIndexes = [];
-      }
-      else if (this.currentPageIndex >= this.pageIndexes[this.pageIndexes.length - 1]
-        && this.currentPageIndex <= this.totalPages) {
+      } else if (
+        this.currentPageIndex >= this.pageIndexes[this.pageIndexes.length - 1] &&
+        this.currentPageIndex <= this.totalPages
+      ) {
         const lastPageIndex = Math.min(this.currentPageIndex + totalPageIndexes - 1, this.totalPages);
         const firstPageIndex = lastPageIndex - totalPageIndexes + 1 < 1 ? 1 : lastPageIndex - totalPageIndexes + 1;
         this.pageIndexes = [];
         for (let index = firstPageIndex; index <= lastPageIndex; index++) {
           this.pageIndexes.push(index);
         }
-      }
-      else if (this.currentPageIndex <= this.pageIndexes[0] && this.currentPageIndex >= 1) {
+      } else if (this.currentPageIndex <= this.pageIndexes[0] && this.currentPageIndex >= 1) {
         const firstPageIndex =
           this.currentPageIndex - totalPageIndexes + 1 < 1 ? 1 : this.currentPageIndex - totalPageIndexes + 1;
         const lastPageIndex = Math.min(firstPageIndex + totalPageIndexes - 1, this.totalPages);
@@ -86,5 +88,4 @@ export class PaginationComponent implements OnChanges {
   showLast(): boolean {
     return this.pageIndexes[this.pageIndexes.length - 1] < this.totalPages;
   }
-
 }

@@ -5,9 +5,15 @@ import { Title } from '@angular/platform-browser';
 import { environment } from '@env/environment';
 import { Logger, untilDestroyed } from '@core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { NotificationData, NotificationService, SnackBarComponent } from './@shared';
-
-
+import {
+  ErrorModalNotificationData,
+  NotificationDataModel,
+  NotificationService,
+  SnackBarComponent,
+  SnackBarNotificationData,
+} from './@shared';
+import { MatDialog } from '@angular/material/dialog';
+import { ErrorModalComponent } from './@shared/notification/error-modal/error-modal.component';
 
 const log = new Logger('App');
 
@@ -22,9 +28,11 @@ export class AppComponent implements OnInit, OnDestroy {
     private activatedRoute: ActivatedRoute,
     private titleService: Title,
     private notificationService: NotificationService,
-    private matSnackBar: MatSnackBar) { }
+    private matSnackBar: MatSnackBar,
+    private matDialog: MatDialog
+  ) {}
 
-  ngOnDestroy() { }
+  ngOnDestroy() {}
 
   ngOnInit() {
     // Setup logger
@@ -32,22 +40,23 @@ export class AppComponent implements OnInit, OnDestroy {
       Logger.enableProductionMode();
     }
 
-    this.notificationService.notification$()
+    this.notificationService
+      .notification$()
       .pipe(untilDestroyed(this))
-      .subscribe((notification: NotificationData) => {
-        if (notification !== undefined) {
-          console.log(notification);
-          this.matSnackBar.openFromComponent(
-            SnackBarComponent, {
+      .subscribe((notification: NotificationDataModel) => {
+        if (notification instanceof ErrorModalNotificationData) {
+          this.matDialog.open(ErrorModalComponent, {
+            data: notification,
+          });
+        } else if (notification instanceof SnackBarNotificationData) {
+          this.matSnackBar.openFromComponent(SnackBarComponent, {
             duration: 1000,
             horizontalPosition: 'end',
             verticalPosition: 'top',
             data: notification,
-            panelClass: [notification.panelClass]
-          }
-          )
+            panelClass: [notification.panelClass],
+          });
         }
-
-      })
+      });
   }
 }

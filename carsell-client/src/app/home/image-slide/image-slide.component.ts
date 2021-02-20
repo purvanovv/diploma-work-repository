@@ -4,18 +4,19 @@ import { AnnouncementSlide, AnnouncementSlideModel } from '@app/announcement/mod
 @Component({
   selector: 'app-image-slide',
   templateUrl: './image-slide.component.html',
-  styleUrls: ['./image-slide.component.scss']
+  styleUrls: ['./image-slide.component.scss'],
 })
 export class ImageSlideComponent implements OnInit {
   public ImageData: string[] = [
     '/assets/slide/audiA6.jpg',
     '/assets/slide/subaruSTI.jpg',
-    '/assets/slide/porsche911.jpg'];
+    '/assets/slide/porsche911.jpg',
+  ];
 
   public slideData: AnnouncementSlide[] = [];
 
   startIndex = 0;
-  constructor() { }
+  constructor() {}
 
   ngOnInit(): void {
     this.initSlideData();
@@ -27,7 +28,7 @@ export class ImageSlideComponent implements OnInit {
       new AnnouncementSlideModel(49900, 'лв.', 22000, true, 'Impreza WRX STI', 'Subaru', '/assets/slide/subaruSTI.jpg'),
       new AnnouncementSlideModel(78800, 'лв.', 36000, false, 'A6 Sedan S line', 'Audi', '/assets/slide/audiA6.jpg'),
       new AnnouncementSlideModel(380000, 'лв.', 1300, false, '911 Turbo S', 'Porsche', '/assets/slide/porsche911.jpg'),
-    ]
+    ];
   }
   repeat() {
     setTimeout(() => {
@@ -54,7 +55,7 @@ export class ImageSlideComponent implements OnInit {
     if (isSelected) {
       return 'block';
     }
-    return 'none'
+    return 'none';
   }
 
   select(index: number) {
@@ -64,5 +65,4 @@ export class ImageSlideComponent implements OnInit {
     this.startIndex = index;
     this.slideData[this.startIndex].isSelected = true;
   }
-
 }

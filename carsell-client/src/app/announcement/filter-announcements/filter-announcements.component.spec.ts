@@ -8,9 +8,8 @@ describe('FilterAnnouncementsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FilterAnnouncementsComponent ]
-    })
-    .compileComponents();
+      declarations: [FilterAnnouncementsComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

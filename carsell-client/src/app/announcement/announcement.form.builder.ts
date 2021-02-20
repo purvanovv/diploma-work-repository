@@ -7,7 +7,7 @@ export class AnnouncementFormBuilder {
   private formGroup: FormGroup;
   private announcement: AnnouncementCreate;
 
-  constructor(private fb: FormBuilder, private category: MainCategoryType) { }
+  constructor(private fb: FormBuilder, private category: MainCategoryType) {}
 
   public withAnnouncement(announcement: AnnouncementCreate) {
     this.announcement = announcement;
@@ -66,8 +66,8 @@ export class AnnouncementFormBuilder {
         this.addControl(controlBuilder.build(Control.USER_ID));
         break;
       }
-     
-      case MainCategoryType.BUSES: { 
+
+      case MainCategoryType.BUSES: {
         this.addControl(controlBuilder.build(Control.ID));
         this.addControl(controlBuilder.build(Control.MAIN_CATEGORY_ID));
         this.addControl(controlBuilder.build(Control.MAKE));

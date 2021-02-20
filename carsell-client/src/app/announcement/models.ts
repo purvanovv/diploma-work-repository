@@ -142,8 +142,8 @@ export class AnnouncementSlideModel implements AnnouncementSlide {
     public isSelected: boolean,
     public model: string,
     public make: string,
-    public imageUrl: string) { }
-
+    public imageUrl: string
+  ) {}
 }
 
 export interface AnnouncementListItem {
@@ -332,8 +332,8 @@ export class AnnouncementSearchModel implements AnnouncementSearch {
       materialType: searchData.materialType,
       widthMax: searchData.widthMax,
       bicycleSize: searchData.bicycleSize,
-      numberOfGears: searchData.numberOfGears
-    }
+      numberOfGears: searchData.numberOfGears,
+    };
   }
 
   public static fromQueryParams(queryParams: ParamMap): AnnouncementSearch {
@@ -381,45 +381,107 @@ export class AnnouncementSearchModel implements AnnouncementSearch {
 
   toString() {
     let searchString = `
-      ${this.mainCategoryName != null && this.mainCategoryName.trim() !== '' ? 'Основна категория: ' + this.mainCategoryName + ', ' : ''} 
+      ${
+        this.mainCategoryName != null && this.mainCategoryName.trim() !== ''
+          ? 'Основна категория: ' + this.mainCategoryName + ', '
+          : ''
+      } 
       ${this.make != null && this.make.trim() !== '' ? 'Марка: ' + this.make + ', ' : ''} 
       ${this.model != null && this.model.trim() !== '' ? 'Модел: ' + this.model + ', ' : ''} 
       ${this.engineType != null && this.engineType.trim() !== '' ? 'Тип двигател: ' + this.engineType + ', ' : ''} 
-      ${this.conditionType != null && this.conditionType.trim() !== '' ? 'Състояние: ' + this.conditionType + ', ' : ''} 
-      ${this.horsePowerMin != null && this.horsePowerMin.trim() !== '' ? 'Мощност от: ' + this.horsePowerMin + ', ' : ''} 
-      ${this.horsePowerMax != null && this.horsePowerMax.trim() !== '' ? 'Мощност до: ' + this.horsePowerMax + ', ' : ''} 
-      ${this.emissionStandartType != null && this.emissionStandartType.trim() !== '' ? 'Евростандарт: ' + this.emissionStandartType + ', ' : ''} 
-      ${this.gearboxType != null && this.gearboxType.trim() !== '' ? 'Скоростна кутия: ' + this.gearboxType + ', ' : ''} 
-      ${this.subCategoryName != null && this.subCategoryName.trim() !== '' ? 'Категория: ' + this.subCategoryName + ', ' : ''} 
+      ${
+        this.conditionType != null && this.conditionType.trim() !== '' ? 'Състояние: ' + this.conditionType + ', ' : ''
+      } 
+      ${
+        this.horsePowerMin != null && this.horsePowerMin.trim() !== '' ? 'Мощност от: ' + this.horsePowerMin + ', ' : ''
+      } 
+      ${
+        this.horsePowerMax != null && this.horsePowerMax.trim() !== '' ? 'Мощност до: ' + this.horsePowerMax + ', ' : ''
+      } 
+      ${
+        this.emissionStandartType != null && this.emissionStandartType.trim() !== ''
+          ? 'Евростандарт: ' + this.emissionStandartType + ', '
+          : ''
+      } 
+      ${
+        this.gearboxType != null && this.gearboxType.trim() !== '' ? 'Скоростна кутия: ' + this.gearboxType + ', ' : ''
+      } 
+      ${
+        this.subCategoryName != null && this.subCategoryName.trim() !== ''
+          ? 'Категория: ' + this.subCategoryName + ', '
+          : ''
+      } 
       ${this.coolingType != null && this.coolingType.trim() !== '' ? 'Вид охлаждане: ' + this.coolingType + ', ' : ''} 
       ${this.numberOfAxels != null && this.numberOfAxels.trim() !== '' ? 'Брой оси: ' + this.numberOfAxels + ', ' : ''} 
-      ${this.numberOfSeats != null && this.numberOfSeats.trim() !== '' ? 'Брой места: ' + this.numberOfSeats + ', ' : ''} 
-      ${this.weightCapacityMin != null && this.weightCapacityMin.trim() !== '' ? 'Товароносимост от: ' + this.weightCapacityMin + ', ' : ''} 
-      ${this.weightCapacityMax != null && this.weightCapacityMax.trim() !== '' ? 'Товароносимост до: ' + this.weightCapacityMax + ', ' : ''} 
+      ${
+        this.numberOfSeats != null && this.numberOfSeats.trim() !== '' ? 'Брой места: ' + this.numberOfSeats + ', ' : ''
+      } 
+      ${
+        this.weightCapacityMin != null && this.weightCapacityMin.trim() !== ''
+          ? 'Товароносимост от: ' + this.weightCapacityMin + ', '
+          : ''
+      } 
+      ${
+        this.weightCapacityMax != null && this.weightCapacityMax.trim() !== ''
+          ? 'Товароносимост до: ' + this.weightCapacityMax + ', '
+          : ''
+      } 
       ${this.priceMin != null && this.priceMin.trim() !== '' ? 'Цена от: ' + this.priceMin + ', ' : ''} 
       ${this.priceMax != null && this.priceMax.trim() !== '' ? 'Цена до: ' + this.priceMax + ', ' : ''} 
-      ${this.dateOfManufactureFrom != null && this.dateOfManufactureFrom.trim() !== '' ? 'Година на производство от: ' + this.dateOfManufactureFrom + ', ' : ''} 
-      ${this.dateOfManufactureTo != null && this.dateOfManufactureTo.trim() !== '' ? 'Година на производство до: ' + this.dateOfManufactureTo + ', ' : ''} 
+      ${
+        this.dateOfManufactureFrom != null && this.dateOfManufactureFrom.trim() !== ''
+          ? 'Година на производство от: ' + this.dateOfManufactureFrom + ', '
+          : ''
+      } 
+      ${
+        this.dateOfManufactureTo != null && this.dateOfManufactureTo.trim() !== ''
+          ? 'Година на производство до: ' + this.dateOfManufactureTo + ', '
+          : ''
+      } 
       ${this.mileageMax != null && this.mileageMax.trim() !== '' ? 'Макс.пробег в км: ' + this.mileageMax + ', ' : ''} 
       ${this.color != null && this.color.trim() !== '' ? 'Цвят: ' + this.color + ', ' : ''} 
       ${this.region != null && this.region.trim() !== '' ? 'Регион: ' + this.region + ', ' : ''} 
       ${this.city != null && this.city.trim() !== '' ? 'Населено място: ' + this.city + ', ' : ''}
       ${this.cubatureMin != null && this.cubatureMin.trim() !== '' ? 'Кубатура от: ' + this.cubatureMin + ', ' : ''}
       ${this.cubatureMax != null && this.cubatureMax.trim() !== '' ? 'Кубатура до: ' + this.cubatureMax + ', ' : ''}
-      ${this.engineCategoryType != null && this.engineCategoryType.trim() !== '' ? 'Вид двигател: ' + this.engineCategoryType + ', ' : ''} 
-      ${this.totalWeightMin != null && this.totalWeightMin.trim() !== '' ? 'Мин.товароносимост: ' + this.totalWeightMin + ', ' : ''}
-      ${this.workingVolumeMin != null && this.workingVolumeMin.trim() !== '' ? 'Мин.работен обем: ' + this.workingVolumeMin + ', ' : ''}
-      ${this.hoursOfOperationMax != null && this.hoursOfOperationMax.trim() !== '' ? 'Мин.работни часа: ' + this.hoursOfOperationMax + ', ' : ''}
+      ${
+        this.engineCategoryType != null && this.engineCategoryType.trim() !== ''
+          ? 'Вид двигател: ' + this.engineCategoryType + ', '
+          : ''
+      } 
+      ${
+        this.totalWeightMin != null && this.totalWeightMin.trim() !== ''
+          ? 'Мин.товароносимост: ' + this.totalWeightMin + ', '
+          : ''
+      }
+      ${
+        this.workingVolumeMin != null && this.workingVolumeMin.trim() !== ''
+          ? 'Мин.работен обем: ' + this.workingVolumeMin + ', '
+          : ''
+      }
+      ${
+        this.hoursOfOperationMax != null && this.hoursOfOperationMax.trim() !== ''
+          ? 'Мин.работни часа: ' + this.hoursOfOperationMax + ', '
+          : ''
+      }
       ${this.numberOfBeds != null && this.numberOfBeds.trim() !== '' ? 'Брой легла: ' + this.numberOfBeds + ', ' : ''}
       ${this.toiletType != null && this.toiletType.trim() !== '' ? 'Тоалетна: ' + this.toiletType + ', ' : ''}
       ${this.heatingType != null && this.heatingType.trim() !== '' ? 'Отопление: ' + this.heatingType + ', ' : ''}
-      ${this.airConditionType != null && this.airConditionType.trim() !== '' ? 'Климатик: ' + this.airConditionType + ', ' : ''}
-      ${this.lengthSizeMax != null && this.lengthSizeMax.trim() !== '' ? 'Макс.дължина: ' + this.lengthSizeMax + ', ' : ''}
+      ${
+        this.airConditionType != null && this.airConditionType.trim() !== ''
+          ? 'Климатик: ' + this.airConditionType + ', '
+          : ''
+      }
+      ${
+        this.lengthSizeMax != null && this.lengthSizeMax.trim() !== ''
+          ? 'Макс.дължина: ' + this.lengthSizeMax + ', '
+          : ''
+      }
       ${this.materialType != null && this.materialType.trim() !== '' ? 'Материал: ' + this.materialType + ', ' : ''}
       ${this.widthMax != null && this.widthMax.trim() !== '' ? 'Макс.ширина: ' + this.widthMax + ', ' : ''}
       ${this.bicycleSize != null && this.bicycleSize.trim() !== '' ? 'Размер: ' + this.bicycleSize + ', ' : ''}
       ${this.numberOfGears != null && this.mainCategoryId.trim() !== '' ? 'Скорости: ' + this.numberOfGears + ', ' : ''}
-    `
+    `;
     searchString = searchString.trim();
     searchString = searchString.substr(0, searchString.length - 1);
     return searchString;
@@ -433,11 +495,7 @@ export interface FileUpload {
 }
 
 export class FileUploadModel implements FileUpload {
-  constructor(
-    public progress: number,
-    public inProgress: boolean,
-    public data: File
-  ) { }
+  constructor(public progress: number, public inProgress: boolean, public data: File) {}
 }
 
 export interface AnnouncementControl {
@@ -481,25 +539,20 @@ export interface ConfirmDialogData {
 }
 
 export class ConfirmDialogDataModel implements ConfirmDialogData {
-  constructor(public title: string, public message: string) { }
+  constructor(public title: string, public message: string) {}
 }
 
 export class PreviewImageModalDataModel implements PreviewImageModalData {
   public selectedImage: ImageFilePreview;
   public images: ImageFilePreview[];
   public announcement: AnnouncementPreview;
-  constructor(
-    selectedImage: ImageFilePreview,
-    images: ImageFilePreview[],
-    announcement: AnnouncementPreview) {
+  constructor(selectedImage: ImageFilePreview, images: ImageFilePreview[], announcement: AnnouncementPreview) {
     this.selectedImage = Object.assign({}, selectedImage);
-    this.images = images.map(i => Object.assign({}, i));
+    this.images = images.map((i) => Object.assign({}, i));
     this.announcement = Object.assign({}, announcement);
   }
 }
 
 export class ImageFilePreviewModel implements ImageFilePreview {
-  constructor(public id: number, public url: SafeUrl, public isSelected: boolean) { }
+  constructor(public id: number, public url: SafeUrl, public isSelected: boolean) {}
 }
-
-

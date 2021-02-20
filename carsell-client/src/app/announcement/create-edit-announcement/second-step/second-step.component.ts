@@ -15,7 +15,6 @@ import { NotificationService } from '@app/@shared';
   templateUrl: './second-step.component.html',
   styleUrls: ['./second-step.component.scss'],
 })
-
 export class SecondStepComponent implements OnInit {
   @ViewChild('fileInput', { static: false }) fileInput: ElementRef;
 
@@ -27,39 +26,42 @@ export class SecondStepComponent implements OnInit {
   private announcementId: number;
   private modelConverter: AnnouncementModelConverter;
 
-  constructor(private announcementService: AnnouncementService,
+  constructor(
+    private announcementService: AnnouncementService,
     private announcementStoreService: AnnouncementStoreService,
     private route: ActivatedRoute,
     private announcementStore: AnnouncementStoreService,
     sanitizer: DomSanitizer,
-    private notificationService: NotificationService) {
+    private notificationService: NotificationService
+  ) {
     this.modelConverter = new AnnouncementModelConverter(sanitizer);
   }
 
   ngOnInit(): void {
     this.checkForEditMode();
 
-    this.announcementStoreService.initDataSecondStep$.pipe(
-      tap(() => {
-        this.announcementId = this.announcementStoreService.getAnnouncementId();
-        const observables = [];
-        if (!this.isCreateMode) {
-          observables.push(this.$initImages(this.announcementId));
-        }
-        const $getFilesToUpload = this.announcementStore.getFilesToUpload$()
-          .pipe(tap((files: FileUpload[]) => {
-            this.files = files;
-            this.disableSubmit = this.files.length <= 0;
-            this.disableUpload = this.files.length >= this.maxNumberOfFiles;
+    this.announcementStoreService.initDataSecondStep$
+      .pipe(
+        tap(() => {
+          this.announcementId = this.announcementStoreService.getAnnouncementId();
+          const observables = [];
+          if (!this.isCreateMode) {
+            observables.push(this.$initImages(this.announcementId));
           }
-          ));
-        observables.push($getFilesToUpload);
-        concat(...observables).subscribe();
-      })).subscribe();
+          const $getFilesToUpload = this.announcementStore.getFilesToUpload$().pipe(
+            tap((files: FileUpload[]) => {
+              this.files = files;
+              this.disableSubmit = this.files.length <= 0;
+              this.disableUpload = this.files.length >= this.maxNumberOfFiles;
+            })
+          );
+          observables.push($getFilesToUpload);
+          concat(...observables).subscribe();
+        })
+      )
+      .subscribe();
     // TODO Fix nested observables
   }
-
-
 
   public upload() {
     const fileInput = this.fileInput.nativeElement;
@@ -80,10 +82,13 @@ export class SecondStepComponent implements OnInit {
   }
 
   public submitForm() {
-    this.announcementService.deleteImages(this.announcementId).pipe(
-      take(1),
-      tap(() => this.uploadFiles())
-    ).subscribe();
+    this.announcementService
+      .deleteImages(this.announcementId)
+      .pipe(
+        take(1),
+        tap(() => this.uploadFiles())
+      )
+      .subscribe();
   }
 
   private uploadFiles() {
@@ -113,7 +118,7 @@ export class SecondStepComponent implements OnInit {
             if (this.files.length <= 0) {
               this.announcementStoreService.initDataThirdStep();
               this.announcementStoreService.changeStep(2);
-              this.notificationService.success('Снимките към обявата бяха запазени успешно.')
+              this.notificationService.success('Снимките към обявата бяха запазени успешно.');
             }
           }
         });
@@ -133,10 +138,11 @@ export class SecondStepComponent implements OnInit {
     return this.announcementService.getImages(announcementId).pipe(
       take(1),
       tap((images: ImageFile[]) => {
-        const files = images.map(i => {
+        const files = images.map((i) => {
           return this.modelConverter.convertImageFileToFileUpload(i);
-        })
+        });
         this.announcementStore.setFilesToUpload(files);
-      }));
+      })
+    );
   }
 }

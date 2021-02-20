@@ -10,24 +10,25 @@ import { finalize } from 'rxjs/operators';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss']
+  styleUrls: ['./register.component.scss'],
 })
 export class RegisterComponent implements OnInit, OnDestroy {
-
   registerForm!: FormGroup;
   error: string | undefined;
   isLoading = false;
 
-  constructor(private formBuilder: FormBuilder,
+  constructor(
+    private formBuilder: FormBuilder,
     private router: Router,
     private authenticationService: AuthenticationService,
-    private notificationService: NotificationService) { }
+    private notificationService: NotificationService
+  ) {}
 
   ngOnInit(): void {
     this.createForm();
   }
 
-  ngOnDestroy() { }
+  ngOnDestroy() {}
 
   register() {
     this.isLoading = true;
@@ -41,7 +42,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
         untilDestroyed(this)
       )
       .subscribe(() => {
-        this.notificationService.success('Регистрирахте се успешно')
+        this.notificationService.success('Регистрирахте се успешно');
         this.router.navigate(['/home'], { replaceUrl: true });
       });
   }
@@ -53,8 +54,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
       email: ['', [Validators.required, Validators.email]],
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
-      telephone: ['', Validators.required]
+      telephone: ['', Validators.required],
     });
   }
-
 }

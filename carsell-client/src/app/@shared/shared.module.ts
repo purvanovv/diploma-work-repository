@@ -8,10 +8,18 @@ import { EnumToArrayPipe } from './enum-to-array.pipe';
 import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
 import { LogoComponent } from './logo/logo.component';
 import { SnackBarComponent } from './notification/snack-bar/snack-bar.component';
+import { ErrorModalComponent } from './notification/error-modal/error-modal.component';
 
 @NgModule({
   imports: [FlexLayoutModule, MaterialModule, CommonModule],
-  declarations: [LoaderComponent, EnumToArrayPipe, ConfirmationDialogComponent, LogoComponent, SnackBarComponent],
-  exports: [LoaderComponent, EnumToArrayPipe, ConfirmationDialogComponent,LogoComponent]
+  declarations: [
+    LoaderComponent,
+    EnumToArrayPipe,
+    ConfirmationDialogComponent,
+    LogoComponent,
+    SnackBarComponent,
+    ErrorModalComponent,
+  ],
+  exports: [LoaderComponent, EnumToArrayPipe, ConfirmationDialogComponent, LogoComponent],
 })
-export class SharedModule { }
+export class SharedModule {}

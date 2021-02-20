@@ -8,7 +8,7 @@ import { AnnouncementPreview, AnnouncementSearch, AnnouncementSearchModel, Categ
 @Component({
   selector: 'app-list-search-result',
   templateUrl: './list-search-result.component.html',
-  styleUrls: ['./list-search-result.component.scss']
+  styleUrls: ['./list-search-result.component.scss'],
 })
 export class ListSearchResultComponent implements OnInit {
   selected: AnnouncementPreview[];
@@ -25,34 +25,36 @@ export class ListSearchResultComponent implements OnInit {
     private router: Router,
     private announcementStore: AnnouncementStoreService,
     private announcementService: AnnouncementService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.isLoading = true;
     this.initSearchData().subscribe(() => {
       this.announcements = this.announcementStore.getAnnouncements();
       if (this.announcements.length <= 0) {
-        this.$initAnnouncements().pipe(tap(() => {
-          this.announcements = this.announcementStore.getAnnouncements();
-          this.initPagesData(this.announcements);
-          this.isLoading = false;
-        })).subscribe();
-      }
-      else {
+        this.$initAnnouncements()
+          .pipe(
+            tap(() => {
+              this.announcements = this.announcementStore.getAnnouncements();
+              this.initPagesData(this.announcements);
+              this.isLoading = false;
+            })
+          )
+          .subscribe();
+      } else {
         this.initPagesData(this.announcements);
         this.isLoading = false;
       }
-    })
+    });
   }
 
   $initAnnouncements() {
-    return this.announcementService.searchAnnouncements(
-      this.searchData)
-      .pipe(
-        take(1),
-        tap((announcements: AnnouncementPreview[]) => {
-          this.announcementStore.setAnnouncements(announcements);
-        }))
+    return this.announcementService.searchAnnouncements(this.searchData).pipe(
+      take(1),
+      tap((announcements: AnnouncementPreview[]) => {
+        this.announcementStore.setAnnouncements(announcements);
+      })
+    );
   }
 
   initSearchData() {
@@ -64,18 +66,20 @@ export class ListSearchResultComponent implements OnInit {
         const categoryPair = categories.find((c) => c.mainCategory.id === Number(this.searchData.mainCategoryId));
         this.searchData.mainCategoryName = categoryPair.mainCategory.name;
         if (this.searchData.subCategoryId != null) {
-          this.searchData.subCategoryName =
-            categoryPair.subCategories.find((sc) => sc.id === Number(this.searchData.subCategoryId))?.name;
+          this.searchData.subCategoryName = categoryPair.subCategories.find(
+            (sc) => sc.id === Number(this.searchData.subCategoryId)
+          )?.name;
         }
-
       })
     );
   }
 
   initPagesData(announcements: AnnouncementPreview[]) {
     const queryParams = this.route.snapshot.queryParamMap;
-    if (queryParams.get('currentPageIndex') != null &&
-      (Number(queryParams.get('currentPageIndex')) <= announcements.length)) {
+    if (
+      queryParams.get('currentPageIndex') != null &&
+      Number(queryParams.get('currentPageIndex')) <= announcements.length
+    ) {
       this.currentPageIndex = Number(queryParams.get('currentPageIndex'));
     } else {
       this.currentPageIndex = 1;
@@ -107,12 +111,8 @@ export class ListSearchResultComponent implements OnInit {
   }
 
   globalSearch() {
-    this.router.navigate(['announcement/search'],
-      { queryParams: AnnouncementSearchModel.toQueryParams(this.searchData) });
+    this.router.navigate(['announcement/search'], {
+      queryParams: AnnouncementSearchModel.toQueryParams(this.searchData),
+    });
   }
-
 }
-
-
-
-

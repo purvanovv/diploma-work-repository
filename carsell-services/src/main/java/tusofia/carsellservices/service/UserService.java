@@ -2,6 +2,7 @@ package tusofia.carsellservices.service;
 
 import org.springframework.security.core.userdetails.UserDetailsService;
 
+import tusofia.carsellservices.model.User;
 import tusofia.carsellservices.model.UserInfo;
 import tusofia.carsellservices.model.dtos.SignupDTO;
 
@@ -13,4 +14,8 @@ public interface UserService extends UserDetailsService{
 	public void updatePassword(String password, Long userId);
 
 	public void updateUserInfo(UserInfo userInfo);
+	
+	public User getUserByEmail(String email);
+
+	public User getUserByUserName(String username);
 }

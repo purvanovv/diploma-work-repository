@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Credentials } from './auth.models';
 
-
-
 const credentialsKey = 'credentials';
 
 /**

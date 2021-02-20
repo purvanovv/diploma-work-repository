@@ -4,7 +4,7 @@
       <div class="search-holder">
         <span class="bold">Търсене:</span>
         <span>
-          {{this.searchData.toString()}}
+          {{ this.searchData.toString() }}
         </span>
       </div>
       <div class="search-btn-holder">
@@ -13,12 +13,22 @@
       <app-filter-announcements [announcements]="announcements" (filtered)="onFilter($event)">
       </app-filter-announcements>
     </div>
-    <app-pagination *ngIf="pagesData.size > 0" [totalPages]="pagesData.size" [currentPageIndex]="currentPageIndex"
-      [maxPageIndexes]="maxPageIndexes" (selected)="onSelect($event)">
+    <app-pagination
+      *ngIf="pagesData.size > 0"
+      [totalPages]="pagesData.size"
+      [currentPageIndex]="currentPageIndex"
+      [maxPageIndexes]="maxPageIndexes"
+      (selected)="onSelect($event)"
+    >
     </app-pagination>
     <app-list-announcements [announcements]="selected"></app-list-announcements>
-    <app-pagination  *ngIf="pagesData.size > 0" [totalPages]="pagesData.size" [currentPageIndex]="currentPageIndex"
-      [maxPageIndexes]="maxPageIndexes" (selected)="onSelect($event)">
+    <app-pagination
+      *ngIf="pagesData.size > 0"
+      [totalPages]="pagesData.size"
+      [currentPageIndex]="currentPageIndex"
+      [maxPageIndexes]="maxPageIndexes"
+      (selected)="onSelect($event)"
+    >
     </app-pagination>
   </mat-card>
 </div>

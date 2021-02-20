@@ -1,6 +1,5 @@
 import { Credentials } from './auth.models';
 
-
 export class MockCredentialsService {
   credentials: Credentials | null = {
     username: 'test',

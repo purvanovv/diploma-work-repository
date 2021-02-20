@@ -5,6 +5,8 @@ import tusofia.carsellservices.model.UserInfo;
 
 public interface UserRepository {
 	public User getUserByUsername(String username);
+	
+	public User getUserByEmail(String email);
 
 	public UserInfo getUserInfoByUserId(Long userId);
 

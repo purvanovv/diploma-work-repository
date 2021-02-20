@@ -15,9 +15,7 @@ import { Router } from '@angular/router';
 export class ShellComponent implements OnInit, OnDestroy {
   @ViewChild('sidenav', { static: false }) sidenav!: MatSidenav;
 
-  constructor(private media: MediaObserver,
-    private credentialsService: CredentialsService,
-    private router: Router) { }
+  constructor(private media: MediaObserver, private credentialsService: CredentialsService, private router: Router) {}
 
   ngOnInit() {
     // Automatically close side menu on screens > sm breakpoint
@@ -39,5 +37,4 @@ export class ShellComponent implements OnInit, OnDestroy {
   isAuthenticated() {
     return this.credentialsService.isAuthenticated();
   }
-
 }
