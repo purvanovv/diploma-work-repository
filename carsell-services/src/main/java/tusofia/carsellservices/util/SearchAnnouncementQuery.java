@@ -46,7 +46,8 @@ public class SearchAnnouncementQuery {
 					+ "       av.delete_flag, " + "       av.modified_by, " + "       av.modified_on, "
 					+ "       av.delete_by " + "FROM   announcement_vehicle av " + "       JOIN main_categories mc "
 					+ "         ON mc.id = av.main_category_id " + "       JOIN sub_categories sc "
-					+ "         ON sc.id = av.sub_category_id " + "WHERE  av.delete_flag = 'N'";
+					+ "         ON sc.id = av.sub_category_id JOIN image_files if on if.announcement_id = av.id"
+					+ " 	  WHERE  av.delete_flag = 'N'";
 			query = new StringBuilder();
 			query.append(queryBase);
 			params = new MapSqlParameterSource();
