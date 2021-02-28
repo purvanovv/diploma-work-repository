@@ -1,4 +1,4 @@
-<div class="container">
+<div *ngIf="!isLoading" class="container">
   <mat-card class="main-mat-card">
     <mat-card-content>
       <app-announcement-details *ngIf="announcement != undefined" [announcement]="announcement">

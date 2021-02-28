@@ -14,8 +14,10 @@ import { AnnouncementPreview, ConfirmDialogDataModel } from '../models';
   styleUrls: ['./preview-announcement.component.scss'],
 })
 export class PreviewAnnouncementComponent implements OnInit {
+  isLoading = false;
   public announcement: AnnouncementPreview;
   private announcementId: number;
+
 
   constructor(
     private route: ActivatedRoute,
@@ -23,14 +25,16 @@ export class PreviewAnnouncementComponent implements OnInit {
     private router: Router,
     private dialog: MatDialog,
     private credentialsService: CredentialsService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
+    this.isLoading = true;
     this.announcementId = Number(this.route.snapshot.paramMap.get('id'));
     this.announcementService
       .getAnnouncementPreview(this.announcementId)
       .subscribe((announcement: AnnouncementPreview) => {
         this.announcement = announcement;
+        this.isLoading = false;
       });
   }
 
