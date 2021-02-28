@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { untilDestroyed } from '@app/@core/until-destroyed';
 import { NotificationService } from '@app/@shared';
 import { CredentialsService } from '@app/auth';
@@ -21,7 +22,8 @@ export class UserInfoComponent implements OnInit, OnDestroy {
     private userService: UserService,
     private formBuilder: FormBuilder,
     private credentialsService: CredentialsService,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private router: Router,
   ) {}
 
   ngOnDestroy() {}
@@ -56,6 +58,7 @@ export class UserInfoComponent implements OnInit, OnDestroy {
       )
       .subscribe(() => {
         this.notificationService.success('Потребителските данни бяха запазени успешно.');
+        this.router.navigate(['/home'], { replaceUrl: true });
       });
   }
 
